@@ -1,9 +1,9 @@
 {
-	"name": "@luftborn/esignatur-onboarding-component",
-	"version": "1.0.0",
-	"description": "Custom web components for eSignatur onboarding application",
-	"main": "dist/index.js",
-	"types": "dist/index.d.ts",
+	"name": "@luftborn/esignatur-collaborator-onboarding",
+	"version": "1.0.2",
+	"description": "Custom web components for eSignatur collaborator onboarding application",
+	"main": "lib/index.min.js",
+	"types": "lib/index.min.js.map",
 	"author": "Luftborn",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
@@ -18,6 +18,7 @@
 		"@types/leaflet": "^1.4.4",
 		"@webcomponents/custom-elements": "^1.2.4",
 		"@webcomponents/webcomponentsjs": "^2.2.10",
+		"gulp-terser": "^1.2.0",
 		"js-polyfills": "^0.1.42",
 		"leaflet": "^1.5.1",
 		"xlsx": "^0.16.0"

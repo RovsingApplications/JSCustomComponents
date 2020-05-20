@@ -11,6 +11,8 @@ const buffer = require('vinyl-buffer');
 
 const rename = require('gulp-rename');
 const uglify = require('gulp-uglify');
+const terser = require('gulp-terser');
+
 const sourcemaps = require('gulp-sourcemaps');
 
 const path = require('path');
@@ -43,9 +45,7 @@ const compileTS = () => {
 		.pipe(sourcemaps.init({
 			loadMaps: true
 		}))
-		// .pipe(uglify({
-		//     sourceMap: true,
-		// }))
+		.pipe(terser())
 		.pipe(rename({
 			extname: '.min.js'
 		}))
