@@ -1,0 +1,42 @@
+{
+	"name": "@luftborn/esignatur-onboarding-component",
+	"version": "1.0.0",
+	"description": "Custom web components for eSignatur onboarding application",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"author": "Luftborn",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"prepublish": "tsc --declaration"
+	},
+	"license": "ISC",
+	"bundledDependencies": [
+		"@webcomponents/webcomponentsjs",
+		"js-polyfills"
+	],
+	"dependencies": {
+		"@types/leaflet": "^1.4.4",
+		"@webcomponents/custom-elements": "^1.2.4",
+		"@webcomponents/webcomponentsjs": "^2.2.10",
+		"js-polyfills": "^0.1.42",
+		"leaflet": "^1.5.1",
+		"xlsx": "^0.16.0"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.4.5",
+		"@types/google.analytics": "0.0.40",
+		"@types/node": "^12.0.10",
+		"tsify": "~4.0.1",
+		"typescript": "~3.5.1",
+		"vinyl-buffer": "~1.0.1",
+		"vinyl-source-stream": "~2.0.0",
+		"babelify": "~10.0.0",
+		"browserify": "~16.2.3",
+		"gulp": "^4.0.2",
+		"gulp-rename": "~1.4.0",
+		"gulp-sourcemaps": "~2.6.5",
+		"gulp-uglify": "~3.0.2",
+		"gulp-webserver": "~0.9.1",
+		"gulp-map": "0.0.2"
+	}
+}
