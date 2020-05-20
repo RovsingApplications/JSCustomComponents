@@ -1,0 +1,277 @@
+body {
+    margin: 30px auto 0;
+}
+
+.container {
+    padding: 0 3rem;
+}
+
+.text-bold {
+    font-weight: bold !important;
+}
+
+.border-solid {
+    border: 1px solid black;
+}
+
+.A0 {
+    width: 33.1in;
+}
+
+.A1 {
+    width: 23.4in;
+}
+
+.A2 {
+    width: 16.5in;
+}
+
+.A3 {
+    width: 11.7in;
+}
+
+.A4 {
+    width: 8.3in;
+}
+
+.A5 {
+    width: 5.8in;
+}
+
+.A6 {
+    width: 4.1in;
+}
+
+.A7 {
+    width: 2.9in;
+}
+
+.A8 {
+    width: 2in;
+}
+
+.A9 {
+    width: 1.5in;
+}
+
+.A10 {
+    width: 1in;
+}
+
+.header-bgcolor-dark {
+    background-color: #315d78;
+}
+
+.head {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+.head-logo {
+    padding: 0 3rem;
+    background-color: white;
+    height: 40px;
+}
+
+.head-title {
+    margin: auto 0;
+}
+
+.head-title.head-title-white {
+    color: white;
+}
+
+.head-subtitles .head-subtitle {
+    line-height: 25px;
+    margin: 0;
+    font-size: 10pt;
+    font-weight: normal;
+}
+
+.field-group {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 25px auto;
+    page-break-inside: avoid;
+}
+
+.field-group .field-group-title {
+    width: 30%;
+    font-weight: bold;
+    padding: 5px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.field-group .field-group-content {
+    width: 70%;
+}
+
+.field-group .field-group-content .group-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+}
+
+.field-group .field-group-content .group-row .field-item {
+    border: 1px solid black;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+}
+
+.field-group .field-group-content .group-row .field-item .field-label {
+    margin: 2px;
+}
+
+.field-group .field-group-content .group-row .field-item .field-input {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.field-group .field-group-content .group-row .field-item .field-input input,
+.field-group .field-group-content .group-row .field-item .field-input select,
+.field-group .field-group-content .group-row .field-item .field-input textarea,
+.field-group .field-group-content .group-row .field-item .field-input button {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    border: none;
+    background-color: #f1f4ff;
+    margin: 2px;
+    resize: none;
+}
+
+.field-group
+    .field-group-content
+    .group-row
+    .field-item
+    .field-input
+    input:focus,
+.field-group
+    .field-group-content
+    .group-row
+    .field-item
+    .field-input
+    select:focus,
+.field-group
+    .field-group-content
+    .group-row
+    .field-item
+    .field-input
+    textarea:focus,
+.field-group
+    .field-group-content
+    .group-row
+    .field-item
+    .field-input
+    button:focus {
+    background-color: transparent;
+    outline: none;
+}
+
+.field-group
+    .field-group-content
+    .group-row
+    .field-item
+    .field-input
+    input:invalid,
+.field-group
+    .field-group-content
+    .group-row
+    .field-item
+    .field-input
+    select:invalid,
+.field-group
+    .field-group-content
+    .group-row
+    .field-item
+    .field-input
+    textarea:invalid,
+.field-group
+    .field-group-content
+    .group-row
+    .field-item
+    .field-input
+    button:invalid,
+
+.field-group
+    .field-group-content
+    .group-row
+    .field-item
+    .field-input
+    input[type='checkbox'],
+.field-group
+    .field-group-content
+    .group-row
+    .field-item
+    .field-input
+    input[type='radio'],
+.field-group
+    .field-group-content
+    .group-row
+    .field-item
+    .field-input
+    select[type='checkbox'],
+.field-group
+    .field-group-content
+    .group-row
+    .field-item
+    .field-input
+    select[type='radio'],
+.field-group
+    .field-group-content
+    .group-row
+    .field-item
+    .field-input
+    textarea[type='checkbox'],
+.field-group
+    .field-group-content
+    .group-row
+    .field-item
+    .field-input
+    textarea[type='radio'],
+.field-group
+    .field-group-content
+    .group-row
+    .field-item
+    .field-input
+    button[type='checkbox'],
+.field-group
+    .field-group-content
+    .group-row
+    .field-item
+    .field-input
+    button[type='radio'] {
+    width: auto;
+}
+
+.field-group
+    .field-group-content
+    .group-row
+    .field-item
+    .field-input
+    .checkbox {
+    width: auto;
+    margin: auto 3px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 0.1;
+    -ms-flex-positive: 0.1;
+    flex-grow: 0.1;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+}

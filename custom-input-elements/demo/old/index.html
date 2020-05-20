@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Elements</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <style>
+        .invalid .box {
+            padding: 0;
+            border: 1px solid red;
+        }	
+        .invalid .field-label{
+            margin-top: 0 !important;
+            color: red !important;
+        }
+        .invalid .invalid-message{
+            display: inline-block !important;
+            background-color: red;
+            color: #FFFFFF;
+            font-size: 13px;
+            line-height: 21px;
+            border-radius: 4px 4px 0px 0px;
+            padding: 3px 8px 0 8px;
+            margin-top: 5px;
+            margin-bottom: 0 !important;
+        }   
+
+    </style>
+</head>
+
+<body class="A4">
+    <!-- omar -->
+        <!-- <div class="group-row">
+                <div class="field-item custom-validation-target">
+                    <span class="invalid-message" style="display: none">Enter a valid   Email</span>
+                    <div class="box">
+                        <div class="field-label">E-mail: </div>
+                        <div class="field-input">
+                            <email-element>
+                                <script type="text/json">
+                                        {
+                                            "label": "E-mail",
+                                            "name": "email",
+                                            "value": null,
+                                            "type": "email",
+                                            "required": false,
+                                            "options": [],
+                                            "noValueDependency": null,
+                                            "hasValueDependency": null,
+                                            "dependencies": [ {
+                                                "value": "peter@luftborn.com",
+                                                "criteria": "Exact",
+                                                "items": ["address"]
+                                            }]
+                                        }
+                                    </script>
+                            </email-element>
+                        </div>
+                    </div>
+                </div>
+                <div class="field-item custom-validation-target">
+                    <span class="invalid-message" style="display: none">Enter a valid   Email</span>
+                    <div class="box">
+                        <div class="field-label">E-mail: </div>
+                        <div class="field-input">
+                            <email-element>
+                                <script type="text/json">
+                                        {
+                                            "label": "E-mail",
+                                            "name": "email2",
+                                            "value": null,
+                                            "type": "email",
+                                            "required": false,
+                                            "options": [],
+                                            "noValueDependency": null,
+                                            "hasValueDependency": null,
+                                            "dependencies": [ {
+                                                "value": "peter@luftborn.com",
+                                                "criteria": "Exact",
+                                                "items": ["address"]
+                                            }]
+                                        }
+                                    </script>
+                            </email-element>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <div class="group-row">
+                <div class="field-item custom-validation-target">
+                    <span class="invalid-message" style="display: none">Enter a valid   checkbox</span>
+                    <div class="field-item">
+                        <div class="field-label">Checkbox: </div>
+                        <div class="field-input">
+                            <checkbox-element>
+                                <script type="application/json">
+                                            {
+                                                "label": "Checkbox",
+                                                "name": "checkbox",
+                                                "value": null,
+                                                "type": "checkbox",
+                                                "required": false,
+                                                "options": ["Ja","Nej"],
+                                                "noValueDependency": null,
+                                                "hasValueDependency": null,
+                                                "dependencies": [
+                                                    {
+                                                        "value": "Ja",
+                                                        "criteria": "Exact",
+                                                        "items": ["email2"]
+                                                    }
+                                                ]
+                                            } 
+                                        </script>
+                            </checkbox-element>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+
+    <!-- peter -->
+    <header class="header header-bgcolor-dark">
+        <div class="container">
+            <div class="head ">
+                <h1 class="head-title head-title-white">Standart Blanket</h1>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="head-subtitles">
+            <div class="container">
+                <h6 class="head-subtitle text-bold">Standard blanket over esignaturs felter</h6>
+                <h6 class="head-subtitle text-bold">Flette felter og ikke flette felter</h6>
+                <h6 class="head-subtitle">Disse er de felter der kan flettes ind fra på pdf’en og felter der ikke
+                    kan
+                    flettes ind</h6>
+            </div>
+        </section>
+        <section class="form">
+            <div class="container">
+                <form action="/" method="POST">
+                    <div class="field-group">
+                        <div class="field-group-title border-solid">
+                            Eksempel på personoplysninger:
+                        </div>
+                        <div class="field-group-content">
+                            <div class="group-row">
+                                <div class="field-item">
+                                    <div class="field-label">Navn: </div>
+                                    <div class="field-input">
+                                        <text-element>
+                                            <script type="application/json">
+                                                            {
+                                                                "label": "Name",
+                                                                "name": "name",
+                                                                "value": null,
+                                                                "type": "Text",
+                                                                "required": true,
+                                                                "options": [],
+                                                                "noValueDependency": null,
+                                                                "hasValueDependency": null,
+                                                                "dependencies": [
+                                                                {
+                                                                    "value": "peter",
+                                                                    "criteria": "Exact",
+                                                                    "items": ["email"]
+                                                                }]
+                                                            }
+                                                        </script>
+                                        </text-element>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="group-row">
+                                <div class="field-item">
+                                    <div class="field-label">E-mail: </div>
+                                    <div class="field-input">
+                                        <email-element>
+                                            <script type="text/json">
+                                                    {
+                                                        "label": "E-mail",
+                                                        "name": "email",
+                                                        "value": null,
+                                                        "type": "email",
+                                                        "required": false,
+                                                        "options": [],
+                                                        "noValueDependency": null,
+                                                        "hasValueDependency": null,
+                                                        "dependencies": [ {
+                                                            "value": "peter@luftborn.com",
+                                                            "criteria": "Exact",
+                                                            "items": ["address"]
+                                                        }]
+                                                    }
+                                                </script>
+                                        </email-element>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-group-title border-solid">
+                            Eksempel på forskellige formfelter:
+                        </div>
+                        <div class="field-group-content">
+                            <div class="group-row">
+                                <div class="field-item">
+                                    <div class="field-label">address: </div>
+                                    <div class="field-input">
+                                        <address-element>
+                                            <script type="application/json">
+
+                                                            {
+                                                            "label": "Address",
+                                                            "name": "address",
+                                                            "value": null,
+                                                            "type": "address",
+                                                            "required": false,
+                                                            "options": [],
+                                                            "noValueDependency": {
+                                                            "value": "",
+                                                            "criteria": "Exact",
+                                                            "items": []
+                                                            },
+                                                            "hasValueDependency": {
+                                                            "value": "",
+                                                            "criteria": "Exact",
+                                                            "items": []
+                                                            },
+                                                            "dependencies": [
+                                                            {
+                                                            "value": "Value1",
+                                                            "criteria": "Exact",
+                                                            "items": [
+                                                            "BankAccount",
+                                                            "FileUpload"
+                                                            ]
+                                                            },
+                                                            {
+                                                            "value": "Value2",
+                                                            "criteria": "Exact",
+                                                            "items": [
+                                                            "cvrn"
+                                                            ]
+                                                            }
+                                                            ]
+                                                            } 
+                                                </script>
+                                        </address-element>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="group-row">
+                                <div class="field-item">
+                                    <div class="field-label">BankAccount: </div>
+                                    <div class="field-input">
+                                        <bank-element>
+                                            <script type="application/json">
+                                                    {
+                                                        "label": "bank",
+                                                        "name": "bank",
+                                                        "value": null,
+                                                        "type": "bank",
+                                                        "required": true,
+                                                        "options": [],
+                                                        "noValueDependency": null,
+                                                        "hasValueDependency": null,
+                                                        "dependencies": []
+                                                    } 
+                                                </script>
+                                        </bank-element>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="group-row">
+                                <div class="field-item">
+                                    <div class="field-label">CPR: </div>
+                                    <div class="field-input">
+                                        <cpr-element>
+                                            <script type="application/json">
+                                                        {
+                                                            "label": "cpr",
+                                                            "name": "cpr",
+                                                            "value": null,
+                                                            "type": "cpr",
+                                                            "required": false,
+                                                            "options": [],
+                                                            "noValueDependency": null,
+                                                            "hasValueDependency": null,
+                                                            "dependencies": []
+                                                        } 
+                                                    </script>
+                                        </cpr-element>
+                                    </div>
+                                </div>
+                                <div class="field-item">
+                                    <div class="field-label">CVR: </div>
+                                    <div class="field-input">
+                                        <cvr-element>
+                                            <script type="application/json">
+                                                    {
+                                                        "label": "cvr",
+                                                        "name": "cvr",
+                                                        "value": null,
+                                                        "type": "cvr",
+                                                        "required": false,
+                                                        "options": [],
+                                                        "noValueDependency": null,
+                                                        "hasValueDependency": null,
+                                                        "dependencies": []
+                                                    } 
+                                                </script>
+                                        </cvr-element>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="group-row">
+                                <div class="field-item">
+                                    <div class="field-label">Checkbox: </div>
+                                    <div class="field-input">
+                                        <checkbox-element>
+                                            <script type="application/json">
+                                                        {
+                                                            "label": "Checkbox",
+                                                            "name": "checkbox",
+                                                            "value": null,
+                                                            "type": "checkbox",
+                                                            "required": false,
+                                                            "options": ["Ja","Nej",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                                                            "noValueDependency": null,
+                                                            "hasValueDependency": null,
+                                                            "dependencies": [
+                                                                {
+                                                                    "value": "Ja",
+                                                                    "criteria": "Exact",
+                                                                    "items": ["BankAccount"]
+                                                                }
+                                                            ]
+                                                        } 
+                                                    </script>
+                                        </checkbox-element>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="group-row">
+                                <div class="field-item">
+                                    <div class="field-label">CustomRegularExpression (ord mellemrum ord):</div>
+                                    <div class="field-input">
+                                        <regex-element>
+                                            <script type="application/json">
+                                                    {
+                                                        "label": "CustomRegular",
+                                                        "name": "regex",
+                                                        "value": "[a-z]*",
+                                                        "type": "regex",
+                                                        "required": false,
+                                                        "options": [],
+                                                        "noValueDependency": null,
+                                                        "hasValueDependency": null,
+                                                        "dependencies": []
+                                                    } 
+                                                </script>
+                                        </regex-element>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="group-row">
+                                <div class="field-item">
+                                    <div class="field-label">DateField: </div>
+                                    <div class="field-input">
+                                        <date-element>
+                                            <script type="application/json">
+                                                    {
+                                                        "label": "DateField",
+                                                        "name": "DateField",
+                                                        "value": null,
+                                                        "type": "Date",
+                                                        "required": false,
+                                                        "allDependenciesMustBeMet": false,
+                                                        "multi": false,
+                                                        "min": "2018-02-05",
+                                                        "max": "2019-02-05",
+                                                        "step": null,
+                                                        "options": [],
+                                                        "noValueDependency": null,
+                                                        "hasValueDependency": null,
+                                                        "dependencies": []
+                                                    }
+                                                </script>
+                                        </date-element>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="group-row">
+                                <div class="field-item">
+                                    <div class="field-label">DropdownList: </div>
+                                    <div class="field-input">
+                                        <drop-down-element>
+                                            <script type="application/json">
+                                                    {
+                                                        "label": "DropdownList",
+                                                        "name": "dropdownList",
+                                                        "value": null,
+                                                        "type": "dropdownList",
+                                                        "required": true,
+                                                        "options": ["option1","option2","option3","option4","option5"],
+                                                        "noValueDependency": null,
+                                                        "hasValueDependency": null,
+                                                        "dependencies": []
+                                                    } 
+                                                </script>
+                                        </drop-down-element>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="group-row">
+                                <div class="field-item">
+                                    <div class="field-label">Identification: </div>
+                                    <div class="field-input">
+                                        <id-element>
+                                            <script type="application/json">
+                                                    {
+                                                        "label": "id",
+                                                        "name": "identification",
+                                                        "value": null,
+                                                        "type": "identification",
+                                                        "required": false,
+                                                        "options": [],
+                                                        "noValueDependency": null,
+                                                        "hasValueDependency": null,
+                                                        "dependencies": []
+                                                    } 
+                                                </script>
+                                        </id-element>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="group-row">
+                                <div class="field-item">
+                                    <div class="field-label">PhoneNumber: </div>
+                                    <div class="field-input">
+                                        <int-phone-element>
+                                            <script type="application/json">
+                                                    {
+                                                        "label": "Phone",
+                                                        "name": "Phone",
+                                                        "value": null,
+                                                        "type": "Phone",
+                                                        "required": false,
+                                                        "options": [],
+                                                        "noValueDependency": null,
+                                                        "hasValueDependency": null,
+                                                        "dependencies": []
+                                                    } 
+                                                </script>
+                                        </int-phone-element>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="group-row">
+                                <div class="field-item">
+                                    <div class="field-label">RadioButtonGroup: </div>
+                                    <div class="field-input">
+                                        <radio-group-element>
+                                            <script type="application/json">
+                                                    {
+                                                        "label": "Radio",
+                                                        "name": "radio",
+                                                        "value": null,
+                                                        "type": "radio",
+                                                        "required": false,
+                                                        "options": ["g1","g2"],
+                                                        "noValueDependency": null,
+                                                        "hasValueDependency": null,
+                                                        "dependencies": []
+                                                    } 
+                                                </script>
+                                        </radio-group-element>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="group-row">
+                                <div class="field-item">
+                                    <div class="field-label">TextFieldArea: </div>
+                                    <div class="field-input">
+                                        <text-area-element>
+                                            <script type="application/json">
+                                                    {
+                                                        "label": "text area",
+                                                        "name": "text_area",
+                                                        "value": null,
+                                                        "type": "Text",
+                                                        "required": false,
+                                                        "options": [],
+                                                        "noValueDependency": null,
+                                                        "hasValueDependency": null,
+                                                        "dependencies": [
+                                                        {
+                                                            "value": "hello",
+                                                            "criteria": "Exact",
+                                                            "items": ["radio"]
+                                                        }]
+                                                    }
+                                                </script>
+                                        </text-area-element>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="group-row">
+                                <div class="field-item">
+                                    <div class="field-label">NumericRange: </div>
+                                    <div class="field-input">
+                                        <numeric-element>
+                                            <script type="application/json">
+                                                    {
+                                                        "label": "Numeric",
+                                                        "name": "numeric",
+                                                        "value": null,
+                                                        "type": "number",
+                                                        "required": false,
+                                                        "options": [],
+                                                        "max":"20",
+                                                        "min":"10",
+                                                        "step":"0.5",
+                                                        "noValueDependency": null,
+                                                        "hasValueDependency": null,
+                                                        "dependencies": [
+                                                        {
+                                                            "value": 20,
+                                                            "criteria": "LessThan",
+                                                            "items": ["files"]
+                                                        }]
+                                                    }
+                                                </script>
+                                        </numeric-element>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-group-title border-solid">
+                            Ikke fletbare felter:
+                        </div>
+                        <div class="field-group-content">
+                            <div class="group-row">
+                                <div class="field-item">
+                                    <div class="field-label">FileUpload (ikke fletbart): </div>
+                                    <div class="field-input">
+                                        <file-element>
+                                            <script type="application/json">
+                                                    {
+                                                        "label": "FileUpload",
+                                                        "name": "files",
+                                                        "value": null,
+                                                        "type": "file",
+                                                        "multi": false,
+                                                        "required": false,
+                                                        "options": [],
+                                                        "noValueDependency": null,
+                                                        "hasValueDependency": null,
+                                                        "dependencies": []
+                                                    }
+                                                </script>
+                                        </file-element>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <input type="submit" value="send">
+
+                </form>
+            </div>
+        </section>
+    </main>
+</body>
+<script src="./index.js"></script>
+
+</html>
