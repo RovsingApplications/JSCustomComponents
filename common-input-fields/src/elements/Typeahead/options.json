@@ -1,0 +1,1322 @@
+[
+    {
+        "Name": "vægeapparatSygdomme(M)",
+        "Description": "BevægeapparatSygdomme(M)",
+        "Value": "M_1"
+    },
+    {
+        "Name": "Rygsygdomme(M4)",
+        "Description": "Rygsygdomme(M4)",
+        "Value": "M_2"
+    },
+    {
+        "Name": "DiskusprolapsIBrystrygOgLænderyg(M51)",
+        "Description": "DiskusprolapsIBrystrygOgLænderyg(M51)",
+        "Value": "M_3"
+    },
+    {
+        "Name": "Knogleskørhed(hals,Bryst-OgLænderyg)(M42)",
+        "Description": "Knogleskørhed(hals,Bryst-OgLænderyg)(M42)",
+        "Value": "M_4"
+    },
+    {
+        "Name": "RygsygdomMedfødt(hals,Bryst,Lænderyg)(M43)",
+        "Description": "RygsygdomMedfødt(hals,Bryst,Lænderyg)(M43)",
+        "Value": "M_5"
+    },
+    {
+        "Name": "Rygsygdom,SlidgigtOgDeg.Forandringer(M47)",
+        "Description": "Rygsygdom,SlidgigtOgDeg.Forandringer(M47)",
+        "Value": "M_6"
+    },
+    {
+        "Name": "RygsygdomAndre(hals,bryst-ogLænderyg)(M48)",
+        "Description": "RygsygdomAndre(hals,bryst-ogLænderyg)(M48)",
+        "Value": "M_7"
+    },
+    {
+        "Name": "Nakke-skuldersmerterKroniske(M53)",
+        "Description": "Nakke-skuldersmerterKroniske(M53)",
+        "Value": "M_8"
+    },
+    {
+        "Name": "Whiplash(forvridningAfHalsryg)(S13)",
+        "Description": "Whiplash(forvridningAfHalsryg)(S13)",
+        "Value": "M_9"
+    },
+    {
+        "Name": "Rygsmerter(M54)",
+        "Description": "Rygsmerter(M54)",
+        "Value": "M_10"
+    },
+    {
+        "Name": "DiskusprolapsIHalsen(M50)",
+        "Description": "DiskusprolapsIHalsen(M50)",
+        "Value": "M_11"
+    },
+    {
+        "Name": "Leddegigt(M0)",
+        "Description": "Leddegigt(M0)",
+        "Value": "M_12"
+    },
+    {
+        "Name": "Leddegigt(herunderUrinsurGigt)(M05)",
+        "Description": "Leddegigt(herunderUrinsurGigt)(M05)",
+        "Value": "M_13"
+    },
+    {
+        "Name": "Ledbetændelse,ArtritisAlleTyper(M13)",
+        "Description": "Ledbetændelse,ArtritisAlleTyper(M13)",
+        "Value": "M_14"
+    },
+    {
+        "Name": "Slidgigt(M1)",
+        "Description": "Slidgigt(M1)",
+        "Value": "M_15"
+    },
+    {
+        "Name": "SlidgigtIHofte(M16)",
+        "Description": "SlidgigtIHofte(M16)",
+        "Value": "M_16"
+    },
+    {
+        "Name": "SlidgigtIKnæ(M17)",
+        "Description": "SlidgigtIKnæ(M17)",
+        "Value": "M_17"
+    },
+    {
+        "Name": "SlidgigtAndre(ikkeRyg,HofteOgKnæ)(M19)",
+        "Description": "SlidgigtAndre(ikkeRyg,HofteOgKnæ)(M19)",
+        "Value": "M_18"
+    },
+    {
+        "Name": "LedsygdommeAndre(M2)",
+        "Description": "LedsygdommeAndre(M2)",
+        "Value": "M_19"
+    },
+    {
+        "Name": "MenisksygdomOgLedbåndsskade(M23)",
+        "Description": "MenisksygdomOgLedbåndsskade(M23)",
+        "Value": "M_20"
+    },
+    {
+        "Name": "Hypermobilitet(M25)",
+        "Description": "Hypermobilitet(M25)",
+        "Value": "M_21"
+    },
+    {
+        "Name": "Bindevævssygdomme(M3)",
+        "Description": "Bindevævssygdomme(M3)",
+        "Value": "M_22"
+    },
+    {
+        "Name": "Lupus(M32)",
+        "Description": "Lupus(M32)",
+        "Value": "M_23"
+    },
+    {
+        "Name": "Sklerodermi(M34)",
+        "Description": "Sklerodermi(M34)",
+        "Value": "M_24"
+    },
+    {
+        "Name": "BindevævssygdommeAndre(M35)",
+        "Description": "BindevævssygdommeAndre(M35)",
+        "Value": "M_25"
+    },
+    {
+        "Name": "Brud(frakturer)(M5)",
+        "Description": "Brud(frakturer)(M5)",
+        "Value": "M_26"
+    },
+    {
+        "Name": "BrudPåHalsryg/nakke(fraktur)(S12)",
+        "Description": "BrudPåHalsryg/nakke(fraktur)(S12)",
+        "Value": "M_27"
+    },
+    {
+        "Name": "BrudPåRygsøjle(fraktur)(S32)",
+        "Description": "BrudPåRygsøjle(fraktur)(S32)",
+        "Value": "M_28"
+    },
+    {
+        "Name": "Brud(frakturer)AndreSteder(T02)",
+        "Description": "Brud(frakturer)AndreSteder(T02)",
+        "Value": "M_29"
+    },
+    {
+        "Name": "Hånd-OgArmsygdomme(M6)",
+        "Description": "Hånd-OgArmsygdomme(M6)",
+        "Value": "M_30"
+    },
+    {
+        "Name": "KarpaltunnelsyndromOgAndreNervesygdIArm(G56)",
+        "Description": "KarpaltunnelsyndromOgAndreNervesygdIArm(G56)",
+        "Value": "M_31"
+    },
+    {
+        "Name": "HvideFingre(morbusRaynaud)(I73)",
+        "Description": "HvideFingre(morbusRaynaud)(I73)",
+        "Value": "M_32"
+    },
+    {
+        "Name": "Seneskedehindebet.OgAndreSygdIHånd/U.arm(M65)",
+        "Description": "Seneskedehindebet.OgAndreSygdIHånd/U.arm(M65)",
+        "Value": "M_33"
+    },
+    {
+        "Name": "Skulder-OgAlbuesygdomme(M7)",
+        "Description": "Skulder-OgAlbuesygdomme(M7)",
+        "Value": "M_34"
+    },
+    {
+        "Name": "Skulder,SenesygdomInkl.Biceps(M75)",
+        "Description": "Skulder,SenesygdomInkl.Biceps(M75)",
+        "Value": "M_35"
+    },
+    {
+        "Name": "TennisalbueOgGolfalbue(M77)",
+        "Description": "TennisalbueOgGolfalbue(M77)",
+        "Value": "M_36"
+    },
+    {
+        "Name": "BevægeapparatAndreSygdomme(M8)",
+        "Description": "BevægeapparatAndreSygdomme(M8)",
+        "Value": "M_37"
+    },
+    {
+        "Name": "Fibromyalgi(M79)",
+        "Description": "Fibromyalgi(M79)",
+        "Value": "M_38"
+    },
+    {
+        "Name": "BevægapparatAndreSygdomme(M95)",
+        "Description": "BevægapparatAndreSygdomme(M95)",
+        "Value": "M_39"
+    },
+    {
+        "Name": "Amputationer(T05)",
+        "Description": "Amputationer(T05)",
+        "Value": "M_40"
+    },
+    {
+        "Name": "BevægeapparatAndreLæsioner(T14)",
+        "Description": "BevægeapparatAndreLæsioner(T14)",
+        "Value": "M_41"
+    },
+    {
+        "Name": "Blod-OgImmunsygdomme(D)",
+        "Description": "Blod-OgImmunsygdomme(D)",
+        "Value": "M_42"
+    },
+    {
+        "Name": "Blodmangel/anæmi(alleTyper)(D0)",
+        "Description": "Blodmangel/anæmi(alleTyper)(D0)",
+        "Value": "M_43"
+    },
+    {
+        "Name": "Blodmangel/anæmi(alleTyper)(D64)",
+        "Description": "Blodmangel/anæmi(alleTyper)(D64)",
+        "Value": "M_44"
+    },
+    {
+        "Name": "Blødersygdom/Hæmofili(alleTyper)(D0)",
+        "Description": "Blødersygdom/Hæmofili(alleTyper)(D0)",
+        "Value": "M_45"
+    },
+    {
+        "Name": "Blødersygdom/Hæmofili(alleTyper)(D68)",
+        "Description": "Blødersygdom/Hæmofili(alleTyper)(D68)",
+        "Value": "M_46"
+    },
+    {
+        "Name": "Sarkoidose(immundefekt)(D0)",
+        "Description": "Sarkoidose(immundefekt)(D0)",
+        "Value": "M_47"
+    },
+    {
+        "Name": "Sarkoidose(immundefekt)(D86)",
+        "Description": "Sarkoidose(immundefekt)(D86)",
+        "Value": "M_48"
+    },
+    {
+        "Name": "Blod-OgImmunsygdomme/defekterAndre(D0)",
+        "Description": "Blod-OgImmunsygdomme/defekterAndre(D0)",
+        "Value": "M_49"
+    },
+    {
+        "Name": "Blod-OgImmunsygdomme/defekterAndre(D89)",
+        "Description": "Blod-OgImmunsygdomme/defekterAndre(D89)",
+        "Value": "M_50"
+    },
+    {
+        "Name": "PsykiskeSygdomme(F)",
+        "Description": "PsykiskeSygdomme(F)",
+        "Value": "M_51"
+    },
+    {
+        "Name": "Demenssygdomme(F0)",
+        "Description": "Demenssygdomme(F0)",
+        "Value": "M_52"
+    },
+    {
+        "Name": "AlzheimersSygdom(F00)",
+        "Description": "AlzheimersSygdom(F00)",
+        "Value": "M_53"
+    },
+    {
+        "Name": "DemensUspecificeret(F03)",
+        "Description": "DemensUspecificeret(F03)",
+        "Value": "M_54"
+    },
+    {
+        "Name": "OrganiskPsykiskSygdomAndre(F06)",
+        "Description": "OrganiskPsykiskSygdomAndre(F06)",
+        "Value": "M_55"
+    },
+    {
+        "Name": "PsykiskSygdomPga.Misbrug(F1)",
+        "Description": "PsykiskSygdomPga.Misbrug(F1)",
+        "Value": "M_56"
+    },
+    {
+        "Name": "Alkoholmisbrug,PsykiskSygdom(F10)",
+        "Description": "Alkoholmisbrug,PsykiskSygdom(F10)",
+        "Value": "M_57"
+    },
+    {
+        "Name": "StofEllerMedicinmisbrugPsykiskSygdom(F19)",
+        "Description": "StofEllerMedicinmisbrugPsykiskSygdom(F19)",
+        "Value": "M_58"
+    },
+    {
+        "Name": "SkizofreniOgPsykoser(F2)",
+        "Description": "SkizofreniOgPsykoser(F2)",
+        "Value": "M_59"
+    },
+    {
+        "Name": "Skizofreni,InklSkizo-affektivSindslidelse(F20)",
+        "Description": "Skizofreni,InklSkizo-affektivSindslidelse(F20)",
+        "Value": "M_60"
+    },
+    {
+        "Name": "PsykoserParanoide(F22)",
+        "Description": "PsykoserParanoide(F22)",
+        "Value": "M_61"
+    },
+    {
+        "Name": "PsykoserAndre(F28)",
+        "Description": "PsykoserAndre(F28)",
+        "Value": "M_62"
+    },
+    {
+        "Name": "AffektivSindslidelse(F3)",
+        "Description": "AffektivSindslidelse(F3)",
+        "Value": "M_63"
+    },
+    {
+        "Name": "Bipolar-affektivSindslidelse(maniodepressiv)(F31)",
+        "Description": "Bipolar-affektivSindslidelse(maniodepressiv)(F31)",
+        "Value": "M_64"
+    },
+    {
+        "Name": "DepressionEnkeltepisode(F32)",
+        "Description": "DepressionEnkeltepisode(F32)",
+        "Value": "M_65"
+    },
+    {
+        "Name": "DepressionPeriodisk(tilbagevendende)(F33)",
+        "Description": "DepressionPeriodisk(tilbagevendende)(F33)",
+        "Value": "M_66"
+    },
+    {
+        "Name": "DepressionKronisk(F34)",
+        "Description": "DepressionKronisk(F34)",
+        "Value": "M_67"
+    },
+    {
+        "Name": "Nervøse,Stressrelat.OgSomatoformeSygdomme(F4)",
+        "Description": "Nervøse,Stressrelat.OgSomatoformeSygdomme(F4)",
+        "Value": "M_68"
+    },
+    {
+        "Name": "AngstFobisk(F40)",
+        "Description": "AngstFobisk(F40)",
+        "Value": "M_69"
+    },
+    {
+        "Name": "AngstAndre(F41)",
+        "Description": "AngstAndre(F41)",
+        "Value": "M_70"
+    },
+    {
+        "Name": "OCD(obsessiv-kompulsivTilstand)(F42)",
+        "Description": "OCD(obsessiv-kompulsivTilstand)(F42)",
+        "Value": "M_71"
+    },
+    {
+        "Name": "BelastningsreaktionAkut(F43.0)",
+        "Description": "BelastningsreaktionAkut(F43.0)",
+        "Value": "M_72"
+    },
+    {
+        "Name": "PTSD(posttraumatiskBelastningsreaktion)(F43.1)",
+        "Description": "PTSD(posttraumatiskBelastningsreaktion)(F43.1)",
+        "Value": "M_73"
+    },
+    {
+        "Name": "Tilpasningsreaktion(F43.2)",
+        "Description": "Tilpasningsreaktion(F43.2)",
+        "Value": "M_74"
+    },
+    {
+        "Name": "BelastningsreaktionUspecOgAndre(F43.9)",
+        "Description": "BelastningsreaktionUspecOgAndre(F43.9)",
+        "Value": "M_75"
+    },
+    {
+        "Name": "SomatoformeTilstande(F45)",
+        "Description": "SomatoformeTilstande(F45)",
+        "Value": "M_76"
+    },
+    {
+        "Name": "StressPrimærOgSekundær(årsag)Diagnose(F48)",
+        "Description": "StressPrimærOgSekundær(årsag)Diagnose(F48)",
+        "Value": "M_77"
+    },
+    {
+        "Name": "Adfærdsændringer(F5)",
+        "Description": "Adfærdsændringer(F5)",
+        "Value": "M_78"
+    },
+    {
+        "Name": "Spiseforstyrrelser(alleTyper)(F50)",
+        "Description": "Spiseforstyrrelser(alleTyper)(F50)",
+        "Value": "M_79"
+    },
+    {
+        "Name": "ForstyrretPersonlighedsstruktur(F6)",
+        "Description": "ForstyrretPersonlighedsstruktur(F6)",
+        "Value": "M_80"
+    },
+    {
+        "Name": "PersonlighedsstrukturForstyrret(F60)",
+        "Description": "PersonlighedsstrukturForstyrret(F60)",
+        "Value": "M_81"
+    },
+    {
+        "Name": "PersonlighedsændringKatastrofeMv.(F62)",
+        "Description": "PersonlighedsændringKatastrofeMv.(F62)",
+        "Value": "M_82"
+    },
+    {
+        "Name": "PsykiskeUdviklingsforstyrrelser(F8)",
+        "Description": "PsykiskeUdviklingsforstyrrelser(F8)",
+        "Value": "M_83"
+    },
+    {
+        "Name": "Autisme,Asperger,ADHDMv.(F84)",
+        "Description": "Autisme,Asperger,ADHDMv.(F84)",
+        "Value": "M_84"
+    },
+    {
+        "Name": "PsykiskeSygdomme/forstyrrelserAndre(F9)",
+        "Description": "PsykiskeSygdomme/forstyrrelserAndre(F9)",
+        "Value": "M_85"
+    },
+    {
+        "Name": "PsykiskeSygdomme/forstyrrelserAndre(F99)",
+        "Description": "PsykiskeSygdomme/forstyrrelserAndre(F99)",
+        "Value": "M_86"
+    },
+    {
+        "Name": "SelvmordOgSelvmordsforsøg(X84)",
+        "Description": "SelvmordOgSelvmordsforsøg(X84)",
+        "Value": "M_87"
+    },
+    {
+        "Name": "Nervesygdomme(G)",
+        "Description": "Nervesygdomme(G)",
+        "Value": "M_88"
+    },
+    {
+        "Name": "Atrofier-Centralnervesystemet(G1)",
+        "Description": "Atrofier-Centralnervesystemet(G1)",
+        "Value": "M_89"
+    },
+    {
+        "Name": "HuntingtonsSygdom(G10)",
+        "Description": "HuntingtonsSygdom(G10)",
+        "Value": "M_90"
+    },
+    {
+        "Name": "Bevægeforstyrrelser(G2)",
+        "Description": "Bevægeforstyrrelser(G2)",
+        "Value": "M_91"
+    },
+    {
+        "Name": "ParkinsonsSygdom(G20)",
+        "Description": "ParkinsonsSygdom(G20)",
+        "Value": "M_92"
+    },
+    {
+        "Name": "DegeneratOgDemyeliniser.sygd.ICentralnerv.(G3)",
+        "Description": "DegeneratOgDemyeliniser.sygd.ICentralnerv.(G3)",
+        "Value": "M_93"
+    },
+    {
+        "Name": "AlzheimersSygdom(G30)",
+        "Description": "AlzheimersSygdom(G30)",
+        "Value": "M_94"
+    },
+    {
+        "Name": "SkleroseDissemineret(G35)",
+        "Description": "SkleroseDissemineret(G35)",
+        "Value": "M_95"
+    },
+    {
+        "Name": "EpisodiskeSygdomme(G4)",
+        "Description": "EpisodiskeSygdomme(G4)",
+        "Value": "M_96"
+    },
+    {
+        "Name": "Epilepsi(G40)",
+        "Description": "Epilepsi(G40)",
+        "Value": "M_97"
+    },
+    {
+        "Name": "Migræne(G43)",
+        "Description": "Migræne(G43)",
+        "Value": "M_98"
+    },
+    {
+        "Name": "Hovedpine(alleTyper,IkkeTraumatiske)(G44.8)",
+        "Description": "Hovedpine(alleTyper,IkkeTraumatiske)(G44.8)",
+        "Value": "M_99"
+    },
+    {
+        "Name": "HovedpinePosttraumatiskOgFølger(G44.3)",
+        "Description": "HovedpinePosttraumatiskOgFølger(G44.3)",
+        "Value": "M_100"
+    },
+    {
+        "Name": "Søvnforstyrrelser(G47)",
+        "Description": "Søvnforstyrrelser(G47)",
+        "Value": "M_101"
+    },
+    {
+        "Name": "NeuromuskulæreOgMuskulæreSygdomme(G7)",
+        "Description": "NeuromuskulæreOgMuskulæreSygdomme(G7)",
+        "Value": "M_102"
+    },
+    {
+        "Name": "MyastheniaGravisOgAndreNeuromus.Sygd(G70)",
+        "Description": "MyastheniaGravisOgAndreNeuromus.Sygd(G70)",
+        "Value": "M_103"
+    },
+    {
+        "Name": "CerebralPareseOgLammelser(G8)",
+        "Description": "CerebralPareseOgLammelser(G8)",
+        "Value": "M_104"
+    },
+    {
+        "Name": "SpastiskSygdom(cerebralParese)(G80)",
+        "Description": "SpastiskSygdom(cerebralParese)(G80)",
+        "Value": "M_105"
+    },
+    {
+        "Name": "NervesygdomMedLammelse/pareseAndre(G83)",
+        "Description": "NervesygdomMedLammelse/pareseAndre(G83)",
+        "Value": "M_106"
+    },
+    {
+        "Name": "Centralnerve-OgNervesystemAndreSygdomme(G9)",
+        "Description": "Centralnerve-OgNervesystemAndreSygdomme(G9)",
+        "Value": "M_107"
+    },
+    {
+        "Name": "Centralnerve-OgNervesystemAndreSygdomme(G98)",
+        "Description": "Centralnerve-OgNervesystemAndreSygdomme(G98)",
+        "Value": "M_108"
+    },
+    {
+        "Name": "ØjneOgØrerSygdomme(H)",
+        "Description": "ØjneOgØrerSygdomme(H)",
+        "Value": "M_109"
+    },
+    {
+        "Name": "SygdommeIØjne(H1)",
+        "Description": "SygdommeIØjne(H1)",
+        "Value": "M_110"
+    },
+    {
+        "Name": "StærGrå,Katarakt,Linseforandringer(H26)",
+        "Description": "StærGrå,Katarakt,Linseforandringer(H26)",
+        "Value": "M_111"
+    },
+    {
+        "Name": "StærGrøn,Glaukom(alleFomer)(H40)",
+        "Description": "StærGrøn,Glaukom(alleFomer)(H40)",
+        "Value": "M_112"
+    },
+    {
+        "Name": "ForandringerISynsnerverOgSynsbaner(H47)",
+        "Description": "ForandringerISynsnerverOgSynsbaner(H47)",
+        "Value": "M_113"
+    },
+    {
+        "Name": "BlindhedOgSvagsyn(H54)",
+        "Description": "BlindhedOgSvagsyn(H54)",
+        "Value": "M_114"
+    },
+    {
+        "Name": "ØjensygdommeØvrige(H57)",
+        "Description": "ØjensygdommeØvrige(H57)",
+        "Value": "M_115"
+    },
+    {
+        "Name": "SygdommeIØrer(H2)",
+        "Description": "SygdommeIØrer(H2)",
+        "Value": "M_116"
+    },
+    {
+        "Name": "MorbusMeniereOgAndreForstAfLigevægtsbal(H81)",
+        "Description": "MorbusMeniereOgAndreForstAfLigevægtsbal(H81)",
+        "Value": "M_117"
+    },
+    {
+        "Name": "HøretabOgDøvhed(alleFormer)(H90)",
+        "Description": "HøretabOgDøvhed(alleFormer)(H90)",
+        "Value": "M_118"
+    },
+    {
+        "Name": "ØresygdommeØvrige(herunderTinnitus)(H93)",
+        "Description": "ØresygdommeØvrige(herunderTinnitus)(H93)",
+        "Value": "M_119"
+    },
+    {
+        "Name": "Kredsløbssygdomme(I)",
+        "Description": "Kredsløbssygdomme(I)",
+        "Value": "M_120"
+    },
+    {
+        "Name": "HjertesygdomReumatisk(I0)",
+        "Description": "HjertesygdomReumatisk(I0)",
+        "Value": "M_121"
+    },
+    {
+        "Name": "HjertesygdomGigtisk(alleTyper)(I09)",
+        "Description": "HjertesygdomGigtisk(alleTyper)(I09)",
+        "Value": "M_122"
+    },
+    {
+        "Name": "HjertesygdomIskæmisk(I1)",
+        "Description": "HjertesygdomIskæmisk(I1)",
+        "Value": "M_123"
+    },
+    {
+        "Name": "BlodtrykForhøjet(I15)",
+        "Description": "BlodtrykForhøjet(I15)",
+        "Value": "M_124"
+    },
+    {
+        "Name": "BlodpropIHjertet(akutMyokardieinfarkt)(I21)",
+        "Description": "BlodpropIHjertet(akutMyokardieinfarkt)(I21)",
+        "Value": "M_125"
+    },
+    {
+        "Name": "HjertesygdomIskæmiskInklAnginaMv.(I25)",
+        "Description": "HjertesygdomIskæmiskInklAnginaMv.(I25)",
+        "Value": "M_126"
+    },
+    {
+        "Name": "LungekredsløbSygdomme(I2)",
+        "Description": "LungekredsløbSygdomme(I2)",
+        "Value": "M_127"
+    },
+    {
+        "Name": "BlodpropILunge(I26)",
+        "Description": "BlodpropILunge(I26)",
+        "Value": "M_128"
+    },
+    {
+        "Name": "LungekredsløbAndreSyg.(inklCorPulm)(I28)",
+        "Description": "LungekredsløbAndreSyg.(inklCorPulm)(I28)",
+        "Value": "M_129"
+    },
+    {
+        "Name": "HjertesygdomAndre(I4)",
+        "Description": "HjertesygdomAndre(I4)",
+        "Value": "M_130"
+    },
+    {
+        "Name": "Hjertesvækkelse(Kardiomyopati)(I42)",
+        "Description": "Hjertesvækkelse(Kardiomyopati)(I42)",
+        "Value": "M_131"
+    },
+    {
+        "Name": "Hjertestop(I46)",
+        "Description": "Hjertestop(I46)",
+        "Value": "M_132"
+    },
+    {
+        "Name": "AtrieflimrenOgAndreHjerterytmeforstyr(I48)",
+        "Description": "AtrieflimrenOgAndreHjerterytmeforstyr(I48)",
+        "Value": "M_133"
+    },
+    {
+        "Name": "HjertesygdommeØvrige(I51)",
+        "Description": "HjertesygdommeØvrige(I51)",
+        "Value": "M_134"
+    },
+    {
+        "Name": "HjertefejlMedfødte(Q24)",
+        "Description": "HjertefejlMedfødte(Q24)",
+        "Value": "M_135"
+    },
+    {
+        "Name": "Hjernesygdomme(I6)",
+        "Description": "Hjernesygdomme(I6)",
+        "Value": "M_136"
+    },
+    {
+        "Name": "HjerneblødningFraArterie/aneurismeSubarakn(I60)",
+        "Description": "HjerneblødningFraArterie/aneurismeSubarakn(I60)",
+        "Value": "M_137"
+    },
+    {
+        "Name": "Hjerneblødning(I61)",
+        "Description": "Hjerneblødning(I61)",
+        "Value": "M_138"
+    },
+    {
+        "Name": "Hjerneinfarkt/apopleksi(I63)",
+        "Description": "Hjerneinfarkt/apopleksi(I63)",
+        "Value": "M_139"
+    },
+    {
+        "Name": "SlagtilfældeUdenBlødningEllerInfarkt(I64)",
+        "Description": "SlagtilfældeUdenBlødningEllerInfarkt(I64)",
+        "Value": "M_140"
+    },
+    {
+        "Name": "HjerneAndreKarsygdomme(cerebrovaskulære)(I67)",
+        "Description": "HjerneAndreKarsygdomme(cerebrovaskulære)(I67)",
+        "Value": "M_141"
+    },
+    {
+        "Name": "KraniebrudOgFølgerHeraf(S02)",
+        "Description": "KraniebrudOgFølgerHeraf(S02)",
+        "Value": "M_142"
+    },
+    {
+        "Name": "HjernerystelseOgFølgerHeraf(S06)",
+        "Description": "HjernerystelseOgFølgerHeraf(S06)",
+        "Value": "M_143"
+    },
+    {
+        "Name": "KredsløbssygdommeØvrige(I7)",
+        "Description": "KredsløbssygdommeØvrige(I7)",
+        "Value": "M_144"
+    },
+    {
+        "Name": "KredsløbssygdomKar,VenerMv.EjHjerne(I73)",
+        "Description": "KredsløbssygdomKar,VenerMv.EjHjerne(I73)",
+        "Value": "M_145"
+    },
+    {
+        "Name": "KredsløbssygdommeAndre(I99)",
+        "Description": "KredsløbssygdommeAndre(I99)",
+        "Value": "M_146"
+    },
+    {
+        "Name": "Hudsygdomme(L)",
+        "Description": "Hudsygdomme(L)",
+        "Value": "M_147"
+    },
+    {
+        "Name": "Hudsygdomme(L0)",
+        "Description": "Hudsygdomme(L0)",
+        "Value": "M_148"
+    },
+    {
+        "Name": "Hudinfektioner(alleTyper)(L08)",
+        "Description": "Hudinfektioner(alleTyper)(L08)",
+        "Value": "M_149"
+    },
+    {
+        "Name": "Hudeksem(alleTyper,ToksiskOgAllergisk)(L23)",
+        "Description": "Hudeksem(alleTyper,ToksiskOgAllergisk)(L23)",
+        "Value": "M_150"
+    },
+    {
+        "Name": "Psoriasis(L40)",
+        "Description": "Psoriasis(L40)",
+        "Value": "M_151"
+    },
+    {
+        "Name": "Rosen(alleTyper)(A46)",
+        "Description": "Rosen(alleTyper)(A46)",
+        "Value": "M_152"
+    },
+    {
+        "Name": "ForbrændingerOgÆtsninger(T30)",
+        "Description": "ForbrændingerOgÆtsninger(T30)",
+        "Value": "M_153"
+    },
+    {
+        "Name": "HudsygdommeAndre(L98)",
+        "Description": "HudsygdommeAndre(L98)",
+        "Value": "M_154"
+    },
+    {
+        "Name": "Lunge-OgLuftvejssygdomme(J)",
+        "Description": "Lunge-OgLuftvejssygdomme(J)",
+        "Value": "M_155"
+    },
+    {
+        "Name": "Lunge-OgLuftvejssygdomme(J0)",
+        "Description": "Lunge-OgLuftvejssygdomme(J0)",
+        "Value": "M_156"
+    },
+    {
+        "Name": "Lungebetændelse(alleTyper)(J18)",
+        "Description": "Lungebetændelse(alleTyper)(J18)",
+        "Value": "M_157"
+    },
+    {
+        "Name": "HøfeberOgAllergiskRhinitis(J30)",
+        "Description": "HøfeberOgAllergiskRhinitis(J30)",
+        "Value": "M_158"
+    },
+    {
+        "Name": "BihulebetændelseKronisk(J32)",
+        "Description": "BihulebetændelseKronisk(J32)",
+        "Value": "M_159"
+    },
+    {
+        "Name": "Bronkitis(alleTyper)(J42)",
+        "Description": "Bronkitis(alleTyper)(J42)",
+        "Value": "M_160"
+    },
+    {
+        "Name": "Lungeemfysem/forStoreLunger(J43)",
+        "Description": "Lungeemfysem/forStoreLunger(J43)",
+        "Value": "M_161"
+    },
+    {
+        "Name": "KOL(kroniskObstruktivLungesygdom)(J44)",
+        "Description": "KOL(kroniskObstruktivLungesygdom)(J44)",
+        "Value": "M_162"
+    },
+    {
+        "Name": "Astma(J45)",
+        "Description": "Astma(J45)",
+        "Value": "M_163"
+    },
+    {
+        "Name": "Støvlunge(J63)",
+        "Description": "Støvlunge(J63)",
+        "Value": "M_164"
+    },
+    {
+        "Name": "Lunge-OgLuftvejssygdommeØvrige(J98)",
+        "Description": "Lunge-OgLuftvejssygdommeØvrige(J98)",
+        "Value": "M_165"
+    },
+    {
+        "Name": "Fordøjelsessygdomme(K)",
+        "Description": "Fordøjelsessygdomme(K)",
+        "Value": "M_166"
+    },
+    {
+        "Name": "Brok(hernier)(K4)",
+        "Description": "Brok(hernier)(K4)",
+        "Value": "M_167"
+    },
+    {
+        "Name": "Brok(alleTyper)(K46)",
+        "Description": "Brok(alleTyper)(K46)",
+        "Value": "M_168"
+    },
+    {
+        "Name": "Tarmsygdomme(K5)",
+        "Description": "Tarmsygdomme(K5)",
+        "Value": "M_169"
+    },
+    {
+        "Name": "Tarmbetændelse,CrohnsSygdom(K50)",
+        "Description": "Tarmbetændelse,CrohnsSygdom(K50)",
+        "Value": "M_170"
+    },
+    {
+        "Name": "Tarmbetændelse,ColitisUlcerosa(K51)",
+        "Description": "Tarmbetændelse,ColitisUlcerosa(K51)",
+        "Value": "M_171"
+    },
+    {
+        "Name": "TarmsygdommeAndre(K63)",
+        "Description": "TarmsygdommeAndre(K63)",
+        "Value": "M_172"
+    },
+    {
+        "Name": "Leversygdomme(K7)",
+        "Description": "Leversygdomme(K7)",
+        "Value": "M_173"
+    },
+    {
+        "Name": "LeverbetændelseAlkoholiskInklFedtlever(K70)",
+        "Description": "LeverbetændelseAlkoholiskInklFedtlever(K70)",
+        "Value": "M_174"
+    },
+    {
+        "Name": "Leverbetændelse(hepatitis,AlleTyper)(K73)",
+        "Description": "Leverbetændelse(hepatitis,AlleTyper)(K73)",
+        "Value": "M_175"
+    },
+    {
+        "Name": "Skrumpelever(inkl.Leverfibrose)(K74)",
+        "Description": "Skrumpelever(inkl.Leverfibrose)(K74)",
+        "Value": "M_176"
+    },
+    {
+        "Name": "LeversygdommeAndre(K76)",
+        "Description": "LeversygdommeAndre(K76)",
+        "Value": "M_177"
+    },
+    {
+        "Name": "SygdommeIGaldesystemOgBugspytkirtel(K8)",
+        "Description": "SygdommeIGaldesystemOgBugspytkirtel(K8)",
+        "Value": "M_178"
+    },
+    {
+        "Name": "Galdesten(K80)",
+        "Description": "Galdesten(K80)",
+        "Value": "M_179"
+    },
+    {
+        "Name": "GaldesygdommeAndre(K83)",
+        "Description": "GaldesygdommeAndre(K83)",
+        "Value": "M_180"
+    },
+    {
+        "Name": "BugspytkirtelBetændelse(K85)",
+        "Description": "BugspytkirtelBetændelse(K85)",
+        "Value": "M_181"
+    },
+    {
+        "Name": "BugspytkirtelAndreSygdomme(K86)",
+        "Description": "BugspytkirtelAndreSygdomme(K86)",
+        "Value": "M_182"
+    },
+    {
+        "Name": "FordøjelsessygdommeAndre(K9)",
+        "Description": "FordøjelsessygdommeAndre(K9)",
+        "Value": "M_183"
+    },
+    {
+        "Name": "FordøjelsessygdomEfterKirurgiskIndgreb(K91)",
+        "Description": "FordøjelsessygdomEfterKirurgiskIndgreb(K91)",
+        "Value": "M_184"
+    },
+    {
+        "Name": "FordøjelsessygdomAndre(K92)",
+        "Description": "FordøjelsessygdomAndre(K92)",
+        "Value": "M_185"
+    },
+    {
+        "Name": "Endokrine,StofskifteOgErnæringssygdomme(E0)",
+        "Description": "Endokrine,StofskifteOgErnæringssygdomme(E0)",
+        "Value": "M_186"
+    },
+    {
+        "Name": "Endokrine,StofskifteOgErnæringssygdomme(E0)",
+        "Description": "Endokrine,StofskifteOgErnæringssygdomme(E0)",
+        "Value": "M_187"
+    },
+    {
+        "Name": "SkjoldbruskkirtlenSygdom(E07)",
+        "Description": "SkjoldbruskkirtlenSygdom(E07)",
+        "Value": "M_188"
+    },
+    {
+        "Name": "Sukkersyge(diabetesIOgII)(E14)",
+        "Description": "Sukkersyge(diabetesIOgII)(E14)",
+        "Value": "M_189"
+    },
+    {
+        "Name": "OvervægtOgFedme(E66)",
+        "Description": "OvervægtOgFedme(E66)",
+        "Value": "M_190"
+    },
+    {
+        "Name": "Hyperlipæmi(herunderHyperkolesterol)(E78)",
+        "Description": "Hyperlipæmi(herunderHyperkolesterol)(E78)",
+        "Value": "M_191"
+    },
+    {
+        "Name": "Endokrine,StofskifteOgErnæringssygd.Andre(E89)",
+        "Description": "Endokrine,StofskifteOgErnæringssygd.Andre(E89)",
+        "Value": "M_192"
+    },
+    {
+        "Name": "Infektionssygdomme(A)",
+        "Description": "Infektionssygdomme(A)",
+        "Value": "M_193"
+    },
+    {
+        "Name": "Infektionssygdomme(A0)",
+        "Description": "Infektionssygdomme(A0)",
+        "Value": "M_194"
+    },
+    {
+        "Name": "Infektion-BakterierOgParasitter(A48)",
+        "Description": "Infektion-BakterierOgParasitter(A48)",
+        "Value": "M_195"
+    },
+    {
+        "Name": "Infektion-Centralnervesystemet(A89)",
+        "Description": "Infektion-Centralnervesystemet(A89)",
+        "Value": "M_196"
+    },
+    {
+        "Name": "Infektions-OgVirussygdomme-Andre(B99)",
+        "Description": "Infektions-OgVirussygdomme-Andre(B99)",
+        "Value": "M_197"
+    },
+    {
+        "Name": "AIDS(B24)",
+        "Description": "AIDS(B24)",
+        "Value": "M_198"
+    },
+    {
+        "Name": "HIV(B23)",
+        "Description": "HIV(B23)",
+        "Value": "M_199"
+    },
+    {
+        "Name": "Urinvejs-OgKønsorganSygdomme(N)",
+        "Description": "Urinvejs-OgKønsorganSygdomme(N)",
+        "Value": "M_200"
+    },
+    {
+        "Name": "Nyresygdomme(N0)",
+        "Description": "Nyresygdomme(N0)",
+        "Value": "M_201"
+    },
+    {
+        "Name": "Nyrebetændelse(akutOgKronisk)(N03)",
+        "Description": "Nyrebetændelse(akutOgKronisk)(N03)",
+        "Value": "M_202"
+    },
+    {
+        "Name": "Nyresvigt(N17)",
+        "Description": "Nyresvigt(N17)",
+        "Value": "M_203"
+    },
+    {
+        "Name": "NyrefunktionNedsat(nyreinsufficiens)(N18)",
+        "Description": "NyrefunktionNedsat(nyreinsufficiens)(N18)",
+        "Value": "M_204"
+    },
+    {
+        "Name": "NyreOgUrinvejeAndre(fxBlærebetændelse)(N28)",
+        "Description": "NyreOgUrinvejeAndre(fxBlærebetændelse)(N28)",
+        "Value": "M_205"
+    },
+    {
+        "Name": "KønsorganerMandlige,Sygdomme(N5)",
+        "Description": "KønsorganerMandlige,Sygdomme(N5)",
+        "Value": "M_206"
+    },
+    {
+        "Name": "KønsorganerMandlige,Sygdomme(N50)",
+        "Description": "KønsorganerMandlige,Sygdomme(N50)",
+        "Value": "M_207"
+    },
+    {
+        "Name": "KønsorganerKvindelige,Sygdomme(N7)",
+        "Description": "KønsorganerKvindelige,Sygdomme(N7)",
+        "Value": "M_208"
+    },
+    {
+        "Name": "Underlivsbetændelse(N73)",
+        "Description": "Underlivsbetændelse(N73)",
+        "Value": "M_209"
+    },
+    {
+        "Name": "Endometriose(N80)",
+        "Description": "Endometriose(N80)",
+        "Value": "M_210"
+    },
+    {
+        "Name": "KønsorganerKvindelige,AndreSygdomme(N99)",
+        "Description": "KønsorganerKvindelige,AndreSygdomme(N99)",
+        "Value": "M_211"
+    },
+    {
+        "Name": "GraviditetOgFødselSygdomme(O)",
+        "Description": "GraviditetOgFødselSygdomme(O)",
+        "Value": "M_212"
+    },
+    {
+        "Name": "GraviditetOgFødselSygdomme(O0)",
+        "Description": "GraviditetOgFødselSygdomme(O0)",
+        "Value": "M_213"
+    },
+    {
+        "Name": "Bækkenløsning(O26)",
+        "Description": "Bækkenløsning(O26)",
+        "Value": "M_214"
+    },
+    {
+        "Name": "GraviditetOgFødselSygdommeAndre(O99)",
+        "Description": "GraviditetOgFødselSygdommeAndre(O99)",
+        "Value": "M_215"
+    },
+    {
+        "Name": "MisdannelserMedfødte(Q)",
+        "Description": "MisdannelserMedfødte(Q)",
+        "Value": "M_216"
+    },
+    {
+        "Name": "MisdannelserMedfødte(Q0)",
+        "Description": "MisdannelserMedfødte(Q0)",
+        "Value": "M_217"
+    },
+    {
+        "Name": "MisdannelserMedfødteEjRyg(Q89)",
+        "Description": "MisdannelserMedfødteEjRyg(Q89)",
+        "Value": "M_218"
+    },
+    {
+        "Name": "DiffuseSymptomer(R)",
+        "Description": "DiffuseSymptomer(R)",
+        "Value": "M_219"
+    },
+    {
+        "Name": "DiffuseSymptomer(R0)",
+        "Description": "DiffuseSymptomer(R0)",
+        "Value": "M_220"
+    },
+    {
+        "Name": "DiffuseSymptomerUdenPrimærDiagnose(R53)",
+        "Description": "DiffuseSymptomerUdenPrimærDiagnose(R53)",
+        "Value": "M_221"
+    },
+    {
+        "Name": "Forgiftninger(T)",
+        "Description": "Forgiftninger(T)",
+        "Value": "M_222"
+    },
+    {
+        "Name": "Forgiftninger(T0)",
+        "Description": "Forgiftninger(T0)",
+        "Value": "M_223"
+    },
+    {
+        "Name": "Forgiftninger(alleTyper)(T65)",
+        "Description": "Forgiftninger(alleTyper)(T65)",
+        "Value": "M_224"
+    },
+    {
+        "Name": "Kræftsygdomme(C)",
+        "Description": "Kræftsygdomme(C)",
+        "Value": "M_225"
+    },
+    {
+        "Name": "KræftIFordøjelsesorganer(C1)",
+        "Description": "KræftIFordøjelsesorganer(C1)",
+        "Value": "M_226"
+    },
+    {
+        "Name": "Mavekræft(C16)",
+        "Description": "Mavekræft(C16)",
+        "Value": "M_227"
+    },
+    {
+        "Name": "Tarmkræft(C17)",
+        "Description": "Tarmkræft(C17)",
+        "Value": "M_228"
+    },
+    {
+        "Name": "Leverkræft(C22)",
+        "Description": "Leverkræft(C22)",
+        "Value": "M_229"
+    },
+    {
+        "Name": "BugspytkirtelKræft(C25)",
+        "Description": "BugspytkirtelKræft(C25)",
+        "Value": "M_230"
+    },
+    {
+        "Name": "KræftIFordøjelsesorganerAndre(C26)",
+        "Description": "KræftIFordøjelsesorganerAndre(C26)",
+        "Value": "M_231"
+    },
+    {
+        "Name": "KræftILungerOgBrysthule(C3)",
+        "Description": "KræftILungerOgBrysthule(C3)",
+        "Value": "M_232"
+    },
+    {
+        "Name": "LungeOgBronkiekræft(C34)",
+        "Description": "LungeOgBronkiekræft(C34)",
+        "Value": "M_233"
+    },
+    {
+        "Name": "Lungehindekræft(mesotheliom)(C38)",
+        "Description": "Lungehindekræft(mesotheliom)(C38)",
+        "Value": "M_234"
+    },
+    {
+        "Name": "KræftIKnoglerOgHud(C4)",
+        "Description": "KræftIKnoglerOgHud(C4)",
+        "Value": "M_235"
+    },
+    {
+        "Name": "KnogleOgBruskKræft(C41)",
+        "Description": "KnogleOgBruskKræft(C41)",
+        "Value": "M_236"
+    },
+    {
+        "Name": "Modermærkekræft(C43)",
+        "Description": "Modermærkekræft(C43)",
+        "Value": "M_237"
+    },
+    {
+        "Name": "Hudkræft(alleTyper)(C44)",
+        "Description": "Hudkræft(alleTyper)(C44)",
+        "Value": "M_238"
+    },
+    {
+        "Name": "KræftIMandligeKønsorg.,NyrerOgUrinveje(C6)",
+        "Description": "KræftIMandligeKønsorg.,NyrerOgUrinveje(C6)",
+        "Value": "M_239"
+    },
+    {
+        "Name": "Prostatakræft(kræftIBlærehalskirtel)(C61)",
+        "Description": "Prostatakræft(kræftIBlærehalskirtel)(C61)",
+        "Value": "M_240"
+    },
+    {
+        "Name": "Tekstikelkræft(C62)",
+        "Description": "Tekstikelkræft(C62)",
+        "Value": "M_241"
+    },
+    {
+        "Name": "Nyrekræft(C64)",
+        "Description": "Nyrekræft(C64)",
+        "Value": "M_242"
+    },
+    {
+        "Name": "Blærekræft(C67)",
+        "Description": "Blærekræft(C67)",
+        "Value": "M_243"
+    },
+    {
+        "Name": "KræftIHjerne,Øje,Centr.nervesyst.OgKirtl(C7)",
+        "Description": "KræftIHjerne,Øje,Centr.nervesyst.OgKirtl(C7)",
+        "Value": "M_244"
+    },
+    {
+        "Name": "HjernekræftInkl.IØje,HjernehindeO.lign.(C71)",
+        "Description": "HjernekræftInkl.IØje,HjernehindeO.lign.(C71)",
+        "Value": "M_245"
+    },
+    {
+        "Name": "RygmarvsKræftOgAndreDeleAfCentralnerves(C72)",
+        "Description": "RygmarvsKræftOgAndreDeleAfCentralnerves(C72)",
+        "Value": "M_246"
+    },
+    {
+        "Name": "SkjoldbruskkirtelKræft(C73)",
+        "Description": "SkjoldbruskkirtelKræft(C73)",
+        "Value": "M_247"
+    },
+    {
+        "Name": "KirtlerOgBinyreKræftAndre(C75)",
+        "Description": "KirtlerOgBinyreKræftAndre(C75)",
+        "Value": "M_248"
+    },
+    {
+        "Name": "KræftILymfevævMv.(C8)",
+        "Description": "KræftILymfevævMv.(C8)",
+        "Value": "M_249"
+    },
+    {
+        "Name": "HodgkinLymfomer(C81)",
+        "Description": "HodgkinLymfomer(C81)",
+        "Value": "M_250"
+    },
+    {
+        "Name": "Lymfomer/non-HodgkinLymfomerAndre(C85)",
+        "Description": "Lymfomer/non-HodgkinLymfomerAndre(C85)",
+        "Value": "M_251"
+    },
+    {
+        "Name": "Leukæmi(kræftIBloddannendeVæv)(C9)",
+        "Description": "Leukæmi(kræftIBloddannendeVæv)(C9)",
+        "Value": "M_252"
+    },
+    {
+        "Name": "Leukæmi,AlleTyper(C94)",
+        "Description": "Leukæmi,AlleTyper(C94)",
+        "Value": "M_253"
+    },
+    {
+        "Name": "Kræftsygdomme-OndartedeØvrige(C10)",
+        "Description": "Kræftsygdomme-OndartedeØvrige(C10)",
+        "Value": "M_254"
+    },
+    {
+        "Name": "KræftØvrigeOndartede(C76)",
+        "Description": "KræftØvrigeOndartede(C76)",
+        "Value": "M_255"
+    },
+    {
+        "Name": "Kræft-TumorerGodartede(C11)",
+        "Description": "Kræft-TumorerGodartede(C11)",
+        "Value": "M_256"
+    },
+    {
+        "Name": "Kræft-AlleGodartedeTumorer(D36)",
+        "Description": "Kræft-AlleGodartedeTumorer(D36)",
+        "Value": "M_257"
+    },
+    {
+        "Name": "KræftIMundOgHals(C0)",
+        "Description": "KræftIMundOgHals(C0)",
+        "Value": "M_258"
+    },
+    {
+        "Name": "KræftILæbe,MundhuleOgSvælgAlle(C14)",
+        "Description": "KræftILæbe,MundhuleOgSvælgAlle(C14)",
+        "Value": "M_259"
+    },
+    {
+        "Name": "KræftIBrystOgKvindeligeKønsorganer(C5)",
+        "Description": "KræftIBrystOgKvindeligeKønsorganer(C5)",
+        "Value": "M_260"
+    },
+    {
+        "Name": "LivmoderKræft(C54)",
+        "Description": "LivmoderKræft(C54)",
+        "Value": "M_261"
+    },
+    {
+        "Name": "ÆggestokKræft(C56)",
+        "Description": "ÆggestokKræft(C56)",
+        "Value": "M_262"
+    },
+    {
+        "Name": "Brystkræft(C50)",
+        "Description": "Brystkræft(C50)",
+        "Value": "M_263"
+    },
+    {
+        "Name": "LivmoderhalsKræft(C53)",
+        "Description": "LivmoderhalsKræft(C53)",
+        "Value": "M_264"
+    }
+]

@@ -1,26 +1,22 @@
 {
-	"name": "@luftborn/esignatur-collaborator-onboarding",
-	"version": "1.0.2",
-	"description": "Custom web components for eSignatur collaborator onboarding application",
+	"name": "@luftborn/esignatur-common-input-fields",
+	"version": "1.0.0",
+	"description": "TypeaheadElement",
 	"main": "lib/index.min.js",
-	"types": "lib/index.min.js.map",
-	"author": "Luftborn",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"prepublish": "tsc --declaration"
 	},
+	"author": "Luftborn",
 	"license": "ISC",
 	"bundledDependencies": [
-		"@webcomponents/webcomponentsjs",
-		"js-polyfills"
+		"@webcomponents/webcomponentsjs"
 	],
 	"dependencies": {
 		"@types/leaflet": "^1.4.4",
 		"@webcomponents/custom-elements": "^1.2.4",
 		"@webcomponents/webcomponentsjs": "^2.2.10",
-		"js-polyfills": "^0.1.42",
-		"leaflet": "^1.5.1",
-		"xlsx": "^0.16.0"
+		"leaflet": "^1.5.1"
 	},
 	"devDependencies": {
 		"gulp-terser": "^1.2.0",

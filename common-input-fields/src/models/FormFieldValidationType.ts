@@ -1,0 +1,26 @@
+enum ValidationType {
+	TextField = "TextField",
+	TextFieldArea = "TextFieldArea",
+	NumericField = "NumericField",
+	CPR = "CPR",
+	CPRWithNemIdValidation = "CPRWithNemIdValidation",
+	CVR = "CVR",
+	PhoneNumber = "PhoneNumber",
+	ZipCode = "ZipCode",
+	BankAccount = "BankAccount",
+	BankAccountRegistrationNumber = "BankAccountRegistrationNumber",
+	EmailAddress = "EmailAddress",
+	CustomRegularExpression = "CustomRegularExpression",
+	Label = "Label",
+	Checkbox = "Checkbox",
+	RadioButtonGroupMulti = "RadioButtonGroupMulti",
+	RadioButtonGroup = "RadioButtonGroup",
+	DateField = "DateField",
+	Passport = "FileUpload",
+	DriversLicence = "FileUpload",
+	FileUpload = "FileUpload",
+	DropdownList = "DropdownList",
+	NumericRange = "NumericRange",
+}
+
+export default ValidationType;

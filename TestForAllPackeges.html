@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+
+	<h3>Test typeahead-element</h3>
+	<div>
+		<typeahead-element>
+			<noscript>
+				[
+				{
+				"Name": "vgeapparatSygdomme(M)",
+				"Description": "BevgeapparatSygdomme(M)",
+				"Value": "M_1"
+				},
+				{
+				"Name": "Rygsygdomme(M4)",
+				"Description": "Rygsygdomme(M4)",
+				"Value": "M_2"
+				},
+				{
+				"Name": "DiskusprolapsIBrystrygOgLnderyg(M51)",
+				"Description": "DiskusprolapsIBrystrygOgLnderyg(M51)",
+				"Value": "M_3"
+				},
+				{
+				"Name": "Knogleskrhed(hals,Bryst-OgLnderyg)(M42)",
+				"Description": "Knogleskrhed(hals,Bryst-OgLnderyg)(M42)",
+				"Value": "M_4"
+				},
+				{
+				"Name": "RygsygdomMedfdt(hals,Bryst,Lnderyg)(M43)",
+				"Description": "RygsygdomMedfdt(hals,Bryst,Lnderyg)(M43)",
+				"Value": "M_5"
+				},
+				{
+				"Name": "Rygsygdom,SlidgigtOgDeg.Forandringer(M47)",
+				"Description": "Rygsygdom,SlidgigtOgDeg.Forandringer(M47)",
+				"Value": "M_6"
+				},
+				{
+				"Name": "RygsygdomAndre(hals,bryst-ogLnderyg)(M48)",
+				"Description": "RygsygdomAndre(hals,bryst-ogLnderyg)(M48)",
+				"Value": "M_7"
+				},
+				{
+				"Name": "Nakke-skuldersmerterKroniske(M53)",
+				"Description": "Nakke-skuldersmerterKroniske(M53)",
+				"Value": "M_8"
+				},
+				{
+				"Name": "Whiplash(forvridningAfHalsryg)(S13)",
+				"Description": "Whiplash(forvridningAfHalsryg)(S13)",
+				"Value": "M_9"
+				},
+				{
+				"Name": "Rygsmerter(M54)",
+				"Description": "Rygsmerter(M54)",
+				"Value": "M_10"
+				},
+				{
+				"Name": "DiskusprolapsIHalsen(M50)",
+				"Description": "DiskusprolapsIHalsen(M50)",
+				"Value": "M_11"
+				}
+				]
+			</noscript>
+		</typeahead-element>
+	</div>
+	<script src="./common-input-fields/lib/index.js"></script>
+
+	<h3>Test OnboardingManagement</h3>
+	<div>
+		<esignature-onboarding apiurl="http://localhost:5003/api/onboarding" apikey="jhgfhjEK254@ios20b25ZsklmJWf"
+			customstyle="td{color:red;}">
+			<noscript role="style">
+				td {
+				text-align: center;
+				}
+			</noscript>
+		</esignature-onboarding>
+	</div>
+	<script src="./OnboardingManagement svelte-app/public/build/bundle.js"></script>
+
+	<h3>Test collaborator-onboarding</h3>
+	<div>
+		<esignatur-collaborator-onboarding api-key="f6115cf1-3c2b-4cc7-a92f-b5dff133e8fe" api-url="http://localhost:5003/">
+		</esignatur-collaborator-onboarding>
+	</div>
+	<script src="./CollaboratorOnboarding CustomWebComponents/lib/index.js"></script>
+
+	<h3>Test Custom Input Elements</h3>
+	<div>
+		<form action="/" method="POST">
+			<div class="field-group group-container" data-depends-on='' data-dependent-value=''>
+				<div class="field-group-title border-solid">
+					Group1:
+				</div>
+				<div class="field-group-content">
+					<div class="group-row">
+						<div class="field-item">
+							<div class="field-label">Navn: </div>
+							<div class="field-input">
+								<text-element>
+									<script type="application/json">
+										{
+											"label": "Name",
+											"name": "name",
+											"value": null,
+											"type": "Text",
+											"required": true,
+											"options": [],
+											"noValueDependency": null,
+											"hasValueDependency": null,
+											"dependencies": [{
+												"value": "peter",
+												"criteria": "Exact",
+												"items": ["email"]
+											}]
+										}
+									</script>
+								</text-element>
+							</div>
+						</div>
+						<div class="field-item custom-validation-target">
+							<span class="invalid-message" style="display: none">Enter a valid checkbox</span>
+							<div class="field-item">
+								<div class="field-label">Display G2: </div>
+								<div class="field-input">
+									<checkbox-element>
+										<script type="application/json">
+											{
+												"label": "Checkbox",
+												"name": "checkbox1",
+												"value": null,
+												"type": "checkbox",
+												"required": false,
+												"options": ["Ja", "Nej"],
+												"noValueDependency": null,
+												"hasValueDependency": null,
+												"dependencies": [{
+													"value": "Ja",
+													"criteria": "Exact",
+													"items": ["email2"]
+												}]
+											}
+										</script>
+									</checkbox-element>
+								</div>
+							</div>
+						</div>
+						<div class="field-item custom-validation-target">
+							<span class="invalid-message" style="display: none">Enter a valid phone</span>
+							<div class="field-item">
+								<div class="field-label">Phone: </div>
+								<div class="field-input">
+									<int-phone-element>
+										<script type="application/json">
+											{
+												"label": "Int Phone",
+												"name": "int-phone-element1",
+												"value": null,
+												"type": "int-phone-element",
+												"required": true,
+												"noValueDependency": null,
+												"hasValueDependency": null
+											}
+										</script>
+									</int-phone-element>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="group-row">
+						<div class="field-item">
+							<div class="field-label">E-mail: </div>
+							<div class="field-input">
+								<email-element>
+									<script type="text/json">
+										{
+											"label": "E-mail",
+											"name": "email",
+											"value": null,
+											"type": "email",
+											"required": false,
+											"options": [],
+											"noValueDependency": null,
+											"hasValueDependency": null,
+											"dependencies": [{
+												"value": "peter@luftborn.com",
+												"criteria": "Exact",
+												"items": ["address"]
+											}]
+										}
+									</script>
+								</email-element>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="field-group group-container" data-depends-on="checkbox1" data-dependent-value="Ja">
+				<div class="field-group-title border-solid">
+					Group2:
+				</div>
+				<div class="field-group-content">
+					<div class="group-row">
+						<div class="field-item custom-validation-target">
+							<div class="field-item">
+								<div class="field-label">Display G3: </div>
+								<div class="field-input">
+									<checkbox-element>
+										<script type="application/json">
+											{
+												"label": "Checkbox",
+												"name": "checkbox2",
+												"value": null,
+												"type": "checkbox",
+												"required": false,
+												"options": ["Ja", "Nej"],
+												"noValueDependency": null,
+												"hasValueDependency": null,
+												"dependencies": [{
+													"value": "Ja",
+													"criteria": "Exact",
+													"items": ["email2"]
+												}]
+											}
+										</script>
+									</checkbox-element>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="field-group group-container" data-depends-on="checkbox2" data-dependent-value="Ja">
+				<div class="field-group-title border-solid">
+					Group 3:
+				</div>
+				<div class="field-group-content">
+					<div class="group-row">
+						<div class="field-item">
+							<div class="field-label">FileUpload (ikke fletbart): </div>
+							<div class="field-input">
+								<file-element>
+									<script type="application/json">
+										{
+											"label": "FileUpload",
+											"name": "files2",
+											"value": null,
+											"type": "file",
+											"multi": false,
+											"required": false,
+											"options": [],
+											"noValueDependency": null,
+											"hasValueDependency": null,
+											"dependencies": []
+										}
+									</script>
+								</file-element>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<input type="submit" value="send">
+		</form>
+	</div>
+	<script src="./custom-input-elements/demo/index.js"></script>
+</body>
+
+</html>
