@@ -2,241 +2,259 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Custom Elements</title>
+	<meta charset="UTF-8">
+	<title>Custom Elements</title>
 
 
-    <link rel="stylesheet" href="../assets/style.css">
-    <style>
-        .invalid .box {
-            padding: 0;
-            border: 1px solid red;
-        }
+	<link rel="stylesheet" href="../assets/style.css">
+	<style>
+		.invalid .box {
+			padding: 0;
+			border: 1px solid red;
+		}
 
-        .invalid .field-label {
-            margin-top: 0 !important;
-            color: red !important;
-        }
+		.invalid .field-label {
+			margin-top: 0 !important;
+			color: red !important;
+		}
 
-        .invalid .invalid-message {
-            display: inline-block !important;
-            background-color: red;
-            color: #FFFFFF;
-            font-size: 13px;
-            line-height: 21px;
-            border-radius: 4px 4px 0px 0px;
-            padding: 3px 8px 0 8px;
-            margin-top: 5px;
-            margin-bottom: 0 !important;
-        }
-    </style>
+		.invalid .invalid-message {
+			display: inline-block !important;
+			background-color: red;
+			color: #FFFFFF;
+			font-size: 13px;
+			line-height: 21px;
+			border-radius: 4px 4px 0px 0px;
+			padding: 3px 8px 0 8px;
+			margin-top: 5px;
+			margin-bottom: 0 !important;
+		}
+	</style>
 </head>
 
 <body class="A4">
-    <header class="header header-bgcolor-dark">
-        <div class="container">
-            <div class="head ">
-                <h1 class="head-title head-title-white">Standart Blanket</h1>
-            </div>
-        </div>
-    </header>
-    <main>
-        <section class="head-subtitles">
-            <div class="container">
-                <h6 class="head-subtitle text-bold">Standard blanket over esignaturs felter</h6>
-                <h6 class="head-subtitle text-bold">Flette felter og ikke flette felter</h6>
-                <h6 class="head-subtitle">Disse er de felter der kan flettes ind fra på pdf’en og felter der ikke kan flettes ind</h6>
-            </div>
-        </section>
-        <section class="form">
-            <div class="container">
-                <form action="/" method="POST">
-                    <div class="field-group group-container" data-depends-on='' data-dependent-value=''>
-                        <div class="field-group-title border-solid">
-                            Group1:
-                        </div>
-                        <div class="field-group-content">
-                            <div class="group-row">
-                                <div class="field-item">
-                                    <div class="field-label">Navn: </div>
-                                    <div class="field-input">
-                                        <text-element>
-                                            <script type="application/json">
-                                                {
-                                                "label": "Name",
-                                                "name": "name",
-                                                "value": null,
-                                                "type": "Text",
-                                                "required": true,
-                                                "options": [],
-                                                "noValueDependency": null,
-                                                "hasValueDependency": null,
-                                                "dependencies": [
-                                                {
-                                                "value": "peter",
-                                                "criteria": "Exact",
-                                                "items": ["email"]
-                                                }]
-                                                }
-                                            </script>
-                                        </text-element>
-                                    </div>
-                                </div>
-                                <div class="field-item custom-validation-target">
-                                    <span class="invalid-message" style="display: none">Enter a valid   checkbox</span>
-                                    <div class="field-item">
-                                        <div class="field-label">Display G2: </div>
-                                        <div class="field-input">
-                                            <checkbox-element>
-                                                <script type="application/json">
-                                                    {
-                                                    "label": "Checkbox",
-                                                    "name": "checkbox1",
-                                                    "value": null,
-                                                    "type": "checkbox",
-                                                    "required": false,
-                                                    "options": ["Ja","Nej"],
-                                                    "noValueDependency": null,
-                                                    "hasValueDependency": null,
-                                                    "dependencies": [
-                                                    {
-                                                    "value": "Ja",
-                                                    "criteria": "Exact",
-                                                    "items": ["email2"]
-                                                    }
-                                                    ]
-                                                    }
-                                                </script>
-                                            </checkbox-element>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="field-item custom-validation-target">
-                                    <span class="invalid-message" style="display: none">Enter a valid  phone</span>
-                                    <div class="field-item">
-                                        <div class="field-label">Phone: </div>
-                                        <div class="field-input">
-                                            <int-phone-element>
-                                                <script type="application/json">
-                                                    {
-                                                    "label": "Int Phone",
-                                                    "name": "int-phone-element1",
-                                                    "value": null,
-                                                    "type": "int-phone-element",
-                                                    "required": true,
-                                                    "noValueDependency": null,
-                                                    "hasValueDependency": null
-                                                    }
-                                                </script>
-                                            </int-phone-element>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="group-row">
-                                <div class="field-item">
-                                    <div class="field-label">E-mail: </div>
-                                    <div class="field-input">
-                                        <email-element>
-                                            <script type="text/json">
-                                                    {
-                                                        "label": "E-mail",
-                                                        "name": "email",
-                                                        "value": null,
-                                                        "type": "email",
-                                                        "required": false,
-                                                        "options": [],
-                                                        "noValueDependency": null,
-                                                        "hasValueDependency": null,
-                                                        "dependencies": [ {
-                                                            "value": "peter@luftborn.com",
-                                                            "criteria": "Exact",
-                                                            "items": ["address"]
-                                                        }]
-                                                    }
-                                                </script>
-                                        </email-element>
-                                    </div>
-                                </div>
+	<header class="header header-bgcolor-dark">
+		<div class="container">
+			<div class="head ">
+				<h1 class="head-title head-title-white">Standart Blanket</h1>
+			</div>
+		</div>
+	</header>
+	<main>
+		<section class="head-subtitles">
+			<div class="container">
+				<h6 class="head-subtitle text-bold">Standard blanket over esignaturs felter</h6>
+				<h6 class="head-subtitle text-bold">Flette felter og ikke flette felter</h6>
+				<h6 class="head-subtitle">Disse er de felter der kan flettes ind fra på pdf’en og felter der ikke kan flettes
+					ind</h6>
+			</div>
+		</section>
+		<section class="form">
+			<div class="container">
+				<form action="/" method="POST">
+					<div class="field-group group-container" data-depends-on='' data-dependent-value=''>
+						<div class="field-group-title border-solid">
+							Group1:
+						</div>
+						<div class="field-group-content">
+							<div class="group-row">
+								<div class="field-item custom-validation-target">
+									<span class="invalid-message" style="display: none">Enter a valid Address</span>
+									<div class="field-item">
+										<div class="field-label">Address: </div>
+										<div class="field-input">
+											<address-element language="da">
+												<script type="application/json">
+													{
+														"label": "Adress label",
+														"name": "Adress name",
+														"type": "address-element",
+														"required": true,
+														"noValueDependency": null,
+														"hasValueDependency": null
+													}
+												</script>
+											</address-element>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="group-row">
+								<div class="field-item">
+									<div class="field-label">Navn: </div>
+									<div class="field-input">
+										<text-element>
+											<script type="application/json">
+												{
+													"label": "Name",
+													"name": "name",
+													"value": null,
+													"type": "Text",
+													"required": true,
+													"options": [],
+													"noValueDependency": null,
+													"hasValueDependency": null,
+													"dependencies": [{
+														"value": "peter",
+														"criteria": "Exact",
+														"items": ["email"]
+													}]
+												}
+											</script>
+										</text-element>
+									</div>
+								</div>
+								<div class="field-item custom-validation-target">
+									<span class="invalid-message" style="display: none">Enter a valid checkbox</span>
+									<div class="field-item">
+										<div class="field-label">Display G2: </div>
+										<div class="field-input">
+											<checkbox-element>
+												<script type="application/json">
+													{
+														"label": "Checkbox",
+														"name": "checkbox1",
+														"value": null,
+														"type": "checkbox",
+														"required": false,
+														"options": ["Ja", "Nej"],
+														"noValueDependency": null,
+														"hasValueDependency": null,
+														"dependencies": [{
+															"value": "Ja",
+															"criteria": "Exact",
+															"items": ["email2"]
+														}]
+													}
+												</script>
+											</checkbox-element>
+										</div>
+									</div>
+								</div>
+								<div class="field-item custom-validation-target">
+									<span class="invalid-message" style="display: none">Enter a valid phone</span>
+									<div class="field-item">
+										<div class="field-label">Phone: </div>
+										<div class="field-input">
+											<int-phone-element>
+												<script type="application/json">
+													{
+														"label": "Int Phone",
+														"name": "int-phone-element1",
+														"value": null,
+														"type": "int-phone-element",
+														"required": true,
+														"noValueDependency": null,
+														"hasValueDependency": null
+													}
+												</script>
+											</int-phone-element>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="group-row">
+								<div class="field-item">
+									<div class="field-label">E-mail: </div>
+									<div class="field-input">
+										<email-element>
+											<script type="text/json">
+												{
+													"label": "E-mail",
+													"name": "email",
+													"value": null,
+													"type": "email",
+													"required": false,
+													"options": [],
+													"noValueDependency": null,
+													"hasValueDependency": null,
+													"dependencies": [{
+														"value": "peter@luftborn.com",
+														"criteria": "Exact",
+														"items": ["address"]
+													}]
+												}
+											</script>
+										</email-element>
+									</div>
+								</div>
 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="field-group group-container" data-depends-on="checkbox1" data-dependent-value="Ja">
-                        <div class="field-group-title border-solid">
-                            Group2:
-                        </div>
-                        <div class="field-group-content">
-                            <div class="group-row">
-                                <div class="field-item custom-validation-target">
-                                    <div class="field-item">
-                                        <div class="field-label">Display G3: </div>
-                                        <div class="field-input">
-                                            <checkbox-element>
-                                                <script type="application/json">
-                                                            {
-                                                                "label": "Checkbox",
-                                                                "name": "checkbox2",
-                                                                "value": null,
-                                                                "type": "checkbox",
-                                                                "required": false,
-                                                                "options": ["Ja","Nej"],
-                                                                "noValueDependency": null,
-                                                                "hasValueDependency": null,
-                                                                "dependencies": [
-                                                                    {
-                                                                        "value": "Ja",
-                                                                        "criteria": "Exact",
-                                                                        "items": ["email2"]
-                                                                    }
-                                                                ]
-                                                            } 
-                                                        </script>
-                                            </checkbox-element>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+							</div>
+						</div>
+					</div>
+					<div class="field-group group-container" data-depends-on="checkbox1" data-dependent-value="Ja">
+						<div class="field-group-title border-solid">
+							Group2:
+						</div>
+						<div class="field-group-content">
+							<div class="group-row">
+								<div class="field-item custom-validation-target">
+									<div class="field-item">
+										<div class="field-label">Display G3: </div>
+										<div class="field-input">
+											<checkbox-element>
+												<script type="application/json">
+													{
+														"label": "Checkbox",
+														"name": "checkbox2",
+														"value": null,
+														"type": "checkbox",
+														"required": false,
+														"options": ["Ja", "Nej"],
+														"noValueDependency": null,
+														"hasValueDependency": null,
+														"dependencies": [{
+															"value": "Ja",
+															"criteria": "Exact",
+															"items": ["email2"]
+														}]
+													}
+												</script>
+											</checkbox-element>
+										</div>
+									</div>
+								</div>
+							</div>
 
-                        </div>
-                    </div>
-                    <div class="field-group group-container" data-depends-on="checkbox2" data-dependent-value="Ja">
-                            <div class="field-group-title border-solid">
-                                Group 3:
-                            </div>
-                            <div class="field-group-content">
-                                <div class="group-row">
-                                    <div class="field-item">
-                                        <div class="field-label">FileUpload (ikke fletbart): </div>
-                                        <div class="field-input">
-                                            <file-element>
-                                                <script type="application/json">
-                                                        {
-                                                            "label": "FileUpload",
-                                                            "name": "files2",
-                                                            "value": null,
-                                                            "type": "file",
-                                                            "multi": false,
-                                                            "required": false,
-                                                            "options": [],
-                                                            "noValueDependency": null,
-                                                            "hasValueDependency": null,
-                                                            "dependencies": []
-                                                        }
-                                                    </script>
-                                            </file-element>
-                                        </div>
-                                    </div>
-                                </div>
-    
-                            </div>
-                        </div>
-                    <input type="submit" value="send">
-                </form>
-            </div>
-        </section>
-    </main>
-    <script src="/demo/index.js"></script>
+						</div>
+					</div>
+					<div class="field-group group-container" data-depends-on="checkbox2" data-dependent-value="Ja">
+						<div class="field-group-title border-solid">
+							Group 3:
+						</div>
+						<div class="field-group-content">
+							<div class="group-row">
+								<div class="field-item">
+									<div class="field-label">FileUpload (ikke fletbart): </div>
+									<div class="field-input">
+										<file-element>
+											<script type="application/json">
+												{
+													"label": "FileUpload",
+													"name": "files2",
+													"value": null,
+													"type": "file",
+													"multi": false,
+													"required": false,
+													"options": [],
+													"noValueDependency": null,
+													"hasValueDependency": null,
+													"dependencies": []
+												}
+											</script>
+										</file-element>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<input type="submit" value="send">
+				</form>
+			</div>
+		</section>
+	</main>
+	<script src="/demo/index.js"></script>
 </body>
 
 </html>
