@@ -96,9 +96,9 @@ export class AddressElement extends CustomInputElement {
 		if (!this.address || !this.city || !this.zip) {
 			return;
 		}
-		this.address.placeholder = Translator.Translate('AddressElement.Address');
-		this.city.placeholder = Translator.Translate('AddressElement.City');
-		this.zip.placeholder = Translator.Translate('AddressElement.Zip');
+		this.address.placeholder = Translator.Translate('AddressElement.Address', language);
+		this.city.placeholder = Translator.Translate('AddressElement.City', language);
+		this.zip.placeholder = Translator.Translate('AddressElement.Zip', language);
 	}
 
 	static get observedAttributes() {

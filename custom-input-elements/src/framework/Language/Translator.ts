@@ -20,7 +20,7 @@ export default class Translator {
 				return this.danishDictionary.get(key);
 				break;
 			case 'en':
-				return this.danishDictionary.get(key);
+				return this.englishDictionary.get(key);
 				break;
 		}
 	}
