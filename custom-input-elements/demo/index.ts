@@ -5,7 +5,7 @@ document.onreadystatechange = () => {
     if (document.readyState === 'complete') {
         let form = new CustomForm(document.forms[0]);
         form.onsubmit = promise => {
-            promise.then(response => {});
+            promise.then(response => { });
         };
     }
 };

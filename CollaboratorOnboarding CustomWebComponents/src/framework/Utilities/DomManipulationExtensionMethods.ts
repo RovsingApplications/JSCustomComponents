@@ -64,5 +64,3 @@ HTMLElement.prototype.removeChildElement = function (child: HTMLElement): void {
 	let element = this.getElement();
 	return element.removeChild(child);
 }
-
-

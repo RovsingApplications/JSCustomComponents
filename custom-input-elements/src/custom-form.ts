@@ -86,7 +86,7 @@ export class CustomForm {
             let customElement: CustomInputElement = document.forms[0].querySelector(`[name="${dependentField}"]`) as CustomInputElement;
             element.setAttribute("hidden", "");
             customElement.onChange.on(event => {
-                if (event.value === dependentValue || event.value.indexOf(dependentValue)>=0) {
+                if (event.value === dependentValue || event.value.indexOf(dependentValue) >= 0) {
                     this.showGroupAndItsDependencies(element);
                 } else {
                     this.hideGroupAndItsDependencies(element);
@@ -100,10 +100,10 @@ export class CustomForm {
         group.setAttribute("hidden", "");
         let groupContainers = this.form.querySelectorAll('div.group-container:not([data-depends-on=""])');
         groupContainers.forEach(otherGroup => {
-            if(otherGroup !== group){
+            if (otherGroup !== group) {
                 let groupDependsOnField = otherGroup.getAttribute('data-depends-on');
                 inputElementsInsideGroup.forEach(input => {
-                    if(input.name === groupDependsOnField){
+                    if (input.name === groupDependsOnField) {
                         this.hideGroupAndItsDependencies(otherGroup);
                     }
                 });
@@ -115,26 +115,26 @@ export class CustomForm {
         const inputElementsInsideGroup = this.inputs.filter(input => this.isDescendant(group, input));
         let groupContainers = this.form.querySelectorAll('div.group-container:not([data-depends-on=""])');
         groupContainers.forEach(otherGroup => {
-            if(otherGroup !== group){
+            if (otherGroup !== group) {
                 let groupDependsOnField = otherGroup.getAttribute('data-depends-on');
                 let dependentValue = otherGroup.getAttribute('data-dependent-value');
                 inputElementsInsideGroup.forEach(input => {
-                    if(input.name === groupDependsOnField && (input.value === dependentValue || input.value.indexOf(dependentValue)>=0)){
+                    if (input.name === groupDependsOnField && (input.value === dependentValue || input.value.indexOf(dependentValue) >= 0)) {
                         this.showGroupAndItsDependencies(otherGroup);
                     }
                 });
             }
         });
-	}
+    }
     private isDescendant(parent: Element, child: Element) {
-		var node = child.parentNode;
-		while (node != null) {
-			if (node === parent) {
-				return true;
-			}	
-			node = node.parentElement;
-		}
-		return false;
-	}
+        var node = child.parentNode;
+        while (node != null) {
+            if (node === parent) {
+                return true;
+            }
+            node = node.parentElement;
+        }
+        return false;
+    }
 
 }

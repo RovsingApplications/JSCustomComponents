@@ -6,7 +6,7 @@ import FloatingLabelSelectElement from '../Select/FloatingLabelSelectElement';
 	selector: 'paginator-element',
 	template: `
 		<span>
-			<span class="page-button" id="first-button">Først</span>
+			<span class="page-button" id="first-button">Første</span>
 			<span id="page-buttons-wrapper">
 				<span class="page-button active">1</span>
 				<span class="page-button">2</span>
@@ -14,9 +14,9 @@ import FloatingLabelSelectElement from '../Select/FloatingLabelSelectElement';
 				<span class="page-button">4</span>
 				<span class="page-button">5</span>
 			</span>
-			<span class="page-button" id="last-button">Sidst</span>
+			<span class="page-button" id="last-button">Sidste</span>
 		</span>
-		<floating-label-select-element label="Varer pr. Side">
+		<floating-label-select-element label="Kunder pr. Side">
 			<style>
 				#inner-element {
 					font-size: 12px;
@@ -51,13 +51,16 @@ import FloatingLabelSelectElement from '../Select/FloatingLabelSelectElement';
 			cursor: pointer;
 			transition: background-color .3s, color .3s;
 		}
+		
 		.page-button.active{
 			background-color: ${Colors.primary};
-  		color: white;
+			color: white;
 		}
+		
 		.page-button:hover:not(.active) {
 			background-color: #ddd;
 		}
+
 		floating-label-select-element {
 			margin-left: 10px;
 			background-color: white;
@@ -68,7 +71,6 @@ import FloatingLabelSelectElement from '../Select/FloatingLabelSelectElement';
 			font-size: 12px;
 			color: ${Colors.primary};
 			margin-left: 10px;
-}
 		}
 	`,
 	useShadow: true,
@@ -127,7 +129,7 @@ export default class PaginatorElement extends HTMLElement {
 		if (this._currentPage < 1 || this._currentPage > this.numberOfPages) {
 			this._currentPage = 1;
 		}
-		this.numberOfPagesElement.innerHTML = `Total sider: ${this.numberOfPages}`
+		this.numberOfPagesElement.innerHTML = `Sider totalt: ${this.numberOfPages}`
 		if (this.numberOfPages <= this.maxDisplayedPageButtons) {
 			this.renderPageButtons(1, this.numberOfPages);
 			return;

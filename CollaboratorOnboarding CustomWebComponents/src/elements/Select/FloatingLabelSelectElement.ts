@@ -25,8 +25,10 @@ export default class FloatingLabelSelectElement extends FloatingLabelBaseElement
 		if (!this.selectElement.options || !this.selectElement.options.length || this.selectElement.selectedIndex === -1) {
 			return null;
 		}
+
 		return this.selectElement.options[this.selectElement.selectedIndex].value;
 	}
+
 	set value(val: any) {
 		let options: HTMLOptionElement[] = Array.prototype.slice.call(this.selectElement.options);
 		let matchingOption = options.find(option => option.value === val);
@@ -36,6 +38,7 @@ export default class FloatingLabelSelectElement extends FloatingLabelBaseElement
 		}
 		this.selectElement.selectedIndex = matchingOption.index;
 	}
+
 	get valid(): boolean {
 		if (this.required) {
 			return this.selectElement.selectedIndex >= 0;
@@ -65,6 +68,7 @@ export default class FloatingLabelSelectElement extends FloatingLabelBaseElement
 		optionElement.innerHTML = option;
 		this.selectElement.appendChild(optionElement);
 	}
+
 	removeAllOptions() {
 		this.selectElement.innerHTML = '';
 	}
@@ -78,6 +82,7 @@ export default class FloatingLabelSelectElement extends FloatingLabelBaseElement
 		if (!this.selectElement) {
 			return;
 		}
+
 		switch (name) {
 			case 'required':
 				if (newVal === 'true') {

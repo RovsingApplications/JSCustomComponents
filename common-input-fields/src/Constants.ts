@@ -4,7 +4,7 @@ export default class Constants {
 		position: relative;
 		float: left;
 		property-events: none;
-        width: 100%; 
+		width: 100%; 
 	}
 	.custom-element {
 		position: relative;
@@ -12,7 +12,7 @@ export default class Constants {
 	.custom-element label {
 		position: absolute;
 		left: 15px;
-        top: 27px;
+		top: 27px;
 		transition: all .4s ease;
 		color: #aaa;
 		pointer-events: none;

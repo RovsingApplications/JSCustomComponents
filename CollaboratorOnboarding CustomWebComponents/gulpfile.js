@@ -27,8 +27,8 @@ const getFilename = (src) => {
 
 const compileTS = () => {
 	const bundle = browserify(path.join('.', 'src', 'index.ts'), {
-			debug: true,
-		})
+		debug: true,
+	})
 		.plugin(tsify)
 		.transform(babelify, {
 			presets: ["@babel/preset-env", "@babel/preset-react"]
@@ -56,8 +56,8 @@ const compileTS = () => {
 
 const compileDemoTS = () => {
 	const bundle = browserify(path.join('.', 'demo', 'index.ts'), {
-			debug: true,
-		})
+		debug: true,
+	})
 		.plugin(tsify)
 		.transform(babelify, {
 			presets: ["@babel/preset-env", "@babel/preset-react"]

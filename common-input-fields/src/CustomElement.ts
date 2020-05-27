@@ -17,18 +17,18 @@ const CustomElement = (config: CustomElementConfig) => (customElementClass) => {
     }
     template.innerHTML = config.template;
 
-	const connectedCallback = customElementClass.prototype.connectedCallback || function () {};
-	customElementClass.prototype.connectedCallback = function() {
+    const connectedCallback = customElementClass.prototype.connectedCallback || function () { };
+    customElementClass.prototype.connectedCallback = function () {
         const clone = document.importNode(template.content, true);
         if (config.useShadow) {
-            this.attachShadow({mode: 'open'}).appendChild(clone);
+            this.attachShadow({ mode: 'open' }).appendChild(clone);
         } else {
             this.appendChild(clone);
         }
         connectedCallback.call(this);
     };
 
-	window.customElements.define(config.selector, customElementClass);
+    window.customElements.define(config.selector, customElementClass);
 };
 
 export default CustomElement;
