@@ -1,6 +1,6 @@
 {
 	"name": "@luftborn/custom-elements",
-	"version": "1.1.10",
+	"version": "1.1.11",
 	"description": "custom HTML elements for the form builder application ",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
@@ -15,6 +15,8 @@
 		"js-polyfills"
 	],
 	"dependencies": {
+		"@luftborn/utilities": "^1.1.6",
+		"@types/googlemaps": "^3.39.6",
 		"@webcomponents/custom-elements": "^1.4.1",
 		"@webcomponents/webcomponentsjs": "^2.4.3",
 		"intl-tel-input": "^16.0.8",

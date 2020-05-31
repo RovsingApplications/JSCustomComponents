@@ -1,15 +1,15 @@
 import CustomElement from '../../framework/custom-element.decorator';
 import { CustomInputElement } from '../../framework/CustomInputElement';
 import { CustomElementEventArgs } from '../../framework/CustomEvents';
-import { StringUtil } from '../../framework/Utilities/StringUtil';
+import { StringUtil } from '@luftborn/utilities';
 
 @CustomElement({
-    selector: 'radio-group-element',
-    template: `
+	selector: 'radio-group-element',
+	template: `
 			<div class="wrapper">
                
 			</div>`,
-    style: `
+	style: `
             :host{
                 width:100%;
             }
@@ -33,76 +33,76 @@ import { StringUtil } from '../../framework/Utilities/StringUtil';
                 resize: none;
             }
            `,
-    useShadow: true,
+	useShadow: true,
 })
 export class RadioButtonGroupElement extends CustomInputElement {
-    radioButton: HTMLInputElement[];
-    radioButtonTemplate = `
+	radioButton: HTMLInputElement[];
+	radioButtonTemplate = `
     <div class='radio-button'>
         <label for="{2}">{1}</label>
         <input type='radio' name='{0}' value="{1}" id="{2}" {3}/>
     </div>`;
 
-    constructor() {
-        super();
-    }
+	constructor() {
+		super();
+	}
 
-    get value(): string {
-        return this.radioButton.filter(c => c.checked).map(c => c.value)[0];
-    }
+	get value(): string {
+		return this.radioButton.filter(c => c.checked).map(c => c.value)[0];
+	}
 
-    set value(value: string) {
-        let matchedRadio = this.radioButton.filter(c => c.value === value)[0];
-        if (matchedRadio) {
-            matchedRadio.setAttribute('checked', '');
-        }
-    }
+	set value(value: string) {
+		let matchedRadio = this.radioButton.filter(c => c.value === value)[0];
+		if (matchedRadio) {
+			matchedRadio.setAttribute('checked', '');
+		}
+	}
 
-    get valid(): boolean {
-        if (this.required) {
-            return this.radioButton.filter(c => c.checked).length > 0;
-        } else {
-            return true;
-        }
-    }
+	get valid(): boolean {
+		if (this.required) {
+			return this.radioButton.filter(c => c.checked).length > 0;
+		} else {
+			return true;
+		}
+	}
 
-    connectedCallback(): void {
-        super.connectedCallback();
-    }
+	connectedCallback(): void {
+		super.connectedCallback();
+	}
 
-    initChildInputs() {
-        this.addRadioButtons();
-        this.radioButton = super.getChildInputs(`[name=${this.name}]`);
-        this.radioButton.forEach(radio =>
-            radio.addEventListener('change', this.change.bind(this)),
-        );
-    }
+	initChildInputs() {
+		this.addRadioButtons();
+		this.radioButton = super.getChildInputs(`[name=${this.name}]`);
+		this.radioButton.forEach(radio =>
+			radio.addEventListener('change', this.change.bind(this)),
+		);
+	}
 
-    private addRadioButtons() {
-        const wrapper = super.getChildElement('.wrapper');
-        this.options.forEach((element, index) => {
-            wrapper.insertAdjacentHTML(
-                'beforeend',
-                StringUtil.StringFormat(
-                    this.radioButtonTemplate,
-                    this.name,
-                    element,
-                    `${this.name}-${index}`,
-                    `${this.required ? 'required' : ''}`,
-                ),
-            );
-        });
-    }
-    // events
-    public change($event): void {
-        this.touched = true;
-        this.onChange.emit(new CustomElementEventArgs(this.value, 'change'));
-    }
+	private addRadioButtons() {
+		const wrapper = super.getChildElement('.wrapper');
+		this.options.forEach((element, index) => {
+			wrapper.insertAdjacentHTML(
+				'beforeend',
+				StringUtil.StringFormat(
+					this.radioButtonTemplate,
+					this.name,
+					element,
+					`${this.name}-${index}`,
+					`${this.required ? 'required' : ''}`,
+				),
+			);
+		});
+	}
+	// events
+	public change($event): void {
+		this.touched = true;
+		this.onChange.emit(new CustomElementEventArgs(this.value, 'change'));
+	}
 
-    public validate(): void {
-        this.valid;
-        this.onValidate.emit(
-            new CustomElementEventArgs(this.value, 'validate'),
-        );
-    }
+	public validate(): void {
+		this.valid;
+		this.onValidate.emit(
+			new CustomElementEventArgs(this.value, 'validate'),
+		);
+	}
 }

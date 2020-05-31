@@ -28,6 +28,9 @@ import Translator from '../../framework/Language/Translator';
 	useShadow: true,
 })
 export class AddressElement extends CustomInputElement {
+	private autoCompleteEnabled = false;
+	private addressAutoComplete: google.maps.places.Autocomplete;
+
 	address: HTMLInputElement;
 	city: HTMLInputElement;
 	zip: HTMLInputElement;
@@ -101,8 +104,47 @@ export class AddressElement extends CustomInputElement {
 		this.zip.placeholder = Translator.Translate('AddressElement.Zip', language);
 	}
 
+	enableAutoComplete(apiKey: string) {
+		this.autoCompleteEnabled = true;
+		let googlePlacesLibraryElementExists = document.querySelector(`[src="https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places"]`);
+		if (googlePlacesLibraryElementExists) {
+			return;
+		}
+		let googlePlacesLibraryElement = document.createElement('script');
+		googlePlacesLibraryElement.type = 'text/javascript';
+		googlePlacesLibraryElement.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
+		window.document.head.appendChild(googlePlacesLibraryElement);
+		googlePlacesLibraryElement.onload = () => {
+			this.bindAutoComplete();
+		};
+	}
+
+	bindAutoComplete(): void {
+		this.addressAutoComplete = new google.maps.places.Autocomplete(this.address);
+		this.addressAutoComplete.addListener("place_changed", this.onAddressChangedHandler.bind(this));
+	}
+
+	onAddressChangedHandler() {
+		const place = this.addressAutoComplete.getPlace();
+		if (!place.address_components) {
+			return;
+		}
+		let cityComponents = place.address_components.filter(component => {
+			const citySynonyms = ['administrative_area_level_1', 'locality'];
+			const isCityComponent = citySynonyms.some(citySynonym => component.types.indexOf(citySynonym) != -1);
+			return isCityComponent;
+		});
+		if (cityComponents && cityComponents[0]) {
+			this.city.value = cityComponents[0].long_name;
+		}
+		const zipComponents = place.address_components.filter(component => component.types.indexOf('postal_code') != -1);
+		if (zipComponents && zipComponents[0]) {
+			this.zip.value = zipComponents[0].long_name;
+		}
+	}
+
 	static get observedAttributes() {
-		return ['language'];
+		return ['language', 'google-places-key'];
 	}
 	attributeChangedCallback(name: string, oldVal: string, newVal: string) {
 		this.attributeChanged(name, oldVal, newVal);
@@ -111,6 +153,9 @@ export class AddressElement extends CustomInputElement {
 		switch (name) {
 			case 'language':
 				this.changeLanguage(newVal)
+				break;
+			case 'google-places-key':
+				this.enableAutoComplete(newVal)
 				break;
 		}
 	}

@@ -1,6 +1,5 @@
 import { CustomElementEvent, CustomElementEventArgs } from "./CustomEvents";
-import DomUtil from "./Utilities/DomUtil";
-import ArrayUtil from "./Utilities/ArrayUtil";
+import { DomUtil, ArrayUtil } from "@luftborn/utilities";
 
 class IDictionary<TValue> {
 	[index: string]: TValue;
