@@ -125,6 +125,9 @@ export class AddressElement extends CustomInputElement {
 	}
 
 	onAddressChangedHandler() {
+		this.city.value = '';
+		this.zip.value = '';
+
 		const place = this.addressAutoComplete.getPlace();
 		if (!place.address_components) {
 			return;
