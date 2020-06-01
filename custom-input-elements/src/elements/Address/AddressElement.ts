@@ -105,6 +105,9 @@ export class AddressElement extends CustomInputElement {
 	}
 
 	enableAutoComplete(apiKey: string) {
+		if (!apiKey || apiKey.trim() === '') {
+			return;
+		}
 		this.autoCompleteEnabled = true;
 		let googlePlacesLibraryElementExists = document.querySelector(`[src="https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places"]`);
 		if (googlePlacesLibraryElementExists) {
