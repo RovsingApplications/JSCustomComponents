@@ -33,7 +33,7 @@ import ErrorResponse from "./Framework/Models/ErrorResponse";
 	`,
 	useShadow: false,
 })
-export default class FloatingLabelInputElement extends CustomHTMLBaseElement {
+export default class EsignaturErrorPage extends CustomHTMLBaseElement {
 
 	private errorPageTitle: HTMLElement;
 	private errorPageBody: HTMLElement;
