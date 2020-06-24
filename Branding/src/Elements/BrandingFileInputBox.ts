@@ -7,6 +7,13 @@ import SVGs from '../Framework/Constants/SVGs';
 	selector: 'esignatur-branding-file-input-box',
 	template: `
 		<input type="file" hidden />
+		<div class="file-input-info-actions">
+			<div class="file-input-info">
+				Billedformat: 
+				<span class="file-input-info-format">PNG</span>
+			</div>
+			<div class="file-input-actions">${SVGs.trashSVG}</div>
+		</div>
 		<div class="file-input-box">
 			<div class="file-input-box-content">
 				<div class="file-input-add-button">${SVGs.addButton}</div>
@@ -15,6 +22,28 @@ import SVGs from '../Framework/Constants/SVGs';
 		</div>
 	`,
 	style: `
+	.file-input-info-actions {
+		display: none;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 2px;
+	}
+	.file-input-info {
+		font-size: 12px;
+		color: ${Colors.senary};
+		font-weight: 500;
+	}
+	.file-input-actions svg {
+		width: 15px;
+		height: 15px;
+		cursor: pointer;
+	}
+	.file-input-actions svg path {
+		fill: ${Colors.secondary};
+	}
+	.file-input-actions svg:hover path {
+		fill: ${Colors.primary};
+	}
 	.file-input-box {
 		user-select: none;
 		cursor: pointer;
@@ -61,6 +90,9 @@ export default class BrandingFileInputBox extends CustomHTMLBaseElement {
 	private fileInputBox: HTMLElement;
 	private addTextElement: HTMLElement;
 	private fileInputBoxContentElement: HTMLElement;
+	private infoActionsBar: HTMLElement;
+	private removeButton: HTMLElement;
+	private fileFormatElement: HTMLElement;
 	private _value: string;
 
 	constructor() {
@@ -75,8 +107,14 @@ export default class BrandingFileInputBox extends CustomHTMLBaseElement {
 		return this._value;
 	}
 	set value(val: string) {
-		this._value = val;
-		this.displayPreview();
+		if (!val || val.trim() === '') {
+			this.removePreview();
+			this.nativeInputElement.value = null;
+			this._value = null;
+		} else {
+			this._value = val;
+			this.displayPreview();
+		}
 		this.dispatchEvent(this.change);
 	}
 
@@ -86,6 +124,9 @@ export default class BrandingFileInputBox extends CustomHTMLBaseElement {
 		this.fileInputBox = this.getChildElement('.file-input-box');
 		this.addTextElement = this.getChildElement('.file-input-add-text');
 		this.fileInputBoxContentElement = this.getChildElement('.file-input-box-content');
+		this.infoActionsBar = this.getChildElement('.file-input-info-actions');
+		this.removeButton = this.getChildElement('.file-input-actions svg');
+		this.fileFormatElement = this.getChildElement('.file-input-info-format');
 
 		this.getAttributeNames().forEach(attributeName => {
 			let attributeValue = this.getAttribute(attributeName);
@@ -102,6 +143,9 @@ export default class BrandingFileInputBox extends CustomHTMLBaseElement {
 		this.fileInputBox.addEventListener('click', () => {
 			this.nativeInputElement.click();
 		});
+		this.removeButton.addEventListener('click', () => {
+			this.value = null;
+		});
 	}
 
 	nativeInputChange(): void {
@@ -116,6 +160,7 @@ export default class BrandingFileInputBox extends CustomHTMLBaseElement {
 		reader.readAsDataURL(file);
 		reader.onload = () => {
 			this.value = reader.result as string;
+			this.fileFormatElement.innerHTML = this.files[0].type.split('/')[1].toUpperCase();
 			this.dispatchEvent(this.change);
 		};
 	}
@@ -123,6 +168,12 @@ export default class BrandingFileInputBox extends CustomHTMLBaseElement {
 	private displayPreview() {
 		this.fileInputBoxContentElement.style.display = 'none';
 		this.fileInputBox.style.backgroundImage = `url(${this.value})`;
+		this.infoActionsBar.style.display = 'flex';
+	}
+	private removePreview() {
+		this.fileInputBoxContentElement.style.display = 'flex';
+		this.fileInputBox.style.backgroundImage = null;
+		this.infoActionsBar.style.display = 'none';
 	}
 
 	private static get observedAttributes() {

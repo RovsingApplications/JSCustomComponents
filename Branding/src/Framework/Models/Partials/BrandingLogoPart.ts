@@ -1,7 +1,7 @@
 import { AlignmentPositionEnum } from "../AlignmentPositionEnum";
 
 export default class BrandingLogoPart {
-	logoBase64: string;
+	logoDataUrl: string;
 	logoAlignment: AlignmentPositionEnum;
 	logoScale: number;
 

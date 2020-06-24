@@ -11,18 +11,29 @@ import Color from '../../Framework/Models/Color';
 		<esignatur-branding-collapsible>
 			<span class="collapsible-title">Colors</span>
 			<span class="collapsible-content">
+			<div class="form-item">
+				<label class="form-label">Primærfarver</label>
 				<esignatur-branding-color-picker name="primary-color"></esignatur-branding-color-picker>
-				<br>
+			</div>
+			<div class="form-item">
+				<label class="form-label">Sekundær farve</label>
 				<esignatur-branding-color-picker name="secondary-color"></esignatur-branding-color-picker>
-				<br>
+			</div>
+			<div class="form-item">
+				<label class="form-label">Tekstfarve</label>
 				<esignatur-branding-color-picker name="text-color"></esignatur-branding-color-picker>
-				<br>
+			</div>
+			<div class="form-item">
+				<label class="form-label">Baggrundsfarve</label>
 				<esignatur-branding-color-picker name="background-color" allow-gradient="true"></esignatur-branding-color-picker>
-				<br>
+			</div>
 			</span>
 		</esignatur-branding-collapsible>
 	`,
 	style: `
+		.form-label {
+			margin-bottom: 5px;
+		}
 	`,
 	useShadow: false,
 })

@@ -4,6 +4,7 @@ import BrandingFileInputBox from '../BrandingFileInputBox';
 import Branding from '../../Framework/Models/Branding';
 import FormLogobar from './FormLogoBar';
 import FormColorsBar from './FormColorsBar';
+import Colors from '../../Framework/Constants/Colors';
 
 @CustomElement({
 	selector: 'esignatur-branding-form',
@@ -12,6 +13,15 @@ import FormColorsBar from './FormColorsBar';
 		<esignatur-branding-form-colors-bar></esignatur-branding-form-colors-bar>
 	`,
 	style: `
+		.form-item {
+			margin-bottom: 10px;
+		}
+		.form-label {
+			font-size: 12px;
+			display: inline-block;
+			color: ${Colors.senary};
+			font-weight: 500;
+		}
 	`,
 	useShadow: false,
 })
@@ -31,7 +41,7 @@ export default class BrandingFormComponent extends CustomHTMLBaseElement {
 		const brandingColorsPart = this.formColorsBar.value;
 		const brandingLogoPart = this.formLogobar.value;
 		const branding = new Branding({
-			logoBase64: brandingLogoPart.logoBase64,
+			logoDataUrl: brandingLogoPart.logoDataUrl,
 			logoAlignment: brandingLogoPart.logoAlignment,
 			logoScale: brandingLogoPart.logoScale,
 			primaryColor: brandingColorsPart.primaryColor,

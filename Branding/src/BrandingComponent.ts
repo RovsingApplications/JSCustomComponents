@@ -8,6 +8,9 @@ import BrandingFormComponent from "./Elements/BrandingForm/BrandingFormComponent
 import Colors from "./Framework/Constants/Colors";
 import { WhiteEDataUrl } from "./Framework/Constants/images/white-e";
 import BrandingPreviewComponent from "./Elements/BrandingPreview/BrandingPreviewComponent";
+import ElementsCreator from "./Framework/Utilities/ElementsCreator";
+import SaveSuccessModal from "./Elements/Modals/SaveSuccessModal";
+import { SaveFailureModal } from ".";
 
 @CustomElement({
 	selector: 'esignatur-branding',
@@ -44,6 +47,7 @@ import BrandingPreviewComponent from "./Elements/BrandingPreview/BrandingPreview
 			display: flex;
 			flex-direction: row;
 			height: 100%;
+			position: relative;
 		}
 		#side-bar {
 			display: flex;
@@ -104,7 +108,6 @@ import BrandingPreviewComponent from "./Elements/BrandingPreview/BrandingPreview
 		#preview-container {
 			background-color: ${Colors.quinary};
 			width: 100%;
-			padding: 100px 200px 100px 100px;
 			overflow: auto;
 		}
 	`,
@@ -131,7 +134,7 @@ export default class BrandingComponent extends CustomHTMLBaseElement {
 			let attributeValue = this.getAttribute(attributeName);
 			this.attributeChanged(attributeName, null, attributeValue);
 		});
-		this.renderComponent();
+		this.initComponent();
 	}
 
 	addFontToDocumentHead() {
@@ -141,26 +144,34 @@ export default class BrandingComponent extends CustomHTMLBaseElement {
 		document.head.appendChild(link);
 	}
 
-	private renderComponent() {
-		// add spinner
-
+	private initComponent() {
+		const loadingOverlay = ElementsCreator.generateOverlayWithSpinner(100);
+		this.appendChildElement(loadingOverlay);
 		const headerName = Constants.apiKeyHeaderName;
-
 		new MakeRequest(
 			`${Globals.apiUrl}api/branding/Get`,
 			'get', { [headerName]: Globals.apiKey }
 		).send().then(res => {
+			this.removeChildElement(loadingOverlay);
 			const branding = new Branding(JSON.parse(res as string));
-			console.log(branding);
-			this.brandingFormComponent.fillForm(branding);
-			this.formChangeHandler();
-			this.bindEvents();
+			this.fillForm(branding);
 		}).catch(exception => {
+			this.removeChildElement(loadingOverlay);
 			console.log(exception);
-
-			// if has no company (404) add new one
-			// else display error
+			if (exception.status === 404) {
+				const branding = new Branding();
+				this.fillForm(branding);
+				return
+			}
+			const errorBlock = ElementsCreator.generateErrorBlock();
+			this.fillContent(errorBlock);
 		});
+	}
+
+	private fillForm(branding: Branding) {
+		this.brandingFormComponent.fillForm(branding);
+		this.formChangeHandler();
+		this.bindEvents();
 	}
 
 	private bindEvents() {
@@ -182,8 +193,8 @@ export default class BrandingComponent extends CustomHTMLBaseElement {
 	private bindSubmitEvent() {
 		this.submitButton.addEventListener('click', () => {
 			this.submitButton.disabled = true;
-			// add spinner
-
+			const loadingOverlay = ElementsCreator.generateOverlayWithLoadingDots(300);
+			this.appendChildElement(loadingOverlay);
 			const headerName = Constants.apiKeyHeaderName;
 			const branding = this.brandingFormComponent.value;
 			new MakeRequest(
@@ -194,20 +205,20 @@ export default class BrandingComponent extends CustomHTMLBaseElement {
 			}
 			).send(JSON.stringify(branding)).then(res => {
 				this.submitButton.disabled = false;
-				// remove spinner
-				// display success modal
-				console.log(res);
+				this.removeChildElement(loadingOverlay);
+				const successModal = new SaveSuccessModal();
+				this.appendChildElement(successModal);
 			}).catch(exception => {
 				this.submitButton.disabled = false;
-				// remove spinner
-				// display error notification
+				this.removeChildElement(loadingOverlay);
+				const failureModal = new SaveFailureModal();
+				this.appendChildElement(failureModal);
 				console.log(exception);
 			});
 
 
 		});
 	}
-
 
 	private static get observedAttributes() {
 		return ['api-key', 'api-url'];

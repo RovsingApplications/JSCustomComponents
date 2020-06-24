@@ -16,8 +16,12 @@ import BrandingSizeSlider from './Elements/BrandingSizeSlider';
 import BrandingColorPicker from './Elements/BrandingColorPicker';
 import BrandingEmailPreview from './Elements/BrandingPreview/BrandingEmailPreview';
 import BrandingSignPreview from './Elements/BrandingPreview/BrandingSignPreview';
+import SaveSuccessModal from './Elements/Modals/SaveSuccessModal';
+import SaveFailureModal from './Elements/Modals/SaveFailureModal';
 
 export {
+	SaveFailureModal,
+	SaveSuccessModal,
 	BrandingSignPreview,
 	BrandingEmailPreview,
 	BrandingColorPicker,

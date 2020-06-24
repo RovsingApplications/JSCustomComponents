@@ -5,7 +5,6 @@ import BrandingAllignmentRadioInput from '../BrandingAllignmentRadioInput';
 import BrandingFileInputBox from '../BrandingFileInputBox';
 import BrandingSizeSlider from '../BrandingSizeSlider';
 import BrandingLogoPart from '../../Framework/Models/Partials/BrandingLogoPart';
-import { AlignmentPositionEnum } from '../../Framework/Models/AlignmentPositionEnum';
 
 @CustomElement({
 	selector: 'esignatur-branding-form-logo-bar',
@@ -13,15 +12,23 @@ import { AlignmentPositionEnum } from '../../Framework/Models/AlignmentPositionE
 		<esignatur-branding-collapsible>
 			<span class="collapsible-title">Logo</span>
 			<span class="collapsible-content">
-				<esignatur-branding-file-input-box text='Tilføj logo'></esignatur-branding-file-input-box>
-				<br>
-				<esignatur-branding-allignment-radio-input></esignatur-branding-allignment-radio-input>
-				<br>
-				<esignatur-branding-size-slider></esignatur-branding-size-slider>
-				<br>
+				<div class="form-item">
+					<esignatur-branding-file-input-box text='Tilføj logo'></esignatur-branding-file-input-box>
+				</div>
+				<div class="form-item">
+					<label class="form-label">Billedjustering</label>
+					<esignatur-branding-allignment-radio-input></esignatur-branding-allignment-radio-input>
+				</div>
+				<div class="form-item">
+					<label class="form-label">Billedestørrelse</label>
+					<esignatur-branding-size-slider></esignatur-branding-size-slider>
+				</div>
 		</esignatur-branding-collapsible>
 	`,
 	style: `
+		.form-label {
+			margin-bottom: 2px;
+		}
 	`,
 	useShadow: false,
 })
@@ -38,7 +45,7 @@ export default class FormLogoBar extends CustomHTMLBaseElement {
 
 	get value(): BrandingLogoPart {
 		const brandingLogoPart = new BrandingLogoPart({
-			logoBase64: this.logoFileElement.value,
+			logoDataUrl: this.logoFileElement.value,
 			logoAlignment: parseInt(this.logoAlignmentElement.value),
 			logoScale: parseInt(this.logoSizeElement.value)
 		});
@@ -66,8 +73,8 @@ export default class FormLogoBar extends CustomHTMLBaseElement {
 	}
 
 	fillInputs(branding: Branding) {
-		if (branding.logoBase64) {
-			this.logoFileElement.value = branding.logoBase64;
+		if (branding.logoDataUrl) {
+			this.logoFileElement.value = branding.logoDataUrl;
 		}
 
 		this.logoAlignmentElement.value = branding.logoAlignment.toString();

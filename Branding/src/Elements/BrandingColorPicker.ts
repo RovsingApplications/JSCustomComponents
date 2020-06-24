@@ -57,6 +57,7 @@ import Color from '../Framework/Models/Color';
 	style: `
 		.color-picker-types {
 			display: flex;
+			margin-bottom: 13px;
 		}
 		.color-picker-type {
 			flex-grow: 1;
@@ -103,7 +104,6 @@ import Color from '../Framework/Models/Color';
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			margin-top: 13px;
 			box-sizing: border-box;
 		}
 		.color-box-content-add {
@@ -307,7 +307,7 @@ export default class BrandingColorPicker extends CustomHTMLBaseElement {
 	private gradientAngleInput: HTMLInputElement;
 	private gradientAngleValueElement: HTMLElement;
 
-	private colorPickerTypeGradient: HTMLElement;
+	private colorPickerTypesElement: HTMLElement;
 	private colorPickerButtonTypeSolid: HTMLElement;
 
 	private gradientControlsElement: HTMLElement;
@@ -410,7 +410,7 @@ export default class BrandingColorPicker extends CustomHTMLBaseElement {
 		this.nativeGradientInput1 = this.getChildElement('.color-picker-gradient-color-input1');
 		this.nativeGradientInput2 = this.getChildElement('.color-picker-gradient-color-input2');
 
-		this.colorPickerTypeGradient = this.getChildElement('.color-picker-type-gradient');
+		this.colorPickerTypesElement = this.getChildElement('.color-picker-types');
 		this.gradientInputbutton1 = this.getChildElement('.color-picker-gradient-select-color-button.button1');
 		this.gradientInputbutton2 = this.getChildElement('.color-picker-gradient-select-color-button.button2');
 
@@ -434,7 +434,7 @@ export default class BrandingColorPicker extends CustomHTMLBaseElement {
 
 	renderComponent() {
 		if (this.allowGradient) {
-			this.colorPickerTypeGradient.style.display = 'block';
+			this.colorPickerTypesElement.style.display = 'flex';
 			if (this.isGradient) {
 				this.activateGradient();
 			} else {
@@ -442,7 +442,7 @@ export default class BrandingColorPicker extends CustomHTMLBaseElement {
 			}
 			return;
 		}
-		this.colorPickerTypeGradient.style.display = 'none';
+		this.colorPickerTypesElement.style.display = 'none';
 		this.colorPickerButtonTypeSolid.style.cursor = 'auto';
 		this.activateSolid();
 	}

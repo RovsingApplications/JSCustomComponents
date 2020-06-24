@@ -77,11 +77,15 @@ import { AlignmentPositionEnum } from '../../Framework/Models/AlignmentPositionE
 		}
 		.esignatur-branding-sign-preview {
 			font-family: 'Raleway', sans-serif;
+			min-width: 600px;
 			background: #FFFFFF;
 		}
 		.sign-preview-nav {
 			background: #B6B8BA;
 			padding: 15px 40px;
+		}
+		.sign-preview-nav img {
+			max-height: 30px;
 		}
 		.stepindicator {
 			display: flex;
@@ -180,7 +184,7 @@ import { AlignmentPositionEnum } from '../../Framework/Models/AlignmentPositionE
 			width: 140px;
 		}
 	`,
-	useShadow: false,
+	useShadow: true,
 })
 export default class BrandingSignPreview extends CustomHTMLBaseElement {
 
@@ -204,7 +208,7 @@ export default class BrandingSignPreview extends CustomHTMLBaseElement {
 		const logoScale = branding.logoScale ? branding.logoScale / 100 : 1;
 		logoElement.style.transform = `scale(${logoScale})`;
 
-		const logoSrc = branding.logoBase64 ? branding.logoBase64 : Globals.esignaturLogoUrl;
+		const logoSrc = branding.logoDataUrl ? branding.logoDataUrl : Globals.esignaturLogoUrl;
 		logoElement.src = logoSrc;
 
 		const logoAlignment = branding.logoAlignment ? AlignmentPositionEnum[branding.logoAlignment] : 'left';
