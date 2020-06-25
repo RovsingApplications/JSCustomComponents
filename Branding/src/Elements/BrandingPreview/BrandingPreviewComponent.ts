@@ -25,12 +25,23 @@ import Colors from '../../Framework/Constants/Colors';
 	style: `
 		.esignatur-branding-preview {
 			margin: 10px 200px 100px 100px;
+			transition: 0.3s ease-in-out;
+		}
+		.esignatur-branding-preview.hidden {
+			margin: 0;
 		}
 		.preview-nav{
 			padding: 20px 0;
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			transition: 0.3 ease-in-out;
+		}
+		.preview-nav.hidden {
+			height: 0;
+			flex-wrap: wrap;
+			overflow: hidden;
+			padding: 0;
 		}
 		.preview-nav-button {
 			padding: 10px;
@@ -54,11 +65,17 @@ import Colors from '../../Framework/Constants/Colors';
 		.preview-item.active {
 			display: block;
 		}
+
+		.esignatur-branding-preview #email-preview-item.active {
+			margin: 20px auto;
+		}
 	`,
 	useShadow: true,
 })
 export default class BrandingPreviewComponent extends CustomHTMLBaseElement {
 
+	private previewContainerElement: HTMLElement;
+	private previewNavElement: HTMLElement;
 	private signPreview: BrandingSignPreview;
 	private previewNavButtons: HTMLElement[];
 	private previewItems: HTMLElement[];
@@ -68,6 +85,8 @@ export default class BrandingPreviewComponent extends CustomHTMLBaseElement {
 	}
 
 	componentDidMount() {
+		this.previewContainerElement = this.getChildElement('.esignatur-branding-preview');
+		this.previewNavElement = this.getChildElement('.preview-nav');
 		this.signPreview = this.getChildElement('esignatur-branding-sign-preview');
 		this.previewNavButtons = this.getChildElements('.preview-nav-button');
 		this.previewItems = this.getChildElements('.preview-item');
@@ -104,5 +123,14 @@ export default class BrandingPreviewComponent extends CustomHTMLBaseElement {
 
 	styleComponent(branding: Branding) {
 		this.signPreview.styleComponent(branding);
+	}
+
+	magnifyPreview() {
+		this.previewNavElement.classList.add('hidden');
+		this.previewContainerElement.classList.add('hidden');
+	}
+	unmagnifyPreview() {
+		this.previewNavElement.classList.remove('hidden');
+		this.previewContainerElement.classList.remove('hidden');
 	}
 }

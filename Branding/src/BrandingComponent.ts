@@ -11,6 +11,7 @@ import BrandingPreviewComponent from "./Elements/BrandingPreview/BrandingPreview
 import ElementsCreator from "./Framework/Utilities/ElementsCreator";
 import SaveSuccessModal from "./Elements/Modals/SaveSuccessModal";
 import { SaveFailureModal } from ".";
+import SVGs from "./Framework/Constants/SVGs";
 
 @CustomElement({
 	selector: 'esignatur-branding',
@@ -33,6 +34,7 @@ import { SaveFailureModal } from ".";
 			<div id="preview-container">
 				<esignatur-branding-preview></esignatur-branding-preview>
 			</div>
+			<div id="preview-lens">${SVGs.lensSVG}</div>
 		</div>
 		
 	`,
@@ -56,6 +58,10 @@ import { SaveFailureModal } from ".";
 			width: 300px;
 			background-color: ${Colors.septenary};
 			height: 100%;
+			transition: width 0.3s ease-in-out;
+		}
+		#side-bar.hidden {
+			width: 0;
 		}
 		#side-bar-top {
 			display: flex;
@@ -110,6 +116,27 @@ import { SaveFailureModal } from ".";
 			width: 100%;
 			overflow: auto;
 		}
+
+		#preview-lens {
+			cursor: pointer;
+			position: absolute;
+			right: 40px;
+			top: 20px;
+		}
+		#preview-lens svg {
+			width: 20px;
+			height: 20px;
+			opacity: 0.5;
+			transition: transform 0.3s;
+		}
+		#preview-lens svg:hover {
+			transform: scale(1.5);
+			opacity: 1;
+		}
+		#preview-lens svg path {
+			fill: ${Colors.primary};
+		}
+
 	`,
 	useShadow: true,
 })
@@ -118,6 +145,10 @@ export default class BrandingComponent extends CustomHTMLBaseElement {
 	private brandingFormComponent: BrandingFormComponent;
 	private brandingPreview: BrandingPreviewComponent;
 	private submitButton: HTMLButtonElement;
+	private previewLens: HTMLElement;
+	private sideBarElement: HTMLElement;
+
+	isMagnified = false;
 
 	constructor() {
 		super();
@@ -129,6 +160,8 @@ export default class BrandingComponent extends CustomHTMLBaseElement {
 		this.brandingFormComponent = this.getChildElement('esignatur-branding-form');
 		this.brandingPreview = this.getChildElement('esignatur-branding-preview');
 		this.submitButton = this.getChildElement('#submit-button');
+		this.previewLens = this.getChildElement('#preview-lens');
+		this.sideBarElement = this.getChildElement('#side-bar')
 
 		this.getAttributeNames().forEach(attributeName => {
 			let attributeValue = this.getAttribute(attributeName);
@@ -177,6 +210,34 @@ export default class BrandingComponent extends CustomHTMLBaseElement {
 	private bindEvents() {
 		this.bindFormChangeEvent();
 		this.bindSubmitEvent();
+		this.bindLensClickEvent();
+	}
+
+	private bindLensClickEvent() {
+		this.previewLens.addEventListener('click', () => {
+			this.toggleMagnification();
+		});
+	}
+
+	private toggleMagnification() {
+		if (this.isMagnified) {
+			this.isMagnified = false;
+			this.unmagnifyPreview();
+			return;
+		}
+		if (!this.isMagnified) {
+			this.isMagnified = true;
+			this.magnifyPreview();
+		}
+	}
+
+	private magnifyPreview() {
+		this.sideBarElement.classList.add('hidden');
+		this.brandingPreview.magnifyPreview()
+	}
+	private unmagnifyPreview() {
+		this.sideBarElement.classList.remove('hidden');
+		this.brandingPreview.unmagnifyPreview()
 	}
 
 	private bindFormChangeEvent() {
@@ -186,7 +247,6 @@ export default class BrandingComponent extends CustomHTMLBaseElement {
 	}
 	private formChangeHandler() {
 		const branding = this.brandingFormComponent.value;
-		console.log(branding);
 		this.brandingPreview.styleComponent(branding);
 	}
 
@@ -209,11 +269,11 @@ export default class BrandingComponent extends CustomHTMLBaseElement {
 				const successModal = new SaveSuccessModal();
 				this.appendChildElement(successModal);
 			}).catch(exception => {
+				console.log(exception);
 				this.submitButton.disabled = false;
 				this.removeChildElement(loadingOverlay);
 				const failureModal = new SaveFailureModal();
 				this.appendChildElement(failureModal);
-				console.log(exception);
 			});
 
 
