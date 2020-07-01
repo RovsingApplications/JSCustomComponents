@@ -172,12 +172,12 @@ export default class BrandingFileInputBox extends CustomHTMLBaseElement {
 	}
 	private removePreview() {
 		this.fileInputBoxContentElement.style.display = 'flex';
-		this.fileInputBox.style.backgroundImage = null;
+		this.fileInputBox.style.backgroundImage = 'none';
 		this.infoActionsBar.style.display = 'none';
 	}
 
 	private static get observedAttributes() {
-		return ['name', 'text'];
+		return ['name', 'text', 'accept'];
 	}
 
 	protected attributeChangedCallback(name: string, oldVal: string, newVal: string) {
@@ -197,6 +197,12 @@ export default class BrandingFileInputBox extends CustomHTMLBaseElement {
 					return;
 				}
 				this.addTextElement.innerHTML = newVal;
+				break;
+			case 'accept':
+				if (!this.nativeInputElement) {
+					return;
+				}
+				this.nativeInputElement.accept = newVal;
 				break;
 		}
 	}

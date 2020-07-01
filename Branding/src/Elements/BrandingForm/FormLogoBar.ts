@@ -13,7 +13,7 @@ import BrandingLogoPart from '../../Framework/Models/Partials/BrandingLogoPart';
 			<span class="collapsible-title">Logo</span>
 			<span class="collapsible-content">
 				<div class="form-item">
-					<esignatur-branding-file-input-box text='Tilføj logo'></esignatur-branding-file-input-box>
+					<esignatur-branding-file-input-box text='Tilføj logo' accept="image/*"></esignatur-branding-file-input-box>
 				</div>
 				<div class="form-item">
 					<label class="form-label">Billedjustering</label>

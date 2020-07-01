@@ -7,7 +7,7 @@ import Colors from '../../Framework/Constants/Colors';
 @CustomElement({
 	selector: 'esignatur-branding-preview',
 	template: `
-	<div class="esignatur-branding-preview">
+	<div class="esignatur-branding-preview-container">
 		<div class="preview-nav">
 			<button class="preview-nav-button active" data-target="sign-preview-item">Sign</button>
 			<button class="preview-nav-button" data-target="email-preview-item">E-mail</button>
@@ -23,11 +23,11 @@ import Colors from '../../Framework/Constants/Colors';
 	</div>
 	`,
 	style: `
-		.esignatur-branding-preview {
+		.esignatur-branding-preview-container {
 			margin: 10px 200px 100px 100px;
 			transition: 0.3s ease-in-out;
 		}
-		.esignatur-branding-preview.hidden {
+		.esignatur-branding-preview-container.hidden {
 			margin: 0;
 		}
 		.preview-nav{
@@ -35,7 +35,7 @@ import Colors from '../../Framework/Constants/Colors';
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			transition: 0.3 ease-in-out;
+			transition: 0.3s ease-in-out;
 		}
 		.preview-nav.hidden {
 			height: 0;
@@ -66,7 +66,7 @@ import Colors from '../../Framework/Constants/Colors';
 			display: block;
 		}
 
-		.esignatur-branding-preview #email-preview-item.active {
+		.esignatur-branding-preview-container.hidden #email-preview-item.active {
 			margin: 20px auto;
 		}
 	`,
@@ -85,7 +85,7 @@ export default class BrandingPreviewComponent extends CustomHTMLBaseElement {
 	}
 
 	componentDidMount() {
-		this.previewContainerElement = this.getChildElement('.esignatur-branding-preview');
+		this.previewContainerElement = this.getChildElement('.esignatur-branding-preview-container');
 		this.previewNavElement = this.getChildElement('.preview-nav');
 		this.signPreview = this.getChildElement('esignatur-branding-sign-preview');
 		this.previewNavButtons = this.getChildElements('.preview-nav-button');
@@ -128,9 +128,11 @@ export default class BrandingPreviewComponent extends CustomHTMLBaseElement {
 	magnifyPreview() {
 		this.previewNavElement.classList.add('hidden');
 		this.previewContainerElement.classList.add('hidden');
+		this.signPreview.magnifyPreview();
 	}
 	unmagnifyPreview() {
 		this.previewNavElement.classList.remove('hidden');
 		this.previewContainerElement.classList.remove('hidden');
+		this.signPreview.unmagnifyPreview();
 	}
 }

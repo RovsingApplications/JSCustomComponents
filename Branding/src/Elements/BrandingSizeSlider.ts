@@ -21,6 +21,7 @@ import Colors from '../Framework/Constants/Colors';
 			border-radius: 2px;
 			background: ${Colors.quaternary};
 			outline: none;
+			padding: 0;
 		}
 		.size-slider::-webkit-slider-thumb {
 			-webkit-appearance: none;

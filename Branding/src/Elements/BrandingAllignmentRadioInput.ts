@@ -53,7 +53,6 @@ import { AlignmentPositionEnum } from '../Framework/Models/AlignmentPositionEnum
 		margin: 0 8px;
 	}
 	.allignment-radio-checkmark .icon {
-		font-family: fantasy;
 		font-size: 12px;
 		position: relative;
 		top: -2.5px;

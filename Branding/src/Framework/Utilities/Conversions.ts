@@ -1,4 +1,5 @@
 import Color from "../Models/Color";
+import { AlignmentPositionEnum } from "../Models/AlignmentPositionEnum";
 
 export default class Conversions {
 	static colorToStyle(color: Color) {
@@ -16,5 +17,16 @@ export default class Conversions {
 			return 'transparent';
 		}
 		return color;
+	}
+
+	static alignmentEnumToStyle(alignmentEnum: AlignmentPositionEnum) {
+		switch (alignmentEnum) {
+			case AlignmentPositionEnum.right:
+				return 'right';
+			case AlignmentPositionEnum.center:
+				return 'center';
+			default:
+				return 'left';
+		}
 	}
 }

@@ -56,17 +56,20 @@ import SVGs from "./Framework/Constants/SVGs";
 			flex-direction: column;
 			justify-content: space-between;
 			width: 300px;
+			min-width: 300px;
 			background-color: ${Colors.septenary};
 			height: 100%;
-			transition: width 0.3s ease-in-out;
+			transition: 0.3s ease-in-out;
 		}
 		#side-bar.hidden {
 			width: 0;
+			min-width: 0;
+			overflow: hidden;
 		}
 		#side-bar-top {
 			display: flex;
 			flex-direction: column;
-			max-height: calc(100% - 60px);
+			height: calc(100% - 60px);
 		}
 		#branding-form {
 			overflow-y: auto;

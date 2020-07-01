@@ -3,6 +3,8 @@ import CustomHTMLBaseElement from './CustomHTMLBaseElement';
 import SVGs from '../Framework/Constants/SVGs';
 import Colors from '../Framework/Constants/Colors';
 import Color from '../Framework/Models/Color';
+import { BomUtility } from '../Framework/Utilities/BomUtility';
+import ColorInputPolyfill from '../Framework/Polyfills/ColorInputPolyfill';
 
 @CustomElement({
 	selector: 'esignatur-branding-color-picker',
@@ -20,7 +22,7 @@ import Color from '../Framework/Models/Color';
 		<div class="color-display-box">
 			<div class="color-box-content-add">
 				<div class="color-add-button">${SVGs.addButton}</div>
-				<input type="color" class="color-picker-solid-color-input">
+				<input type="color" class="color-picker-solid-color-input" id="solid-color-input">
 				<div class="color-add-text">Tilføj baggrundsfarve</div>
 			</div>
 		</div>
@@ -37,11 +39,11 @@ import Color from '../Framework/Models/Color';
 		<div class="color-picker-gradient-controls">
 			<div class="color-picker-gradient-colors">
 				<div class="color-picker-gradient-color">
-					<input type="color" class="color-picker-gradient-color-input1" value="${Colors.primary}">
+					<input type="color" class="color-picker-gradient-color-input1" value="${Colors.primary}" id="gradient-color-input-1">
 					<div class="color-picker-gradient-select-color-button button1">Vælg farve</div>
 				</div>
 				<div class="color-picker-gradient-color">
-					<input type="color" class="color-picker-gradient-color-input2" value="${Colors.secondary}">
+					<input type="color" class="color-picker-gradient-color-input2" value="${Colors.secondary}" id="gradient-color-input-2">
 					<div class="color-picker-gradient-select-color-button button2">Vælg farve</div>
 				</div>
 			</div>
@@ -253,6 +255,7 @@ import Color from '../Framework/Models/Color';
 			border-radius: 2px;
 			background: ${Colors.quaternary};
 			outline: none;
+			padding: 0;
 		}
 		.color-picker-gradient-angle-input::-webkit-slider-thumb {
 			-webkit-appearance: none;
@@ -286,7 +289,7 @@ import Color from '../Framework/Models/Color';
 			user-select: none;
 		}
 	`,
-	useShadow: false,
+	useShadow: true,
 })
 export default class BrandingColorPicker extends CustomHTMLBaseElement {
 	private change = new Event('change');
@@ -428,10 +431,18 @@ export default class BrandingColorPicker extends CustomHTMLBaseElement {
 			this.attributeChanged(attributeName, null, attributeValue);
 		});
 
+		this.polyfillForIE();
 		this.renderComponent();
 		this.bindEvents();
 	}
 
+	private polyfillForIE() {
+		if (BomUtility.isInternetExplorer()) {
+			new ColorInputPolyfill(this).init('solid-color-input');
+			new ColorInputPolyfill(this).init('gradient-color-input-1');
+			new ColorInputPolyfill(this).init('gradient-color-input-2');
+		}
+	}
 	renderComponent() {
 		if (this.allowGradient) {
 			this.colorPickerTypesElement.style.display = 'flex';
@@ -522,7 +533,7 @@ export default class BrandingColorPicker extends CustomHTMLBaseElement {
 		this.gradientControlsElement.style.display = 'none';
 		this.solidStandardColorsElement.style.display = 'flex';
 
-		this.colorDisplayBox.style.background = null;
+		this.colorDisplayBox.style.background = 'none';
 		this.colorDisplayBox.style.cursor = 'pointer';
 
 		if (this.isSolidTransparent) {

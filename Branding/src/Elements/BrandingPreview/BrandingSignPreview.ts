@@ -10,62 +10,90 @@ import { AlignmentPositionEnum } from '../../Framework/Models/AlignmentPositionE
 @CustomElement({
 	selector: 'esignatur-branding-sign-preview',
 	template: `
-		<div class="esignatur-branding-sign-preview">
-			<div class="sign-preview-nav">
-				<img src="${Globals.esignaturLogoUrl}" alt="logo">
-			</div>
-			<!-- Step indicator navbar-fixed-top -->
-			<div class="row">
-				<ul class="stepindicator">
-					<li class="box active">
-						<span class="stepnumber">1</span>
-						<span class="steptxt">Log ind</span>
-						<div class="divider">&nbsp;</div>
-					</li>
-					<li class="box">
-						<span class="stepnumber">2</span>
-						<span class="steptxt">Læs</span>
-						<div class="divider">&nbsp;</div>
-					</li>
-					<li class="box">
-						<span class="stepnumber">3</span>
-						<span class="steptxt">Underskriv</span>
-						<div class="divider">&nbsp;</div>
-					</li>
-					<li class="box">
-						<span class="stepnumber">4</span>
-						<span class="steptxt">Kvittering</span>
-						<div class="divider">&nbsp;</div>
-					</li>
-				</ul>
-			</div>
+		<div class="esignatur-branding-sign-preview-container-ie-border">
+			<div class="esignatur-branding-sign-preview-container">
+				<div class="sign-preview-nav">
+					<div class="sign-preview-nav-content">
+						<div class="logo-container">
+							<img id="logo-image" src="${Globals.esignaturLogoUrl}">
+						</div>
+						<ul class="language-flags">
+							<li>${SVGs.daSVG}</li>
+							<li>${SVGs.gbSVG}</li>
+							<li>${SVGs.noSVG}</li>
+							<li>${SVGs.seSVG}</li>
+						</ul>
+					</div>
+				</div>
+				<!-- Step indicator navbar-fixed-top -->
+				<div class="row">
+					<ul class="stepindicator">
+						<li class="box active">
+							<span class="stepnumber">1</span>
+							<span class="steptxt">Log ind</span>
+							<div class="divider">&nbsp;</div>
+						</li>
+						<li class="box">
+							<span class="stepnumber">2</span>
+							<span class="steptxt">Læs</span>
+							<div class="divider">&nbsp;</div>
+						</li>
+						<li class="box">
+							<span class="stepnumber">3</span>
+							<span class="steptxt">Underskriv</span>
+							<div class="divider">&nbsp;</div>
+						</li>
+						<li class="box">
+							<span class="stepnumber">4</span>
+							<span class="steptxt">Kvittering</span>
+							<div class="divider">&nbsp;</div>
+						</li>
+					</ul>
+				</div>
 
-			<!-- Body -->
-			<div class	="sign-preview-content-header row">
-				<h3>Log ind</h3>
-				Du skal logge ind, før du kan læse og underskrive eller downloade et aftaledokument.
-				<br><br>
-				Bruger du NemID/BankID, og oplever du, at feltet er længe om at loade, kan du enten forsøge at skifte browser eller deaktivere din browsers plugins. Du har desuden mulighed for at underskrive fra din mobil eller tablet.
-			</div>
+				<!-- Body -->
+				<div class	="sign-preview-content-header row">
+					<h3>Log ind</h3>
+					Du skal logge ind, før du kan læse og underskrive eller downloade et aftaledokument.
+					<br><br>
+					Bruger du NemID/BankID, og oplever du, at feltet er længe om at loade, kan du enten forsøge at skifte browser eller deaktivere din browsers plugins. Du har desuden mulighed for at underskrive fra din mobil eller tablet.
+				</div>
 
-			<div class="row border-box">
-				<ul class="language-select">
-					<li>
-						<img src="https://sign.esignatur.dk/Content/img/lang/dk.svg">
-						<span>Nøglekort</span>
-					</li>
-					<span class="dropdown-arrow-icon">${SVGs.triangle}</span>
-				</ul>
-			</div>
-			<div class="row border-box">
-				<img class="nem-id-img" src="${NemIdImageDataUrl}">
-			</div>
-			<div class="row sign-preview-footer">
-					<img src="${Globals.esignaturSecuredbyLogoUrl}" alt="secured by eSignatur">
+				<div class="row border-box">
+					<ul class="language-select">
+						<li>
+							<img src="https://sign.esignatur.dk/Content/img/lang/dk.svg">
+							<span>Nøglekort</span>
+						</li>
+						<span class="dropdown-arrow-icon">${SVGs.triangle}</span>
+					</ul>
+				</div>
+				<div class="row border-box">
+					<img class="nem-id-img" src="${NemIdImageDataUrl}">
+				</div>
+				<div class="row sign-preview-footer">
+						<img src="${Globals.esignaturSecuredbyLogoUrl}" alt="secured by eSignatur">
+				</div>
 			</div>
 		</div>
 	`,
 	style: `
+		@media (min-width: 1200px) {
+			.sign-preview-nav-content.full-screen {
+				width: 1170px;
+			}
+		}
+		@media (min-width: 992px) {
+			.sign-preview-nav-content.full-screen {
+				width: 970px;
+			}
+		}
+		@media (min-width: 768px) {
+			.sign-preview-nav-content.full-screen {
+				width: 750px;
+			}
+		}
+	
 		* {
 			transition: 0.5s;
 		}
@@ -75,17 +103,57 @@ import { AlignmentPositionEnum } from '../../Framework/Models/AlignmentPositionE
 			margin: auto;
 			padding: 0 15px;
 		}
-		.esignatur-branding-sign-preview {
+		.esignatur-branding-sign-preview-container-ie-border {
+			border-left-color: #FFFFFF;
+			border-left-style: solid;
+			border-left-width: 600px;
+		}
+		.esignatur-branding-sign-preview-container {
 			font-family: 'Raleway', sans-serif;
-			min-width: 600px;
+			margin-left:-600px;
 			background: #FFFFFF;
 		}
 		.sign-preview-nav {
 			background: #B6B8BA;
-			padding: 15px 40px;
+			padding: 15px 20px;
+			display: flex;
 		}
-		.sign-preview-nav img {
-			max-height: 30px;
+		.sign-preview-nav-content {
+			display: flex;
+			margin: auto;
+			width: 100%;
+		}
+		.logo-container {
+			flex-grow: 1;
+			display: flex;
+			align-items: center;
+		}
+		#logo-image {
+			background-position: left;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-image: url(${Globals.esignaturLogoUrl});
+			height:30px;
+			width:100%;
+			padding-left: 100%;
+		}
+		.language-flags {
+			display: flex;
+			list-style: none;
+			margin: 0;
+		}
+		.language-flags li {
+			opacity: 0.3;
+		}
+		.language-flags li:first-child {
+			opacity: 1;
+		}
+		.language-flags svg {
+			width: 20px;
+			height: 20px;
+			margin: 10px;
 		}
 		.stepindicator {
 			display: flex;
@@ -202,24 +270,24 @@ export default class BrandingSignPreview extends CustomHTMLBaseElement {
 	}
 
 	private styleLogo(branding: Branding) {
-		const navElement = this.getChildElement('.sign-preview-nav');
-		const logoElement = this.getChildElement<HTMLImageElement>('.sign-preview-nav img');
+		const logoElement = this.getChildElement<HTMLImageElement>('#logo-image');
 
 		const logoScale = branding.logoScale ? branding.logoScale / 100 : 1;
-		logoElement.style.transform = `scale(${logoScale})`;
+		const logoHeight = parseInt((logoScale * 30).toString());
+		logoElement.style.height = `${logoHeight}px`;
 
 		const logoSrc = branding.logoDataUrl ? branding.logoDataUrl : Globals.esignaturLogoUrl;
-		logoElement.src = logoSrc;
+		logoElement.style.backgroundImage = `url(${logoSrc})`;
 
-		const logoAlignment = branding.logoAlignment ? AlignmentPositionEnum[branding.logoAlignment] : 'left';
-		navElement.style.textAlign = logoAlignment;
+		const logoAlignment = branding.logoAlignment ? Conversions.alignmentEnumToStyle(branding.logoAlignment) : Conversions.alignmentEnumToStyle(AlignmentPositionEnum.left);
+		logoElement.style.backgroundPosition = logoAlignment;
 	}
 
 	private styleColoring(branding: Branding) {
 		const navElement = this.getChildElement('.sign-preview-nav');
 		const stepIndicatorBoxes = this.getChildElements<HTMLElement>('.stepindicator li.box');
 		const stepIndicatorActiveBox = this.getChildElement('.stepindicator li.box.active');
-		const stepIndicatorStepNumber = this.getChildElement('.stepindicator li .stepnumber');
+		const stepIndicatorsStepNumber = this.getChildElements<HTMLElement>('.stepindicator li .stepnumber');
 		const contentPreview = this.getChildElement('.sign-preview-content-header');
 		const contentPreviewH3 = this.getChildElement('.sign-preview-content-header h3');
 		const languageSelectLi = this.getChildElement('ul.language-select li');
@@ -230,10 +298,21 @@ export default class BrandingSignPreview extends CustomHTMLBaseElement {
 			box.style.background = Conversions.nullColorToTransparent(branding.secondaryColor);
 		});
 		stepIndicatorActiveBox.style.background = Conversions.nullColorToTransparent(branding.primaryColor);
-		stepIndicatorStepNumber.style.color = Conversions.nullColorToTransparent(branding.textColor);
+		stepIndicatorsStepNumber.forEach(stepIndicatorStepNumber => {
+			stepIndicatorStepNumber.style.color = Conversions.nullColorToTransparent(branding.textColor);
+		});
 		contentPreview.style.color = Conversions.nullColorToTransparent(branding.textColor);
 		contentPreviewH3.style.color = Conversions.nullColorToTransparent(branding.primaryColor);
 		languageSelectLi.style.color = Conversions.nullColorToTransparent(branding.textColor);
 		languageArrow.style.fill = Conversions.nullColorToTransparent(branding.primaryColor);
+	}
+
+	magnifyPreview() {
+		const navContent = this.getChildElement('.sign-preview-nav-content');
+		navContent.classList.add('full-screen');
+	}
+	unmagnifyPreview() {
+		const navContent = this.getChildElement('.sign-preview-nav-content');
+		navContent.classList.remove('full-screen');
 	}
 }

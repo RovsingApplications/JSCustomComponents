@@ -110,7 +110,7 @@ export default class BrandingCollapsibleComponent extends CustomHTMLBaseElement 
 			} else {
 				contentWrapperElement.style.maxHeight = contentWrapperElement.scrollHeight + "px";
 				setTimeout(() => {
-					contentWrapperElement.style.maxHeight = 'fit-content';
+					contentWrapperElement.style.maxHeight = 'none';
 				}, 300);
 
 			}

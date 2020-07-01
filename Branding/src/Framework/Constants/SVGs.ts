@@ -1,6 +1,6 @@
 export default class SVGs {
 	public static readonly colorFill = `
-		<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="fill" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-fill fa-w-16 fa-2x"><path fill="currentColor" d="M502.63 217.06L294.94 9.37C288.69 3.12 280.5 0 272.31 0s-16.38 3.12-22.62 9.37l-81.58 81.58L81.93 4.77c-6.24-6.25-16.38-6.25-22.62 0L36.69 27.38c-6.24 6.25-6.24 16.38 0 22.63l86.19 86.18-94.76 94.76c-37.49 37.49-37.49 98.26 0 135.75l117.19 117.19c18.75 18.74 43.31 28.12 67.87 28.12 24.57 0 49.13-9.37 67.88-28.12l221.57-221.57c12.49-12.5 12.49-32.76 0-45.26zm-116.22 70.97H65.93c1.36-3.84 3.57-7.98 7.43-11.83l13.15-13.15 81.61-81.61 58.61 58.6c12.49 12.49 32.75 12.49 45.24 0 12.49-12.49 12.49-32.75 0-45.24l-58.61-58.6 58.95-58.95 162.45 162.44-48.35 48.34z" class=""></path></svg>
+		<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="fill" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M502.63 217.06L294.94 9.37C288.69 3.12 280.5 0 272.31 0s-16.38 3.12-22.62 9.37l-81.58 81.58L81.93 4.77c-6.24-6.25-16.38-6.25-22.62 0L36.69 27.38c-6.24 6.25-6.24 16.38 0 22.63l86.19 86.18-94.76 94.76c-37.49 37.49-37.49 98.26 0 135.75l117.19 117.19c18.75 18.74 43.31 28.12 67.87 28.12 24.57 0 49.13-9.37 67.88-28.12l221.57-221.57c12.49-12.5 12.49-32.76 0-45.26zm-116.22 70.97H65.93c1.36-3.84 3.57-7.98 7.43-11.83l13.15-13.15 81.61-81.61 58.61 58.6c12.49 12.49 32.75 12.49 45.24 0 12.49-12.49 12.49-32.75 0-45.24l-58.61-58.6 58.95-58.95 162.45 162.44-48.35 48.34z"></path></svg>
 	`;
 	public static readonly halfCircle = `
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
@@ -27,7 +27,7 @@ export default class SVGs {
 		</svg>
 	`;
 
-	public static readonly spinnerSVG = `<svg class="svg-loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"><path fill="#325d77" d="M40 72C22.4 72 8 57.6 8 40S22.4 8 40 8s32 14.4 32 32c0 1.1-.9 2-2 2s-2-.9-2-2c0-15.4-12.6-28-28-28S12 24.6 12 40s12.6 28 28 28c1.1 0 2 .9 2 2s-.9 2-2 2z"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 40 40" to="360 40 40" dur="0.6s" repeatCount="indefinite"/></path></svg>`;
+	public static readonly spinnerSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"><path fill="#325d77" d="M40 72C22.4 72 8 57.6 8 40S22.4 8 40 8s32 14.4 32 32c0 1.1-.9 2-2 2s-2-.9-2-2c0-15.4-12.6-28-28-28S12 24.6 12 40s12.6 28 28 28c1.1 0 2 .9 2 2s-.9 2-2 2z"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 40 40" to="360 40 40" dur="0.6s" repeatCount="indefinite"/></path></svg>`;
 
 	public static readonly timesSVG = `
 		<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240">
@@ -86,4 +86,52 @@ export default class SVGs {
 			<path d="M970.2,874.4L763,667.2c50.4-70,78-153.7,78-241.8c0-110.9-43.2-215.3-121.8-293.8C640.9,53.2,536.5,10,425.5,10c-111,0-215.3,43.2-293.8,121.7C53.2,210.1,10,314.5,10,425.5s43.2,215.3,121.7,293.8c78.5,78.5,182.8,121.8,293.8,121.8c88,0,171.6-27.6,241.7-78l207.2,207.2c13.3,13.2,30.5,19.8,47.9,19.8c17.3,0,34.7-6.6,47.9-19.8C996.6,943.7,996.6,900.9,970.2,874.4z M227.5,623.5c-52.9-52.9-82-123.3-82-198s29.1-145.1,82-198c52.9-52.9,123.2-82,198-82c74.8,0,145.1,29.1,198,82c52.9,52.9,82.1,123.2,82.1,198c0,74.8-29.1,145.1-82.1,198c-52.9,52.9-123.2,82-198,82S280.3,676.4,227.5,623.5z"/>
 		</svg>
 	`;
+
+	public static readonly daSVG = `
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><circle cx="256" cy="256" r="256" fill="#f0f0f0"/>
+			<g fill="#d80027">
+				<path d="M200.349 222.609h309.484C493.47 97.002 386.067 0 256 0a256.902 256.902 0 0 0-55.652 6.085v216.524h.001zM133.565 222.608V31.127C63.272 69.481 12.95 139.832 2.167 222.609h131.398v-.001zM133.564 289.391H2.167c10.783 82.777 61.105 153.128 131.398 191.481l-.001-191.481zM200.348 289.392v216.523A256.902 256.902 0 0 0 256 512c130.067 0 237.47-97.002 253.833-222.609H200.348v.001z"/>
+			</g>
+		</svg>
+	`;
+	public static readonly noSVG = `
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><circle cx="256" cy="256" r="256" fill="#f0f0f0"/>
+			<g fill="#d80027">
+			<path d="M8.819 322.783c14.812 54.959 47.457 102.593 91.355 136.322V322.783H8.819zM233.739 511.026A259.29 259.29 0 0 0 256 512c118.279 0 217.805-80.221 247.181-189.217H233.739v188.243zM503.181 189.217C473.805 80.221 374.279 0 256 0c-7.502 0-14.923.342-22.261.974v188.243h269.442zM100.174 52.895c-43.898 33.73-76.543 81.363-91.355 136.322h91.355V52.895z"/></g><path d="M509.833 222.609H200.348V6.085a254.258 254.258 0 0 0-66.783 25.042v191.481H2.167C.742 233.539 0 244.683 0 256s.742 22.461 2.167 33.391h131.398v191.481a254.258 254.258 0 0 0 66.783 25.042V289.392h309.485C511.256 278.461 512 267.317 512 256s-.744-22.461-2.167-33.391z" fill="#0052b4"/>
+		</svg>
+	`;
+	public static readonly seSVG = `
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+			<circle cx="256" cy="256" r="256" fill="#ffda44"/>
+			<path d="M200.349 222.609h309.484C493.47 97.002 386.067 0 256 0a256.902 256.902 0 0 0-55.652 6.085v216.524h.001zm-66.784-.001V31.127C63.271 69.481 12.95 139.832 2.167 222.609h131.398v-.001zm-.001 66.783H2.167c10.783 82.777 61.104 153.128 131.398 191.481l-.001-191.481zm66.784.001v216.523A256.902 256.902 0 0 0 256 512c130.067 0 237.47-97.002 253.833-222.609H200.348v.001z" fill="#0052b4"/>
+		</svg>
+	`;
+	public static readonly gbSVG = `
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="New" viewBox="0 0 512 512">
+		<defs>
+			<circle id="SVGID_1_" cx="256" cy="256" r="256"/>
+		</defs>
+		<clipPath id="SVGID_2_">
+			<use xlink:href="#SVGID_1_" overflow="visible"/>
+		</clipPath>
+		<g clip-path="url(#SVGID_2_)">
+			<path fill="#039" d="M0 0h512v512H0z"/>
+			<path transform="rotate(45.001 247.45 265.68)" style="fill: #fff;" d="M205.8-25.5h83.3v582.4h-83.3z"/>
+			<path transform="rotate(134.999 256.062 257.068)" style="fill: #fff;" d="M214.4-61.4h83.3v637h-83.3z"/>
+			<path style="fill: #fff;" d="M189.5 0h133v512h-133z"/>
+			<path transform="rotate(90 255.973 256.186)" style="fill: #fff;" d="M189.4.2h133.2v511.9H189.4z"/>
+			<path transform="rotate(-45.001 134.052 184.489)" style="fill: #fff;" d="M127.1 55.8H141v257.3h-13.9z"/>
+			<path style="fill: #c00;" d="M189.5 190.9l-40.5-1.3-101-101L67.6 69z"/>
+			<path transform="rotate(-134.999 161.244 401.07)" style="fill: #fff;" d="M154.3 261.5h13.9v279.1h-13.9z"/>
+			<path transform="rotate(-45.001 373.386 90.925)" style="fill: #fff;" d="M269.1 84h208.6v13.9H269.1z"/>
+			<path style="fill: #c00;" d="M322.5 189.2v-37.6L452.1 22.1l19.8 19.4zM190.5 322.8L38.1 475.2l19.6 19.6L189.5 363zM214.3 0h83.3v512h-83.3z"/>
+			<g>
+				<path transform="rotate(134.999 403.993 355.884)" style="fill: #fff;" d="M397.1 216.7H411v278.4h-13.9z"/>
+				<path style="fill: #c00;" d="M321.8 322.8l156.1 156 19.6-19.6-136.4-136.4z"/>
+			</g>
+			<path transform="rotate(90 256 255.996)" style="fill: #c00;" d="M214.4 0h83.3v512h-83.3z"/>
+		</g>
+	</svg>
+	`;
+
 }
