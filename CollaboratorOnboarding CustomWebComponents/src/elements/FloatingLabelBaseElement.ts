@@ -7,6 +7,7 @@ export default abstract class FloatingLabelElement extends CustomHTMLBaseElement
 	protected innerElement: HTMLElement;
 	protected errorElement: HTMLSpanElement;
 	protected labelElement: HTMLLabelElement;
+	protected postfixElement: HTMLElement;
 	protected customStyle: HTMLStyleElement;
 	protected required: boolean;
 
@@ -26,6 +27,7 @@ export default abstract class FloatingLabelElement extends CustomHTMLBaseElement
 		this.errorElement = this.getChildElement('#error-message');
 		this.innerElement = this.getChildElement('#inner-element');
 		this.labelElement = this.getChildElement('#inner-label');
+		this.postfixElement = this.getChildElement('#postfix-icon');
 		this.customStyle = this.querySelector('style');
 
 		this.applyCustomStyle(this.baseStyle);
@@ -39,6 +41,8 @@ export default abstract class FloatingLabelElement extends CustomHTMLBaseElement
 		this.innerElement.addEventListener('focusout', (event: FocusEvent) => {
 			this.checkHasValue();
 		});
+
+		this.renderPostfixIcon();
 	}
 
 	protected checkHasValue() {
@@ -54,6 +58,13 @@ export default abstract class FloatingLabelElement extends CustomHTMLBaseElement
 			this.setAttribute('invalid', 'true');
 		} else {
 			this.removeAttribute('invalid');
+		}
+	}
+
+	renderPostfixIcon() {
+		const postfix = this.querySelector('[slot="postfix"]') as HTMLElement;
+		if (postfix) {
+			this.postfixElement.fillContent(postfix);
 		}
 	}
 

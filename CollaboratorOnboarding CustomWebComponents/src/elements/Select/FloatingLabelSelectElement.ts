@@ -8,10 +8,19 @@ import FloatingLabelBaseElement from '../FloatingLabelBaseElement';
 			<select id="inner-element">
 			</select>
 			<label id="inner-label"></label>
+			<span id="postfix-icon"></span>
 			<span id="error-message"></span>
 		</span>
 	`,
-	style: ``,
+	style: `
+		#postfix-icon {
+			position: absolute;
+			top: 1px;
+			max-width: 15px;
+			max-height: 15px;
+			right: 20px;
+		}
+	`,
 	useShadow: true,
 })
 export default class FloatingLabelSelectElement extends FloatingLabelBaseElement {

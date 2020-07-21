@@ -8,7 +8,6 @@ export default class FloatingLabelBaseStyle {
 	#item-group {
 		position: relative;
 	}
-
 	#inner-element {
 		z-index: 1;
 		width: 100%;
