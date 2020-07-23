@@ -269,7 +269,7 @@ export default class ChildCompaniesTable extends HTMLElement {
 	private renderActionBar() {
 		const downloadCredentialsButton = document.createElement('button');
 		downloadCredentialsButton.classList.add('download-button');
-		downloadCredentialsButton.innerHTML = 'Download credentials';
+		downloadCredentialsButton.innerHTML = 'Download legitimationsoplysninger';
 		this.actionBarWrapper.fillContent(downloadCredentialsButton);
 		downloadCredentialsButton.onclick = () => {
 			downloadCredentialsButton.disabled = true;
@@ -326,7 +326,7 @@ export default class ChildCompaniesTable extends HTMLElement {
 				downloadSelectedCredentialsButton = document.createElement('button');
 				downloadSelectedCredentialsButton.classList.add('download-button');
 				downloadSelectedCredentialsButton.id = 'download-selected-button';
-				downloadSelectedCredentialsButton.innerHTML = 'Download valgte credentials';
+				downloadSelectedCredentialsButton.innerHTML = 'Download valgte legitimationsoplysninger';
 				this.actionBarWrapper.insertAdjacentElement('afterbegin', downloadSelectedCredentialsButton);
 
 				downloadSelectedCredentialsButton.onclick = () => {

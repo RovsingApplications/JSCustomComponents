@@ -1,6 +1,6 @@
 {
 	"name": "@luftborn/esignatur-collaborator-onboarding",
-	"version": "1.0.2",
+	"version": "1.0.4",
 	"description": "Custom web components for eSignatur collaborator onboarding application",
 	"main": "lib/index.min.js",
 	"types": "lib/index.min.js.map",

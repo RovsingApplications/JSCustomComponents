@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="./index.js"></script>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+
+		@media (min-width: 768px) {
+			.error-page-header-content {
+				width: 750px;
+			}
+		}
+
+		.error-page-header {
+			min-height: 75px;
+			background-color: #b6b8ba;
+		}
+
+		.error-page-header-content {
+			margin: auto;
+			padding: 15px;
+		}
+
+		.error-page-logo {
+			font-size: 30px;
+			font-weight: bold;
+			color: #325d77;
+		}
+
+		.error-page-content {
+			margin: auto;
+			margin-top: 70px;
+			padding: 20px 40px;
+		}
+
+		.error-page-footer {
+			display: flex;
+			margin-top: 50px;
+			justify-content: center;
+		}
+
+		.error-page-footer-logo {
+			width: 140px;
+			font-size: 12px;
+			font-weight: bold;
+			color: #325d77;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="error-page-header">
+		<div class="error-page-header-content">
+			<img class="error-page-logo" src="https://sign.demosign.esignatur.dk/content/img/esig_logo.png" alt="eSignatur">
+		</div>
+	</div>
+
+	<esignatur-error-page apiurl="https://localhost:5001/" key="NoAccessOwner" language="en"
+		tokens='{ "REFERENCENR": "875467", "VIRKSOMHED": "Omar" }'>
+	</esignatur-error-page>
+
+	<div class="error-page-footer">
+		<img class="error-page-footer-logo" src="https://sign.demosign.esignatur.dk/content/img/securedby_esignatur.png"
+			alt="Secured by eSignatur">
+	</div>
+</body>
+
+</html>

@@ -8,6 +8,7 @@ import '../framework/Utilities/DomManipulationExtensionMethods';
 import ElementsCreator from '../framework/Utilities/ElementsCreator';
 import ChildOnboardingRequest from "../framework/Models/ChildOnboardingRequest";
 import ChildCompany from "../framework/Models/ChildCompany";
+import { infoSVG15px } from "../framework/Constants/svgs";
 
 @CustomElement({
 	selector: 'collaborator-onboarding-form',
@@ -16,28 +17,53 @@ import ChildCompany from "../framework/Models/ChildCompany";
 			<input hidden id="id-field" />
 			<div class="row">
 				<div class="col col-spacing">
-					<floating-label-input error="Du skal indtaste et gyldigt Kundenavn" id="name-field" label="Kundenavn *" required="true"></floating-label-input>
+					<floating-label-input error="Du skal indtaste et gyldigt Kundenavn" id="name-field" label="Kundenavn*" required="true"></floating-label-input>
 				</div>
 				<div class="col col-spacing">
-					<floating-label-input id="customer-number-field" label="Virk Nr."></floating-label-input>
+					<floating-label-input id="customer-number-field" label="Kundenr."></floating-label-input>
 				</div>
 				<div class="col col-spacing">
-					<floating-label-input error="Du skal indtaste et gyldigt cvr nummer" number-input="true" id="cvr-field" label="CVR *" validator="cvr" required="true"></floating-label-input>
+					<floating-label-input error="Du skal indtaste et gyldigt cvr nummer" number-input="true" id="cvr-field" label="CVR*" validator="cvr" required="true"></floating-label-input>
 				</div>
 				<div class="col col-spacing">
-					<floating-label-input error="Du skal indtaste et gyldigt email" id="email-field" label="Email *" validator="email" required="true"></floating-label-input>
+					<floating-label-input error="Du skal indtaste et gyldigt email" id="email-field" label="Email*" validator="email" required="true"></floating-label-input>
 				</div>
 				<div class="col col-spacing">
-					<floating-label-input error="Du skal indtaste et gyldigt Afdeling" id="department-field" label="Afdeling *" required="true"></floating-label-input>
+					<floating-label-input error="Du skal indtaste et gyldigt Afdeling" id="department-field" label="Afdeling*" required="true">
+						<onboarding-tooltip-element slot="postfix" position="right">
+							<span slot="handle">${infoSVG15px}</span>
+							<span slot="title" style="display:none;">Unikt virksomhedsnavn</span>
+							<span slot="content" style="display:none;">
+								<div>
+									Hvis virksomhedsnavnet ikke er unikt, skal feltet "Afdeling" udfyldes.
+								</div>
+								<br>
+								<div>
+									Eksempel 1:
+									<div>
+										<b>Unikt</b> virksomhedsnavn - <b>RealMæglerne Sorø</b>
+									</div>
+								</div>
+								<br>
+								<div>
+									Eksempel 2:
+									<div>
+										<b>Ikke unikt</b> virksomhedsnavn - <b>Advodan</b>
+									</div>
+								</div>
+							</span>
+						</onboarding-tooltip-element>
+					</floating-label-input>
 				</div>
 				<div class="col col-spacing" id="branding-field-wrapper">
-					<floating-label-select-element error="Du skal indtaste et gyldigt Branding" id="branding-field" label="Branding *" required="true"></floating-label-input>
+					<floating-label-select-element error="Du skal indtaste et gyldigt Branding" id="branding-field" label="Branding*" required="true"></floating-label-input>
 				</div>
-				<div class="col col-spacing button-wrapper">
-					<button class="add-btn">
-						<span>Tilføj</span>
-					</button>
-				</div>
+				
+			</div>
+			<div class="button-wrapper">
+				<button class="add-btn">
+					<span>Opret</span>
+				</button>
 			</div>
 		</form>
 	`,
@@ -46,9 +72,11 @@ import ChildCompany from "../framework/Models/ChildCompany";
 
 		.button-wrapper {
 			display: flex;
-			justify-content: space-around;	
+			justify-content: space-around;
+			padding: 0 10px;
 		}
 		button {
+			flex: 0 1 100%;
 			font-family: Roboto, sans-serif;
 			font-size: 14px;
 			padding: 0 30px;
@@ -61,14 +89,15 @@ import ChildCompany from "../framework/Models/ChildCompany";
 			cursor: pointer;
 			display: flex;
 			align-items: center;
+			justify-content: center;
 			transition: transform .2s;
 		}
 		button:hover {
-			transform: scale(1.1);
+			transform: scale(1.05);
 		}
 
 		.col-spacing {
-			padding: 10px; !important;
+			padding: 10px;
 		}
 		.row {
 			display: flex;

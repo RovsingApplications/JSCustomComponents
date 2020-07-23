@@ -1,6 +1,7 @@
 import CustomElement from "../../framework/custom-element.decorator";
 import FloatingLabelBaseElement from '../FloatingLabelBaseElement';
 import { CvrValidator, EmailValidator } from '../../framework/Validations/Validators/Validators';
+import { infoSVG } from '../../framework/Constants/svgs';
 
 @CustomElement({
 	selector: 'floating-label-input',
@@ -8,10 +9,19 @@ import { CvrValidator, EmailValidator } from '../../framework/Validations/Valida
 		<span id="item-group">
 			<input id="inner-element" />
 			<label for="inner-element" id="inner-label"></label>
+			<span id="postfix-icon"></span>
 			<span id="error-message"></span>
 		</span>
 	`,
-	style: ``,
+	style: `
+		#postfix-icon {
+			position: absolute;
+			top: 1px;
+			max-width: 15px;
+			max-height: 15px;
+			right: 10px;
+		}
+	`,
 	useShadow: true,
 })
 export default class FloatingLabelInputElement extends FloatingLabelBaseElement {

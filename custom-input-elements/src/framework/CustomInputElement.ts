@@ -61,6 +61,9 @@ export abstract class CustomInputElement extends HTMLElement {
 
 	private parseData(): void {
 		try {
+			if (!(this.children[0] instanceof HTMLScriptElement)) {
+				return;
+			}
 			let data = JSON.parse(this.children[0].innerHTML);
 			this.removeChild(this.children[0]);
 			this.options = data.options;
@@ -137,7 +140,7 @@ export abstract class CustomInputElement extends HTMLElement {
 		}
 	}
 
-	private bindDependency(elementName: string, type: string, value?: string, criteria?: string, ): void {
+	private bindDependency(elementName: string, type: string, value?: string, criteria?: string,): void {
 		let element = document.querySelector(`[name="${elementName}"]`) as CustomInputElement;
 
 		if (element instanceof CustomInputElement) {

@@ -27,7 +27,7 @@ const CustomElement = (config: elementConfig) => {
 
 		cls.prototype.connectedCallback = function () {
 			let clone = document.importNode(templateElement.content, true);
-			if (config.useShadow) {
+			if (config.useShadow && !this.shadowRoot) {
 				this.attachShadow({ mode: 'open' }).appendChild(clone);
 			} else {
 				this.appendChild(clone);

@@ -2,6 +2,7 @@ import CustomElement from '../../framework/custom-element.decorator';
 import { CustomInputElement } from '../../framework/CustomInputElement';
 import { CustomElementEventArgs } from '../../framework/CustomEvents';
 import Translator from '../../framework/Language/Translator';
+import getAttributeNamesPolyfill from '../../framework/Polyfills/getAttributeNamesPolyfill';
 
 @CustomElement({
 	selector: 'address-element',
@@ -37,6 +38,7 @@ export class AddressElement extends CustomInputElement {
 
 	constructor() {
 		super();
+		getAttributeNamesPolyfill();
 	}
 
 	get value(): string {
@@ -132,6 +134,7 @@ export class AddressElement extends CustomInputElement {
 		this.zip.value = '';
 
 		const place = this.addressAutoComplete.getPlace();
+		console.log(place);
 		if (!place.address_components) {
 			return;
 		}
@@ -141,7 +144,7 @@ export class AddressElement extends CustomInputElement {
 			return isCityComponent;
 		});
 		if (cityComponents && cityComponents[0]) {
-			this.city.value = cityComponents[0].long_name;
+			this.city.value = cityComponents[cityComponents.length - 1].long_name;
 		}
 		const zipComponents = place.address_components.filter(component => component.types.indexOf('postal_code') != -1);
 		if (zipComponents && zipComponents[0]) {
