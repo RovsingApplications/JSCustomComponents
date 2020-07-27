@@ -51,7 +51,7 @@ export default class FloatingLabelInputElement extends FloatingLabelBaseElement 
 				if (!allowEmpty) {
 					return this.value && this.value.trim().length > 0;
 				}
-				break;
+				return true;
 		}
 	}
 

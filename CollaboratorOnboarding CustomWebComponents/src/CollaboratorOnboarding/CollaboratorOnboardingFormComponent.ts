@@ -29,7 +29,13 @@ import { infoSVG15px } from "../framework/Constants/svgs";
 					<floating-label-input error="Du skal indtaste et gyldigt email" id="email-field" label="Email*" validator="email" required="true"></floating-label-input>
 				</div>
 				<div class="col col-spacing">
-					<floating-label-input error="Du skal indtaste et gyldigt Afdeling" id="department-field" label="Afdeling*" required="true">
+					<floating-label-input error="Du skal indtaste et gyldigt Afdeling" id="department-field" label="Afdeling">
+						<style>
+							onboarding-tooltip-element {
+								background-color: #FFFFFF;
+								padding: 2px 0 0 2px;
+							}
+						</style>
 						<onboarding-tooltip-element slot="postfix" position="right">
 							<span slot="handle">${infoSVG15px}</span>
 							<span slot="title" style="display:none;">Unikt virksomhedsnavn</span>
