@@ -44,6 +44,7 @@ import SVGs from "./Framework/Constants/SVGs";
 		}
 		:host {
 			height: 100%;
+			width: 100%;
 		}
 		#container {
 			display: flex;

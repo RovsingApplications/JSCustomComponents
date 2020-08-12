@@ -1,7 +1,7 @@
 {
-	"name": "@luftborn/esignatur-branding",
-	"version": "1.0.2",
-	"description": "custom component for esignature branding-theming",
+	"name": "@luftborn/esignatur-branding-admin",
+	"version": "1.0.0",
+	"description": "custom component for esignature branding-theming for admin users",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"author": "Luftborn",
@@ -15,6 +15,7 @@
 		"js-polyfills"
 	],
 	"dependencies": {
+		"@luftborn/esignatur-branding": "^1.0.2",
 		"@webcomponents/custom-elements": "^1.4.1",
 		"@webcomponents/webcomponentsjs": "^2.4.3",
 		"js-polyfills": "^0.1.42"

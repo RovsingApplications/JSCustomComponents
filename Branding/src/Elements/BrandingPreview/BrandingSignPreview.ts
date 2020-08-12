@@ -15,7 +15,7 @@ import { AlignmentPositionEnum } from '../../Framework/Models/AlignmentPositionE
 				<div class="sign-preview-nav">
 					<div class="sign-preview-nav-content">
 						<div class="logo-container">
-							<img id="logo-image" src="${Globals.esignaturLogoUrl}">
+							<span id="logo-image"></span>
 						</div>
 						<ul class="language-flags">
 							<li>${SVGs.daSVG}</li>

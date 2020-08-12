@@ -62,7 +62,7 @@ import { infoSVG15px } from "../framework/Constants/svgs";
 					</floating-label-input>
 				</div>
 				<div class="col col-spacing" id="branding-field-wrapper">
-					<floating-label-select-element error="Du skal indtaste et gyldigt Branding" id="branding-field" label="Branding*" required="true"></floating-label-input>
+					<floating-label-select-element error="Du skal indtaste et gyldigt Branding" id="branding-field" label="Branding*" required="true"></floating-label-select-element>
 				</div>
 				
 			</div>
