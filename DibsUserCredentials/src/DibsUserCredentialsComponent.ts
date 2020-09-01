@@ -52,8 +52,8 @@ export default class DibsUserCredentialsComponent extends CustomHTMLBaseElement 
 
 	private initComponent() {
 
-		if (!Globals.apiKey || !Globals.baseUrl) {
-			const errorBlock = ElementsCreator.generateErrorBlock('Indtast api-key- og base-url-attributter');
+		if (!Globals.apiKey || !Globals.baseUrl || !Globals.netsId) {
+			const errorBlock = ElementsCreator.generateErrorBlock('Indtast nets-id, api-key- og base-url-attributter');
 			DomUtility.fillContent(this.userCredentialsWrapper, errorBlock);
 		}
 		const loadingOverlay = ElementsCreator.generateOverlayWithSpinner(100);

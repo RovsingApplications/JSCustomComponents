@@ -16,7 +16,7 @@ import SVGs from "../../Framework/Constants/SVGs";
 			</div>
 			<div class="all-credentials-wrapper"></div>
 			<div class="credentials-form-action-wrapper">
-				<button>Gemme</button>
+				<button>Gem</button>
 			</div>
 		</form>
 	`,
