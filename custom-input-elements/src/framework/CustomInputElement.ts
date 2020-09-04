@@ -1,5 +1,6 @@
 import { CustomElementEvent, CustomElementEventArgs } from "./CustomEvents";
 import { DomUtil, ArrayUtil } from "@luftborn/utilities";
+import OptionWithDescription from "./Models/OptionWithDescription";
 
 class IDictionary<TValue> {
 	[index: string]: TValue;
@@ -21,6 +22,7 @@ export abstract class CustomInputElement extends HTMLElement {
 
 	public name: string;
 	public options: any[];
+	public optionsWithDescriptions: OptionWithDescription[];
 	public required: boolean;
 	public customValue: string;
 	public allDependenciesMustBeMet: boolean = false;
@@ -67,6 +69,7 @@ export abstract class CustomInputElement extends HTMLElement {
 			let data = JSON.parse(this.children[0].innerHTML);
 			this.removeChild(this.children[0]);
 			this.options = data.options;
+			this.optionsWithDescriptions = data.optionsWithDescriptions;
 			this.hasValueDependency = data.hasValueDependency;
 			this.noValueDependency = data.noValueDependency;
 			this.dependencies = data.dependencies;
@@ -233,6 +236,14 @@ export abstract class CustomInputElement extends HTMLElement {
 			element = this.shadowRoot;
 		}
 		return element.querySelector(selector) as HTMLElement;
+	}
+
+	protected getChildElements(selector: string): HTMLElement[] {
+		let element: any = this;
+		if (this.shadowRoot) {
+			element = this.shadowRoot;
+		}
+		return element.querySelectorAll(selector) as HTMLElement[];
 	}
 
 	public RegisterDependentOn(name: string, initialValue: boolean = false) {

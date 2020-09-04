@@ -1,6 +1,6 @@
 {
 	"name": "@luftborn/custom-elements",
-	"version": "1.1.18",
+	"version": "1.1.21",
 	"description": "custom HTML elements for the form builder application ",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",

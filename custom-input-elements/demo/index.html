@@ -59,6 +59,54 @@
 						<div class="field-group-content">
 							<div class="group-row">
 								<div class="field-item custom-validation-target">
+									<span class="invalid-message" style="display: none">Select an department</span>
+									<div class="field-item">
+										<div class="field-label">Department: </div>
+										<div class="field-input">
+											<type-ahead-element>
+												<script type="application/json">
+													{
+														"label": "department label",
+														"name": "department name",
+														"type": "type-ahead-element",
+														"required": true,
+														"noValueDependency": null,
+														"hasValueDependency": null,
+														"optionsWithDescriptions": [{
+																"title": "HR",
+																"value": "Dept001",
+																"description": "HR department"
+															},
+															{
+																"title": "Finance",
+																"value": "Dept002",
+																"description": "Financial department"
+															},
+															{
+																"title": "Sales",
+																"value": "Dept003",
+																"description": "Sales department"
+															},
+															{
+																"title": "Marketing",
+																"value": "Dept004",
+																"description": "Marketing department"
+															},
+															{
+																"title": "IT",
+																"value": "Dept005",
+																"description": "Information Technology department"
+															}
+														]
+													}
+												</script>
+											</type-ahead-element>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="group-row">
+								<div class="field-item custom-validation-target">
 									<span class="invalid-message" style="display: none">Enter a valid Address</span>
 									<div class="field-item">
 										<div class="field-label">Address: </div>

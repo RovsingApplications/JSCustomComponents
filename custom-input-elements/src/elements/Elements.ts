@@ -14,22 +14,24 @@ import { CPRElement } from './CPRElement/CPRElement';
 import { CVRElement } from './CVRElement/CVRElement';
 import { IdentificationElement } from './IdentificationElement/IdentificationElement';
 import { BankFieldElement } from './BankField/BankFieldElement';
+import { TypeAheadElement } from './TypeAhead/TypeAheadElement';
 
 export {
-    AddressElement,
-    TextFieldElement,
-    EmailFieldElement,
-    CheckBoxElement,
-    RadioButtonGroupElement,
-    TextAreaElement,
-    DropDownListElement,
-    FileFieldElement,
-    NumericFieldElement,
-    CustomRegularExpressionElement,
-    DateFieldElement,
-    IntPhoneFieldElement,
-    CPRElement,
-    CVRElement,
-    IdentificationElement,
-    BankFieldElement,
+	AddressElement,
+	TextFieldElement,
+	EmailFieldElement,
+	CheckBoxElement,
+	RadioButtonGroupElement,
+	TextAreaElement,
+	DropDownListElement,
+	FileFieldElement,
+	NumericFieldElement,
+	CustomRegularExpressionElement,
+	DateFieldElement,
+	IntPhoneFieldElement,
+	CPRElement,
+	CVRElement,
+	IdentificationElement,
+	BankFieldElement,
+	TypeAheadElement
 };
