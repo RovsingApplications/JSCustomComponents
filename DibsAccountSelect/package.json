@@ -1,0 +1,38 @@
+{
+	"name": "@luftborn/esignatur-dibs-account-select",
+	"version": "1.0.0",
+	"description": "custom component to select account of a customer",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"author": "Luftborn",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"prepublish": "tsc --declaration"
+	},
+	"license": "ISC",
+	"bundledDependencies": [
+		"@webcomponents/webcomponentsjs"
+	],
+	"dependencies": {
+		"@luftborn/esignatur-branding": "^1.0.2",
+		"@webcomponents/custom-elements": "^1.4.1",
+		"@webcomponents/webcomponentsjs": "^2.4.3"
+	},
+	"devDependencies": {
+		"gulp-terser": "^1.2.0",
+		"@babel/core": "^7.10.0",
+		"@types/node": "^14.0.5",
+		"tsify": "~4.0.1",
+		"typescript": "~3.9.3",
+		"vinyl-buffer": "~1.0.1",
+		"vinyl-source-stream": "~2.0.0",
+		"babelify": "~10.0.0",
+		"browserify": "~16.5.1",
+		"gulp": "^4.0.2",
+		"gulp-rename": "~1.4.0",
+		"gulp-sourcemaps": "~2.6.5",
+		"gulp-uglify": "~3.0.2",
+		"gulp-webserver": "~0.9.1",
+		"gulp-map": "0.0.2"
+	}
+}
