@@ -80,19 +80,17 @@ export class TypeAheadElement extends CustomInputElement {
 
 	get value(): string {
 		if (!this.selectedOption) {
-			return this.textInputElement.value;
+			return null;
 		}
 		return this.selectedOption.value;
 	}
 
 	set value(value: string) {
 		if (!this.optionsWithDescriptions || this.optionsWithDescriptions.length === 0) {
-			this.textInputElement.value = value;
 			return;
 		}
 		const option = this.optionsWithDescriptions.find(option => option.value === value);
 		if (!option) {
-			this.textInputElement.value = value;
 			return;
 		}
 		this.selectedOption = option;
@@ -100,13 +98,10 @@ export class TypeAheadElement extends CustomInputElement {
 	}
 
 	get valid(): boolean {
-		return this.optionsWithDescriptions &&
-			this.optionsWithDescriptions.length > 0 &&
-			this.optionsWithDescriptions.every(option =>
-				option.title && option.title.trim() !== '' &&
-				option.value && option.value.trim() !== '' &&
-				option.description && option.description.trim() !== ''
-			);
+		if (this.required) {
+			return !!this.selectedOption;
+		}
+		return !!this.selectedOption || this.textInputElement.value === '';
 	}
 
 	connectedCallback(): void {
@@ -127,6 +122,7 @@ export class TypeAheadElement extends CustomInputElement {
 	}
 
 	private inputEventHandler() {
+		this.selectedOption = null;
 		this.closeOptionsList();
 		this.searchResultOptions = [];
 		const searchValue = this.textInputElement.value;
