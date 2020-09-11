@@ -7,18 +7,22 @@ export default class CustomerCredentialsService {
 
 	private authHeaders = { [Constants.apiKeyHeaderName]: Globals.apiKey, [Constants.netsIdHeaderName]: Globals.netsId };
 
+	request: MakeRequest;
+
 	getByApiKey() {
-		return new MakeRequest(
+		this.request = new MakeRequest(
 			`${Globals.baseUrl}api/credentials/get`,
 			'get', this.authHeaders
-		).send();
+		);
+		return this.request.send();
 	}
 
 	upsert(customerPaymentAccounts: Array<CustomerPaymentAccount>) {
-		return new MakeRequest(
+		this.request = new MakeRequest(
 			`${Globals.baseUrl}api/credentials/upsert`,
 			'post', { ...this.authHeaders, 'Content-Type': 'application/json' }
-		).send(JSON.stringify(customerPaymentAccounts));
+		);
+		return this.request.send(JSON.stringify(customerPaymentAccounts));
 	}
 
 }

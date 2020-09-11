@@ -6,6 +6,7 @@ import CustomerCredentialsService from "../../Framework/Services/CustomerCredent
 import CustomerPaymentAccount from "../../Framework/Models/CustomerPaymentAccount";
 import ElementsCreator from "../../Framework/Utilities/ElementsCreator";
 import SVGs from "../../Framework/Constants/SVGs";
+import Globals from "../../Framework/Globals/Globals";
 
 @CustomElement({
 	selector: 'esignatur-dibs-user-credentials-credentials-form',
@@ -87,6 +88,8 @@ export default class CredentialsFormElement extends CustomHTMLBaseElement {
 
 	private snackBar: HTMLElement;
 	private allCredentialsWrapper: HTMLElement;
+	private addCredentialsWrapper: HTMLElement;
+	private formActionWrapper: HTMLElement;
 	private addCredentialsButton: HTMLElement;
 	private submitButton: HTMLElement;
 	private singleCredentialsElements: SingleCredentialsElement[];
@@ -97,8 +100,16 @@ export default class CredentialsFormElement extends CustomHTMLBaseElement {
 
 	componentDidMount() {
 		this.allCredentialsWrapper = this.getChildElement('.all-credentials-wrapper');
+		this.addCredentialsWrapper = this.getChildElement('.add-credentials-wrapper');
 		this.addCredentialsButton = this.getChildElement('.add-credentials-wrapper button');
+		this.formActionWrapper = this.getChildElement('.credentials-form-action-wrapper');
 		this.submitButton = this.getChildElement('.credentials-form-action-wrapper button');
+
+		if (!Globals.isAdmin) {
+			this.addCredentialsWrapper.style.display = 'none';
+			this.formActionWrapper.style.display = 'none';
+		}
+
 		this.bindEvents();
 	}
 

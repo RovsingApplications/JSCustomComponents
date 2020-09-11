@@ -4,6 +4,7 @@ import CustomerPaymentAccount from "../../Framework/Models/CustomerPaymentAccoun
 import SVGs from "../../Framework/Constants/SVGs";
 import Colors from "../../Framework/Constants/Colors";
 import FloatingLabelInputElement from "../FloatingLabel/FloatingLabelInputElement";
+import Globals from "../../Framework/Globals/Globals";
 
 
 @CustomElement({
@@ -104,6 +105,7 @@ export default class SingleCredentialsElement extends CustomHTMLBaseElement {
 
 	private paymentAccountId: string;
 	private singleCredentialsWrapper: HTMLElement;
+	private singleCredentialsActionsWrapper: HTMLElement;
 	private nameElement: FloatingLabelInputElement;
 	private merchantIdElement: FloatingLabelInputElement;
 	private secretKeyElement: FloatingLabelInputElement;
@@ -210,11 +212,16 @@ export default class SingleCredentialsElement extends CustomHTMLBaseElement {
 		this.checkoutKeyElement = this.getChildElement('#checkout-key-field');
 		this.editButton = this.getChildElement('.edit-button');
 		this.deleteButton = this.getChildElement('.delete-button');
+		this.singleCredentialsActionsWrapper = this.getChildElement('.single-credentials-actions-wrapper');
 
 		this.getAttributeNames().forEach(attributeName => {
 			let attributeValue = this.getAttribute(attributeName);
 			this.attributeChanged(attributeName, null, attributeValue);
 		});
+
+		if (!Globals.isAdmin) {
+			this.singleCredentialsActionsWrapper.style.display = 'none';
+		}
 
 		this.bindEvents();
 	}

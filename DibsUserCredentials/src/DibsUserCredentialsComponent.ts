@@ -58,9 +58,13 @@ export default class DibsUserCredentialsComponent extends CustomHTMLBaseElement 
 		}
 		const loadingOverlay = ElementsCreator.generateOverlayWithSpinner(100);
 		this.userCredentialsWrapper.appendChild(loadingOverlay);
-		new CustomerCredentialsService().getByApiKey()
+		const customerCredentialsService = new CustomerCredentialsService()
+		customerCredentialsService.getByApiKey()
 			.then(res => {
 				loadingOverlay.remove();
+				if (customerCredentialsService.request.getResponseHeader('x-esignatur-dibs-admin') === 'true') {
+					Globals.isAdmin = true;
+				}
 				const credentialsFormElement = new CredentialsFormElement();
 				DomUtility.fillContent(this.userCredentialsWrapper, credentialsFormElement);
 				const customerPaymentAccounts: Array<CustomerPaymentAccount> = JSON.parse(res as string);

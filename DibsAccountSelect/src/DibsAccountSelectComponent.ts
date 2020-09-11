@@ -41,6 +41,7 @@ export default class DibsAccountSelectComponent extends CustomHTMLBaseElement {
 	private _accountsSelectLabelAttribute: string;
 	private _accountsSelectRequiredAttribute: string;
 	private change = new Event('change');
+	private _tempValue: string;
 
 	constructor() {
 		super();
@@ -54,6 +55,7 @@ export default class DibsAccountSelectComponent extends CustomHTMLBaseElement {
 	}
 
 	set value(val: string) {
+		this._tempValue = val;
 		if (!this.accountsSelectElement) {
 			return;
 		}
@@ -134,6 +136,10 @@ export default class DibsAccountSelectComponent extends CustomHTMLBaseElement {
 			});
 			this.setAccountSelectAttributes();
 			this.accountsSelectElement.initComponent(accounts);
+			if (this._tempValue) {
+				this.accountsSelectElement.value = this._tempValue;
+				this._tempValue = null;
+			}
 		})
 			.catch(ex => {
 				console.error(ex);
@@ -181,7 +187,7 @@ export default class DibsAccountSelectComponent extends CustomHTMLBaseElement {
 	}
 
 	private static get observedAttributes() {
-		return ['nets-id', 'api-key', 'base-url', 'language', 'invalid', 'error', 'label', 'required'];
+		return ['nets-id', 'api-key', 'base-url', 'language', 'invalid', 'error', 'label', 'required', 'value'];
 	}
 
 	protected attributeChangedCallback(name: string, oldVal: string, newVal: string) {
@@ -216,6 +222,9 @@ export default class DibsAccountSelectComponent extends CustomHTMLBaseElement {
 				break;
 			case 'required':
 				this.accountsSelectRequiredAttribute = newVal;
+				break;
+			case 'value':
+				this.value = newVal;
 				break;
 		}
 	}
