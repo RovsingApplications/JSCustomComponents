@@ -8,11 +8,17 @@
 </head>
 
 <body>
-	<esignatur-dibs-checkout-wrapper payment-id="004e00005f4d1ff2b2148d1a8c8ac344"
+	<esignatur-dibs-checkout-wrapper payment-id="015900005f5f99e3a900e91e44e08437"
 		checkout-key="test-checkout-key-34873ac232244acbac9ac7b1c4b17645" language="en-GB" test>
 	</esignatur-dibs-checkout-wrapper>
 
 	<script src="./index.js"></script>
+	<script>
+		const component = document.getElementsByTagName('esignatur-dibs-checkout-wrapper')[0];
+		component.addEventListener('checkoutcomplete', () => {
+			console.log('checkoutcomplete');
+		});
+	</script>
 </body>
 
 </html>

@@ -15,6 +15,8 @@ export default class DibsCheckoutWrapper extends CustomHTMLBaseElement {
 	checkoutKey: string;
 	language: string = 'da-DK';
 	test: boolean = false;
+	private checkoutComplete = new Event('checkoutcomplete');
+
 
 	constructor() {
 		super();
@@ -52,10 +54,7 @@ export default class DibsCheckoutWrapper extends CustomHTMLBaseElement {
 		var checkout = new Dibs.Checkout(checkoutOptions);
 
 		checkout.on('payment-completed', (response) => {
-			console.log('payment-completed');
-			console.log(response);
-			// emit event that payment is complete
-			// display a user friendly message
+			this.dispatchEvent(this.checkoutComplete);
 		});
 	}
 
