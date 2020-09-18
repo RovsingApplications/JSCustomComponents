@@ -19,4 +19,11 @@ export default class PaymentService {
 		).send();
 	}
 
+	downloadReceipt(paymentId: string) {
+		return new MakeRequest(
+			`${Globals.baseUrl}api/Payment/receipt/${paymentId}`,
+			'get', this.authHeaders
+		).send();
+	}
+
 }

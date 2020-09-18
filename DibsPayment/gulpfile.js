@@ -98,7 +98,7 @@
 				fallback: './index.html',
 				livereload: true,
 				open: true,
-				port: 8083
+				port: 8085
 			}));
 	});
 
