@@ -9,6 +9,7 @@ import DomUtility from '../../framework/Utilities/DomUtility';
 	template: `
 		<div class="wrapper">
 			<input type="text" id="text-input">
+			<div id="description"></div>
 		</div>`,
 	style: `
 		:host {
@@ -17,7 +18,9 @@ import DomUtility from '../../framework/Utilities/DomUtility';
 		.wrapper {
 			position: relative;
 			display:flex;
+			flex-direction: column;
 			justify-content: center;
+			align-items: center;
 		}
 		#text-input {
 			box-sizing: border-box;
@@ -26,6 +29,11 @@ import DomUtility from '../../framework/Utilities/DomUtility';
 			background-color: #f1f4ff;
 			margin: 2px;
 			resize: none;
+		}
+		.wrapper #description {
+			width: 100%;
+			padding: 0 2px;
+			box-sizing: border-box;
 		}
 		.options-list {
 			position: absolute;
@@ -63,6 +71,7 @@ import DomUtility from '../../framework/Utilities/DomUtility';
 export class TypeAheadElement extends CustomInputElement {
 
 	private textInputElement: HTMLInputElement;
+	private descriptionElement: HTMLElement;
 	private componentWrapper: HTMLElement;
 	private currentFoucsedIndex = -1;
 
@@ -91,10 +100,12 @@ export class TypeAheadElement extends CustomInputElement {
 		}
 		const option = this.optionsWithDescriptions.find(option => option.value === value);
 		if (!option) {
+			this.descriptionElement.innerHTML = null;
 			return;
 		}
 		this.selectedOption = option;
 		this.textInputElement.value = option.title;
+		this.descriptionElement.innerHTML = option.description;
 	}
 
 	get valid(): boolean {
@@ -110,6 +121,7 @@ export class TypeAheadElement extends CustomInputElement {
 
 	initChildInputs() {
 		this.textInputElement = super.getChildInput('#text-input');
+		this.descriptionElement = super.getChildInput('#description');
 		this.componentWrapper = super.getChildElement('.wrapper');
 		if (this.required) {
 			this.textInputElement.setAttribute('required', '');
@@ -123,6 +135,7 @@ export class TypeAheadElement extends CustomInputElement {
 
 	private inputEventHandler() {
 		this.selectedOption = null;
+		this.descriptionElement.innerHTML = null;
 		this.closeOptionsList();
 		this.searchResultOptions = [];
 		const searchValue = this.textInputElement.value;
