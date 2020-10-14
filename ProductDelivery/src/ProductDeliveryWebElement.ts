@@ -26,7 +26,7 @@ import Translator from "./Framework/Language/Translator";
 		</select>
 		<label id="path">Path</label>
 		<custom-input-element name="path"></custom-input-element>
-		<button id="save" type="submit">Save</button>
+		<button class="button">Save</button>
 	</div>	
 	<div class="container container--right"> <!-- move this to a independent web component -->
 		<label id="status">Delivery result</label> 
@@ -35,7 +35,7 @@ import Translator from "./Framework/Language/Translator";
 				Here shows current status of FTP Connection.
 			</p>
 		</div>
-		<button type="submit">Try</button> 
+		<button class="button">Try</button> 
 	</div>
 	<table class="content-table"> <!-- move this to a independent web component -->
 		<tbody>
@@ -83,6 +83,20 @@ label {
 	padding-top: 5px;
  	padding-bottom: 5px;
 }
+
+/* button */
+.button {
+	background:#808080;
+	border: none;
+	color: white;
+	padding: 10px 27px;
+	text-align: center;
+	float: right;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+  }
 
 /* select */
 .select{
