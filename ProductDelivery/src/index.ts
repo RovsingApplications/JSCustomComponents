@@ -5,7 +5,7 @@ import polyfills from './Framework/Polyfills/polyfills';
 polyfills();
 
 import CustomInputElement from './Elements/Input/CustomInputElement';
-import DropDownListElement from './Elements/DropDownList/DropDownListElement';
+import {DropDownListElement} from '../../custom-input-elements/src/elements/DropDownList/DropDownListElement';
 import ProductDeliveryWebElement from './ProductDeliveryWebElement';
 
 
