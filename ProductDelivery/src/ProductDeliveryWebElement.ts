@@ -14,38 +14,16 @@ import Translator from "./Framework/Language/Translator";
 		<label id="port">Port</label>
 		<custom-input-element name="port"></custom-input-element>
 		<label id="type">Type</label>
-		<drop-down-element>
-			<script type="application/json">
-			{
-				"label": "Select FTP Type",
-				"name": "FTP Type",
-				"type": "type-ahead-element",
-				"required": true,
-				"options": 
-				[
-					"FTP",
-					"FTPS"
-				]
-			}
-			</script>
-		</drop-down-element>
+		<select class="select">
+			<option>FTP</option>
+			<option>FTPS</option>
+		</select>
 		<label id="fileName">File Name (template)</label>
-		<drop-down-element>
-			<script type="application/json">
-			{
-				"label": "Select File Name",
-				"name": "file name",
-				"type": "type-ahead-element",
-				"required": true,
-				"options": 
-				[
-					"/Template1",
-					"/Template2",
-					"/Template3"
-				]
-			}
-			</script>
-		</drop-down-element>
+		<select class="select">
+			<option>Template 1</option>
+			<option>Template 2</option>
+			<option>Template 3</option>
+		</select>
 		<label id="path">Path</label>
 		<custom-input-element name="path"></custom-input-element>
 		<button id="save" type="submit">Save</button>
@@ -106,9 +84,17 @@ label {
  	padding-bottom: 5px;
 }
 
+/* select */
+.select{
+	width: 100% !important;
+	height: 40px;
+	border-radius: 4px;
+	border-color: 1px solid #DFDFDF;
+}
+
 /* inputs boxes */
 input, select, textarea, *-element {
-	height: 60px;
+	height: 40px;
 	border-radius: 4px;
 	box-sizing: border-box;
 	border: 1px solid #DFDFDF;
