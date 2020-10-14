@@ -99,20 +99,26 @@ h1 {
 	line-height: 30px;
 }
 
+/* label text */
+label {
+	display: block;
+	padding-top: 5px;
+ 	padding-bottom: 5px;
+}
+
 /* inputs boxes */
 input, select, textarea, *-element {
-	height: 40px;
-	width: 100%;
+	height: 60px;
 	border-radius: 4px;
 	box-sizing: border-box;
 	border: 1px solid #DFDFDF;
 	background: #fff;
+	padding-bottom: 5px;
 }
 .wrapper {
 	width: 100%;
 }
 
-/* inputs boxes */
 .container {
 	width: calc(50% - 51px);
 	position: relative;
