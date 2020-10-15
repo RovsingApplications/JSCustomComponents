@@ -65,19 +65,10 @@
             color: #003E64;
         }
 
-        /* select */
-        .select {
-            width: 100% !important;
-            height: 40px;
-            border-radius: 4px;
-            border-color: 1px solid #DFDFDF;
-        }
-
         /* inputs boxes */
         input,
         select,
-        textarea,
-        *-element {
+        textarea {
             width: 100%;
             height: 40px;
             border-radius: 4px;
@@ -85,6 +76,7 @@
             border: 1px solid #DFDFDF;
             background: #fff;
             padding-bottom: 5px;
+            border-color: 1px solid #DFDFDF;
         }
 
         .wrapper {
@@ -221,9 +213,9 @@
             <div class="container container--left">
                 <!-- move this to a independent web component -->
                 <label id="url">FTP address</label>
-                <input name="url"></input>
+                <input name="url" placeholder="Enter Url"></input>
                 <label id="port">Port</label>
-                <input name="port"></input>
+                <input name="port" placeholder="Enter Port"></input>
                 <label id="type">Type</label>
                 <select class="select">
                     <option>FTP</option>
@@ -236,7 +228,7 @@
                     <option>Template 3</option>
                 </select>
                 <label id="path">Path</label>
-                <input name="path"></input>
+                <input name="path" placeholder="Enter Path"></input>
             </div>
             <div class="container container--right">
                 <!-- move this to a independent web component -->
