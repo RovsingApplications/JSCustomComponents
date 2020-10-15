@@ -46,16 +46,23 @@
 
         /* button */
         .button {
-            background: #808080;
-            border: none;
-            color: white;
-            padding: 10px 27px;
+            background: #003E64;
+            border: 2px solid #003E64;
+            border-radius: 4px;
+            color: #fff;
             text-align: center;
             float: right;
             display: inline-block;
             font-size: 16px;
-            margin: 4px 2px;
+            margin: auto;
             cursor: pointer;
+            width: 153px;
+            height: 40px;
+            margin: 10px 0 10px 10px;
+        }
+        .button--inverted {
+            background: #fff;
+            color: #003E64;
         }
 
         /* select */
@@ -71,6 +78,7 @@
         select,
         textarea,
         *-element {
+            width: 100%;
             height: 40px;
             border-radius: 4px;
             box-sizing: border-box;
@@ -83,6 +91,17 @@
             width: 100%;
         }
 
+        .top {
+            position: relative;
+            float: left;
+            width: 100%;
+        }
+        .bottom {
+            clear: both;
+            position: relative;
+            float: left;
+            width: 100%;
+        }
         .container {
             width: calc(50% - 51px);
             position: relative;
@@ -208,6 +227,23 @@
         table tr:hover {
             background-color: #ddd;
         }
+        .buttons-wrapper {
+            width: 100%;
+            position: relative;
+            float: left;
+            clear: both;
+        }
+        .result-box {
+            position: relative;
+            width: 100%;
+            height: 344.1px;
+
+            background: #FFFFFF;
+            border: 1px solid #DFDFDF;
+            box-sizing: border-box;
+            border-radius: 4px;
+            padding: 10px;
+        }
     </style>
 </head>
 
@@ -225,54 +261,61 @@
                 </label>
             </div>
         </div>
-        <div class="container container--left">
-            <!-- move this to a independent web component -->
-            <label id="url">FTP address</label>
-            <custom-input-element name="url"></custom-input-element>
-            <label id="port">Port</label>
-            <custom-input-element name="port"></custom-input-element>
-            <label id="type">Type</label>
-            <select class="select">
-                <option>FTP</option>
-                <option>FTPS</option>
-            </select>
-            <label id="fileName">File Name (template)</label>
-            <select class="select">
-                <option>Template 1</option>
-                <option>Template 2</option>
-                <option>Template 3</option>
-            </select>
-            <label id="path">Path</label>
-            <custom-input-element name="path"></custom-input-element>
-            <button class="button">Save</button>
-        </div>
-        <div class="container container--right">
-            <!-- move this to a independent web component -->
-
-            <div>
-                <p>
-                    Here shows current status of FTP Connection.
-                </p>
+        <div class="top">
+            <div class="container container--left">
+                <!-- move this to a independent web component -->
+                <label id="url">FTP address</label>
+                <input name="url"></input>
+                <label id="port">Port</label>
+                <input name="port"></input>
+                <label id="type">Type</label>
+                <select class="select">
+                    <option>FTP</option>
+                    <option>FTPS</option>
+                </select>
+                <label id="fileName">File Name (template)</label>
+                <input class="select">
+                    <option>Template 1</option>
+                    <option>Template 2</option>
+                    <option>Template 3</option>
+                </select>
+                <label id="path">Path</label>
+                <input name="path"></input>
             </div>
-            <button class="button">Try</button>
+            <div class="container container--right">
+                <!-- move this to a independent web component -->
+                <h3>Delivery result</h3>
+                <div class="result-box">
+                    <p>
+                        Here shows current status of FTP Connection.
+                    </p>
+                </div>
+            </div>
+
+            <div class="buttons-wrapper">
+                <button class="button">Save</button>
+                <button class="button button--inverted">Try</button>
+            </div>
         </div>
-        <h3>Deliveries</h3>
-        <table>
-            <!-- move this to a independent web component -->
-            <tbody>
-                <tr class="active-row">
-                    <td>localhost:8080</td>
-                    <td>80</td>
-                    <td>FTPS</td>
-                    <td>Sucess</td>
-                </tr>
-                <tr class="active-row">
-                    <td>localhost:8080</td>
-                    <td>21</td>
-                    <td>FTP</td>
-                    <td>Fail</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="bottom">
+            <h3>Deliveries</h3>
+            <table>
+                <!-- move this to a independent web component -->
+                <tbody>
+                    <tr class="active-row">
+                        <td>localhost:8080</td>
+                        <td>80</td>
+                        <td>FTPS</td>
+                        <td>Sucess</td>
+                    </tr>
+                    <tr class="active-row">
+                        <td>localhost:8080</td>
+                        <td>21</td>
+                        <td>FTP</td>
+                        <td>Fail</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
