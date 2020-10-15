@@ -123,86 +123,49 @@
             float: right;
         }
 
-        /* onoffswitch */
         .onoffswitch {
-            position: relative;
-            width: 55px;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
+            float: right;
+        }
+        .onoffswitch input[type=checkbox]{
+            height: 0;
+            width: 0;
+            visibility: hidden;
         }
 
-        .onoffswitch-checkbox {
-            position: absolute;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .onoffswitch-label {
-            display: block;
-            overflow: hidden;
+        .onoffswitch label {
             cursor: pointer;
-            border: 2px solid #999999;
-            border-radius: 9px;
-        }
-
-        .onoffswitch-inner {
+            text-indent: -9999px;
+            width: 50px;
+            height: 20px;
+            background: grey;
             display: block;
-            width: 200%;
-            margin-left: -100%;
-            transition: margin 0.3s ease-in 0s;
+            border-radius: 100px;
+            position: relative;
         }
 
-        .onoffswitch-inner:before,
-        .onoffswitch-inner:after {
-            display: block;
-            float: left;
-            width: 50%;
-            height: 18px;
-            padding: 0;
-            line-height: 18px;
-            font-size: 11px;
-            color: white;
-            font-family: Trebuchet, Arial, sans-serif;
-            font-weight: bold;
-            box-sizing: border-box;
-        }
-
-        .onoffswitch-inner:before {
-            content: "ON";
-            padding-left: 5px;
-            background-color: #FFFFFF;
-            color: #94C5D6;
-        }
-
-        .onoffswitch-inner:after {
-            content: "OFF";
-            padding-right: 5px;
-            background-color: #EEEEEE;
-            color: #999999;
-            text-align: right;
-        }
-
-        .onoffswitch-switch {
-            display: block;
-            width: 17px;
-            margin: 0.5px;
-            background: #FFFFFF;
+        .onoffswitch label:after {
+            content: '';
             position: absolute;
-            top: 0;
-            bottom: 0;
-            right: 33px;
-            border: 2px solid #999999;
-            border-radius: 9px;
-            transition: all 0.3s ease-in 0s;
+            top: 5px;
+            left: 5px;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 90px;
+            transition: 0.3s;
         }
 
-        .onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-inner {
-            margin-left: 0;
+        .onoffswitch input:checked + label {
+            background: #003E64;
         }
 
-        .onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-switch {
-            right: 0px;
+        .onoffswitch input:checked + label:after {
+            left: calc(100% - 5px);
+            transform: translateX(-100%);
+        }
+
+        .onoffswitch label:active:after {
+            width: 60px;
         }
 
         /*table*/
@@ -250,15 +213,8 @@
 <body>
     <div class="wrapper">
         <h2>Product Delivery Setup</h2>
-        <div class="horizontal">
-            <label id="port">Produuct Delivery :</label>
             <div class="onoffswitch">
-                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="customSwitch" tabindex="0"
-                    checked>
-                <label class="onoffswitch-label" for="customSwitch">
-                    <span class="onoffswitch-inner"></span>
-                    <span class="onoffswitch-switch"></span>
-                </label>
+                <input type="checkbox" id="switch" /><label for="switch">Toggle</label>
             </div>
         </div>
         <div class="top">
