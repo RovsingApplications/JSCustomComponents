@@ -112,7 +112,6 @@
         .horizontal {
             display: inline-block;
             text-align:right;
-            float: right;
         }
 
         .onoffswitch {
@@ -129,7 +128,7 @@
             text-indent: -9999px;
             width: 50px;
             height: 20px;
-            background: grey;
+            background:  #fff;
             display: block;
             border-radius: 100px;
             position: relative;
@@ -142,13 +141,13 @@
             left: 5px;
             width: 20px;
             height: 20px;
-            background: #fff;
+            background: #84cce9;
             border-radius: 90px;
             transition: 0.3s;
         }
 
         .onoffswitch input:checked + label {
-            background: #003E64;
+            background:  #fff;
         }
 
         .onoffswitch input:checked + label:after {
@@ -167,7 +166,6 @@
             font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
             border-collapse: collapse;
             margin: 4px 2px;
-
         }
 
         table td {
@@ -251,7 +249,6 @@
         </div>
         <div class="bottom">
             <h3>Deliveries</h3>
-            <button class="button" style="float: right;">Run all failed</button>
             <table>
                 <!-- move this to a independent web component -->
                 <tbody>
@@ -269,6 +266,7 @@
                     </tr>
                 </tbody>
             </table>
+            <button class="button" style="float: right;">Run all failed</button>
         </div>
     </div>
 </body>
