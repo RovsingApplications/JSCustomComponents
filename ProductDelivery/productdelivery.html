@@ -4,6 +4,7 @@
 <head>
     <title>Product delivery</title>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <style>
         /* latin */
         @font-face {
@@ -13,6 +14,25 @@
             font-display: swap;
             src: url(https://fonts.gstatic.com/s/mulish/v1/1Ptvg83HX_SGhgqk3wot.woff2) format('woff2');
             unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        .color-primary
+        {
+            color: #003E64;
+        }
+        
+        .color-secondary
+        {
+            color: #28BECE;
+        }
+
+        .color-error
+        {
+            color: #CE2828;
+        }
+
+        .color-success
+        {
+            color: #28BECE;
         }
 
         * {
@@ -30,7 +50,11 @@
         span {
             width: 100%;
         }
-
+        h3, label {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 17px;
+        }
         h1 {
             font-weight: 800;
             font-size: 24px;
@@ -75,8 +99,12 @@
             box-sizing: border-box;
             border: 1px solid #DFDFDF;
             background: #fff;
-            padding-bottom: 5px;
-            border-color: 1px solid #DFDFDF;
+            padding-left: 10px;
+        }
+        input:read-only {
+            line-height: 20px;
+            height: 20px;
+            margin-top: 10px;
         }
 
         .wrapper {
@@ -116,54 +144,58 @@
 
        /* switch button*/
        .switch {
-        position: relative;
-        display: inline-block;
-        width: 60px;
-        height: 18px;
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 24px;
         }
 
         .switch input {display:none;}
 
         .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: lightgray;
-        -webkit-transition: .4s;
-        transition: .4s;
-        border-radius: 34px;
-        border: 2px solid rgb(104, 161, 199);
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 34px;
+            height: 24px;
+            border: 2px solid #E5E5E5;
         }
 
         .slider:before {
         position: absolute;
         content: "";
-        height: 23px;
-        width: 22px;
+        height: 20px;
+        width: 20px;
         left:1px;
-        background-color:rgb(54, 178, 228);
+        top: 2px;
+        background-color:#DFDFDF;
         -webkit-transition: .4s;
         transition: .4s;
         border-radius: 50%;
         }
 
         input:checked + .slider {
-        background-color: #FFFFFF;
+            border-color: #28BECE;
         }
 
         input:focus + .slider {
-        box-shadow: 0 0 1px #2196F3;
+        box-shadow: 0 0 1px #DFDFDF;
         }
 
         input:checked + .slider:before {
         -webkit-transform: translateX(26px);
         -ms-transform: translateX(26px);
         transform: translateX(32px);
+            background-color: #28BECE;
         }
-
+        .actions i {
+            margin-left: 5px;
+        }
         .slider:after
         {
         color: white;
@@ -178,16 +210,23 @@
 /*--------
         /*table*/
         table {
-            width: 100%;
-            clear: both;
-            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
             border-collapse: collapse;
-            margin: 4px 2px;
+            width: 100%;
+            border: 1px solid #DFDFDF;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            border-radius: 4px;
         }
 
         table td {
-            border: 1px solid #ddd;
-            padding: 8px;
+            border: none;
+            font-size: 12px;
+            line-height: 30px;
+            padding-left: 20px;
+        }
+
+        .rotate-45 {
+            transform: rotate(45deg);
         }
 
         table tr:nth-child(even) {
@@ -207,7 +246,6 @@
             position: relative;
             width: 100%;
             height: 344.1px;
-
             background: #FFFFFF;
             border: 1px solid #DFDFDF;
             box-sizing: border-box;
@@ -239,13 +277,10 @@
                     <option>FTPS</option>
                 </select>
                 <label id="fileName">File Name (template)</label>
-                <input class="select">
-                    <option>Template 1</option>
-                    <option>Template 2</option>
-                    <option>Template 3</option>
-                </select>
+                <input name="fileName" placeholder="Enter file name">
                 <label id="path">Path</label>
                 <input name="path" placeholder="Enter Path"></input>
+                <input name="pathResult" readonly placeholder="/..."></input>
             </div>
             <div class="container container--right">
                 <!-- move this to a independent web component -->
@@ -264,22 +299,33 @@
         </div>
         <div class="bottom">
             <h3>Deliveries</h3>
-            <table>
+            <table class="rounded">
                 <!-- move this to a independent web component -->
                 <tbody>
                     <tr class="active-row">
-                        <td>localhost:8080</td>
-                        <td>80</td>
-                        <td>FTPS</td>
+                        <td>
+                            <i class="fas fa-unlink rotate-45 color-error"></i>
+                        </td>
+                        <td>ftps://localhost:8080</td>
                         <td>System/Library/Path</td>
-                        <td>Sucess</td>
+                        <td>Failed</td>
+                        <td class="actions">
+                            <i class="fas fa-play color-primary"></i>
+                            <i class="fas fa-info-circle color-primary"></i>
+                        </td>
                     </tr>
                     <tr class="active-row">
-                        <td>localhost:8080</td>
-                        <td>21</td>
-                        <td>FTP</td>
+                        <td>
+                            <i class="fas fa-link rotate-45 color-secondary"></i>
+                        </td>
+                        <td>ftps://localhost:8080</td>
                         <td>System/Library/Path</td>
-                        <td>Fail</td>
+                        <td>Sucess</td>
+                        <td class="actions">
+                            <i class="fas fa-play color-primary"></i>
+                            <i class="fas fa-info-circle color-primary"></i>
+                        </td>
+
                     </tr>
                 </tbody>
             </table>
