@@ -114,51 +114,68 @@
             text-align:right;
         }
 
-        .onoffswitch {
-            float: right;
-        }
-        .onoffswitch input[type=checkbox]{
-            height: 0;
-            width: 0;
-            visibility: hidden;
-        }
-
-        .onoffswitch label {
-            cursor: pointer;
-            text-indent: -9999px;
-            width: 50px;
-            height: 20px;
-            background:  #fff;
-            display: block;
-            border-radius: 100px;
-            position: relative;
+       /* switch button*/
+       .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 18px;
         }
 
-        .onoffswitch label:after {
-            content: '';
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            width: 20px;
-            height: 20px;
-            background: #84cce9;
-            border-radius: 90px;
-            transition: 0.3s;
+        .switch input {display:none;}
+
+        .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: lightgray;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 34px;
+        border: 2px solid rgb(104, 161, 199);
         }
 
-        .onoffswitch input:checked + label {
-            background:  #fff;
+        .slider:before {
+        position: absolute;
+        content: "";
+        height: 23px;
+        width: 22px;
+        left:1px;
+        background-color:rgb(54, 178, 228);
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 50%;
         }
 
-        .onoffswitch input:checked + label:after {
-            left: calc(100% - 5px);
-            transform: translateX(-100%);
+        input:checked + .slider {
+        background-color: #FFFFFF;
         }
 
-        .onoffswitch label:active:after {
-            width: 60px;
+        input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
         }
 
+        input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(32px);
+        }
+
+        .slider:after
+        {
+        color: white;
+        display: block;
+        position: absolute;
+        transform: translate(-50%,-50%);
+        top: 50%;
+        left: 50%;
+        font-size: 10px;
+        font-family: Verdana, sans-serif;
+        }
+/*--------
         /*table*/
         table {
             width: 100%;
@@ -204,10 +221,8 @@
     <div class="wrapper">
         <h2>Product Delivery Setup</h2>
         <div style="float: right; display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-around;" >
-                <label style="padding: 22px;" >Product Delivery - Active</label>
-                <div class="onoffswitch">
-                    <input type="checkbox" id="switch" /><label for="switch">Toggle</label>
-                </div>
+                <label>Product Delivery - Active</label>
+                <label class="switch"><input  type="checkbox" id="togBtn"><div class="slider"></div></label>
         </div>
        </div>
         <div class="top">
