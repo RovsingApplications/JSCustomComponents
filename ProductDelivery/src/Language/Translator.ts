@@ -1,6 +1,6 @@
 import DanishDictionary from "./Languages/DanishDictionary";
 import EnglishDictionary from "./Languages/EnglishDictionary";
-import Constants from "../Constants/Constants";
+import Constants from "../../../Framework/Constants/Constants";
 
 export default class Translator {
 	private static langauges = [

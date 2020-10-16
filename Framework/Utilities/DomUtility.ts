@@ -4,14 +4,8 @@ export default class DomUtility {
 		if (!children || children.length === 0) {
 			return;
 		}
-		children.forEach(child => {
+		children.foreach(child => {
 			child.remove();
 		});
 	}
-
-	static fillContent(parent: Element, child: Element) {
-		DomUtility.removeAllChildren(parent);
-		parent.appendChild(child);
-	}
-
 }

@@ -1,22 +1,63 @@
-import Colors from "../../Framework/Constants/Colors";
-import CustomElement from "../../Framework/custom-element.decorator";
+import Colors from "../../../Framework/Constants/Colors";
+import CustomElement from "../../../Framework/custom-element.decorator";
+import IDeliveryProfile from "../../models/IDeliveryProfile";
 import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 
 @CustomElement({
-	selector: 'custom-input-element',
+	selector: 'delivery-profile-form',
 	template: `
-		<input class="custom-input">
+<div class="wrapper">
+	<!-- move this to a independent web component -->
+	<label id="url">FTP address</label>
+	<input name="url" placeholder="Enter Url"></input>
+	<label id="port">Port</label>
+	<input name="port" placeholder="Enter Port"></input>
+	<label id="type">Type</label>
+	<select class="select">
+		<option value="" disabled selected>Select Type</option>
+		<option>FTP</option>
+		<option>FTPS</option>
+	</select>
+	<label id="fileName">File Name (template)</label>
+	<input name="fileName" placeholder="Enter file name">
+	<label id="path">Path</label>
+	<input name="path" placeholder="Enter Path"></input>
+	<input name="pathResult" readonly placeholder="/..."></input>
+</div>
 	`,
 	style: `
-		.custom-input {
-			width: 100%;
-			height: 30px;
-			border-color: ${Colors.primary};
-		}
+
+	* {
+		font-family: "Mulish", sans-serif;
+		color: #000;
+	}
+	.pad-10 {
+		padding: 10px;
+	}
+	
+	.color-primary
+	{
+		color: #003E64;
+	}
+	
+	.color-secondary
+	{
+		color: #28BECE;
+	}
+
+	.color-error
+	{
+		color: #CE2828;
+	}
+
+	.color-success
+	{
+		color: #28BECE;
+	}
 	`,
 	useShadow: false,
 })
-export default class CustomInputElement extends CustomHTMLBaseElement {
+export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElement {
 
 	private nativeInput: HTMLInputElement;
 	private change = new Event('change');
@@ -37,6 +78,13 @@ export default class CustomInputElement extends CustomHTMLBaseElement {
 			return;
 		}
 		this.nativeInput.value = val;
+	}
+
+	public getProfile(): IDeliveryProfile
+	{
+		var profile = {} as IDeliveryProfile;
+		
+		return profile;
 	}
 
 	componentDidMount() {

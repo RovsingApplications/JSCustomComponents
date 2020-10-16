@@ -1,9 +1,9 @@
 import getAttributeNamesPolyfill from './getAttributeNamesPolyfill';
 import childNodeRemovePolyfill from './childNodeRemovePolyfill';
-import arrayFindPolyfill from './arrayFindPolyfill';
+import stringStartsWithPolyfill from './stringStartsWithPolyfill';
 
 export default function polyfills() {
 	getAttributeNamesPolyfill();
 	childNodeRemovePolyfill();
-	arrayFindPolyfill();
+	stringStartsWithPolyfill();
 }

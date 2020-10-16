@@ -20,13 +20,14 @@ const CustomElement = (config: elementConfig) => {
 		if (!config.template) {
 			throw new Error('You need to pass a template for the element');
 		}
-		templateElement.innerHTML = `<style>${config.style}</style> ${config.template
+		templateElement.innerHTML = `<style>${config.style}</style> ${
+			config.template
 			}`;
 		const connectedCallback = cls.prototype.connectedCallback || function () { };
 		const disconnectedCallback = cls.prototype.disconnectedCallback || function () { };
 		cls.prototype.connectedCallback = function () {
 			let clone = document.importNode(templateElement.content, true);
-			if (config.useShadow && !this.shadowRoot) {
+			if (config.useShadow) {
 				this.attachShadow({ mode: 'open' }).appendChild(clone);
 			} else {
 				this.appendChild(clone);
