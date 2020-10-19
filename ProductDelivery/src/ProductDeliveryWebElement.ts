@@ -305,6 +305,8 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 	private customDeliveryProfileFormElement: CustomDeliveryProfileFormElement;
 	private customDeliveryResultElement: CustomDeliveryResultElement;
 	private apiKey: string;
+	private apiUrl: string;
+	private baseURL:string;
 
 	constructor() {
 		super();
@@ -313,17 +315,18 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 	componentDidMount() {
 		this.apiKey = this.getAttribute("api-key");
 
-		this.saveButton = document.getElementById('save') as HTMLButtonElement;
-		this.tryButton = document.getElementById('try') as HTMLButtonElement;
-		this.customDeliveryEventTableElement = this.querySelector('delivery-event-table') as CustomDeliveryEventTableElement;
-		this.customDeliveryProfileFormElement = this.querySelector('delivery-profile-form') as CustomDeliveryProfileFormElement;
-		this.customDeliveryResultElement = this.querySelector('delivery-result') as CustomDeliveryResultElement;
+		this.saveButton =  this.getChildElement('#save'); 
+		this.tryButton = this.getChildElement('#try');  
+		this.customDeliveryEventTableElement = this.getChildElement('delivery-event-table'); 
+		this.customDeliveryProfileFormElement = this.getChildElement('delivery-profile-form'); 
+		this.customDeliveryResultElement = this.getChildElement('delivery-result'); 
 		
 		this.getAttributeNames().forEach(attributeName => {
 			let attributeValue = this.getAttribute(attributeName);
 			this.attributeChanged(attributeName, null, attributeValue);
 		});
 
+		this.addListeners();
 	}
 
 	addListeners() {
@@ -366,7 +369,14 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 			case 'language':
 				this.changeLanguage(newVal)
 				break;
+				case 'api-key':
+					this.apiKey=newVal;
+					break;
+				case 'api-url':
+					this.apiKey=this.apiUrl;
+					break;
 		}
 	}
+
 
 }

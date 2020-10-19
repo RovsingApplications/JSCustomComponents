@@ -1,4 +1,4 @@
-import { ProductDeliveryWebElement } from '../src/index';
+import { ProductDeliveryWebElement } from './../src/index';
 
 export {
 	ProductDeliveryWebElement

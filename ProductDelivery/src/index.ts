@@ -1,16 +1,16 @@
 import '@webcomponents/webcomponentsjs/webcomponents-bundle';
 import '@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js';
 import '@webcomponents/webcomponentsjs/webcomponents-loader.js';
-import polyfills from './Framework/Polyfills/polyfills';
-polyfills();
 
-import CustomInputElement from './Elements/Input/CustomInputElement';
-import {DropDownListElement} from '../../custom-input-elements/src/elements/DropDownList/DropDownListElement';
+
+import CustomDeliveryEventTableElement from './Elements/CustomDeliveryEventTableElement';
+import CustomDeliveryProfileFormElement from './Elements/CustomDeliveryProfileFormElement';
+import CustomDeliveryResultElement from './Elements/CustomDeliveryResultElement';
 import ProductDeliveryWebElement from './ProductDeliveryWebElement';
 
-
 export {
-	CustomInputElement,
-	ProductDeliveryWebElement,
-	DropDownListElement,
+	CustomDeliveryEventTableElement,
+	CustomDeliveryProfileFormElement,
+	CustomDeliveryResultElement,
+	ProductDeliveryWebElement
 }

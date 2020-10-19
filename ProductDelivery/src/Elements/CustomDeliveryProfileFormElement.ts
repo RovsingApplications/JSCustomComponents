@@ -1,5 +1,6 @@
 import Colors from "../../../Framework/Constants/Colors";
 import CustomElement from "../../../Framework/custom-element.decorator";
+import { FTPType } from "../../models/FTPType";
 import IDeliveryProfile from "../../models/IDeliveryProfile";
 import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 
@@ -82,7 +83,17 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 
 	public getProfile(): IDeliveryProfile
 	{
-		var profile = {} as IDeliveryProfile;
+		var profile = 
+		{
+			customerApiKey:"test",
+			url: "test",
+			port:21,
+			type:FTPType.FTPS,
+			FileTemplate:"test",
+			PathTemplate:"test",
+			Username:"test",
+			Password:"test"
+		} as IDeliveryProfile;
 		
 		return profile;
 	}
