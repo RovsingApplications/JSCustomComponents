@@ -3,6 +3,7 @@ import CustomElement from "../../../Framework/custom-element.decorator";
 import { FTPType } from "../../models/FTPType";
 import IDeliveryProfile from "../../models/IDeliveryProfile";
 import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
+import Globals from '../Globals/Globals'
 
 @CustomElement({
 	selector: 'delivery-profile-form',
@@ -18,6 +19,7 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 		<option value="" disabled selected>Select Type</option>
 		<option>FTP</option>
 		<option>FTPS</option>
+		<option>SFTP</option>
 	</select>
 	<label id="lblFileTemplate">File Name (template)</label>
 	<input id="fileTemplate" placeholder="Enter file name">
@@ -58,6 +60,7 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 	`,
 	useShadow: false,
 })
+
 export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElement {
 
 	private nativeInput: HTMLInputElement;
@@ -85,17 +88,24 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	{
 		var profile = 
 		{
-			customerApiKey:"",
+			customerApiKey:Globals.apiKey,
 			url: (this.getChildElement('#url') as HTMLInputElement).value,
 			port: Number((this.getChildElement('#port') as HTMLInputElement).value),
-			type: FTPType.FTP,
+			type: this.GetSelectedFTPType((this.getChildElement('.select'))) ,
 			FileTemplate:(this.getChildElement('#fileTemplate') as HTMLInputElement).value,
-			PathTemplate:(this.getChildElement('#fileTemplate') as HTMLInputElement).value,
+			PathTemplate:(this.getChildElement('#path') as HTMLInputElement).value,
 			Username:"testUser",
 			Password:"Password"
 		} as IDeliveryProfile;
 		return profile;
 	}
+
+	private GetSelectedFTPType(select) : FTPType 
+	{
+		var selectedValue= select.options[select.selectedIndex].value
+		return (<any>FTPType)[selectedValue];
+	}
+
 
 	componentDidMount() {
 		this.nativeInput = this.getChildElement('.custom-input');

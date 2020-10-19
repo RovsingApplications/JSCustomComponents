@@ -335,7 +335,6 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 
 	submitDeliveryForm()
 	{
-		// add functionality for submitting the form
 		var deliveryProfile = this.customDeliveryProfileFormElement.getProfile();
 		deliveryProfile.customerApiKey = Globals.apiKey;
 		const headerName = Constants.apiKeyHeaderName;
@@ -355,8 +354,20 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 
 	tryDelivery()
 	{
-		// add functionality for for trying your profile
-
+		var deliveryProfile = this.customDeliveryProfileFormElement.getProfile();
+		const headerName = Constants.apiKeyHeaderName;
+		const creatorId= Constants.apiKeyCreatorId;
+		const req = new MakeRequest(
+				`${Globals.apiUrl}api/DeliveryController/test`,
+				'post', {
+				[headerName]: Globals.apiKey,
+				[creatorId]:Globals.creatorId,
+				'Content-Type': 'application/json'
+			}
+			).send(JSON.stringify(deliveryProfile)).then(res => {
+			}).catch(exception => {
+				console.log(exception);
+			});
 	}
 
 	getEventHistory()
@@ -390,9 +401,6 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 					Globals.apiUrl = `${Globals.apiUrl}/`;
 				}
 				break;
-			case 'api-key':
-				Globals.apiKey = newVal;
-				break;	
 			case 'creator-id':
 				Globals.creatorId = newVal
 				break;	
