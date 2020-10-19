@@ -3,7 +3,7 @@ import CustomElement from "../../../Framework/custom-element.decorator";
 import { FTPType } from "../../models/FTPType";
 import IDeliveryProfile from "../../models/IDeliveryProfile";
 import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
-import Globals from '../Globals/Globals'
+import Globals from '../Globals/Globals';
 
 @CustomElement({
 	selector: 'delivery-profile-form',
@@ -21,6 +21,10 @@ import Globals from '../Globals/Globals'
 		<option>FTPS</option>
 		<option>SFTP</option>
 	</select>
+	<label id="lblUsername">Username</label>
+	<input id="username" placeholder="Enter Username">
+	<label id="lblPassword">Password</label>
+	<input id="password" type="password" placeholder="Enter Password"></input>
 	<label id="lblFileTemplate">File Name (template)</label>
 	<input id="fileTemplate" placeholder="Enter file name">
 	<label id="lblpath">Path</label>
@@ -94,8 +98,8 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 			type: this.GetSelectedFTPType((this.getChildElement('.select'))) ,
 			FileTemplate:(this.getChildElement('#fileTemplate') as HTMLInputElement).value,
 			PathTemplate:(this.getChildElement('#path') as HTMLInputElement).value,
-			Username:"testUser",
-			Password:"Password"
+			Username:(this.getChildElement('#username') as HTMLInputElement).value,
+			Password:(this.getChildElement('#password') as HTMLInputElement).value
 		} as IDeliveryProfile;
 		return profile;
 	}
