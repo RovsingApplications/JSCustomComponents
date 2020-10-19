@@ -1,11 +1,13 @@
 import CustomElement from "../../Framework/custom-element.decorator";
 import Colors from "../../Framework/Constants/Colors";
+import Constants from "./Framework/Constants/Constants";
 import CustomHTMLBaseElement from "./CustomHTMLBaseElement";
 import CustomDeliveryEventTableElement from "./Elements/CustomDeliveryEventTableElement";
 import CustomDeliveryProfileFormElement from "./Elements/CustomDeliveryProfileFormElement";
 import CustomDeliveryResultElement from "./Elements/CustomDeliveryResultElement";
 import Translator from "./Language/Translator";
 import Globals from './Globals/Globals'
+import MakeRequest from "../../Branding/src/Framework/Utilities/MakeRequest";
 
 @CustomElement({
 	selector: 'product-delivery',
@@ -305,17 +307,13 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 	private customDeliveryEventTableElement: CustomDeliveryEventTableElement;
 	private customDeliveryProfileFormElement: CustomDeliveryProfileFormElement;
 	private customDeliveryResultElement: CustomDeliveryResultElement;
-	private apiKey: string;
-	private apiUrl: string;
-	private baseURL:string;
+
 
 	constructor() {
 		super();
 	}
 
 	componentDidMount() {
-		this.apiKey = this.getAttribute("api-key");
-
 		this.saveButton =  this.getChildElement('#save'); 
 		this.tryButton = this.getChildElement('#try');  
 		this.customDeliveryEventTableElement = this.getChildElement('delivery-event-table'); 
@@ -339,8 +337,20 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 	{
 		// add functionality for submitting the form
 		var deliveryProfile = this.customDeliveryProfileFormElement.getProfile();
-		deliveryProfile.customerApiKey = this.apiKey;
-
+		deliveryProfile.customerApiKey = Globals.apiKey;
+		const headerName = Constants.apiKeyHeaderName;
+		const creatorId= Constants.apiKeyCreatorId;
+		const req = new MakeRequest(
+				`${Globals.apiUrl}api/ProfileController/Upsert`,
+				'post', {
+				[headerName]: Globals.apiKey,
+				[creatorId]:Globals.creatorId,
+				'Content-Type': 'application/json'
+			}
+			).send(JSON.stringify(deliveryProfile)).then(res => {
+			}).catch(exception => {
+				console.log(exception);
+			});
 	}
 
 	tryDelivery()
@@ -352,7 +362,6 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 	getEventHistory()
 	{
 		// add functionality for for trying your profile
-
 	}
 
 	private changeLanguage(language: string) {
@@ -385,6 +394,7 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 				Globals.apiKey = newVal;
 				break;	
 			case 'creator-id':
+				Globals.creatorId = newVal
 				break;	
 		}
 	}
