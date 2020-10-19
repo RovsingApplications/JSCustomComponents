@@ -5,6 +5,7 @@ import CustomDeliveryEventTableElement from "./Elements/CustomDeliveryEventTable
 import CustomDeliveryProfileFormElement from "./Elements/CustomDeliveryProfileFormElement";
 import CustomDeliveryResultElement from "./Elements/CustomDeliveryResultElement";
 import Translator from "./Language/Translator";
+import Globals from './Globals/Globals'
 
 @CustomElement({
 	selector: 'product-delivery',
@@ -338,6 +339,8 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 	{
 		// add functionality for submitting the form
 		var deliveryProfile = this.customDeliveryProfileFormElement.getProfile();
+		deliveryProfile.customerApiKey = this.apiKey;
+
 	}
 
 	tryDelivery()
@@ -369,12 +372,20 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 			case 'language':
 				this.changeLanguage(newVal)
 				break;
-				case 'api-key':
-					this.apiKey=newVal;
-					break;
-				case 'api-url':
-					this.apiKey=this.apiUrl;
-					break;
+			case 'api-key':
+				Globals.apiKey = newVal;
+				break;
+			case 'api-url':
+				Globals.apiUrl = newVal;
+				if (Globals.apiUrl[Globals.apiUrl.length - 1] !== '/') {
+					Globals.apiUrl = `${Globals.apiUrl}/`;
+				}
+				break;
+			case 'api-key':
+				Globals.apiKey = newVal;
+				break;	
+			case 'creator-id':
+				break;	
 		}
 	}
 

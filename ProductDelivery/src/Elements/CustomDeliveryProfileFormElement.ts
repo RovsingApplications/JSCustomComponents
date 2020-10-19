@@ -9,20 +9,20 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 	template: `
 <div class="wrapper">
 	<!-- move this to a independent web component -->
-	<label id="url">FTP address</label>
-	<input name="url" placeholder="Enter Url"></input>
-	<label id="port">Port</label>
-	<input name="port" placeholder="Enter Port"></input>
-	<label id="type">Type</label>
+	<label id="lblurl">FTP address</label>
+	<input id="url" placeholder="Enter Url"></input>
+	<label id="lblport">Port</label>
+	<input id="port" placeholder="Enter Port"></input>
+	<label id="lbltype">Type</label>
 	<select class="select">
 		<option value="" disabled selected>Select Type</option>
 		<option>FTP</option>
 		<option>FTPS</option>
 	</select>
-	<label id="fileName">File Name (template)</label>
-	<input name="fileName" placeholder="Enter file name">
-	<label id="path">Path</label>
-	<input name="path" placeholder="Enter Path"></input>
+	<label id="lblFileTemplate">File Name (template)</label>
+	<input id="fileTemplate" placeholder="Enter file name">
+	<label id="lblpath">Path</label>
+	<input id="path" placeholder="Enter Path"></input>
 	<input name="pathResult" readonly placeholder="/..."></input>
 </div>
 	`,
@@ -85,16 +85,15 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	{
 		var profile = 
 		{
-			customerApiKey:"test",
-			url: "test",
-			port:21,
-			type:FTPType.FTPS,
-			FileTemplate:"test",
-			PathTemplate:"test",
-			Username:"test",
-			Password:"test"
+			customerApiKey:"",
+			url: (this.getChildElement('#url') as HTMLInputElement).value,
+			port: Number((this.getChildElement('#port') as HTMLInputElement).value),
+			type: FTPType.FTP,
+			FileTemplate:(this.getChildElement('#fileTemplate') as HTMLInputElement).value,
+			PathTemplate:(this.getChildElement('#fileTemplate') as HTMLInputElement).value,
+			Username:"testUser",
+			Password:"Password"
 		} as IDeliveryProfile;
-		
 		return profile;
 	}
 
