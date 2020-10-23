@@ -92,14 +92,15 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	{
 		var profile = 
 		{
-			customerApiKey:Globals.apiKey,
-			url: (this.getChildElement('#url') as HTMLInputElement).value,
+			url:(this.getChildElement('#url') as HTMLInputElement).value,
 			port: Number((this.getChildElement('#port') as HTMLInputElement).value),
-			type: this.GetSelectedFTPType((this.getChildElement('.select'))) ,
-			FileTemplate:(this.getChildElement('#fileTemplate') as HTMLInputElement).value,
-			PathTemplate:(this.getChildElement('#path') as HTMLInputElement).value,
-			Username:(this.getChildElement('#username') as HTMLInputElement).value,
-			Password:(this.getChildElement('#password') as HTMLInputElement).value
+			connectionMode:"Implicit",
+			protocol: this.GetSelectedFTPType((this.getChildElement('.select'))),
+			fileTemplate: (this.getChildElement('#fileTemplate') as HTMLInputElement).value,
+			folderTemplate : (this.getChildElement('#path') as HTMLInputElement).value,
+			userName : (this.getChildElement('#username') as HTMLInputElement).value,
+			Password : (this.getChildElement('#password') as HTMLInputElement).value
+
 		} as IDeliveryProfile;
 		return profile;
 	}

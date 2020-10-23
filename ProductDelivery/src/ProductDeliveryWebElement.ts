@@ -336,14 +336,11 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 	submitDeliveryForm()
 	{
 		var deliveryProfile = this.customDeliveryProfileFormElement.getProfile();
-		deliveryProfile.customerApiKey = Globals.apiKey;
 		const headerName = Constants.apiKeyHeaderName;
-		const creatorId= Constants.apiKeyCreatorId;
 		const req = new MakeRequest(
-				`${Globals.apiUrl}api/ProfileController/Upsert`,
+				`${Globals.apiUrl}Profile/upsert`,
 				'post', {
 				[headerName]: Globals.apiKey,
-				[creatorId]:Globals.creatorId,
 				'Content-Type': 'application/json'
 			}
 			).send(JSON.stringify(deliveryProfile)).then(res => {
@@ -356,12 +353,10 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 	{
 		var deliveryProfile = this.customDeliveryProfileFormElement.getProfile();
 		const headerName = Constants.apiKeyHeaderName;
-		const creatorId= Constants.apiKeyCreatorId;
 		const req = new MakeRequest(
-				`${Globals.apiUrl}api/DeliveryController/test`,
+				`${Globals.apiUrl}Delivery/test`,
 				'post', {
 				[headerName]: Globals.apiKey,
-				[creatorId]:Globals.creatorId,
 				'Content-Type': 'application/json'
 			}
 			).send(JSON.stringify(deliveryProfile)).then(res => {
@@ -372,7 +367,7 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 
 	getEventHistory()
 	{
-		// add functionality for for trying your profile
+		
 	}
 
 	private changeLanguage(language: string) {
