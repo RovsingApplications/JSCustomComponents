@@ -47,29 +47,15 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 })
 export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 
-	private nativeInput: HTMLInputElement;
+	private paragrapghElement: HTMLParagraphElement;
 	private change = new Event('change');
 
 	constructor() {
 		super();
 	}
 
-	get value() {
-		if (!this.nativeInput) {
-			return null;
-		}
-		return this.nativeInput.value;
-	}
-
-	set value(val: string) {
-		if (!this.nativeInput) {
-			return;
-		}
-		this.nativeInput.value = val;
-	}
-
 	componentDidMount() {
-		this.nativeInput = this.getChildElement('.custom-input');
+		this.paragrapghElement = this.getChildElement('.result-box p');
 
 		this.getAttributeNames().forEach(attributeName => {
 			let attributeValue = this.getAttribute(attributeName);
@@ -79,8 +65,12 @@ export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 		this.bindEvents();
 	}
 
+	AddMessage(message: string) {
+		this.paragrapghElement.textContent = message;
+	}
+
 	private bindEvents() {
-		this.nativeInput.onchange = () => {
+		this.paragrapghElement.onchange = () => {
 			this.dispatchEvent(this.change);
 		};
 	}
@@ -95,22 +85,7 @@ export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 
 	private attributeChanged(name: string, oldVal: string, newVal: string) {
 		switch (name) {
-			case 'required':
-				if (!this.nativeInput) {
-					break;
-				}
-				if (newVal === 'true') {
-					this.nativeInput.required = true;
-					break;
-				}
-				this.nativeInput.required = false;
-				break;
-			case 'name':
-				if (!this.nativeInput) {
-					break;
-				}
-				this.nativeInput.name = newVal;
-				break;
+
 		}
 	}
 }

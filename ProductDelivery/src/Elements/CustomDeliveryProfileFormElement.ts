@@ -66,7 +66,9 @@ import Globals from '../Globals/Globals';
 })
 
 export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElement {
-
+	
+	
+	
 	private nativeInput: HTMLInputElement;
 	private change = new Event('change');
 
@@ -104,6 +106,23 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		} as IDeliveryProfile;
 		return profile;
 	}
+
+	getTestProfile() : IDeliveryProfile {
+		var profile = 
+		{
+			url:"ftp://waws-prod-am2-331.ftp.azurewebsites.windows.nettt/",
+			port: 21,
+			connectionMode:"Explicit",
+			protocol: FTPType.FTP,
+			fileTemplate: "{Document.FileName}",
+			folderTemplate : "{SenderName}/{Signer.Name}",
+			userName : "esignatur-ftp-test\\$esignatur-ftp-test",
+			Password : "3bhBzGj8mkQEYpnbFNpHKNpaQnWA8nEGa6AcWnrCc0iYSvJTqayMtkuqkXuP"
+
+		} as IDeliveryProfile;
+		return profile;
+	}
+
 
 	private GetSelectedFTPType(select) : FTPType 
 	{

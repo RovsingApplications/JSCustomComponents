@@ -345,23 +345,24 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 			}
 			).send(JSON.stringify(deliveryProfile)).then(res => {
 			}).catch(exception => {
-				console.log(exception);
+				this.customDeliveryResultElement.AddMessage(exception.stack)
 			});
 	}
 
 	tryDelivery()
 	{
-		var deliveryProfile = this.customDeliveryProfileFormElement.getProfile();
+		var deliveryProfile = this.customDeliveryProfileFormElement.getTestProfile();
 		const headerName = Constants.apiKeyHeaderName;
 		const req = new MakeRequest(
-				`${Globals.apiUrl}Delivery/test`,
+				`${Globals.apiUrl}delivery/test`,
 				'post', {
 				[headerName]: Globals.apiKey,
 				'Content-Type': 'application/json'
 			}
 			).send(JSON.stringify(deliveryProfile)).then(res => {
+				this.customDeliveryResultElement.AddMessage("Connection Was Sccuess")
 			}).catch(exception => {
-				console.log(exception);
+				this.customDeliveryResultElement.AddMessage(exception.stack)
 			});
 	}
 
