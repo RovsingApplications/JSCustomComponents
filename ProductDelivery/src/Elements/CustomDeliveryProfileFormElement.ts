@@ -66,9 +66,9 @@ import Globals from '../Globals/Globals';
 })
 
 export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElement {
-	
-	
-	
+
+
+
 	private nativeInput: HTMLInputElement;
 	private change = new Event('change');
 
@@ -90,43 +90,41 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		this.nativeInput.value = val;
 	}
 
-	public getProfile(): IDeliveryProfile
-	{
-		var profile = 
-		{
-			url:(this.getChildElement('#url') as HTMLInputElement).value,
-			port: Number((this.getChildElement('#port') as HTMLInputElement).value),
-			connectionMode:"Implicit",
-			protocol: this.GetSelectedFTPType((this.getChildElement('.select'))),
-			fileTemplate: (this.getChildElement('#fileTemplate') as HTMLInputElement).value,
-			folderTemplate : (this.getChildElement('#path') as HTMLInputElement).value,
-			userName : (this.getChildElement('#username') as HTMLInputElement).value,
-			Password : (this.getChildElement('#password') as HTMLInputElement).value
+	public getProfile(): IDeliveryProfile {
+		var profile =
+			{
+				url: (this.getChildElement('#url') as HTMLInputElement).value,
+				port: Number((this.getChildElement('#port') as HTMLInputElement).value),
+				connectionMode: "Implicit",
+				protocol: this.GetSelectedFTPType((this.getChildElement('.select'))),
+				fileTemplate: (this.getChildElement('#fileTemplate') as HTMLInputElement).value,
+				folderTemplate: (this.getChildElement('#path') as HTMLInputElement).value,
+				userName: (this.getChildElement('#username') as HTMLInputElement).value,
+				Password: (this.getChildElement('#password') as HTMLInputElement).value
 
-		} as IDeliveryProfile;
+			} as IDeliveryProfile;
 		return profile;
 	}
 
-	getTestProfile() : IDeliveryProfile {
-		var profile = 
-		{
-			url:"ftp://waws-prod-am2-331.ftp.azurewebsites.windows.nettt/",
-			port: 21,
-			connectionMode:"Explicit",
-			protocol: FTPType.FTP,
-			fileTemplate: "{Document.FileName}",
-			folderTemplate : "{SenderName}/{Signer.Name}",
-			userName : "esignatur-ftp-test\\$esignatur-ftp-test",
-			Password : "3bhBzGj8mkQEYpnbFNpHKNpaQnWA8nEGa6AcWnrCc0iYSvJTqayMtkuqkXuP"
+	getTestProfile(): IDeliveryProfile {
+		var profile =
+			{
+				url: "ftp://waws-prod-am2-331.ftp.azurewebsites.windows.net/",
+				port: 21,
+				connectionMode: "Explicit",
+				protocol: FTPType.FTP,
+				fileTemplate: "{Document.FileName}",
+				folderTemplate: "{SenderName}/{Signer.Name}",
+				userName: "esignatur-ftp-test\\$esignatur-ftp-test",
+				Password: "3bhBzGj8mkQEYpnbFNpHKNpaQnWA8nEGa6AcWnrCc0iYSvJTqayMtkuqkXuP"
 
-		} as IDeliveryProfile;
+			} as IDeliveryProfile;
 		return profile;
 	}
 
 
-	private GetSelectedFTPType(select) : FTPType 
-	{
-		var selectedValue= select.options[select.selectedIndex].value
+	private GetSelectedFTPType(select): FTPType {
+		var selectedValue = select.options[select.selectedIndex].value
 		return (<any>FTPType)[selectedValue];
 	}
 
@@ -138,19 +136,8 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 			let attributeValue = this.getAttribute(attributeName);
 			this.attributeChanged(attributeName, null, attributeValue);
 		});
-
-		this.bindEvents();
 	}
 
-	private bindEvents() {
-		this.nativeInput.onchange = () => {
-			this.dispatchEvent(this.change);
-		};
-	}
-
-	private static get observedAttributes() {
-		return ['name', 'required'];
-	}
 
 	private attributeChangedCallback(name: string, oldVal: string, newVal: string) {
 		this.attributeChanged(name, oldVal, newVal);

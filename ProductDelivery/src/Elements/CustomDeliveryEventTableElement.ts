@@ -96,15 +96,8 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 			let attributeValue = this.getAttribute(attributeName);
 			this.attributeChanged(attributeName, null, attributeValue);
 		});
-
-		this.bindEvents();
 	}
 
-	private bindEvents() {
-		this.nativeInput.onchange = () => {
-			this.dispatchEvent(this.change);
-		};
-	}
 
 	private static get observedAttributes() {
 		return ['name', 'required'];
