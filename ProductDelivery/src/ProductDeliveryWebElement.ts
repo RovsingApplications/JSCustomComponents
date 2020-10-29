@@ -8,6 +8,7 @@ import CustomDeliveryResultElement from "./Elements/CustomDeliveryResultElement"
 import Translator from "./Language/Translator";
 import Globals from './Globals/Globals'
 import MakeRequest from "../../Branding/src/Framework/Utilities/MakeRequest";
+import DeliveryResult from "../models/DeliveryResult";
 
 @CustomElement({
 	selector: 'product-delivery',
@@ -314,12 +315,12 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 	}
 
 	componentDidMount() {
-		this.saveButton =  this.getChildElement('#save'); 
-		this.tryButton = this.getChildElement('#try');  
-		this.customDeliveryEventTableElement = this.getChildElement('delivery-event-table'); 
-		this.customDeliveryProfileFormElement = this.getChildElement('delivery-profile-form'); 
-		this.customDeliveryResultElement = this.getChildElement('delivery-result'); 
-		
+		this.saveButton = this.getChildElement('#save');
+		this.tryButton = this.getChildElement('#try');
+		this.customDeliveryEventTableElement = this.getChildElement('delivery-event-table');
+		this.customDeliveryProfileFormElement = this.getChildElement('delivery-profile-form');
+		this.customDeliveryResultElement = this.getChildElement('delivery-result');
+
 		this.getAttributeNames().forEach(attributeName => {
 			let attributeValue = this.getAttribute(attributeName);
 			this.attributeChanged(attributeName, null, attributeValue);
@@ -333,42 +334,43 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 		this.tryButton.addEventListener("click", this.tryDelivery.bind(this));
 	}
 
-	submitDeliveryForm()
-	{
+	submitDeliveryForm() {
 		var deliveryProfile = this.customDeliveryProfileFormElement.getProfile();
 		const headerName = Constants.apiKeyHeaderName;
 		const req = new MakeRequest(
-				`${Globals.apiUrl}Profile/upsert`,
-				'post', {
-				[headerName]: Globals.apiKey,
-				'Content-Type': 'application/json'
-			}
-			).send(JSON.stringify(deliveryProfile)).then(res => {
-			}).catch(exception => {
-				this.customDeliveryResultElement.AddMessage(exception.stack)
-			});
+			`${Globals.apiUrl}Profile/upsert`,
+			'post', {
+			[headerName]: Globals.apiKey,
+			'Content-Type': 'application/json'
+		}
+		).send(JSON.stringify(deliveryProfile)).then(res => {
+
+		}).catch(exception => {
+
+		});
 	}
 
-	tryDelivery()
-	{
+	tryDelivery() {
 		var deliveryProfile = this.customDeliveryProfileFormElement.getTestProfile();
 		const headerName = Constants.apiKeyHeaderName;
+		let deliveryResult: DeliveryResult;
 		const req = new MakeRequest(
-				`${Globals.apiUrl}delivery/test`,
-				'post', {
-				[headerName]: Globals.apiKey,
-				'Content-Type': 'application/json'
-			}
-			).send(JSON.stringify(deliveryProfile)).then(res => {
-				this.customDeliveryResultElement.AddMessage("Connection Was Sccuess")
-			}).catch(exception => {
-				this.customDeliveryResultElement.AddMessage(exception.stack)
-			});
+			`${Globals.apiUrl}delivery/test`,
+			'post', {
+			[headerName]: Globals.apiKey,
+			'Content-Type': 'application/json'
+		}
+		).send(JSON.stringify(deliveryProfile)).then(response => {
+			deliveryResult = new DeliveryResult(JSON.parse(response as string));
+			this.customDeliveryResultElement.AddEvents(deliveryResult.eventLog);
+		}).catch(exception => {
+			// this need to fix
+			this.customDeliveryResultElement.AddEvents(deliveryResult.eventLog)
+		});
 	}
 
-	getEventHistory()
-	{
-		
+	getEventHistory() {
+
 	}
 
 	private changeLanguage(language: string) {
@@ -382,7 +384,7 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 	attributeChangedCallback(name: string, oldVal: string, newVal: string) {
 		this.attributeChanged(name, oldVal, newVal);
 	}
-	
+
 	private attributeChanged(name: string, oldVal: string, newVal: string) {
 		switch (name) {
 			case 'language':
@@ -399,7 +401,7 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 				break;
 			case 'creator-id':
 				Globals.creatorId = newVal
-				break;	
+				break;
 		}
 	}
 

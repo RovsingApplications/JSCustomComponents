@@ -1,5 +1,6 @@
 import Colors from "../../../Framework/Constants/Colors";
 import CustomElement from "../../../Framework/custom-element.decorator";
+import DeliveryResult from "../../models/DeliveryResult";
 import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 
 @CustomElement({
@@ -47,6 +48,7 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 })
 export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 
+
 	private paragrapghElement: HTMLParagraphElement;
 	private change = new Event('change');
 
@@ -61,18 +63,14 @@ export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 			let attributeValue = this.getAttribute(attributeName);
 			this.attributeChanged(attributeName, null, attributeValue);
 		});
-
-		this.bindEvents();
 	}
 
-	AddMessage(message: string) {
-		this.paragrapghElement.textContent = message;
-	}
-
-	private bindEvents() {
-		this.paragrapghElement.onchange = () => {
-			this.dispatchEvent(this.change);
-		};
+	AddEvents(log: any) {
+		//console.log(typeof log);
+		this.paragrapghElement.textContent = "";
+		log.forEach(event => {
+			this.paragrapghElement.innerHTML += `$ ${event} <br/>`;
+		});
 	}
 
 	private static get observedAttributes() {
