@@ -308,7 +308,7 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 	private customDeliveryEventTableElement: CustomDeliveryEventTableElement;
 	private customDeliveryProfileFormElement: CustomDeliveryProfileFormElement;
 	private customDeliveryResultElement: CustomDeliveryResultElement;
-
+	private deliveryResult: DeliveryResult;
 
 	constructor() {
 		super();
@@ -320,6 +320,7 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 		this.customDeliveryEventTableElement = this.getChildElement('delivery-event-table');
 		this.customDeliveryProfileFormElement = this.getChildElement('delivery-profile-form');
 		this.customDeliveryResultElement = this.getChildElement('delivery-result');
+
 
 		this.getAttributeNames().forEach(attributeName => {
 			let attributeValue = this.getAttribute(attributeName);
@@ -343,17 +344,19 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 			[headerName]: Globals.apiKey,
 			'Content-Type': 'application/json'
 		}
-		).send(JSON.stringify(deliveryProfile)).then(res => {
-
+		).send(JSON.stringify(deliveryProfile)).then(response => {
+			this.deliveryResult = new DeliveryResult(JSON.parse(response as string));
+			this.customDeliveryResultElement.AddEvents(this.deliveryResult.eventLog);
 		}).catch(exception => {
-
+			console.log(exception);
+			// this need to fix
+			//this.customDeliveryResultElement.AddEvents(this.deliveryResult.eventLog);
 		});
 	}
 
 	tryDelivery() {
 		var deliveryProfile = this.customDeliveryProfileFormElement.getTestProfile();
 		const headerName = Constants.apiKeyHeaderName;
-		let deliveryResult: DeliveryResult;
 		const req = new MakeRequest(
 			`${Globals.apiUrl}delivery/test`,
 			'post', {
@@ -361,11 +364,13 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 			'Content-Type': 'application/json'
 		}
 		).send(JSON.stringify(deliveryProfile)).then(response => {
-			deliveryResult = new DeliveryResult(JSON.parse(response as string));
-			this.customDeliveryResultElement.AddEvents(deliveryResult.eventLog);
+			this.deliveryResult = new DeliveryResult(JSON.parse(response as string));
+			this.customDeliveryResultElement.AddEvents(this.deliveryResult.eventLog);
+			this.customDeliveryEventTableElement.AddDeliveryResult(this.deliveryResult, deliveryProfile);
 		}).catch(exception => {
+			console.log(exception)
 			// this need to fix
-			this.customDeliveryResultElement.AddEvents(deliveryResult.eventLog)
+			//this.customDeliveryResultElement.AddEvents(this.deliveryResult.eventLog)
 		});
 	}
 
