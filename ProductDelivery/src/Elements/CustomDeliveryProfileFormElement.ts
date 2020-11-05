@@ -7,7 +7,7 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 
 @CustomElement({
 	selector: 'delivery-profile-form',
-	template: `<form>
+	template: `<form class="from" id="from">
 	<!-- move this to a independent web component -->
 	<label id="lblurl">Ftp Url</label>
 	<input id="url" placeholder="Enter Url" autocomplete="off""></input>
