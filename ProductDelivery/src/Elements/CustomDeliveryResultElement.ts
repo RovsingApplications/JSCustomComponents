@@ -7,10 +7,9 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 	selector: 'delivery-result',
 	template: `
 <!-- move this to a independent web component -->
-<h3>Delivery result</h3>
+<label>Delivery result</label>
 <div class="result-box pad-10">
 	<p>
-		Here shows current status of FTP Connection.
 	</p>
 </div>
 	`,
@@ -34,14 +33,8 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 		color: #28BECE;
 	}
 
-	.color-error
-	{
-		color: #CE2828;
-	}
-
-	.color-success
-	{
-		color: #28BECE;
+	.label {
+		font-size: 14px;
 	}
 	`,
 	useShadow: false,
@@ -58,14 +51,31 @@ export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 
 	componentDidMount() {
 		this.paragrapghElement = this.getChildElement('.result-box p');
-
+		this.InitialResultText();
 		this.getAttributeNames().forEach(attributeName => {
 			let attributeValue = this.getAttribute(attributeName);
 			this.attributeChanged(attributeName, null, attributeValue);
 		});
 	}
 
-	AddEvents(log: any) {
+	eventListener() {
+		this.addEventListener('show-result', this.showResut.bind(this));
+	}
+
+	showResut(event: CustomEvent): void {
+		this.paragrapghElement.textContent = "";
+		var deliveryResult = event.detail as DeliveryResult;
+		var preElement = new HTMLPreElement();
+		preElement.innerHTML = `$ ${deliveryResult.eventLog.join('$ \n')}`;
+		this.paragrapghElement.appendChild(preElement);
+	}
+
+	InitialResultText() {
+		this.paragrapghElement.innerHTML = `<p> <b>Awaiting test</b> </br>
+		Please enter your credential and test your connection to product delivery</p> `
+	}
+
+	AddEvents(log: any): void {
 		//console.log(typeof log);
 		this.paragrapghElement.textContent = "";
 		log.forEach(event => {

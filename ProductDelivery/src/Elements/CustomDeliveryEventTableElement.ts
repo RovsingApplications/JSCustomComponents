@@ -10,46 +10,11 @@ import Globals from '../Globals/Globals';
 @CustomElement({
 	selector: 'delivery-event-table',
 	template: `
-<h3>Deliveries</h3>
-<table class="rounded">
-	<tbody>
-		<tr class="active-row">
-			<!--
-			<td>
-				<i class="fas fa-unlink rotate-45 color-error"></i>
-			</td>
-			-->
-			<td>https://localhost:5001/productDelivery</td>
-			<td>TestFolderTemplate</td>
-			<td>5f90478fe228c0e5f0f3838a</td>
-			<td>6657</td>
-			<td>Failed</td>
-			<td class="actions">
-			<!--  
-				<i class="fas fa-play color-primary"></i>
-				<i class="fas fa-info-circle color-primary"></i> 
-				-->
-			<button id="play" type="button">play</button>
-			<button id="delete" type="button">Delete</button>
-			</td>
-		</tr>
-		<tr class="active-row">
-			<td>
-				<i class="fas fa-link rotate-45 color-secondary"></i>
-			</td>
-			<td>ftps://localhost:8080</td>
-			<td>System/Library/Path</td>
-			<td>Sucess</td>
-			<td class="actions">
-			<!-- 
-				<i class="fas fa-play color-primary"></i>
-				<i class="fas fa-info-circle color-primary"></i>
-				-->
-				<button id="play" type="button">play</button>
-				<button id="delete" type="button">Delete</button>
-			</td>
-		</tr>
-	</tbody>
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<label>Deliveries</label>
+<table>
 </table>`,
 	style: `
 	* {
@@ -59,31 +24,14 @@ import Globals from '../Globals/Globals';
 	.pad-10 {
 		padding: 10px;
 	}
-	
-	.color-primary
+	.result-cell
 	{
-		color: #003E64;
+  		padding: 5px;
+		--status-icon: 
+		--orderid:
+		--result:
+		--action:
 	}
-	
-	.color-secondary
-	{
-		color: #28BECE;
-	}
-
-	.color-error
-	{
-		color: #CE2828;
-	}
-
-	.color-success
-	{
-		color: #28BECE;
-	}
-
-	function ClickPlay(td) {
-		console.log("play button test");
-	}
-
 	`,
 	useShadow: false,
 })
@@ -93,8 +41,6 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 
 	private deliveryTable: HTMLTableElement;
 	private nativeInput: HTMLInputElement;
-	private playButton: HTMLButtonElement;
-	private deleteButton: HTMLButtonElement;
 	private change = new Event('change');
 
 	constructor() {
@@ -118,52 +64,157 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 	componentDidMount() {
 
 		this.nativeInput = this.getChildElement('.custom-input');
-		this.deliveryTable = this.getChildElement('.rounded');
-
-		this.playButton = this.getChildElement('#play');
+		this.deliveryTable = this.getChildElement('table') as HTMLTableElement;
 
 		this.getAttributeNames().forEach(attributeName => {
 			let attributeValue = this.getAttribute(attributeName);
 			this.attributeChanged(attributeName, null, attributeValue);
 		});
-
-		this.playButton = this.getChildElement('#play');
-		this.playButton.addEventListener("click", this.ClickPlay.bind(this));
+		var deliveryResultMockList = JSON.parse(this.GetTestDeliveryResult()) as DeliveryResult[]; // we need the results
+		var deliveryResultRows = deliveryResultMockList.forEach(delveryResult => this.deliveryTable.appendChild(this.addDeliveryResultRow(delveryResult)));
 	}
 
 
-	private ClickPlay(td: HTMLTableCellElement): void {
-		var selectedRow = td.parentElement.parentElement as HTMLTableRowElement;
-		var url = selectedRow.cells[0].innerText;
-		console.log(url);
+	private GetDeliveryResults(): DeliveryResult[] {
+		let deliveryResults = [];
+		const headerName = Constants.apiKeyHeaderName;
+		const request = new MakeRequest(
+			`${Globals.apiUrl}Results/GetAsync`,
+			'get',
+			{
+				[headerName]: Globals.apiKey,
+				'Content-Type': 'application/json'
+			})
+			.send()
+			.then(response => {
+				deliveryResults = (JSON.parse(response as string)) as DeliveryResult[];
+			})
+			.catch(exception => {
+				console.log(exception)
+			});
+		return deliveryResults;
 	}
 
+	private GetTestDeliveryResult(): string {
+		return `[{
+							"id": "123A",
+							"customerId": "741852A",
+							"orderId": "asdsib235435435435",
+							"resultStatus": "Success",
+							"signers": [{
+								"name": "Dilshan Makavitage",
+								"identification": "dmp",
+								"email": "dmp@esignature.dk"
+							}],
+							"documents": [{
+								"documentType": "Document",
+								"fileName": "TestFile_1"
+							}, {
+								"documentType": "PaymentReceipt",
+								"fileName": "TestFile_2"
+							}],
+							"completedDate": "2020-11-03T08:49:23.3162541+01:00",
+							"createdAt": "2020-11-03T08:49:23.3163175+01:00",
+							"lastModified": "2020-11-03T08:49:23.3165274+01:00",
+							"eventLog": ["filepath : /productDelivery", "connection url : https://localhost/productDelivery", "userName : dilshan", "Upload : Sucess"]
+							},
+							{
+							"id": "5fa1625f8493a71baf49e94b",
+							"customerId": "852164A",
+							"orderId": "5fa1625f8493a71baf49e94b",
+							"resultStatus": "Failed",
+							"signers": [{
+								"name": "Dilshan Makavitage",
+								"identification": "dmp",
+								"email": "dmp@esignature.dk"
+							}],
+							"documents": [{
+								"documentType": "Document",
+								"fileName": "TestFile_21"
+							}, {
+								"documentType": "PaymentReceipt",
+								"fileName": "TestFile_22"
+							}],
+							"completedDate": "2020-11-03T08:49:23.3162541+01:00",
+							"createdAt": "2020-11-03T08:49:23.3163175+01:00",
+							"lastModified": "2020-11-03T08:49:23.3165274+01:00",
+							"eventLog": ["filepath : /productDelivery", "connection url : https://localhost/productDelivery", "userName : Bondo", "Upload : Failed"]
+						}]`;
+	}
 
-	AddDeliveryResult(deliveryResult: DeliveryResult, deliveryProfile: IDeliveryProfile) {
+	private addDeliveryResultRow(deliveryResult: DeliveryResult) {
 
-		var rowData = {
-			'url': deliveryProfile.url,
-			'path': deliveryProfile.folderTemplate,
-			'resultId': deliveryResult.id,
-			'customerId': deliveryResult.customerId,
-			'Status': deliveryResult.resultStatus
-		}
+		var tableRow = this.deliveryTable.insertRow(0);
+		tableRow.addEventListener('click', this.showResult.bind(deliveryResult));
+		// icon cell
+		var iconCell = tableRow.insertCell(0);
+		var faIcon = deliveryResult.resultStatus == "Success" ? 'link' : "unlink";
+		// <i class="fas fa-unlink rotate-45 color-error"></i>
+		// <i class="fas fa-link rotate-45 color-secondary"></i>
+		//iconCell.appendChild(document.createElement(`<i class="fa fa-${faIcon} rotate-45 ${deliveryResult.resultStatus}" aria-hidden="true"></i>`));
+		iconCell.innerHTML = `<i class="fas fa-${faIcon} rotate-45 color-${deliveryResult.resultStatus}"></i>`;
+		iconCell.classList.add("result-cell");
+		iconCell.classList.add("result-cell--status-icon");
+		tableRow.appendChild(iconCell);
 
-		var tableBody = this.deliveryTable.getElementsByTagName('tbody')[0];
-		var newRow = tableBody.insertRow(tableBody.rows.length);
-		var cell1 = newRow.insertCell(0)
-		cell1.innerHTML = rowData.resultId;
-		var cell2 = newRow.insertCell(1)
-		cell2.innerHTML = rowData.customerId;
-		var cell3 = newRow.insertCell(2)
-		cell3.innerHTML = rowData.url;
-		var cell4 = newRow.insertCell(3)
-		cell4.innerHTML = rowData.path;
-		var cell5 = newRow.insertCell(4)
-		cell5.innerHTML = rowData.Status;
-		var cell6 = newRow.insertCell(5)
-		cell6.innerHTML = `<button id="play" type="button">play</button>`;
+		var orderIdCell = tableRow.insertCell(1);
+		orderIdCell.innerText = deliveryResult.orderId;
+		orderIdCell.classList.add("result-cell");
+		orderIdCell.classList.add("result-cell--orderid");
+		tableRow.appendChild(orderIdCell);
 
+		var resultCell = tableRow.insertCell(2);
+		resultCell.innerText = deliveryResult.resultStatus;
+		resultCell.classList.add("result-cell");
+		resultCell.classList.add("result-cell--result");
+		tableRow.appendChild(resultCell);
+
+		var actionCell = tableRow.insertCell(3);
+		var actionButton = document.createElement('button');
+		actionButton.innerHTML = `<i class="fas fa-play"></i>`;
+		actionButton.addEventListener('click', this.runAction.bind(deliveryResult));
+		actionButton.classList.add("result-cell");
+		actionButton.classList.add("result-cell--action");
+		actionCell.appendChild(actionButton);
+		tableRow.appendChild(actionCell);
+
+		return tableRow;
+	}
+
+	private runAction(event: Event): void {
+		event.preventDefault();
+		const headerName = Constants.apiKeyHeaderName;
+		const request = new MakeRequest(
+			`${Globals.apiUrl}delivery/run/?resultId=${this.id}`,
+			'post',
+			{
+				[headerName]: Globals.apiKey,
+				'Content-Type': 'application/json'
+			}
+		)
+			.send()
+			.then(response => {
+				var myRunEvent = new CustomEvent('show-result', {
+					bubbles: true,
+					composed: true,
+					detail: response // ensure response it the correct deliveryResult json
+				});
+				document.dispatchEvent(myRunEvent);
+			})
+			.catch(exception => {
+				console.log(exception)
+			});
+	}
+
+	showResult(event: Event): void {
+		event.preventDefault();
+		var response = this;
+		var myshowResultEvent = new CustomEvent('show-result', {
+			bubbles: true,
+			composed: true,
+			detail: this
+		});
+		document.dispatchEvent(myshowResultEvent);
 	}
 
 	private attributeChanged(name: string, oldVal: string, newVal: string) {
