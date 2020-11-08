@@ -262,14 +262,6 @@ import DeliveryResult from "../models/DeliveryResult";
 	.pad-10 {
 		padding: 10px;
 	}
-	.color-error
-	{
-		color: #CE2828;
-	}
-	.color-success
-	{
-		color: #28BECE;
-	}
 `,
 	useShadow: true,
 })
@@ -324,34 +316,34 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 				'Content-Type': 'application/json'
 			}
 			).send(JSON.stringify(deliveryProfile)).then(response => {
-				this.deliveryResult = new DeliveryResult(JSON.parse(response as string));
-				this.customDeliveryResultElement.AddEvents(this.deliveryResult.eventLog);
+				this.addDeliveryResult(response);
 			}).catch(exception => {
 				console.log(exception);
-				// this need to fix
-				//this.customDeliveryResultElement.AddEvents(this.deliveryResult.eventLog);
 			});
 		}
 	}
 
+	private addDeliveryResult(response: any): void {
+		this.deliveryResult = new DeliveryResult(JSON.parse(response as string));
+		this.customDeliveryResultElement.AddEvents(this.deliveryResult.eventLog);
+	}
+
 	private tryDelivery() {
-		var deliveryProfile = this.customDeliveryProfileFormElement.getTestProfile();
-		const headerName = Constants.apiKeyHeaderName;
-		const req = new MakeRequest(
-			`${Globals.apiUrl}delivery/test`,
-			'post', {
-			[headerName]: Globals.apiKey,
-			'Content-Type': 'application/json'
+		if (this.customDeliveryProfileFormElement.checkInputs()) {
+			var deliveryProfile = this.customDeliveryProfileFormElement.getTestProfile();
+			const headerName = Constants.apiKeyHeaderName;
+			const req = new MakeRequest(
+				`${Globals.apiUrl}delivery/test`,
+				'post', {
+				[headerName]: Globals.apiKey,
+				'Content-Type': 'application/json'
+			}
+			).send(JSON.stringify(deliveryProfile)).then(response => {
+				this.addDeliveryResult(response);
+			}).catch(exception => {
+				console.log(exception)
+			});
 		}
-		).send(JSON.stringify(deliveryProfile)).then(response => {
-			this.deliveryResult = new DeliveryResult(JSON.parse(response as string));
-			this.customDeliveryResultElement.AddEvents(this.deliveryResult.eventLog);
-			//this.customDeliveryEventTableElement.AddDeliveryResult(this.deliveryResult, deliveryProfile);
-		}).catch(exception => {
-			console.log(exception)
-			// this need to fix
-			//this.customDeliveryResultElement.AddEvents(this.deliveryResult.eventLog)
-		});
 	}
 
 	private runAllFail() {

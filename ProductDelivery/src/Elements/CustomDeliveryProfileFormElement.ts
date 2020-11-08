@@ -75,14 +75,13 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	private pathInput: HTMLInputElement;
 	private contactInput: HTMLInputElement;
 
-	deliveryEventTableElement = new CustomDeliveryEventTableElement();
 
 	private nativeInput: HTMLInputElement;
 	ftpUrlRexExp: RegExp = /^(?:(?:ftps?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/i;
 	ftpPortRexExp: RegExp = /^[0-9\s]*$/;
-	ftpPathRexExp: RegExp = /^([A-Za-z]:|[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*)((\/[A-Za-z0-9_.-]+)+)$/;
+	//ftpPathRexExp: RegExp = /^([A-Za-z]:|[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*)((\/[A-Za-z0-9_.-]+)+)$/;
 	contactEmailExp: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	fileNameExp: RegExp = /^[\w,\s-]+\.[A-Za-z]{3}$/;
+	//fileNameExp: RegExp = /^[\w,\s-]+\[A-Za-z]{3}$/;
 
 	private change = new Event('change');
 
@@ -111,15 +110,28 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	private addListeners() {
 		this.ftpUrlInput.addEventListener("blur", this.validateFtpUrl.bind(this));
 		this.ftpPortInput.addEventListener("blur", this.validateFtpPort.bind(this));
-		this.filenameInput.addEventListener("blur", this.validateFileField.bind(this));
-		this.pathInput.addEventListener("blur", this.validatePathField.bind(this));
+		this.filenameInput.addEventListener("blur", this.validatEmptyField.bind(this));
+		this.pathInput.addEventListener("blur", this.validatEmptyField.bind(this));
 		this.contactInput.addEventListener("blur", this.validateEmailField.bind(this));
+		this.typeElement.addEventListener("change", this.validateTypeField.bind(this));
 	}
 
-	validateFileField(event: Event): void {
+	validateTypeField(event: Event): void {
+		event.preventDefault();
+		const selectElement = event.currentTarget as HTMLSelectElement;
+		if (selectElement.selectedIndex != 0) {
+			selectElement.style.borderColor = '#28BECE'
+		}
+		else {
+			selectElement.style.borderColor = '#CE2828'
+		}
+	}
+
+
+	validatEmptyField(event: Event): void {
 		event.preventDefault();
 		const inputField = event.currentTarget as HTMLInputElement;
-		if (this.fileNameExp.test(inputField.value)) {
+		if (inputField.value.length != 0) {
 			inputField.style.borderColor = '#28BECE'
 		}
 		else {
@@ -132,28 +144,6 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		event.preventDefault();
 		const inputField = event.currentTarget as HTMLInputElement;
 		if (this.contactEmailExp.test(inputField.value)) {
-			inputField.style.borderColor = '#28BECE'
-		}
-		else {
-			inputField.style.borderColor = '#CE2828'
-		}
-	}
-
-	validatePathField(event: Event): void {
-		event.preventDefault();
-		const inputField = event.currentTarget as HTMLInputElement;
-		if (this.ftpPathRexExp.test(inputField.value)) {
-			inputField.style.borderColor = '#28BECE'
-		}
-		else {
-			inputField.style.borderColor = '#CE2828'
-		}
-	}
-
-	validateRequiredField(event: Event): void {
-		event.preventDefault();
-		const inputField = event.currentTarget as HTMLInputElement;
-		if (inputField.value.length != 0) {
 			inputField.style.borderColor = '#28BECE'
 		}
 		else {
@@ -225,15 +215,15 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 
 		// validate url
 		if (!this.ftpUrlRexExp.test(url)) {
-			this.setErrorfor(this.ftpUrlInput, 'Invalid Value');
+			this.setErrorfor(this.ftpUrlInput);
 			hasValidData = false;
 		}
 		else {
 			this.setSucessFor(this.ftpUrlInput)
 		}
 		// validate port
-		if (this.ftpPortRexExp.test(port)) {
-			this.setErrorfor(this.ftpPortInput, 'Invalid Value');
+		if (!this.ftpPortRexExp.test(port) && port.length != 0) {
+			this.setErrorfor(this.ftpPortInput);
 			hasValidData = false;
 		}
 		else {
@@ -241,36 +231,43 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		}
 		// validate type
 		if (protocol === 0) {
-			this.setErrorfor(this.typeElement, 'Invalid Value');
+			this.setErrorfor(this.typeElement);
 			hasValidData = false;
 		}
 		else {
 			this.setSucessFor(this.typeElement);
 		}
 
-		hasValidData = this.HasEmptyField(fileTemplate, this.filenameInput);
-
-		hasValidData = this.HasEmptyField(folderTemplate, this.pathInput);
-
-		hasValidData = this.HasEmptyField(userName, this.contactInput);
-
-		return hasValidData;
-	}
-
-	HasEmptyField(fieldvalue: string, fieldInput: HTMLInputElement): boolean {
-		let hasValidData = true;
-		if (fieldvalue === '') {
-
-			this.setErrorfor(fieldInput, 'Invalid Value');
+		// validate filename
+		if (fileTemplate.length == 0) {
+			this.setErrorfor(this.filenameInput);
 			hasValidData = false;
 		}
 		else {
-			this.setSucessFor(fieldInput);
+			this.setSucessFor(this.filenameInput);
+		}
+
+		// validate path
+		if (folderTemplate.length == 0) {
+			this.setErrorfor(this.pathInput);
+			hasValidData = false;
+		}
+		else {
+			this.setSucessFor(this.pathInput);
+		}
+
+		// validate contact Name
+		if (!this.contactEmailExp.test(userName)) {
+			this.setErrorfor(this.contactInput);
+			hasValidData = false;
+		}
+		else {
+			this.setSucessFor(this.contactInput);
 		}
 		return hasValidData;
 	}
 
-	private setErrorfor(input: HTMLElement, message: string) {
+	private setErrorfor(input: HTMLElement) {
 		input.className = 'form-control error';
 	}
 

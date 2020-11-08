@@ -26,11 +26,24 @@ import Globals from '../Globals/Globals';
 	}
 	.result-cell
 	{
-  		padding: 5px;
-		--status-icon: 
-		--orderid:
-		--result:
-		--action:
+		padding-left: 23px;
+	}
+	.action
+	{
+		 background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+	}
+	.color-Failed
+	{
+		color: #CE2828;
+	}
+	.color-Success
+	{
+		color: #28BECE;
 	}
 	`,
 	useShadow: false,
@@ -79,7 +92,7 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 		let deliveryResults = [];
 		const headerName = Constants.apiKeyHeaderName;
 		const request = new MakeRequest(
-			`${Globals.apiUrl}Results/GetAsync`,
+			`${Globals.apiUrl}/Results/get?customerId=6657`,
 			'get',
 			{
 				[headerName]: Globals.apiKey,
@@ -97,7 +110,7 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 
 	private GetTestDeliveryResult(): string {
 		return `[{
-							"id": "123A",
+							"id": "5f8f22b9d2010aaed36cb635",
 							"customerId": "741852A",
 							"orderId": "asdsib235435435435",
 							"resultStatus": "Success",
@@ -119,9 +132,9 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 							"eventLog": ["filepath : /productDelivery", "connection url : https://localhost/productDelivery", "userName : dilshan", "Upload : Sucess"]
 							},
 							{
-							"id": "5fa1625f8493a71baf49e94b",
+							"id": "5f90478fe228c0e5f0f3838a",
 							"customerId": "852164A",
-							"orderId": "5fa1625f8493a71baf49e94b",
+							"orderId": "713601",
 							"resultStatus": "Failed",
 							"signers": [{
 								"name": "Dilshan Makavitage",
@@ -160,13 +173,15 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 		var orderIdCell = tableRow.insertCell(1);
 		orderIdCell.innerText = deliveryResult.orderId;
 		orderIdCell.classList.add("result-cell");
-		orderIdCell.classList.add("result-cell--orderid");
+		var colorClass = deliveryResult.resultStatus == "Success" ? null : "color-Failed";
+		if (colorClass != null) {
+			orderIdCell.classList.add(colorClass);
+		}
 		tableRow.appendChild(orderIdCell);
 
 		var resultCell = tableRow.insertCell(2);
 		resultCell.innerText = deliveryResult.resultStatus;
 		resultCell.classList.add("result-cell");
-		resultCell.classList.add("result-cell--result");
 		tableRow.appendChild(resultCell);
 
 		var actionCell = tableRow.insertCell(3);
@@ -174,7 +189,7 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 		actionButton.innerHTML = `<i class="fas fa-play"></i>`;
 		actionButton.addEventListener('click', this.runAction.bind(deliveryResult));
 		actionButton.classList.add("result-cell");
-		actionButton.classList.add("result-cell--action");
+		actionButton.classList.add("action");
 		actionCell.appendChild(actionButton);
 		tableRow.appendChild(actionCell);
 
@@ -183,9 +198,10 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 
 	private runAction(event: Event): void {
 		event.preventDefault();
+
 		const headerName = Constants.apiKeyHeaderName;
 		const request = new MakeRequest(
-			`${Globals.apiUrl}delivery/run/?resultId=${this.id}`,
+			`${Globals.apiUrl}Delivery/run?resultId=${this.id}`,
 			'post',
 			{
 				[headerName]: Globals.apiKey,
