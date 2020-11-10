@@ -4,6 +4,7 @@ import ProductDeliveryDocument from "./ProductDeliveryDocument";
 export default class DeliveryResult {
 	id: string;
 	customerId: string;
+	customerApiKey: string;
 	orderId: string;
 	resultStatus: string;
 	signers: ProductDeliverySigner[];

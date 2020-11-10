@@ -37,11 +37,11 @@ import Globals from '../Globals/Globals';
     overflow: hidden;
     outline:none;
 	}
-	.color-Failed
+	.color-fail
 	{
 		color: #CE2828;
 	}
-	.color-Success
+	.color-success
 	{
 		color: #28BECE;
 	}
@@ -75,7 +75,6 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 	}
 
 	componentDidMount() {
-
 		this.nativeInput = this.getChildElement('.custom-input');
 		this.deliveryTable = this.getChildElement('table') as HTMLTableElement;
 
@@ -83,76 +82,28 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 			let attributeValue = this.getAttribute(attributeName);
 			this.attributeChanged(attributeName, null, attributeValue);
 		});
-		var deliveryResultMockList = JSON.parse(this.GetTestDeliveryResult()) as DeliveryResult[]; // we need the results
-		var deliveryResultRows = deliveryResultMockList.forEach(delveryResult => this.deliveryTable.appendChild(this.addDeliveryResultRow(delveryResult)));
+		this.GetDeliveryResults();
 	}
 
 
-	private GetDeliveryResults(): DeliveryResult[] {
-		let deliveryResults = [];
+	private GetDeliveryResults() {
+
 		const headerName = Constants.apiKeyHeaderName;
 		const request = new MakeRequest(
-			`${Globals.apiUrl}/Results/get?customerId=6657`,
+			`https://localhost:5001/Results/get?customerId=6657`,
 			'get',
 			{
-				[headerName]: Globals.apiKey,
+				[headerName]: `ceeab147-adea-4352-9282-0f75b4254942`,
 				'Content-Type': 'application/json'
 			})
 			.send()
 			.then(response => {
-				deliveryResults = (JSON.parse(response as string)) as DeliveryResult[];
+				var deliveryResults = (JSON.parse(response as string)) as DeliveryResult[];
+				deliveryResults.forEach(delveryResult => this.deliveryTable.appendChild(this.addDeliveryResultRow(delveryResult)));
 			})
 			.catch(exception => {
-				console.log(exception)
+				console.log(exception);
 			});
-		return deliveryResults;
-	}
-
-	private GetTestDeliveryResult(): string {
-		return `[{
-							"id": "5f8f22b9d2010aaed36cb635",
-							"customerId": "741852A",
-							"orderId": "asdsib235435435435",
-							"resultStatus": "Success",
-							"signers": [{
-								"name": "Dilshan Makavitage",
-								"identification": "dmp",
-								"email": "dmp@esignature.dk"
-							}],
-							"documents": [{
-								"documentType": "Document",
-								"fileName": "TestFile_1"
-							}, {
-								"documentType": "PaymentReceipt",
-								"fileName": "TestFile_2"
-							}],
-							"completedDate": "2020-11-03T08:49:23.3162541+01:00",
-							"createdAt": "2020-11-03T08:49:23.3163175+01:00",
-							"lastModified": "2020-11-03T08:49:23.3165274+01:00",
-							"eventLog": ["filepath : /productDelivery", "connection url : https://localhost/productDelivery", "userName : dilshan", "Upload : Sucess"]
-							},
-							{
-							"id": "5f90478fe228c0e5f0f3838a",
-							"customerId": "852164A",
-							"orderId": "713601",
-							"resultStatus": "Failed",
-							"signers": [{
-								"name": "Dilshan Makavitage",
-								"identification": "dmp",
-								"email": "dmp@esignature.dk"
-							}],
-							"documents": [{
-								"documentType": "Document",
-								"fileName": "TestFile_21"
-							}, {
-								"documentType": "PaymentReceipt",
-								"fileName": "TestFile_22"
-							}],
-							"completedDate": "2020-11-03T08:49:23.3162541+01:00",
-							"createdAt": "2020-11-03T08:49:23.3163175+01:00",
-							"lastModified": "2020-11-03T08:49:23.3165274+01:00",
-							"eventLog": ["filepath : /productDelivery", "connection url : https://localhost/productDelivery", "userName : Bondo", "Upload : Failed"]
-						}]`;
 	}
 
 	private addDeliveryResultRow(deliveryResult: DeliveryResult) {
@@ -162,10 +113,11 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 		// icon cell
 		var iconCell = tableRow.insertCell(0);
 		var faIcon = deliveryResult.resultStatus == "Success" ? 'link' : "unlink";
+		var faColor = deliveryResult.resultStatus == "Success" ? 'success' : 'fail';
 		// <i class="fas fa-unlink rotate-45 color-error"></i>
 		// <i class="fas fa-link rotate-45 color-secondary"></i>
 		//iconCell.appendChild(document.createElement(`<i class="fa fa-${faIcon} rotate-45 ${deliveryResult.resultStatus}" aria-hidden="true"></i>`));
-		iconCell.innerHTML = `<i class="fas fa-${faIcon} rotate-45 color-${deliveryResult.resultStatus}"></i>`;
+		iconCell.innerHTML = `<i class="fas fa-${faIcon} rotate-45 color-${faColor}"></i>`;
 		iconCell.classList.add("result-cell");
 		iconCell.classList.add("result-cell--status-icon");
 		tableRow.appendChild(iconCell);
@@ -173,9 +125,8 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 		var orderIdCell = tableRow.insertCell(1);
 		orderIdCell.innerText = deliveryResult.orderId;
 		orderIdCell.classList.add("result-cell");
-		var colorClass = deliveryResult.resultStatus == "Success" ? null : "color-Failed";
-		if (colorClass != null) {
-			orderIdCell.classList.add(colorClass);
+		if (faColor != 'success') {
+			orderIdCell.classList.add(`color-${faColor}`);
 		}
 		tableRow.appendChild(orderIdCell);
 

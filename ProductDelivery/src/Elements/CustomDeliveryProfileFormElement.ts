@@ -18,7 +18,6 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 		<option value="" disabled selected>Select Type</option>
 		<option>FTP</option>
 		<option>FTPS</option>
-		<option>SFTP</option>
 	</select>
 	<label id="lblFileTemplate">File Name (template)</label>
 	<input id="fileTemplate" placeholder="Enter file name" autocomplete="off" onblur=''>
