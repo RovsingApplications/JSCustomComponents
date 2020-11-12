@@ -30,12 +30,12 @@ import Globals from '../Globals/Globals';
 	}
 	.action
 	{
-		 background-color: Transparent;
-    background-repeat:no-repeat;
-    border: none;
-    cursor:pointer;
-    overflow: hidden;
-    outline:none;
+	background-color: Transparent;
+	background-repeat:no-repeat;
+	border: none;
+	cursor:pointer;
+	overflow: hidden;
+	outline:none;
 	}
 	.color-fail
 	{

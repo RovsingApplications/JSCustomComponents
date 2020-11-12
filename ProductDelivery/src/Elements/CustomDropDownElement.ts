@@ -2,59 +2,80 @@ import CustomElement from "../../../Framework/custom-element.decorator";
 import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 
 @CustomElement({
-	selector: 'delivery-result',
+	selector: 'custom-dropdown-element',
 	template: `
-	<div class='dropdown'>
-		<div class='dropdown_value'></div>
-		<div class='dropdown_arrow'>▾</div>
-		<div class='dropdown_panel'>
-		<div class='dropdown_items'></div>
+	<div class="divWrapper">
+		<div class='dropdown'>
+			<div class='dropdown_value'></div>
+			<div class='dropdown_arrow'>▾</div>
+			<div class='dropdown_panel'>
+				<div class='dropdown_items'></div>
+			</div>
 		</div>
-	</div>
+		<input class="readOnlyOption" readonly>
+	</div>	
 	`,
 	style: `
-	/* step1 */
-	body {
-		background: #ccc;
+	.divWrapper {
+		width: 100%;
+		height: 48px;
 	}
-
-	/* step1 */
 	.dropdown {
 		text-align:left;
-	color: #333;
+		font-family: "Mulish", sans-serif;
+		color: #000;
 		user-select: none;
-		border-radius: 5px;
-		background: white;
+		border-radius: 4px;
 		cursor: pointer;
-		width: 200px;
-		height: 30px;
-		line-height: 30px;
+		width: 100%;
+		height: 34px;
+		line-height: 20px;
 		display: inline-block;
 		position: relative;
-		font-size: 1.2em;
-		font-family: Arial;
-		background: white;
-		box-shadow: 2px 2px 2px #999;
-		border: 1px solid #aaa;
+		box-sizing: border-box;
+		border: 1px solid #DFDFDF;
+		background: #fff;
+		margin-bottom: 15px;
 	}
 
-	/* step1 */
+	.readOnlyOption {
+		width: 97%;
+		height: 32px;
+		margin-bottom: 1px;
+		margin-left: 1px;
+		position: relative;
+		top: -53px;
+		border: 0;
+		padding-left: 5px;
+		text-align:left;
+		font-family: "Mulish", sans-serif;
+		outline: none;
+	}
+
 	.dropdown_value {
 		display: inline-block;
 		padding-left: 5px;
 	}
 
-	/* step1 */
+	.add-custom-button{
+		float:left;
+		background-color: Transparent;
+		border: none;
+		cursor:pointer;
+		overflow: hidden;
+		outline:none;
+	}
+
 	.dropdown_arrow {
 		transition: all 0.2s ease;
 		position: absolute;
-		right: 5px;
-		top: 0px;
-		color: #ccc;
+		right: 0px;
+		top: 8.3px;
+		height: 7.41px
+		color: #000000 54%;
 		font-size: 25px;
 	}
 
-	/* step2 */
 	.dropdown_panel {
 		position: absolute;
 		background: transparent;
@@ -67,7 +88,6 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 		pointer-events: none;
 	}
 
-	/* step2 */
 	.dropdown_items {
 		position: absolute;
 		pointer-events: all;
@@ -85,50 +105,141 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 		border: 1px solid #aaa;
 	}
 
-	/* step2 */
 	.dropdown_item {
-		padding: 5px;
+		padding-left: 25px;
+		height:25px;
 	}
 
-	/* step2 */
+	.addplaceholder_item {
+		background: #FFFFFF;
+	}
+
 	.dropdown_item:hover {
 		background: #eee;
 	}
 
-	/* step2 */
 	.dropdown ::-webkit-scrollbar {
 		width: 8px;
 	}
 
-	/* step2 */
 	.dropdown ::-webkit-scrollbar-thumb {
 		background-color: #999;
 	}
-		
+	
+	.fa-plus-circle{
+	 color :darkblue;
+	 width :13.33px;
+	 height:13.33px;
+	 top :1px;
+	 left:1px;
+	}
+
+	.add-custom-text
+	{
+		font-family: "Mulish", sans-serif;
+		font-size: 12px;
+		margin-top:5px;
+	 	margin-bottom:5px;
+	}
+
 	`,
 	useShadow: false,
 })
 export default class CustomDropDownElement extends CustomHTMLBaseElement {
 
 
-	private paragrapghElement: HTMLParagraphElement;
-	private change = new Event('change');
+	private divDropDownItems: HTMLDivElement;
+	private divDropDownParent: HTMLDivElement;
+	private divArrow: HTMLDivElement;
+	private divValue: HTMLDivElement;
+	private readonlyInput: HTMLInputElement;
+	private addPlaceholderButton: HTMLButtonElement;
+	private isVisible: boolean;
+
+
 
 	constructor() {
 		super();
 	}
 
 	componentDidMount() {
+		this.divDropDownItems = this.getChildElement('.dropdown_items');
+		this.divDropDownParent = this.getChildElement('.dropdown');
+		this.divArrow = this.getChildElement('.dropdown_arrow');
+		this.divValue = this.getChildElement('.dropdown_value');
+		this.readonlyInput = this.getChildElement('.readOnlyOption');
+
 
 		this.getAttributeNames().forEach(attributeName => {
 			let attributeValue = this.getAttribute(attributeName);
 			this.attributeChanged(attributeName, null, attributeValue);
 		});
+		this.addListeners();
 	}
 
-	eventListener() {
-
+	addListeners() {
+		this.divDropDownParent.addEventListener('mousedown', this.handleVisibility.bind(this));
+		this.readonlyInput.addEventListener('click', this.handleVisibility.bind(this));
+		this.addEventListener("divItemClick", this.clickedItem.bind(this));
 	}
+
+	handleVisibility() {
+		if (this.isVisible) {
+			this.hideData();
+		}
+		else {
+			this.showData();
+		}
+	}
+
+	showData() {
+		this.isVisible = true;
+		this.divDropDownItems.style.transform = 'translate(0px,0px)';
+		this.divArrow.style.transform = 'rotate(180deg)';
+	}
+
+	hideData() {
+		this.isVisible = false;
+		this.divDropDownItems.style.transform = 'translate(0px,-255px)';
+		this.divArrow.style.transform = 'rotate(0deg)';
+	}
+
+
+	addElement(item): any {
+		var divDropDownItem = document.createElement('div');
+		divDropDownItem.innerHTML = `<div>${item}</div>`;
+		divDropDownItem.classList.add("dropdown_item");
+		divDropDownItem.addEventListener('click', e => {
+			const customDivClick = new CustomEvent('divItemClick', { bubbles: true, composed: true, detail: { item: item } });
+			this.dispatchEvent(customDivClick);
+		});
+		return divDropDownItem;
+	}
+
+	clickedItem(event: Event): void {
+		event.preventDefault();
+		console.log('wasclicked');
+	}
+
+	getValue(): string {
+		var value = this.readonlyInput.innerText;
+		return value;
+	}
+
+	initializePathPlaceholders() {
+		let placeholderList: string[] = ['System/Library/Core', 'User/Projects/Product/Delivery', 'D:/Projects/User/PD/CustomFields', 'D:/Projects/User/PD/CustomFields'];
+		placeholderList.forEach(item => this.divDropDownItems.appendChild(this.addElement(item)));
+	}
+
+	initializeFileNamePlaceholders() {
+		let placeholderList: string[] = ['{Placeholder 1}', '{Placeholder 2}', '{Placeholder 3}', '{Placeholder 4}', '{Placeholder 5}', '{Placeholder 6}', '{Placeholder 7}', '{Placeholder 8}'];
+		placeholderList.forEach(item => this.divDropDownItems.appendChild(this.addElement(item)));
+	}
+	/*clicked(event: Event): void {
+			event.stopPropagation();
+			//this.hideData();
+			alert('you click here');
+		}*/
 
 	private attributeChangedCallback(name: string, oldVal: string, newVal: string) {
 		this.attributeChanged(name, oldVal, newVal);
@@ -136,7 +247,12 @@ export default class CustomDropDownElement extends CustomHTMLBaseElement {
 
 	private attributeChanged(name: string, oldVal: string, newVal: string) {
 		switch (name) {
-
+			case 'placeholder':
+				this.changePlaceholderValue(newVal)
+				break;
 		}
+	}
+	changePlaceholderValue(placeholderValue: string) {
+		this.readonlyInput.placeholder = placeholderValue;
 	}
 }

@@ -109,9 +109,6 @@ import DeliveryResult from "../models/DeliveryResult";
 		padding-bottom:12px;
 		padding-top:12px;
 		line-height: 18px;
-	}
-	input,
-	select {
 		width: 100%;
 		height: 34px;
 		border-radius: 4px;

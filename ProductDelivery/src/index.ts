@@ -7,6 +7,7 @@ import CustomDeliveryEventTableElement from './Elements/CustomDeliveryEventTable
 import CustomDeliveryProfileFormElement from './Elements/CustomDeliveryProfileFormElement';
 import CustomDeliveryResultElement from './Elements/CustomDeliveryResultElement';
 import ProductDeliveryWebElement from './ProductDeliveryWebElement';
+import CustomDropDownElement from './Elements/CustomDropDownElement';
 
 export {
 	CustomDeliveryEventTableElement,

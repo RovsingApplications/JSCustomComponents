@@ -12,21 +12,36 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 	<label id="lblurl">Ftp Url</label>
 	<input id="url" placeholder="Enter Url" autocomplete="off""></input>
 	<label id="lblport">Port</label>
-	<input id="port" placeholder="Enter Port" autocomplete="off" onblur=''></input>
+	<input id="port" type="number" placeholder="Enter Port" autocomplete="off"></input>
 	<label id="lbltype">Type</label>
-	<select id="type" class="select">
+	<select id="type" class="select-element">
 		<option value="" disabled selected>Select Type</option>
 		<option>FTP</option>
 		<option>FTPS</option>
 	</select>
-	<label id="lblFileTemplate">File Name (template)</label>
-	<input id="fileTemplate" placeholder="Enter file name" autocomplete="off" onblur=''>
-	<label id="lblpath">Path</label>
-	<input id="path" placeholder="Enter Path" autocomplete="off" onblur=''></input>
-	<input name="pathResult" readonly placeholder="/..."></input>
+	<div class="divPlaceholderWrapper">
+		<div class="divPlaceholderWrapper__divSelectPlaceholder">
+			<select id="placeholder" class="divPlaceholderWrapper__select">
+				<option value="" disabled selected>Select Placeholder</option>
+				<option>OrderId</option>
+				<option>Signer.Name</option>
+				<option>Signer.Identification</option>
+				<option>Signer.Title</option>
+				<option>Document.AgreementId</option>
+				<option>Document.FileName</option>
+			</select>
+			<button id="btnAdd" class="divPlaceholderWrapper__button button">Add</button>
+		</div>	
+		<div>
+			<label id="lblFileTemplate">File Name (template)</label>
+			<input id="fileTemplate" placeholder="Select file name" autocomplete="off">
+			<label id="lblpath">Path</label>
+			<input id="path" placeholder="Select Path" autocomplete="off" ></input>
+		</div>
+	</div>
 	<label id="lblFileTemplate">Contact Person</label>
-	<input id="username" placeholder="Enter Email" autocomplete="off" onblur=''></input>
-</form>
+	<input id="username" placeholder="Enter Email" autocomplete="off"></input>
+	</form>
 	`,
 	style: `
 
@@ -62,6 +77,40 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 	.form-control.error  {
 		border-color: #CE2828
 	}
+	.divPlaceholderWrapper{
+		margin-top:13px;
+	}
+	.divPlaceholderWrapper--divSelectPlaceholder
+	{
+
+	}
+
+	.divPlaceholderWrapper__select {
+		width: 81%;
+		height: 34px;
+		border-radius: 4px;
+		box-sizing: border-box;
+		border: 1px solid #DFDFDF;
+		background: #fff;
+		margin-bottom: 15px;
+		display:inline-block;
+	}
+	.divPlaceholderWrapper__button {
+		display:inline-block;
+		height: 33px;
+		margin-top:-0px;
+		margin-bottom: -10px;
+		
+	}
+	.select-element {
+		width: 100%;
+		height: 34px;
+		border-radius: 4px;
+		box-sizing: border-box;
+		border: 1px solid #DFDFDF;
+		background: #fff;
+		margin-bottom: 15px;
+	}
 	`,
 	useShadow: false,
 })
@@ -73,6 +122,10 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	private filenameInput: HTMLInputElement;
 	private pathInput: HTMLInputElement;
 	private contactInput: HTMLInputElement;
+	// placeholder fields
+	private placeholderSelect: HTMLSelectElement;
+	private placeholderAddbtn: HTMLButtonElement;
+	private placeholderType: string = null;
 
 
 	private nativeInput: HTMLInputElement;
@@ -97,6 +150,8 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		this.filenameInput = (this.getChildElement('#fileTemplate') as HTMLInputElement);
 		this.pathInput = (this.getChildElement('#path') as HTMLInputElement);
 		this.contactInput = (this.getChildElement('#username') as HTMLInputElement);
+		this.placeholderSelect = (this.getChildElement('#placeholder') as HTMLSelectElement);
+		this.placeholderAddbtn = (this.getChildElement('#btnAdd') as HTMLButtonElement);
 
 
 		this.getAttributeNames().forEach(attributeName => {
@@ -109,13 +164,38 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	private addListeners() {
 		this.ftpUrlInput.addEventListener("blur", this.validateFtpUrl.bind(this));
 		this.ftpPortInput.addEventListener("blur", this.validateFtpPort.bind(this));
-		this.filenameInput.addEventListener("blur", this.validatEmptyField.bind(this));
-		this.pathInput.addEventListener("blur", this.validatEmptyField.bind(this));
+		this.filenameInput.addEventListener("blur", this.lostFocusEvent.bind(this));
+		this.pathInput.addEventListener("blur", this.lostFocusEvent.bind(this));
 		this.contactInput.addEventListener("blur", this.validateEmailField.bind(this));
-		this.typeElement.addEventListener("change", this.validateTypeField.bind(this));
+		this.typeElement.addEventListener("change", this.validateSelectField.bind(this));
+		this.placeholderAddbtn.addEventListener("click", this.addPlaceholderValue.bind(this));
+		this.placeholderSelect.addEventListener("change", this.validateSelectField.bind(this));
 	}
 
-	validateTypeField(event: Event): void {
+	addPlaceholderValue(event: Event): void {
+		event.preventDefault();
+		if (this.placeholderSelect.selectedIndex === 0) {
+			//this.setErrorfor(this.placeholderSelect);
+			this.placeholderSelect.style.borderColor = '#CE2828'
+		}
+		else {
+			var selectedValue = this.placeholderSelect.selectedOptions[0].value;
+			let existingValue = '';
+			if (this.placeholderType === 'file') {
+				existingValue = this.filenameInput.value;
+				existingValue += `{${selectedValue}}` + ' ';
+				this.filenameInput.value = existingValue;
+			}
+			else {
+				existingValue = this.pathInput.value;
+				existingValue += `{${selectedValue}}` + ' ';
+				this.pathInput.value = existingValue;
+			}
+			this.placeholderType = null;
+		}
+	}
+
+	validateSelectField(event: Event): void {
 		event.preventDefault();
 		const selectElement = event.currentTarget as HTMLSelectElement;
 		if (selectElement.selectedIndex != 0) {
@@ -126,18 +206,17 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		}
 	}
 
-
-	validatEmptyField(event: Event): void {
+	lostFocusEvent(event: Event): void {
 		event.preventDefault();
-		const inputField = event.currentTarget as HTMLInputElement;
-		if (inputField.value.length != 0) {
-			inputField.style.borderColor = '#28BECE'
+		const element = event.currentTarget as HTMLElement;
+		if (element.id === 'fileTemplate') {
+			this.placeholderType = 'file';
 		}
 		else {
-			inputField.style.borderColor = '#CE2828'
+			this.placeholderType = 'path';
 		}
-	}
 
+	}
 
 	validateEmailField(event: Event): void {
 		event.preventDefault();
@@ -221,7 +300,7 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 			this.setSucessFor(this.ftpUrlInput)
 		}
 		// validate port
-		if (!this.ftpPortRexExp.test(port) && port.length != 0) {
+		if (!this.ftpPortRexExp.test(port) || (port == '')) {
 			this.setErrorfor(this.ftpPortInput);
 			hasValidData = false;
 		}
@@ -230,7 +309,7 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		}
 		// validate type
 		if (protocol === 0) {
-			this.setErrorfor(this.typeElement);
+			this.typeElement.style.borderColor = '#CE2828'
 			hasValidData = false;
 		}
 		else {
