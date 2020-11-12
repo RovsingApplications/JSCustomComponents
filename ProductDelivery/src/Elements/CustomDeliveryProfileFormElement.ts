@@ -4,6 +4,7 @@ import { FTPType } from "../../models/FTPType";
 import IDeliveryProfile from "../../models/IDeliveryProfile";
 import CustomDeliveryEventTableElement from "./CustomDeliveryEventTableElement";
 import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
+import Interpolation from "../../models/Interpolation";
 
 @CustomElement({
 	selector: 'delivery-profile-form',
@@ -23,20 +24,14 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 		<div class="divPlaceholderWrapper__divSelectPlaceholder">
 			<select id="placeholder" class="divPlaceholderWrapper__select">
 				<option value="" disabled selected>Select Placeholder</option>
-				<option>OrderId</option>
-				<option>Signer.Name</option>
-				<option>Signer.Identification</option>
-				<option>Signer.Title</option>
-				<option>Document.AgreementId</option>
-				<option>Document.FileName</option>
 			</select>
 			<button id="btnAdd" class="divPlaceholderWrapper__button button">Add</button>
 		</div>	
 		<div>
 			<label id="lblFileTemplate">File Name (template)</label>
-			<input id="fileTemplate" placeholder="Select file name" autocomplete="off">
+			<input id="fileTemplate" placeholder="Add file name" autocomplete="off">
 			<label id="lblpath">Path</label>
-			<input id="path" placeholder="Select Path" autocomplete="off" ></input>
+			<input id="path" placeholder="Add Path" autocomplete="off" ></input>
 		</div>
 	</div>
 	<label id="lblFileTemplate">Contact Person</label>
@@ -126,7 +121,8 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	private placeholderSelect: HTMLSelectElement;
 	private placeholderAddbtn: HTMLButtonElement;
 	private placeholderType: string = null;
-
+	private filePlaceholderType: string = 'file';
+	private pathPlaceholderType: string = 'path';
 
 	private nativeInput: HTMLInputElement;
 	ftpUrlRexExp: RegExp = /^(?:(?:ftps?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/i;
@@ -158,7 +154,18 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 			let attributeValue = this.getAttribute(attributeName);
 			this.attributeChanged(attributeName, null, attributeValue);
 		});
+		this.initializeInterpolation();
 		this.addListeners();
+	}
+
+	private initializeInterpolation() {
+
+		for (var index = 0; index < Interpolation.InperpolationList.length; index++) {
+			var option = document.createElement("option");
+			option.textContent = Interpolation.InperpolationList[index];
+			option.value = `{${Interpolation.InperpolationList[index]}}`;
+			this.placeholderSelect.appendChild(option);
+		}
 	}
 
 	private addListeners() {
@@ -175,20 +182,19 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	addPlaceholderValue(event: Event): void {
 		event.preventDefault();
 		if (this.placeholderSelect.selectedIndex === 0) {
-			//this.setErrorfor(this.placeholderSelect);
 			this.placeholderSelect.style.borderColor = '#CE2828'
 		}
 		else {
 			var selectedValue = this.placeholderSelect.selectedOptions[0].value;
 			let existingValue = '';
-			if (this.placeholderType === 'file') {
+			if (this.placeholderType === this.filePlaceholderType) {
 				existingValue = this.filenameInput.value;
-				existingValue += `{${selectedValue}}` + ' ';
+				existingValue += selectedValue + ' ';
 				this.filenameInput.value = existingValue;
 			}
-			else {
+			else if (this.placeholderType === this.pathPlaceholderType) {
 				existingValue = this.pathInput.value;
-				existingValue += `{${selectedValue}}` + ' ';
+				existingValue += selectedValue + ' ';
 				this.pathInput.value = existingValue;
 			}
 			this.placeholderType = null;
@@ -210,10 +216,10 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		event.preventDefault();
 		const element = event.currentTarget as HTMLElement;
 		if (element.id === 'fileTemplate') {
-			this.placeholderType = 'file';
+			this.placeholderType = this.filePlaceholderType;
 		}
 		else {
-			this.placeholderType = 'path';
+			this.placeholderType = this.pathPlaceholderType;
 		}
 
 	}
