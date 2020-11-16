@@ -286,8 +286,6 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 		this.customDeliveryEventTableElement = this.getChildElement('delivery-event-table');
 		this.customDeliveryProfileFormElement = this.getChildElement('delivery-profile-form');
 		this.customDeliveryResultElement = this.getChildElement('delivery-result');
-		this.customDeliveryEventTableElement.customDeliveryResult = this.customDeliveryResultElement;
-
 
 		this.getAttributeNames().forEach(attributeName => {
 			let attributeValue = this.getAttribute(attributeName);
@@ -319,6 +317,7 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 
 	private submitDeliveryForm() {
 		if (this.customDeliveryProfileFormElement.checkInputs()) {
+			this.customDeliveryResultElement.clearContent();
 			var deliveryProfile = this.customDeliveryProfileFormElement.getProfile();
 			const headerName = Constants.apiKeyHeaderName;
 			const req = new MakeRequest(
@@ -342,6 +341,7 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 
 	private tryDelivery() {
 		if (this.customDeliveryProfileFormElement.checkInputs()) {
+			this.customDeliveryResultElement.clearContent();
 			var deliveryProfile = this.customDeliveryProfileFormElement.getProfile();
 			const headerName = Constants.apiKeyHeaderName;
 			const req = new MakeRequest(

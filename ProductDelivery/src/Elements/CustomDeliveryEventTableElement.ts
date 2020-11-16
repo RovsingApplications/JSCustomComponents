@@ -92,7 +92,6 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 
 
 	private GetAllDeliveryResults() {
-
 		const headerName = Constants.apiKeyHeaderName;
 		const request = new MakeRequest(
 			`https://localhost:5001/Results/get?customerId=6657`,

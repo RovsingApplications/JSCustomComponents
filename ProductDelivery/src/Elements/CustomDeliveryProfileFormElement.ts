@@ -319,7 +319,7 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 			hasValidData = false;
 		}
 		else {
-			this.setSucessFor(this.typeElement);
+			this.typeElement.style.borderColor = '#28BECE'
 		}
 
 		// validate filename
