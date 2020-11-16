@@ -6,6 +6,7 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 import Constants from "../Framework/Constants/Constants";
 import MakeRequest from "../../../Branding/src/Framework/Utilities/MakeRequest";
 import Globals from '../Globals/Globals';
+import CustomDeliveryResultElement from '../Elements/CustomDeliveryResultElement';
 
 @CustomElement({
 	selector: 'delivery-event-table',
@@ -45,6 +46,9 @@ import Globals from '../Globals/Globals';
 	{
 		color: #28BECE;
 	}
+	.fa-play{
+		color: #003E64;
+	}
 	`,
 	useShadow: false,
 })
@@ -54,6 +58,7 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 
 	private deliveryTable: HTMLTableElement;
 	private nativeInput: HTMLInputElement;
+	private customDeliveryResult: CustomDeliveryResultElement;
 	private change = new Event('change');
 
 	constructor() {
@@ -149,7 +154,6 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 
 	private runAction(event: Event): void {
 		event.preventDefault();
-
 		const headerName = Constants.apiKeyHeaderName;
 		const request = new MakeRequest(
 			`${Globals.apiUrl}Delivery/run?resultId=${this.id}`,
@@ -161,17 +165,36 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 		)
 			.send()
 			.then(response => {
-				var myRunEvent = new CustomEvent('show-result', {
+				var deliveryResult = new DeliveryResult(JSON.parse(response as string));
+				this.customDeliveryResult.AddEvents(deliveryResult.eventLog);
+				this.updateDeliveryResultRowStatus(deliveryResult);
+
+				/*var myRunEvent = new CustomEvent('show-result', {
 					bubbles: true,
 					composed: true,
 					detail: response // ensure response it the correct deliveryResult json
 				});
-				document.dispatchEvent(myRunEvent);
+				document.dispatchEvent(myRunEvent);*/
 			})
 			.catch(exception => {
 				console.log(exception)
 			});
 	}
+
+
+	updateDeliveryResultRowStatus(deliveryResult: DeliveryResult) {
+		let resultIdColumn = 1;
+		let statuscolumn = 2;
+		let resultId = '';
+		for (var i = 0, row; row = this.deliveryTable.rows[i]; i++) {
+			resultId = (row as HTMLTableRowElement).cells[resultIdColumn].innerText;
+			if (resultId === deliveryResult.id) {
+				(row as HTMLTableRowElement).cells[statuscolumn].innerText = deliveryResult.resultStatus;
+			}
+		}
+	}
+
+
 
 	showResult(event: Event): void {
 		event.preventDefault();
