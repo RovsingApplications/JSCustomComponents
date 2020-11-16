@@ -28,6 +28,7 @@ import CustomDeliveryResultElement from '../Elements/CustomDeliveryResultElement
 	.result-cell
 	{
 		padding-left: 23px;
+		color: #000;
 	}
 	.action
 	{
@@ -55,10 +56,9 @@ import CustomDeliveryResultElement from '../Elements/CustomDeliveryResultElement
 
 
 export default class CustomDeliveryEventTableElement extends CustomHTMLBaseElement {
-
 	private deliveryTable: HTMLTableElement;
 	private nativeInput: HTMLInputElement;
-	private customDeliveryResult: CustomDeliveryResultElement;
+	public customDeliveryResult: CustomDeliveryResultElement;
 	private change = new Event('change');
 
 	constructor() {
@@ -87,11 +87,11 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 			let attributeValue = this.getAttribute(attributeName);
 			this.attributeChanged(attributeName, null, attributeValue);
 		});
-		this.GetDeliveryResults();
+		this.GetAllDeliveryResults();
 	}
 
 
-	private GetDeliveryResults() {
+	private GetAllDeliveryResults() {
 
 		const headerName = Constants.apiKeyHeaderName;
 		const request = new MakeRequest(
@@ -128,7 +128,7 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 		tableRow.appendChild(iconCell);
 
 		var orderIdCell = tableRow.insertCell(1);
-		orderIdCell.innerText = deliveryResult.orderId;
+		orderIdCell.innerText = deliveryResult.id;
 		orderIdCell.classList.add("result-cell");
 		if (faColor != 'success') {
 			orderIdCell.classList.add(`color-${faColor}`);
@@ -156,7 +156,7 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 		event.preventDefault();
 		const headerName = Constants.apiKeyHeaderName;
 		const request = new MakeRequest(
-			`${Globals.apiUrl}Delivery/run?resultId=${this.id}`,
+			`https://localhost:5001/Delivery/run?resultId=${this.id}`,
 			'post',
 			{
 				[headerName]: Globals.apiKey,
@@ -166,35 +166,61 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 			.send()
 			.then(response => {
 				var deliveryResult = new DeliveryResult(JSON.parse(response as string));
-				this.customDeliveryResult.AddEvents(deliveryResult.eventLog);
-				this.updateDeliveryResultRowStatus(deliveryResult);
-
-				/*var myRunEvent = new CustomEvent('show-result', {
+				let showDataEvent = new CustomEvent('show-result', {
 					bubbles: true,
 					composed: true,
-					detail: response // ensure response it the correct deliveryResult json
+					detail: deliveryResult
 				});
-				document.dispatchEvent(myRunEvent);*/
+				let updateSingleRowEvent = new CustomEvent('update-single-row', {
+					bubbles: true,
+					composed: true,
+					detail: deliveryResult
+				});
+				document.dispatchEvent(showDataEvent);
+				document.dispatchEvent(updateSingleRowEvent);
 			})
 			.catch(exception => {
 				console.log(exception)
 			});
 	}
 
-
 	updateDeliveryResultRowStatus(deliveryResult: DeliveryResult) {
-		let resultIdColumn = 1;
+		// if we want load all records from DB following code can use
+		//this.deliveryTable.innerHTML = "";
+		//this.GetAllDeliveryResults();
+		// otherwise update only spceific row as follows.
 		let statuscolumn = 2;
-		let resultId = '';
+		let resultCell = null;
+		var faIcon = deliveryResult.resultStatus == "Success" ? 'link' : "unlink";
+		var faColor = deliveryResult.resultStatus == "Success" ? 'success' : 'fail';
 		for (var i = 0, row; row = this.deliveryTable.rows[i]; i++) {
-			resultId = (row as HTMLTableRowElement).cells[resultIdColumn].innerText;
-			if (resultId === deliveryResult.id) {
+			// retrive result id row cell
+			resultCell = (row as HTMLTableRowElement).cells[1] as HTMLTableDataCellElement;
+			if (resultCell.innerText === deliveryResult.id) {
+
+				(row as HTMLTableRowElement).cells[0].innerHTML = `<i class="fas fa-${faIcon} rotate-45 color-${faColor}"></i>`;
+
 				(row as HTMLTableRowElement).cells[statuscolumn].innerText = deliveryResult.resultStatus;
+
+				var cssClasses = resultCell.classList as string[];
+				for (var j = cssClasses.length - 1; j >= 0; j--) {
+					var className = resultCell.classList[j];
+					resultCell.classList.remove(className);
+				}
+				if (faColor != 'success') {
+					resultCell.classList.add(`color-${faColor}`);
+				}
+				resultCell.classList.add(`result-cell`);
 			}
 		}
 	}
 
 
+	updateDeliveryResultRowsStatus(deliveryResults: DeliveryResult[]) {
+		deliveryResults.forEach((item) => {
+			this.updateDeliveryResultRowStatus(item);
+		});
+	}
 
 	showResult(event: Event): void {
 		event.preventDefault();

@@ -286,6 +286,7 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 		this.customDeliveryEventTableElement = this.getChildElement('delivery-event-table');
 		this.customDeliveryProfileFormElement = this.getChildElement('delivery-profile-form');
 		this.customDeliveryResultElement = this.getChildElement('delivery-result');
+		this.customDeliveryEventTableElement.customDeliveryResult = this.customDeliveryResultElement;
 
 
 		this.getAttributeNames().forEach(attributeName => {
@@ -300,6 +301,20 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 		this.saveButton.addEventListener("click", this.submitDeliveryForm.bind(this));
 		this.tryButton.addEventListener("click", this.tryDelivery.bind(this));
 		this.runAllFailButton.addEventListener("click", this.runAllFail.bind(this));
+		document.addEventListener('show-result', (evt) => this.showResult(evt as CustomEvent));
+		document.addEventListener('update-single-row', (evt) => this.updateDeliveryResultRow(evt as CustomEvent));
+	}
+
+	updateDeliveryResultRow(evt: CustomEvent): void {
+		evt.preventDefault();
+		var deliveryResult = evt.detail as DeliveryResult;
+		this.customDeliveryEventTableElement.updateDeliveryResultRowStatus(deliveryResult);
+	}
+
+	showResult(evt: CustomEvent): void {
+		evt.preventDefault();
+		this.customDeliveryResultElement.clearContent();
+		this.customDeliveryResultElement.AddEvents(evt.detail);
 	}
 
 	private submitDeliveryForm() {
@@ -322,12 +337,12 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 
 	private addDeliveryResult(response: any): void {
 		this.deliveryResult = new DeliveryResult(JSON.parse(response as string));
-		this.customDeliveryResultElement.AddEvents(this.deliveryResult.eventLog);
+		this.customDeliveryResultElement.AddEvents(this.deliveryResult);
 	}
 
 	private tryDelivery() {
 		if (this.customDeliveryProfileFormElement.checkInputs()) {
-			var deliveryProfile = this.customDeliveryProfileFormElement.getTestProfile();
+			var deliveryProfile = this.customDeliveryProfileFormElement.getProfile();
 			const headerName = Constants.apiKeyHeaderName;
 			const req = new MakeRequest(
 				`${Globals.apiUrl}delivery/test`,
@@ -352,7 +367,9 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 			'Content-Type': 'application/json'
 		}
 		).send().then(response => {
-
+			var deliveryResults = (JSON.parse(response as string)) as DeliveryResult[];
+			this.customDeliveryEventTableElement.updateDeliveryResultRowsStatus(deliveryResults);
+			this.customDeliveryResultElement.AddEventsForDeliveryResults(deliveryResults);
 		}).catch(exception => {
 			console.log(exception)
 		});

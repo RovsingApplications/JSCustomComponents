@@ -9,8 +9,6 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 <!-- move this to a independent web component -->
 <label>Delivery result</label>
 <div class="result-box pad-10">
-	<p>
-	</p>
 </div>
 	`,
 	style: `
@@ -41,8 +39,7 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 })
 export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 
-
-	private paragrapghElement: HTMLParagraphElement;
+	private mainDivElement: HTMLParagraphElement;
 	private change = new Event('change');
 
 	constructor() {
@@ -50,7 +47,7 @@ export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 	}
 
 	componentDidMount() {
-		this.paragrapghElement = this.getChildElement('.result-box p');
+		this.mainDivElement = this.getChildElement('.result-box');
 		this.InitialResultText();
 		this.getAttributeNames().forEach(attributeName => {
 			let attributeValue = this.getAttribute(attributeName);
@@ -58,29 +55,41 @@ export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 		});
 	}
 
-	eventListener() {
-		this.addEventListener('show-result', this.showResut.bind(this));
-	}
-
-	showResut(event: CustomEvent): void {
-		this.paragrapghElement.textContent = "";
-		var deliveryResult = event.detail as DeliveryResult;
-		var preElement = new HTMLPreElement();
-		preElement.innerHTML = `$ ${deliveryResult.eventLog.join('$ \n')}`;
-		this.paragrapghElement.appendChild(preElement);
-	}
-
 	InitialResultText() {
-		this.paragrapghElement.innerHTML = `<p> <b>Awaiting test</b> </br>
-		Please enter your credential and test your connection to product delivery</p> `
+		var paraElement = document.createElement("p");
+		paraElement.innerHTML = `<b>Awaiting test</b> </br>
+		Please enter your credential and test your connection to product delivery`;
+		this.mainDivElement.appendChild(paraElement);
 	}
 
-	AddEvents(log: any): void {
-		//console.log(typeof log);
-		this.paragrapghElement.textContent = "";
-		log.forEach(event => {
-			this.paragrapghElement.innerHTML += `$ ${event} <br/>`;
+	AddEventsForDeliveryResults(deliveryResults: DeliveryResult[]) {
+		this.clearContent();
+		deliveryResults.forEach(item => {
+			this.AddEvents(item);
 		});
+	}
+
+	clearContent() {
+		this.mainDivElement.innerHTML = "";
+	}
+
+	AddEvents(deliveryResult: DeliveryResult): void {
+
+		var divElement = document.createElement("div");
+		var labelText = document.createElement("label");
+		labelText.innerText = `${deliveryResult.id}`
+		var unOrderedList = document.createElement("ul");
+
+		(deliveryResult.eventLog as string[]).forEach(eve => {
+			var node = document.createElement("LI");
+			var textnode = document.createTextNode(`$ ${eve}`);
+			node.appendChild(textnode);
+			unOrderedList.appendChild(node);
+		});
+
+		divElement.appendChild(labelText);
+		divElement.appendChild(unOrderedList);
+		this.mainDivElement.appendChild(divElement);
 	}
 
 	private static get observedAttributes() {

@@ -81,7 +81,7 @@ import Interpolation from "../../models/Interpolation";
 	}
 
 	.divPlaceholderWrapper__select {
-		width: 81%;
+		width: 78%;
 		height: 34px;
 		border-radius: 4px;
 		box-sizing: border-box;
