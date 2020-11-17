@@ -262,6 +262,7 @@ import DeliveryResult from "../models/DeliveryResult";
 `,
 	useShadow: true,
 })
+
 export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 	private saveButton: HTMLButtonElement;
 	private tryButton: HTMLButtonElement;
@@ -291,7 +292,6 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 			let attributeValue = this.getAttribute(attributeName);
 			this.attributeChanged(attributeName, null, attributeValue);
 		});
-
 		this.addListeners();
 	}
 
@@ -377,10 +377,6 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 
 	private changeLanguage(language: string) {
 		// implement language change
-	}
-
-	private static get observedAttributes() {
-		return ['language'];
 	}
 
 	attributeChangedCallback(name: string, oldVal: string, newVal: string) {

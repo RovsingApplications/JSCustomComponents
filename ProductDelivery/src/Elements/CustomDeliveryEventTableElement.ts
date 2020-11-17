@@ -90,14 +90,16 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 		this.GetAllDeliveryResults();
 	}
 
-
+	//load all deliveryResults into table.
 	private GetAllDeliveryResults() {
 		const headerName = Constants.apiKeyHeaderName;
+		//`https://localhost:5001/Results/get?customerId=6657`
+		//`ceeab147-adea-4352-9282-0f75b4254942`
 		const request = new MakeRequest(
-			`https://localhost:5001/Results/get?customerId=6657`,
+			`${Globals.apiUrl}Results/get?customerId=6657`,
 			'get',
 			{
-				[headerName]: `ceeab147-adea-4352-9282-0f75b4254942`,
+				[headerName]: Globals.apiKey,
 				'Content-Type': 'application/json'
 			})
 			.send()
@@ -110,10 +112,10 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 			});
 	}
 
+	// create dynamic deliveryResult row 
 	private addDeliveryResultRow(deliveryResult: DeliveryResult) {
 
 		var tableRow = this.deliveryTable.insertRow(0);
-		tableRow.addEventListener('click', this.showResult.bind(deliveryResult));
 		// icon cell
 		var iconCell = tableRow.insertCell(0);
 		var faIcon = deliveryResult.resultStatus == "Success" ? 'link' : "unlink";
@@ -151,11 +153,12 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 		return tableRow;
 	}
 
+	// bind runAction on play button
 	private runAction(event: Event): void {
 		event.preventDefault();
 		const headerName = Constants.apiKeyHeaderName;
 		const request = new MakeRequest(
-			`https://localhost:5001/Delivery/run?resultId=${this.id}`,
+			`${Globals.apiUrl}Delivery/run?resultId=${this.id}`,
 			'post',
 			{
 				[headerName]: Globals.apiKey,
@@ -214,22 +217,10 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 		}
 	}
 
-
 	updateDeliveryResultRowsStatus(deliveryResults: DeliveryResult[]) {
 		deliveryResults.forEach((item) => {
 			this.updateDeliveryResultRowStatus(item);
 		});
-	}
-
-	showResult(event: Event): void {
-		event.preventDefault();
-		var response = this;
-		var myshowResultEvent = new CustomEvent('show-result', {
-			bubbles: true,
-			composed: true,
-			detail: this
-		});
-		document.dispatchEvent(myshowResultEvent);
 	}
 
 	private attributeChanged(name: string, oldVal: string, newVal: string) {
