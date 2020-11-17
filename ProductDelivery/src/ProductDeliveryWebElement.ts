@@ -274,24 +274,20 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 
 	constructor() {
 		super();
-		document.addEventListener('event-send-to-other-component', (event: CustomEventInit<string>) => {
-			console.log("i hear you");
-			var result = event.detail;
-		});
 	}
 
 	componentDidMount() {
+		this.getAttributeNames().forEach(attributeName => {
+			let attributeValue = this.getAttribute(attributeName);
+			this.attributeChanged(attributeName, null, attributeValue);
+		});
 		this.saveButton = this.getChildElement('#save');
 		this.tryButton = this.getChildElement('#try');
 		this.runAllFailButton = this.getChildElement('#runallfail');
 		this.customDeliveryEventTableElement = this.getChildElement('delivery-event-table');
 		this.customDeliveryProfileFormElement = this.getChildElement('delivery-profile-form');
 		this.customDeliveryResultElement = this.getChildElement('delivery-result');
-
-		this.getAttributeNames().forEach(attributeName => {
-			let attributeValue = this.getAttribute(attributeName);
-			this.attributeChanged(attributeName, null, attributeValue);
-		});
+		this.customDeliveryEventTableElement.GetAllDeliveryResults();
 		this.addListeners();
 	}
 

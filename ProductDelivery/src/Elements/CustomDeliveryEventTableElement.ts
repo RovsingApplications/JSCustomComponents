@@ -87,11 +87,11 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 			let attributeValue = this.getAttribute(attributeName);
 			this.attributeChanged(attributeName, null, attributeValue);
 		});
-		this.GetAllDeliveryResults();
+
 	}
 
 	//load all deliveryResults into table.
-	private GetAllDeliveryResults() {
+	GetAllDeliveryResults() {
 		const headerName = Constants.apiKeyHeaderName;
 		//`https://localhost:5001/Results/get?customerId=6657`
 		//`ceeab147-adea-4352-9282-0f75b4254942`
