@@ -122,18 +122,6 @@ import DeliveryResult from "../models/DeliveryResult";
 		height: 20px;
 		margin-top: 10px;
 	}
-
-	/* result-box */
-	.result-box {
-		position: relative;
-		width: 100%;
-		background: #FFFFFF;
-		border: 1px solid #DFDFDF;
-		box-sizing: border-box;
-		border-radius: 4px;
-		height: 457px;
-		margin-top: 10px;
-	}
 	/*wrapper*/
 	.wrapper {
 		width: 100%;

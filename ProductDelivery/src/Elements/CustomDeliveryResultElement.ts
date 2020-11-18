@@ -13,6 +13,18 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 	`,
 	style: `
 
+	/* result-box */
+	.result-box {
+		position: relative;
+		width: 100%;
+		background: #FFFFFF;
+		border: 1px solid #DFDFDF;
+		box-sizing: border-box;
+		border-radius: 4px;
+		height: 457px;
+		margin-top: 10px;
+		overflow: auto;
+	}
 	* {
 		font-family: "Mulish", sans-serif;
 		color: #000;
@@ -74,22 +86,23 @@ export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 	}
 
 	AddEvents(deliveryResult: DeliveryResult): void {
-
-		var divElement = document.createElement("div");
-		var labelText = document.createElement("label");
-		labelText.innerText = `${deliveryResult.id}`
-		var unOrderedList = document.createElement("ul");
-
-		(deliveryResult.eventLog as string[]).forEach(eve => {
-			var node = document.createElement("LI");
-			var textnode = document.createTextNode(`$ ${eve}`);
-			node.appendChild(textnode);
-			unOrderedList.appendChild(node);
-		});
-
-		divElement.appendChild(labelText);
-		divElement.appendChild(unOrderedList);
-		this.mainDivElement.appendChild(divElement);
+		console.log(deliveryResult.eventLog);
+		if (deliveryResult.eventLog != null) {
+			var divElement = document.createElement("div");
+			var labelText = document.createElement("label");
+			labelText.innerText = `${deliveryResult.id}`
+			var unOrderedList = document.createElement("ul");
+			var eventList = (deliveryResult.eventLog as string[]);
+			eventList.forEach(eve => {
+				var node = document.createElement("LI");
+				var textnode = document.createTextNode(`$ ${eve}`);
+				node.appendChild(textnode);
+				unOrderedList.appendChild(node);
+			});
+			divElement.appendChild(labelText);
+			divElement.appendChild(unOrderedList);
+			this.mainDivElement.appendChild(divElement);
+		}
 	}
 
 	private static get observedAttributes() {
