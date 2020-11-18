@@ -351,7 +351,11 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 			'Content-Type': 'application/json'
 		}
 		).send().then(response => {
-			var deliveryResults = (JSON.parse(response as string)) as DeliveryResult[];
+			var results = (JSON.parse(response as string));
+			var deliveryResults = new Array();
+			results.forEach(ele => {
+				deliveryResults.push(ele.result);
+			});
 			this.customDeliveryEventTableElement.updateDeliveryResultRowsStatus(deliveryResults);
 			this.customDeliveryResultElement.AddEventsForDeliveryResults(deliveryResults);
 		}).catch(exception => {
