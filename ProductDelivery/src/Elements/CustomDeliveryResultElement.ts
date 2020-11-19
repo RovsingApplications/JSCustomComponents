@@ -86,7 +86,6 @@ export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 	}
 
 	AddEvents(deliveryResult: DeliveryResult): void {
-		console.log(deliveryResult.eventLog);
 		if (deliveryResult.eventLog != null) {
 			var divElement = document.createElement("div");
 			var labelText = document.createElement("label");
