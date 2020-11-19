@@ -20,6 +20,10 @@ import Interpolation from "../../models/Interpolation";
 		<option>FTP</option>
 		<option>FTPS</option>
 	</select>
+	<label id="lblUsername">Username</label>
+	<input id="username" placeholder="Enter Username" autocomplete="off""></input>
+	<label id="lblPassword">Password</label>
+	<input id="password" type="password" placeholder="Enter password" autocomplete="off"></input>
 	<div class="divPlaceholderWrapper">
 		<div class="divPlaceholderWrapper__divSelectPlaceholder">
 			<select id="placeholder" class="divPlaceholderWrapper__select">
@@ -35,7 +39,7 @@ import Interpolation from "../../models/Interpolation";
 		</div>
 	</div>
 	<label id="lblFileTemplate">Contact Person</label>
-	<input id="username" placeholder="Enter Email" autocomplete="off"></input>
+	<input id="email" placeholder="Enter Email" autocomplete="off"></input>
 	</form>
 	`,
 	style: `
@@ -117,6 +121,8 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	private filenameInput: HTMLInputElement;
 	private pathInput: HTMLInputElement;
 	private contactInput: HTMLInputElement;
+	private passwordInput: HTMLInputElement;
+	private usernameInput: HTMLInputElement;
 	// placeholder fields
 	private placeholderSelect: HTMLSelectElement;
 	private placeholderAddbtn: HTMLButtonElement;
@@ -145,7 +151,9 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		this.typeElement = (this.getChildElement('#type') as HTMLSelectElement);
 		this.filenameInput = (this.getChildElement('#fileTemplate') as HTMLInputElement);
 		this.pathInput = (this.getChildElement('#path') as HTMLInputElement);
-		this.contactInput = (this.getChildElement('#username') as HTMLInputElement);
+		this.contactInput = (this.getChildElement('#email') as HTMLInputElement);
+		this.usernameInput = (this.getChildElement('#username') as HTMLInputElement);
+		this.passwordInput = (this.getChildElement('#password') as HTMLInputElement);
 		this.placeholderSelect = (this.getChildElement('#placeholder') as HTMLSelectElement);
 		this.placeholderAddbtn = (this.getChildElement('#btnAdd') as HTMLButtonElement);
 
@@ -174,6 +182,8 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		this.filenameInput.addEventListener("blur", this.lostFocusEvent.bind(this));
 		this.pathInput.addEventListener("blur", this.lostFocusEvent.bind(this));
 		this.contactInput.addEventListener("blur", this.validateEmailField.bind(this));
+		this.usernameInput.addEventListener("blur", this.validateEmptyField.bind(this));
+		this.passwordInput.addEventListener("blur", this.validateEmptyField.bind(this));
 		this.typeElement.addEventListener("change", this.validateSelectField.bind(this));
 		this.placeholderAddbtn.addEventListener("click", this.addPlaceholderValue.bind(this));
 		this.placeholderSelect.addEventListener("change", this.validateSelectField.bind(this));
@@ -222,6 +232,17 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 			this.placeholderType = this.pathPlaceholderType;
 		}
 
+	}
+
+	validateEmptyField(event: Event): void {
+		event.preventDefault();
+		const inputField = event.currentTarget as HTMLInputElement;
+		if (inputField.value.trim() == '') {
+			inputField.style.borderColor = '#CE2828';
+		}
+		else {
+			inputField.style.borderColor = '#28BECE';
+		}
 	}
 
 	validateEmailField(event: Event): void {
@@ -281,7 +302,9 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 				protocol: this.GetSelectedFTPType(this.typeElement),
 				fileTemplate: this.filenameInput.value.trim(),
 				folderTemplate: this.pathInput.value.trim(),
-				userName: this.contactInput.value.trim(),
+				userName: this.usernameInput.value.trim(),
+				Password: this.passwordInput.value.trim(),
+				email: this.contactInput.value.trim()
 			} as IDeliveryProfile;
 		return profile;
 	}
@@ -295,7 +318,9 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		const protocol = this.typeElement.selectedIndex;
 		const fileTemplate = this.filenameInput.value.trim();
 		const folderTemplate = this.pathInput.value.trim();
-		const userName = this.contactInput.value.trim();
+		const contact = this.contactInput.value.trim();
+		const username = this.usernameInput.value.trim();
+		const password = this.passwordInput.value.trim();
 
 		// validate url
 		if (!this.ftpUrlRexExp.test(url)) {
@@ -341,13 +366,32 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		}
 
 		// validate contact Name
-		if (!this.contactEmailExp.test(userName)) {
+		if (!this.contactEmailExp.test(contact)) {
 			this.setErrorfor(this.contactInput);
 			hasValidData = false;
 		}
 		else {
 			this.setSucessFor(this.contactInput);
 		}
+
+		// validate username
+		if (username == '') {
+			this.setErrorfor(this.usernameInput);
+			hasValidData = false;
+		}
+		else {
+			this.setSucessFor(this.usernameInput);
+		}
+
+		// validate password
+		if (password == '') {
+			this.setErrorfor(this.passwordInput);
+			hasValidData = false;
+		}
+		else {
+			this.setSucessFor(this.passwordInput);
+		}
+
 		return hasValidData;
 	}
 
@@ -359,7 +403,7 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	private setSucessFor(input: HTMLElement) {
 		input.className = 'form-control success';
 	}
-
+	/*
 	getTestProfile(): IDeliveryProfile {
 		var profile =
 			{
@@ -374,7 +418,7 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 
 			} as IDeliveryProfile;
 		return profile;
-	}
+	}*/
 
 	private GetSelectedFTPType(select): FTPType {
 		var selectedValue = select.options[select.selectedIndex].value
@@ -386,7 +430,7 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		(this.getChildElement('#port') as HTMLInputElement).value = "";
 		(this.getChildElement('#fileTemplate') as HTMLInputElement).value = "";
 		(this.getChildElement('#path') as HTMLInputElement).value = "";
-		(this.getChildElement('#username') as HTMLInputElement).value = "";
+		(this.getChildElement('#email') as HTMLInputElement).value = "";
 		(this.getChildElement('#password') as HTMLInputElement).value = "";
 		(this.getChildElement('.select') as HTMLSelectElement).selectedIndex = 0;
 	}
