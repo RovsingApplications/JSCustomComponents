@@ -123,6 +123,8 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	private contactInput: HTMLInputElement;
 	private passwordInput: HTMLInputElement;
 	private usernameInput: HTMLInputElement;
+	private
+
 	// placeholder fields
 	private placeholderSelect: HTMLSelectElement;
 	private placeholderAddbtn: HTMLButtonElement;
@@ -192,7 +194,7 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	addPlaceholderValue(event: Event): void {
 		event.preventDefault();
 		if (this.placeholderSelect.selectedIndex === 0) {
-			this.placeholderSelect.style.borderColor = '#CE2828'
+			this.placeholderSelect.style.borderColor = '#CE2828';
 		}
 		else {
 			var selectedValue = this.placeholderSelect.selectedOptions[0].value;
@@ -215,23 +217,28 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		event.preventDefault();
 		const selectElement = event.currentTarget as HTMLSelectElement;
 		if (selectElement.selectedIndex != 0) {
-			selectElement.style.borderColor = '#28BECE'
+			selectElement.style.borderColor = '#28BECE';
 		}
 		else {
-			selectElement.style.borderColor = '#CE2828'
+			selectElement.style.borderColor = '#CE2828';
 		}
 	}
 
 	lostFocusEvent(event: Event): void {
 		event.preventDefault();
-		const element = event.currentTarget as HTMLElement;
+		const element = event.currentTarget as HTMLInputElement;
 		if (element.id === 'fileTemplate') {
 			this.placeholderType = this.filePlaceholderType;
 		}
 		else {
 			this.placeholderType = this.pathPlaceholderType;
 		}
-
+		if (element.value == '') {
+			element.style.borderColor = '#CE2828';
+		}
+		else {
+			element.style.borderColor = '#28BECE';
+		}
 	}
 
 	validateEmptyField(event: Event): void {
@@ -249,10 +256,10 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		event.preventDefault();
 		const inputField = event.currentTarget as HTMLInputElement;
 		if (this.contactEmailExp.test(inputField.value)) {
-			inputField.style.borderColor = '#28BECE'
+			inputField.style.borderColor = '#28BECE';
 		}
 		else {
-			inputField.style.borderColor = '#CE2828'
+			inputField.style.borderColor = '#CE2828';
 		}
 	}
 
@@ -260,10 +267,10 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		event.preventDefault();
 		const inputField = event.currentTarget as HTMLInputElement;
 		if (this.ftpPortRexExp.test(inputField.value) && inputField.value.length != 0) {
-			inputField.style.borderColor = '#28BECE'
+			inputField.style.borderColor = '#28BECE';
 		}
 		else {
-			inputField.style.borderColor = '#CE2828'
+			inputField.style.borderColor = '#CE2828';
 		}
 	}
 
@@ -271,10 +278,10 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		event.preventDefault();
 		const inputField = event.currentTarget as HTMLInputElement;
 		if (this.ftpUrlRexExp.test(inputField.value)) {
-			inputField.style.borderColor = '#28BECE'
+			inputField.style.borderColor = '#28BECE';
 		}
 		else {
-			inputField.style.borderColor = '#CE2828'
+			inputField.style.borderColor = '#CE2828';
 		}
 	}
 

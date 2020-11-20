@@ -156,6 +156,11 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 	// bind runAction on play button
 	private runAction(event: Event): void {
 		event.preventDefault();
+		let showSpinner = new CustomEvent('show-spinner', {
+			bubbles: true,
+			composed: true
+		});
+		document.dispatchEvent(showSpinner);
 		const headerName = Constants.apiKeyHeaderName;
 		const request = new MakeRequest(
 			`${Globals.apiUrl}Delivery/run?resultId=${this.id}`,

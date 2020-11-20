@@ -48,22 +48,52 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 	}
 
 	.loader {
-	border: 16px solid #f3f3f3; /* Light grey */
-	border-top: 16px solid #3498db; /* Blue */
-	border-radius: 50%;
-	width: 120px;
-	height: 120px;
-	animation: spin 2s linear infinite;
+    border: 10px solid white;
+    border-top: 10px solid #003E64;
+	border-right: 10px solid #003E64;
+	border-bottom: 10px solid #003E64;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 3s linear infinite;
 	}
 
 	@keyframes spin {
 	0% { transform: rotate(0deg); }
-	100% { transform: rotate(360deg); }
-}
-
-.hide-loader{
-display:none;
-}
+	100% { transform: rotate(360deg); }}
+	
+	.hide-loader{
+	display:none;
+	}
+	.center {
+		position: relative;
+		width: 400px;
+  		height: 50px;
+  		background-color: white;
+  		/* Center vertically and horizontally */
+  
+  		top: 40%;
+  		left: 50%;
+  		margin: -25px 0 0 -25px
+	}
+	.firstText {
+		font-family: Mulish;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 20px;
+		line-height: 25px;
+		text-align: center;
+		color: #000000;
+		margin-left: -150px;
+	}
+	.secondText {
+		background: #FFFFFF;
+		box-sizing: border-box;
+		border-radius: 4px;
+		height: 34.53px;
+		text-align: center;
+		margin-left: -150px;
+	}
 	`,
 	useShadow: false,
 })
@@ -78,18 +108,48 @@ export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 
 	componentDidMount() {
 		this.mainDivElement = this.getChildElement('.result-box');
-		this.InitialResultText();
+		this.initialResultText();
 		this.getAttributeNames().forEach(attributeName => {
 			let attributeValue = this.getAttribute(attributeName);
 			this.attributeChanged(attributeName, null, attributeValue);
 		});
+
 	}
 
-	InitialResultText() {
-		var paraElement = document.createElement("p");
-		paraElement.innerHTML = `<b>Awaiting test</b> </br>
-		Please enter your credential and test your connection to product delivery`;
-		this.mainDivElement.appendChild(paraElement);
+	addWaitingSpinner() {
+		this.clearContent();
+		var outerDivElement = document.createElement("div");
+		outerDivElement.classList.add("center");
+		var innerDivElement = document.createElement("div");
+		innerDivElement.classList.add("loader");
+		var firstText = document.createElement('p');
+		firstText.innerText = 'Connecting';
+		firstText.classList.add('firstText');
+		var secondText = document.createElement('p');
+		secondText.innerHTML = 'Connecting to product delivery <br> is in progress...';
+		secondText.classList.add('secondText');
+		outerDivElement.appendChild(innerDivElement);
+		outerDivElement.appendChild(firstText);
+		outerDivElement.appendChild(secondText);
+		this.mainDivElement.appendChild(outerDivElement);
+	}
+
+	removeBusyWaiting() {
+		this.clearContent()
+	}
+
+	initialResultText() {
+		var outerDivElement = document.createElement("div");
+		outerDivElement.classList.add("center");
+		var firstText = document.createElement('p');
+		firstText.innerText = 'Awaiting test';
+		firstText.classList.add('firstText');
+		var secondText = document.createElement('p');
+		secondText.innerHTML = 'Please enter your credentials and test your <br> connection to product delivery';
+		secondText.classList.add('secondText');
+		outerDivElement.appendChild(firstText);
+		outerDivElement.appendChild(secondText);
+		this.mainDivElement.appendChild(outerDivElement);
 	}
 
 	AddEventsForDeliveryResults(deliveryResults: DeliveryResult[]) {
@@ -105,6 +165,7 @@ export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 
 	AddEvents(deliveryResult: DeliveryResult): void {
 		if (deliveryResult.eventLog != null) {
+			this.clearContent();
 			var divElement = document.createElement("div");
 			var labelText = document.createElement("label");
 			labelText.innerText = `${deliveryResult.id}`

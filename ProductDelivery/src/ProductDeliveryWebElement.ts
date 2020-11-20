@@ -285,12 +285,18 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 		this.runAllFailButton.addEventListener("click", this.runAllFail.bind(this));
 		document.addEventListener('show-result', (evt) => this.showResult(evt as CustomEvent));
 		document.addEventListener('update-single-row', (evt) => this.updateDeliveryResultRow(evt as CustomEvent));
+		document.addEventListener('show-spinner', (evt) => this.showResultSpinner(evt as CustomEvent));
 	}
 
 	updateDeliveryResultRow(evt: CustomEvent): void {
 		evt.preventDefault();
 		var deliveryResult = evt.detail as DeliveryResult;
 		this.customDeliveryEventTableElement.updateDeliveryResultRowStatus(deliveryResult);
+	}
+
+	showResultSpinner(evt: CustomEvent) {
+		evt.preventDefault();
+		this.customDeliveryResultElement.addWaitingSpinner();
 	}
 
 	showResult(evt: CustomEvent): void {
@@ -301,7 +307,7 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 
 	private submitDeliveryForm() {
 		if (this.customDeliveryProfileFormElement.checkInputs()) {
-			this.customDeliveryResultElement.clearContent();
+			this.customDeliveryResultElement.addWaitingSpinner();
 			var deliveryProfile = this.customDeliveryProfileFormElement.getProfile();
 			const headerName = Constants.apiKeyHeaderName;
 			const req = new MakeRequest(
@@ -325,7 +331,7 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 
 	private tryDelivery() {
 		if (this.customDeliveryProfileFormElement.checkInputs()) {
-			this.customDeliveryResultElement.clearContent();
+			this.customDeliveryResultElement.addWaitingSpinner();
 			var deliveryProfile = this.customDeliveryProfileFormElement.getProfile();
 			const headerName = Constants.apiKeyHeaderName;
 			const req = new MakeRequest(
@@ -344,6 +350,7 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 
 	private runAllFail() {
 		const headerName = Constants.apiKeyHeaderName;
+		this.customDeliveryResultElement.addWaitingSpinner();
 		const req = new MakeRequest(
 			`${Globals.apiUrl}delivery/runfailed`,
 			'post', {
