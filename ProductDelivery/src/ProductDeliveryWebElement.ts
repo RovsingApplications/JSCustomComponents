@@ -302,7 +302,7 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 	showResult(evt: CustomEvent): void {
 		evt.preventDefault();
 		this.customDeliveryResultElement.clearContent();
-		this.customDeliveryResultElement.AddEvents(evt.detail);
+		this.customDeliveryResultElement.AddDeliveryResult(evt.detail);
 	}
 
 	private submitDeliveryForm() {
@@ -326,7 +326,7 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 
 	private addDeliveryResult(response: any): void {
 		this.deliveryResult = new DeliveryResult(JSON.parse(response as string));
-		this.customDeliveryResultElement.AddEvents(this.deliveryResult);
+		this.customDeliveryResultElement.AddDeliveryResult(this.deliveryResult);
 	}
 
 	private tryDelivery() {
@@ -364,7 +364,7 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 				deliveryResults.push(ele.result);
 			});
 			this.customDeliveryEventTableElement.updateDeliveryResultRowsStatus(deliveryResults);
-			this.customDeliveryResultElement.AddEventsForDeliveryResults(deliveryResults);
+			this.customDeliveryResultElement.AddDeliveryResults(deliveryResults);
 		}).catch(exception => {
 			console.log(exception)
 		});

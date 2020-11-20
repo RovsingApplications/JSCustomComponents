@@ -61,7 +61,7 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 	@keyframes spin {
 	0% { transform: rotate(0deg); }
 	100% { transform: rotate(360deg); }}
-	
+
 	.hide-loader{
 	display:none;
 	}
@@ -94,6 +94,17 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 		text-align: center;
 		margin-left: -150px;
 	}
+
+	.resultContent {
+	position: absolute;
+	font-family: Mulish;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 10px;
+	line-height: 13px;
+	color: #003E64;
+	}
+	.
 	`,
 	useShadow: false,
 })
@@ -152,35 +163,85 @@ export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 		this.mainDivElement.appendChild(outerDivElement);
 	}
 
-	AddEventsForDeliveryResults(deliveryResults: DeliveryResult[]) {
+
+
+	AddDeliveryResult(deliveryResult: DeliveryResult) {
 		this.clearContent();
-		deliveryResults.forEach(item => {
-			this.AddEvents(item);
-		});
+		var div = this.addEventDiv(deliveryResult);
+		if (div != null) {
+			this.mainDivElement.appendChild(div);
+		}
 	}
 
 	clearContent() {
 		this.mainDivElement.innerHTML = "";
 	}
 
-	AddEvents(deliveryResult: DeliveryResult): void {
+	formatDate() {
+		var date = new Date();
+		var hours = date.getHours();
+		var minutes = date.getMinutes();
+		var seconds = date.getSeconds();
+		hours = hours % 12;
+		hours = hours ? hours : 12;
+		minutes = minutes < 10 ? 0 + minutes : minutes;
+		var strTime = hours + ':' + minutes + ' ' + seconds + ' ';
+		return date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear() + " " + strTime;
+	}
+
+
+	AddDeliveryResults(deliveryResults: DeliveryResult[]) {
+		this.clearContent();
+		var sucessResults = 0;
+		var failedResults = 0;
+		deliveryResults.forEach(dr => {
+			if (dr.resultStatus === 'Success') {
+				sucessResults += 1;
+			}
+			else {
+				failedResults += 1;
+			}
+		});
+		var resultDivElement = document.createElement("div");
+		resultDivElement.classList.add("resultContent");
+		var unOrderedList = document.createElement("ul");
+		var nodesucess = document.createElement("LI");
+		var textnodeSuccess = document.createTextNode(`Number of Success Delivery Results : $ ${sucessResults}`);
+		nodesucess.appendChild(textnodeSuccess);
+		unOrderedList.appendChild(nodesucess);
+		var nodefailed = document.createElement("LI");
+		var textnodeFailed = document.createTextNode(`Number of Failed Delivery Results : $ ${failedResults}`);
+		nodefailed.appendChild(textnodeFailed);
+		unOrderedList.appendChild(nodefailed);
+		resultDivElement.appendChild(unOrderedList);
+		this.mainDivElement.appendChild(resultDivElement);
+		/*deliveryResults.forEach(item => {
+			var div = this.addEventDiv(item);
+			if (div != null) {
+				this.mainDivElement.appendChild(div);
+			}
+		});*/
+	}
+
+	private addEventDiv(deliveryResult: DeliveryResult): HTMLDivElement {
 		if (deliveryResult.eventLog != null) {
-			this.clearContent();
-			var divElement = document.createElement("div");
-			var labelText = document.createElement("label");
-			labelText.innerText = `${deliveryResult.id}`
+			var resultDivElement = document.createElement("div");
+			resultDivElement.classList.add("resultContent");
+			var datetime = this.formatDate();
+			var labelText = document.createTextNode(`${datetime} - ${deliveryResult.id}`);
 			var unOrderedList = document.createElement("ul");
 			var eventList = (deliveryResult.eventLog as string[]);
-			eventList.forEach(eve => {
+			eventList.forEach(event => {
 				var node = document.createElement("LI");
-				var textnode = document.createTextNode(`$ ${eve}`);
+				var textnode = document.createTextNode(`$ ${event}`);
 				node.appendChild(textnode);
 				unOrderedList.appendChild(node);
 			});
-			divElement.appendChild(labelText);
-			divElement.appendChild(unOrderedList);
-			this.mainDivElement.appendChild(divElement);
+			resultDivElement.appendChild(labelText);
+			resultDivElement.appendChild(unOrderedList);
+			return resultDivElement;
 		}
+		return null;
 	}
 
 	private static get observedAttributes() {
