@@ -65,6 +65,7 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 	.hide-loader{
 	display:none;
 	}
+
 	.center {
 		position: relative;
 		width: 400px;
@@ -76,7 +77,8 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
   		left: 50%;
   		margin: -25px 0 0 -25px
 	}
-	.firstText {
+
+	.firsttext {
 		font-family: Mulish;
 		font-style: normal;
 		font-weight: normal;
@@ -86,7 +88,8 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 		color: #000000;
 		margin-left: -150px;
 	}
-	.secondText {
+
+	.secondtext {
 		background: #FFFFFF;
 		box-sizing: border-box;
 		border-radius: 4px;
@@ -95,7 +98,7 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 		margin-left: -150px;
 	}
 
-	.resultContent {
+	.resultcontent {
 	position: absolute;
 	font-family: Mulish;
 	font-style: normal;
@@ -135,10 +138,10 @@ export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 		innerDivElement.classList.add("loader");
 		var firstText = document.createElement('p');
 		firstText.innerText = 'Connecting';
-		firstText.classList.add('firstText');
+		firstText.classList.add('firsttext');
 		var secondText = document.createElement('p');
 		secondText.innerHTML = 'Connecting to product delivery <br> is in progress...';
-		secondText.classList.add('secondText');
+		secondText.classList.add('secondtext');
 		outerDivElement.appendChild(innerDivElement);
 		outerDivElement.appendChild(firstText);
 		outerDivElement.appendChild(secondText);
@@ -154,10 +157,10 @@ export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 		outerDivElement.classList.add("center");
 		var firstText = document.createElement('p');
 		firstText.innerText = 'Awaiting test';
-		firstText.classList.add('firstText');
+		firstText.classList.add('firsttext');
 		var secondText = document.createElement('p');
 		secondText.innerHTML = 'Please enter your credentials and test your <br> connection to product delivery';
-		secondText.classList.add('secondText');
+		secondText.classList.add('secondtext');
 		outerDivElement.appendChild(firstText);
 		outerDivElement.appendChild(secondText);
 		this.mainDivElement.appendChild(outerDivElement);
@@ -203,7 +206,7 @@ export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 			}
 		});
 		var resultDivElement = document.createElement("div");
-		resultDivElement.classList.add("resultContent");
+		resultDivElement.classList.add("resultcontent");
 		var unOrderedList = document.createElement("ul");
 		var nodesucess = document.createElement("LI");
 		var textnodeSuccess = document.createTextNode(`Number of Success Delivery Results : $ ${sucessResults}`);
@@ -226,7 +229,7 @@ export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 	private addEventDiv(deliveryResult: DeliveryResult): HTMLDivElement {
 		if (deliveryResult.eventLog != null) {
 			var resultDivElement = document.createElement("div");
-			resultDivElement.classList.add("resultContent");
+			resultDivElement.classList.add("resultcontent");
 			var datetime = this.formatDate();
 			var labelText = document.createTextNode(`${datetime} - ${deliveryResult.id}`);
 			var unOrderedList = document.createElement("ul");

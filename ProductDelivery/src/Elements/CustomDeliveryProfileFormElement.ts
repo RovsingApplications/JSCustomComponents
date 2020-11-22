@@ -24,12 +24,12 @@ import Interpolation from "../../models/Interpolation";
 	<input id="username" placeholder="Enter Username" autocomplete="off""></input>
 	<label id="lblPassword">Password</label>
 	<input id="password" type="password" placeholder="Enter password" autocomplete="off"></input>
-	<div class="divPlaceholderWrapper">
-		<div class="divPlaceholderWrapper__divSelectPlaceholder">
-			<select id="placeholder" class="divPlaceholderWrapper__select">
+	<div class="divplaceholderwrapper">
+		<div class="divplaceholderwrapper__divselectplaceholder">
+			<select id="placeholder" class="divplaceholderwrapper__select">
 				<option value="" disabled selected>Select Placeholder</option>
 			</select>
-			<button id="btnAdd" class="divPlaceholderWrapper__button button">Add</button>
+			<button id="btnAdd" class="divplaceholderwrapper__button button">Add</button>
 		</div>	
 		<div>
 			<label id="lblFileTemplate">File Name (template)</label>
@@ -76,15 +76,15 @@ import Interpolation from "../../models/Interpolation";
 	.form-control.error  {
 		border-color: #CE2828
 	}
-	.divPlaceholderWrapper{
+	.divplaceholderwrapper{
 		margin-top:13px;
 	}
-	.divPlaceholderWrapper--divSelectPlaceholder
+	.divplaceholderwrapper--divselectplaceholder
 	{
 
 	}
 
-	.divPlaceholderWrapper__select {
+	.divplaceholderwrapper__select {
 		width: 78%;
 		height: 34px;
 		border-radius: 4px;
@@ -94,7 +94,7 @@ import Interpolation from "../../models/Interpolation";
 		margin-bottom: 15px;
 		display:inline-block;
 	}
-	.divPlaceholderWrapper__button {
+	.divplaceholderwrapper__button {
 		display:inline-block;
 		height: 33px;
 		margin-top:-0px;
