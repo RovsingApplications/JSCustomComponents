@@ -103,7 +103,7 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 	font-family: Mulish;
 	font-style: normal;
 	font-weight: bold;
-	font-size: 10px;
+	font-size: 11px;
 	line-height: 13px;
 	color: #003E64;
 	}
@@ -208,15 +208,17 @@ export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 		});
 		var resultDivElement = document.createElement("div");
 		resultDivElement.classList.add("resultcontent");
+		var labelText = document.createTextNode(`Summary`);
 		var unOrderedList = document.createElement("ul");
 		var nodesucess = document.createElement("LI");
-		var textnodeSuccess = document.createTextNode(`Number of Success Delivery Results : $ ${sucessResults}`);
+		var textnodeSuccess = document.createTextNode(`Number of Success Delivery Results : ${sucessResults}`);
 		nodesucess.appendChild(textnodeSuccess);
 		unOrderedList.appendChild(nodesucess);
 		var nodefailed = document.createElement("LI");
-		var textnodeFailed = document.createTextNode(`Number of Failed Delivery Results : $ ${failedResults}`);
+		var textnodeFailed = document.createTextNode(`Number of Failed Delivery Results : ${failedResults}`);
 		nodefailed.appendChild(textnodeFailed);
 		unOrderedList.appendChild(nodefailed);
+		resultDivElement.appendChild(labelText);
 		resultDivElement.appendChild(unOrderedList);
 		this.mainDivElement.appendChild(resultDivElement);
 	}
