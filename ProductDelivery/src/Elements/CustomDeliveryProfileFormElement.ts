@@ -131,7 +131,8 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	private placeholderType: string = null;
 	private filePlaceholderType: string = 'file';
 	private pathPlaceholderType: string = 'path';
-
+	private errorColor: string = '#CE2828';
+	private successColor: string = '#28BECE';
 	private nativeInput: HTMLInputElement;
 	ftpUrlRexExp: RegExp = /^(?:(?:ftps?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/i;
 	ftpPortRexExp: RegExp = /^[0-9\s]*$/;
@@ -189,12 +190,13 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		this.typeElement.addEventListener("change", this.validateSelectField.bind(this));
 		this.placeholderAddbtn.addEventListener("click", this.addPlaceholderValue.bind(this));
 		this.placeholderSelect.addEventListener("change", this.validateSelectField.bind(this));
+
 	}
 
 	addPlaceholderValue(event: Event): void {
 		event.preventDefault();
 		if (this.placeholderSelect.selectedIndex === 0) {
-			this.placeholderSelect.style.borderColor = '#CE2828';
+			this.placeholderSelect.style.borderColor = this.errorColor;
 		}
 		else {
 			var selectedValue = this.placeholderSelect.selectedOptions[0].value;
@@ -217,10 +219,10 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		event.preventDefault();
 		const selectElement = event.currentTarget as HTMLSelectElement;
 		if (selectElement.selectedIndex != 0) {
-			selectElement.style.borderColor = '#28BECE';
+			selectElement.style.borderColor = this.successColor;
 		}
 		else {
-			selectElement.style.borderColor = '#CE2828';
+			selectElement.style.borderColor = this.errorColor;
 		}
 	}
 
@@ -233,22 +235,16 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		else {
 			this.placeholderType = this.pathPlaceholderType;
 		}
-		if (element.value == '') {
-			element.style.borderColor = '#CE2828';
-		}
-		else {
-			element.style.borderColor = '#28BECE';
-		}
 	}
 
 	validateEmptyField(event: Event): void {
 		event.preventDefault();
 		const inputField = event.currentTarget as HTMLInputElement;
 		if (inputField.value.trim() == '') {
-			inputField.style.borderColor = '#CE2828';
+			inputField.style.borderColor = this.errorColor;
 		}
 		else {
-			inputField.style.borderColor = '#28BECE';
+			inputField.style.borderColor = this.successColor;
 		}
 	}
 
@@ -256,10 +252,10 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		event.preventDefault();
 		const inputField = event.currentTarget as HTMLInputElement;
 		if (this.contactEmailExp.test(inputField.value)) {
-			inputField.style.borderColor = '#28BECE';
+			inputField.style.borderColor = this.successColor;
 		}
 		else {
-			inputField.style.borderColor = '#CE2828';
+			inputField.style.borderColor = this.errorColor;
 		}
 	}
 
@@ -267,10 +263,10 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		event.preventDefault();
 		const inputField = event.currentTarget as HTMLInputElement;
 		if (this.ftpPortRexExp.test(inputField.value) && inputField.value.length != 0) {
-			inputField.style.borderColor = '#28BECE';
+			inputField.style.borderColor = this.successColor;
 		}
 		else {
-			inputField.style.borderColor = '#CE2828';
+			inputField.style.borderColor = this.errorColor;
 		}
 	}
 
@@ -278,10 +274,10 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		event.preventDefault();
 		const inputField = event.currentTarget as HTMLInputElement;
 		if (this.ftpUrlRexExp.test(inputField.value)) {
-			inputField.style.borderColor = '#28BECE';
+			inputField.style.borderColor = this.successColor;
 		}
 		else {
-			inputField.style.borderColor = '#CE2828';
+			inputField.style.borderColor = this.errorColor;
 		}
 	}
 
@@ -347,11 +343,11 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		}
 		// validate type
 		if (protocol === 0) {
-			this.typeElement.style.borderColor = '#CE2828'
+			this.typeElement.style.borderColor = this.errorColor;
 			hasValidData = false;
 		}
 		else {
-			this.typeElement.style.borderColor = '#28BECE'
+			this.typeElement.style.borderColor = this.successColor;
 		}
 
 		// validate filename
@@ -432,14 +428,16 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		return (<any>FTPType)[selectedValue];
 	}
 
-	private resetFields() {
-		(this.getChildElement('#url') as HTMLInputElement).value = "";
-		(this.getChildElement('#port') as HTMLInputElement).value = "";
-		(this.getChildElement('#fileTemplate') as HTMLInputElement).value = "";
-		(this.getChildElement('#path') as HTMLInputElement).value = "";
-		(this.getChildElement('#email') as HTMLInputElement).value = "";
-		(this.getChildElement('#password') as HTMLInputElement).value = "";
-		(this.getChildElement('.select') as HTMLSelectElement).selectedIndex = 0;
+	resetFields() {
+		this.ftpUrlInput.value = '';
+		this.ftpPortInput.value = '';
+		this.typeElement.selectedIndex = 0;
+		this.placeholderSelect.selectedIndex = 0;
+		this.filenameInput.value = '';
+		this.pathInput.value = '';
+		this.contactInput.value = '';
+		this.usernameInput.value = '';
+		this.passwordInput.value = '';
 	}
 
 	private attributeChangedCallback(name: string, oldVal: string, newVal: string) {

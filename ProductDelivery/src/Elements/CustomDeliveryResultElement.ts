@@ -113,6 +113,7 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 })
 export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 
+
 	private mainDivElement: HTMLParagraphElement;
 	private change = new Event('change');
 
@@ -218,12 +219,16 @@ export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 		unOrderedList.appendChild(nodefailed);
 		resultDivElement.appendChild(unOrderedList);
 		this.mainDivElement.appendChild(resultDivElement);
-		/*deliveryResults.forEach(item => {
-			var div = this.addEventDiv(item);
-			if (div != null) {
-				this.mainDivElement.appendChild(div);
-			}
-		});*/
+	}
+
+	createDeliveryProfile(deliveryResult: DeliveryResult) {
+		this.clearContent();
+		var resultDivElement = document.createElement("div");
+		resultDivElement.classList.add("resultcontent");
+		var paragraphElement = document.createElement("p");
+		paragraphElement.innerText = `Profile saved successfully!`;
+		resultDivElement.appendChild(paragraphElement);
+		this.mainDivElement.appendChild(resultDivElement);
 	}
 
 	private addEventDiv(deliveryResult: DeliveryResult): HTMLDivElement {

@@ -7,6 +7,7 @@ import CustomDeliveryResultElement from "./Elements/CustomDeliveryResultElement"
 import Globals from './Globals/Globals'
 import MakeRequest from "../../Branding/src/Framework/Utilities/MakeRequest";
 import DeliveryResult from "../models/DeliveryResult";
+import IDeliveryProfile from "../models/IDeliveryProfile";
 
 @CustomElement({
 	selector: 'product-delivery',
@@ -317,16 +318,13 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 				'Content-Type': 'application/json'
 			}
 			).send(JSON.stringify(deliveryProfile)).then(response => {
-				this.addDeliveryResult(response);
+				var deliveryProfile = (JSON.parse(response as string)) as IDeliveryProfile;
+				this.customDeliveryResultElement.createDeliveryProfile(this.deliveryResult);
+				this.customDeliveryProfileFormElement.resetFields();
 			}).catch(exception => {
 				console.log(exception);
 			});
 		}
-	}
-
-	private addDeliveryResult(response: any): void {
-		this.deliveryResult = new DeliveryResult(JSON.parse(response as string));
-		this.customDeliveryResultElement.AddDeliveryResult(this.deliveryResult);
 	}
 
 	private tryDelivery() {
@@ -341,7 +339,8 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 				'Content-Type': 'application/json'
 			}
 			).send(JSON.stringify(deliveryProfile)).then(response => {
-				this.addDeliveryResult(response);
+				this.deliveryResult = new DeliveryResult(JSON.parse(response as string));
+				this.customDeliveryResultElement.AddDeliveryResult(this.deliveryResult);
 			}).catch(exception => {
 				console.log(exception)
 			});
@@ -359,12 +358,12 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 		}
 		).send().then(response => {
 			var results = (JSON.parse(response as string));
-			var deliveryResults = new Array();
+			/*var deliveryResults = new Array();
 			results.forEach(ele => {
 				deliveryResults.push(ele.result);
-			});
-			this.customDeliveryEventTableElement.updateDeliveryResultRowsStatus(deliveryResults);
-			this.customDeliveryResultElement.AddDeliveryResults(deliveryResults);
+			});*/
+			this.customDeliveryEventTableElement.updateDeliveryResultRowsStatus(results);
+			this.customDeliveryResultElement.AddDeliveryResults(results);
 		}).catch(exception => {
 			console.log(exception)
 		});
