@@ -5,13 +5,13 @@ import BankAccountValidator from '../../framework/Validation/Validators/BankAcco
 import BankAccountRegistrationNumberValidator from '../../framework/Validation/Validators/BankAccountRegistrationNumber';
 
 @CustomElement({
-    selector: 'bank-element',
-    template: `
+	selector: 'bank-element',
+	template: `
 			<div class="wrapper">
 				<input type="text" id='account-field' placeholder='Bank Account'/>
 				<input type="text" id='reg-number-field' placeholder='Bank Account Registration Number'/>
 			</div>`,
-    style: `
+	style: `
     :host{
             width:100%;
     }
@@ -27,68 +27,70 @@ import BankAccountRegistrationNumberValidator from '../../framework/Validation/V
             resize: none;
     }
            `,
-    useShadow: true,
+	useShadow: true,
 })
 export class BankFieldElement extends CustomInputElement {
-    account: HTMLInputElement;
-    regNumber: HTMLInputElement;
-    bankAccountValidator: BankAccountValidator = new BankAccountValidator();
-    regNumberValidator: BankAccountRegistrationNumberValidator = new BankAccountRegistrationNumberValidator();
+	account: HTMLInputElement;
+	regNumber: HTMLInputElement;
+	bankAccountValidator: BankAccountValidator = new BankAccountValidator();
+	regNumberValidator: BankAccountRegistrationNumberValidator = new BankAccountRegistrationNumberValidator();
 
-    constructor() {
-        super();
-    }
+	constructor() {
+		super();
+	}
 
-    get value(): string {
-        let account = this.account.value || '';
-        let regNumber = this.regNumber.value ? `,${this.regNumber.value}` : '';
-        return `${account}${regNumber}`;
-    }
+	get value(): string {
+		let account = this.account.value || '';
+		let regNumber = this.regNumber.value ? `,${this.regNumber.value}` : '';
+		return `${account}${regNumber}`;
+	}
 
-    set value(value: string) {
-        const values = value.split(',');
-        this.account.value = values[0];
-        this.regNumber.value = values[1];
-    }
+	set value(value: string) {
+		const values = value.split(',');
+		this.account.value = values[0];
+		this.regNumber.value = values[1];
+	}
 
-    get valid(): boolean {
-        return (
-            this.bankAccountValidator.isSatisfiedBy(
-                this.account.value,
-                !this.required,
-            ) &&
-            this.regNumberValidator.isSatisfiedBy(
-                this.regNumber.value,
-                !this.required,
-            )
-        );
-    }
+	get valid(): boolean {
+		return (
+			this.bankAccountValidator.isSatisfiedBy(
+				this.account.value,
+				!this.required,
+			) &&
+			this.regNumberValidator.isSatisfiedBy(
+				this.regNumber.value,
+				!this.required,
+			) &&
+			this.account.validity.valid &&
+			this.regNumber.validity.valid
+		);
+	}
 
-    connectedCallback(): void {
-        super.connectedCallback();
-    }
+	connectedCallback(): void {
+		super.connectedCallback();
+	}
 
-    initChildInputs() {
-        this.account = super.getChildInput('#account-field');
-        this.regNumber = super.getChildInput('#reg-number-field');
-        this.account.addEventListener('change', this.change.bind(this));
-        this.regNumber.addEventListener('change', this.change.bind(this));
-        if (this.required) {
-            this.account.setAttribute('required', '');
-            this.regNumber.setAttribute('required', '');
-        }
-    }
+	initChildInputs() {
+		this.account = super.getChildInput('#account-field');
+		this.regNumber = super.getChildInput('#reg-number-field');
+		this.account.addEventListener('change', this.change.bind(this));
+		this.regNumber.addEventListener('change', this.change.bind(this));
+		if (this.required) {
+			this.account.setAttribute('required', '');
+			this.regNumber.setAttribute('required', '');
+		}
+	}
 
-    // events
-    public change($event): void {
-        this.touched = true;
-        this.onChange.emit(new CustomElementEventArgs(this.value, 'change'));
-    }
+	// events
+	public change($event): void {
+		this.touched = true;
+		this.onChange.emit(new CustomElementEventArgs(this.value, 'change'));
+	}
 
-    public validate(): void {
-        this.valid;
-        this.onValidate.emit(
-            new CustomElementEventArgs(this.value, 'validate'),
-        );
-    }
+	public validate(): void {
+		this.valid;
+		this.onValidate.emit(
+			new CustomElementEventArgs(this.value, 'validate'),
+		);
+	}
 }

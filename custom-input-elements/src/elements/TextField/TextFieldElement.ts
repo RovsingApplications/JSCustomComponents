@@ -3,12 +3,12 @@ import { CustomInputElement } from '../../framework/CustomInputElement';
 import { CustomElementEventArgs } from '../../framework/CustomEvents';
 
 @CustomElement({
-    selector: 'text-element',
-    template: `
+	selector: 'text-element',
+	template: `
 			<div class="wrapper">
 				<input type="text" id='text-field'/>
 			</div>`,
-    style: `
+	style: `
     :host{
             width:100%;
     }
@@ -24,49 +24,49 @@ import { CustomElementEventArgs } from '../../framework/CustomEvents';
             resize: none;
     }
            `,
-    useShadow: true,
+	useShadow: true,
 })
 export class TextFieldElement extends CustomInputElement {
-    text: HTMLInputElement;
+	text: HTMLInputElement;
 
-    constructor() {
-        super();
-    }
+	constructor() {
+		super();
+	}
 
-    get value(): string {
-        return `${this.text.value}`;
-    }
+	get value(): string {
+		return `${this.text.value}`;
+	}
 
-    set value(value: string) {
-        this.text.value = value;
-    }
+	set value(value: string) {
+		this.text.value = value;
+	}
 
-    get valid(): boolean {
-        return this.text.validity.valid;
-    }
+	get valid(): boolean {
+		return this.text.validity.valid;
+	}
 
-    connectedCallback(): void {
-        super.connectedCallback();
-    }
+	connectedCallback(): void {
+		super.connectedCallback();
+	}
 
-    initChildInputs() {
-        this.text = super.getChildInput('#text-field');
-        this.text.addEventListener('change', this.change.bind(this));
-        if (this.required) {
-            this.text.setAttribute('required', '');
-        }
-    }
+	initChildInputs() {
+		this.text = super.getChildInput('#text-field');
+		this.text.addEventListener('change', this.change.bind(this));
+		if (this.required) {
+			this.text.setAttribute('required', '');
+		}
+	}
 
-    // events
-    public change($event): void {
-        this.touched = true;
-        this.onChange.emit(new CustomElementEventArgs(this.value, 'change'));
-    }
+	// events
+	public change($event): void {
+		this.touched = true;
+		this.onChange.emit(new CustomElementEventArgs(this.value, 'change'));
+	}
 
-    public validate(): void {
-        this.valid;
-        this.onValidate.emit(
-            new CustomElementEventArgs(this.value, 'validate'),
-        );
-    }
+	public validate(): void {
+		this.valid;
+		this.onValidate.emit(
+			new CustomElementEventArgs(this.value, 'validate'),
+		);
+	}
 }

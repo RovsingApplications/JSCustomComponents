@@ -3,12 +3,12 @@ import { CustomInputElement } from '../../framework/CustomInputElement';
 import { CustomElementEventArgs } from '../../framework/CustomEvents';
 
 @CustomElement({
-    selector: 'file-element',
-    template: `
+	selector: 'file-element',
+	template: `
 			<div class="wrapper">
 				<input type="file" id='file-field' accept="image/*,application/pdf"/>
 			</div>`,
-    style: `
+	style: `
     :host{
             width:100%;
     }
@@ -24,53 +24,53 @@ import { CustomElementEventArgs } from '../../framework/CustomEvents';
             resize: none;
     }
            `,
-    useShadow: true,
+	useShadow: true,
 })
 export class FileFieldElement extends CustomInputElement {
-    file: HTMLInputElement;
+	file: HTMLInputElement;
 
-    constructor() {
-        super();
-    }
+	constructor() {
+		super();
+	}
 
-    get value(): FileList {
-        return this.file.files;
-    }
+	get value(): FileList {
+		return this.file.files;
+	}
 
-    set value(files: FileList) {
-        this.file.files = files;
-    }
+	set value(files: FileList) {
+		this.file.files = files;
+	}
 
-    get valid(): boolean {
-        return this.file.validity.valid;
-    }
+	get valid(): boolean {
+		return this.file.validity.valid;
+	}
 
-    connectedCallback(): void {
-        this.initChildInputs();
-        super.connectedCallback();
-    }
+	connectedCallback(): void {
+		this.initChildInputs();
+		super.connectedCallback();
+	}
 
-    initChildInputs() {
-        this.file = super.getChildInput('#file-field');
-        this.file.addEventListener('change', this.change.bind(this));
-        if (this.required) {
-            this.file.setAttribute('required', '');
-        }
-        if (this.multi) {
-            this.file.setAttribute('multiple', '');
-        }
-    }
+	initChildInputs() {
+		this.file = super.getChildInput('#file-field');
+		this.file.addEventListener('change', this.change.bind(this));
+		if (this.required) {
+			this.file.setAttribute('required', '');
+		}
+		if (this.multi) {
+			this.file.setAttribute('multiple', '');
+		}
+	}
 
-    // events
-    public change($event): void {
-        this.touched = true;
-        this.onChange.emit(new CustomElementEventArgs(this.value, 'change'));
-    }
+	// events
+	public change($event): void {
+		this.touched = true;
+		this.onChange.emit(new CustomElementEventArgs(this.value, 'change'));
+	}
 
-    public validate(): void {
-        this.valid;
-        this.onValidate.emit(
-            new CustomElementEventArgs(this.value, 'validate'),
-        );
-    }
+	public validate(): void {
+		this.valid;
+		this.onValidate.emit(
+			new CustomElementEventArgs(this.value, 'validate'),
+		);
+	}
 }
