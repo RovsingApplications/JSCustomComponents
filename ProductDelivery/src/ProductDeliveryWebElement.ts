@@ -76,6 +76,7 @@ import Colors from "./Framework/Constants/Colors"
 		padding-top: 5px;
 		padding-bottom: 5px;
 		margin-bottom:6px;
+		margin-right: 10px;
 	}
 	
 	/* button */
