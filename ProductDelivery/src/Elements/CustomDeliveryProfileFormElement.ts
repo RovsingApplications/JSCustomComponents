@@ -1,46 +1,45 @@
-import Colors from "../../../Framework/Constants/Colors";
-import CustomElement from "../../../Framework/custom-element.decorator";
-import { FTPType } from "../../models/FTPType";
-import IDeliveryProfile from "../../models/IDeliveryProfile";
-import CustomDeliveryEventTableElement from "./CustomDeliveryEventTableElement";
+import CustomElement from "../Framework/custom-element.decorator";
+import { FTPType } from "../models/FTPType";
+import IDeliveryProfile from "../models/IDeliveryProfile";
 import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
-import Interpolation from "../../models/Interpolation";
+import Interpolation from "../models/Interpolation";
+import Colors from "../../src/Framework/Constants/Colors"
 
 @CustomElement({
 	selector: 'delivery-profile-form',
 	template: `<form class="from" id="from">
-	<!-- move this to a independent web component -->
-	<label id="lblurl">Ftp Url</label>
-	<input id="url" placeholder="Enter Url" autocomplete="off""></input>
-	<label id="lblport">Port</label>
-	<input id="port" type="number" placeholder="Enter Port" autocomplete="off"></input>
-	<label id="lbltype">Type</label>
-	<select id="type" class="select-element">
-		<option value="" disabled selected>Select Type</option>
-		<option>FTP</option>
-		<option>FTPS</option>
-	</select>
-	<label id="lblUsername">Username</label>
-	<input id="username" placeholder="Enter Username" autocomplete="off""></input>
-	<label id="lblPassword">Password</label>
-	<input id="password" type="password" placeholder="Enter password" autocomplete="off"></input>
-	<div class="divplaceholderwrapper">
-		<div class="divplaceholderwrapper__divselectplaceholder">
-			<select id="placeholder" class="divplaceholderwrapper__select">
-				<option value="" disabled selected>Select Placeholder</option>
+			<!-- move this to a independent web component -->
+			<label id="lbl-url">Ftp Url</label>
+			<input id="url" placeholder="Enter Url" autocomplete="off""></input>
+			<label id="lbl-port">Port</label>
+			<input id="port" type="number" placeholder="Enter Port" autocomplete="off"></input>
+			<label id="lbl-type">Type</label>
+			<select id="type" class="select-element">
+				<option value="" disabled selected>Select Type</option>
+				<option>FTP</option>
+				<option>FTPS</option>
 			</select>
-			<button id="btnAdd" class="divplaceholderwrapper__button button">Add</button>
-		</div>	
-		<div>
-			<label id="lblFileTemplate">File Name (template)</label>
-			<input id="fileTemplate" placeholder="Add file name" autocomplete="off">
-			<label id="lblpath">Path</label>
-			<input id="path" placeholder="Add Path" autocomplete="off" ></input>
-		</div>
-	</div>
-	<label id="lblFileTemplate">Contact Person</label>
-	<input id="email" placeholder="Enter Email" autocomplete="off"></input>
-	</form>
+			<label id="lbl-username">Username</label>
+			<input id="username" placeholder="Enter Username" autocomplete="off""></input>
+			<label id="lbl-password">Password</label>
+			<input id="password" type="password" placeholder="Enter password" autocomplete="off"></input>
+			<div class="divplaceholder-wrapper">
+				<div class="divplaceholder-wrapper__divselectplaceholder">
+					<select id="placeholder" class="divplaceholder-wrapper-select">
+						<option value="" disabled selected>Select Placeholder</option>
+					</select>
+					<button id="btn-add" class="divplaceholder-wrapper-button button">Add</button>
+				</div>	
+				<div>
+					<label id="lbl-filename">File Name (template)</label>
+					<input id="file-template" placeholder="Add file name" autocomplete="off">
+					<label id="lbl-path">Path</label>
+					<input id="path" placeholder="Add Path" autocomplete="off" ></input>
+				</div>
+			</div>
+			<label id="lbl-filetemplate">Contact Person</label>
+			<input id="email" placeholder="Enter Email" autocomplete="off"></input>
+			</form>
 	`,
 	style: `
 
@@ -53,38 +52,29 @@ import Interpolation from "../../models/Interpolation";
 	}
 	.color-primary
 	{
-		color: #003E64;
-	}
-	.color-secondary
-	{
-		color: #28BECE;
+		color: ${Colors.primary};
 	}
 	.color-error
 	{
-		color: #CE2828;
+		color: ${Colors.error};
 	}
 	.color-success
 	{
-		color: #28BECE;
+		color: ${Colors.border};
 	}
 	.label {
 		font-size: 14px;
 	}
 	.form-control.success  {
-		border-color: #28BECE
+		border-color: ${Colors.border};
 	}
 	.form-control.error  {
-		border-color: #CE2828
+		border-color: ${Colors.border};
 	}
-	.divplaceholderwrapper{
+	.divplaceholder-wrapper{
 		margin-top:13px;
 	}
-	.divplaceholderwrapper--divselectplaceholder
-	{
-
-	}
-
-	.divplaceholderwrapper__select {
+	.divplaceholder-wrapper-select {
 		width: 78%;
 		height: 34px;
 		border-radius: 4px;
@@ -94,7 +84,7 @@ import Interpolation from "../../models/Interpolation";
 		margin-bottom: 15px;
 		display:inline-block;
 	}
-	.divplaceholderwrapper__button {
+	.divplaceholder-wrapper-button {
 		display:inline-block;
 		height: 33px;
 		margin-top:-0px;
@@ -123,7 +113,6 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	private contactInput: HTMLInputElement;
 	private passwordInput: HTMLInputElement;
 	private usernameInput: HTMLInputElement;
-	private
 
 	// placeholder fields
 	private placeholderSelect: HTMLSelectElement;
@@ -131,8 +120,8 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	private placeholderType: string = null;
 	private filePlaceholderType: string = 'file';
 	private pathPlaceholderType: string = 'path';
-	private errorColor: string = '#CE2828';
-	private successColor: string = '#28BECE';
+	private errorColor: string = Colors.error;
+	private successColor: string = Colors.border;
 	private nativeInput: HTMLInputElement;
 	ftpUrlRexExp: RegExp = /^(?:(?:ftps?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/i;
 	ftpPortRexExp: RegExp = /^[0-9\s]*$/;
@@ -152,31 +141,25 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		this.ftpUrlInput = (this.getChildElement('#url') as HTMLInputElement);
 		this.ftpPortInput = (this.getChildElement('#port') as HTMLInputElement);
 		this.typeElement = (this.getChildElement('#type') as HTMLSelectElement);
-		this.filenameInput = (this.getChildElement('#fileTemplate') as HTMLInputElement);
+		this.filenameInput = (this.getChildElement('#file-template') as HTMLInputElement);
 		this.pathInput = (this.getChildElement('#path') as HTMLInputElement);
 		this.contactInput = (this.getChildElement('#email') as HTMLInputElement);
 		this.usernameInput = (this.getChildElement('#username') as HTMLInputElement);
 		this.passwordInput = (this.getChildElement('#password') as HTMLInputElement);
 		this.placeholderSelect = (this.getChildElement('#placeholder') as HTMLSelectElement);
-		this.placeholderAddbtn = (this.getChildElement('#btnAdd') as HTMLButtonElement);
+		this.placeholderAddbtn = (this.getChildElement('#btn-add') as HTMLButtonElement);
 
-
-		this.getAttributeNames().forEach(attributeName => {
-			let attributeValue = this.getAttribute(attributeName);
-			this.attributeChanged(attributeName, null, attributeValue);
-		});
 		this.initializeInterpolation();
 		this.addListeners();
 	}
 
 	private initializeInterpolation() {
-
-		for (var index = 0; index < Interpolation.InperpolationList.length; index++) {
+		Interpolation.InperpolationList.forEach(item => {
 			var option = document.createElement("option");
-			option.textContent = Interpolation.InperpolationList[index];
-			option.value = `{${Interpolation.InperpolationList[index]}}`;
+			option.textContent = item;
+			option.value = `{${item}}`;
 			this.placeholderSelect.appendChild(option);
-		}
+		})
 	}
 
 	private addListeners() {
@@ -197,39 +180,33 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		event.preventDefault();
 		if (this.placeholderSelect.selectedIndex === 0) {
 			this.placeholderSelect.style.borderColor = this.errorColor;
+			return;
 		}
-		else {
-			var selectedValue = this.placeholderSelect.selectedOptions[0].value;
-			let existingValue = '';
-			if (this.placeholderType === this.filePlaceholderType) {
-				existingValue = this.filenameInput.value;
-				existingValue += selectedValue + ' ';
-				this.filenameInput.value = existingValue;
-			}
-			else if (this.placeholderType === this.pathPlaceholderType) {
-				existingValue = this.pathInput.value;
-				existingValue += selectedValue + ' ';
-				this.pathInput.value = existingValue;
-			}
-			this.placeholderType = null;
+		var selectedValue = this.placeholderSelect.selectedOptions[0].value;
+		let existingValue = '';
+		if (this.placeholderType === this.filePlaceholderType) {
+			existingValue = this.filenameInput.value;
+			existingValue += selectedValue + ' ';
+			this.filenameInput.value = existingValue;
 		}
+		else if (this.placeholderType === this.pathPlaceholderType) {
+			existingValue = this.pathInput.value;
+			existingValue += selectedValue + ' ';
+			this.pathInput.value = existingValue;
+		}
+		this.placeholderType = null;
 	}
 
 	validateSelectField(event: Event): void {
 		event.preventDefault();
 		const selectElement = event.currentTarget as HTMLSelectElement;
-		if (selectElement.selectedIndex != 0) {
-			selectElement.style.borderColor = this.successColor;
-		}
-		else {
-			selectElement.style.borderColor = this.errorColor;
-		}
+		this.validateSelectElement(selectElement);
 	}
 
 	lostFocusEvent(event: Event): void {
 		event.preventDefault();
 		const element = event.currentTarget as HTMLInputElement;
-		if (element.id === 'fileTemplate') {
+		if (element.id === 'file-template') {
 			this.placeholderType = this.filePlaceholderType;
 		}
 		else {
@@ -240,45 +217,22 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	validateEmptyField(event: Event): void {
 		event.preventDefault();
 		const inputField = event.currentTarget as HTMLInputElement;
-		if (inputField.value.trim() == '') {
-			inputField.style.borderColor = this.errorColor;
-		}
-		else {
-			inputField.style.borderColor = this.successColor;
-		}
+		this.VallidateEmptyInput(inputField);
 	}
 
 	validateEmailField(event: Event): void {
 		event.preventDefault();
-		const inputField = event.currentTarget as HTMLInputElement;
-		if (this.contactEmailExp.test(inputField.value)) {
-			inputField.style.borderColor = this.successColor;
-		}
-		else {
-			inputField.style.borderColor = this.errorColor;
-		}
+		this.validateEmailInput();
 	}
 
 	validateFtpPort(event: Event): void {
 		event.preventDefault();
-		const inputField = event.currentTarget as HTMLInputElement;
-		if (this.ftpPortRexExp.test(inputField.value) && inputField.value.length != 0) {
-			inputField.style.borderColor = this.successColor;
-		}
-		else {
-			inputField.style.borderColor = this.errorColor;
-		}
+		this.validateFTPPortInput()
 	}
 
 	validateFtpUrl(event: Event): void {
 		event.preventDefault();
-		const inputField = event.currentTarget as HTMLInputElement;
-		if (this.ftpUrlRexExp.test(inputField.value)) {
-			inputField.style.borderColor = this.successColor;
-		}
-		else {
-			inputField.style.borderColor = this.errorColor;
-		}
+		this.validateFTPInput();
 	}
 
 	get value() {
@@ -313,43 +267,82 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	}
 
 
+	validateFTPInput(): Boolean {
+		const url = this.ftpUrlInput.value.trim();
+		if (this.ftpUrlRexExp.test(url)) {
+			this.ftpUrlInput.style.borderColor = this.successColor;
+			return true;
+		}
+		else {
+			this.ftpUrlInput.style.borderColor = this.errorColor;
+			return false;
+		}
+	}
+
+	validateFTPPortInput(): Boolean {
+		const port = this.ftpPortInput.value.trim();
+		if (this.ftpPortRexExp.test(port) && port.length != 0) {
+			this.ftpPortInput.style.borderColor = this.successColor;
+			return true;
+		}
+		else {
+			this.ftpPortInput.style.borderColor = this.errorColor;
+			return false;
+		}
+	}
+
+	validateSelectElement(selectElement: HTMLSelectElement): Boolean {
+		if (selectElement.selectedIndex != 0) {
+			selectElement.style.borderColor = this.successColor;
+			return true;
+		}
+		else {
+			selectElement.style.borderColor = this.errorColor;
+			return false;
+		}
+	}
+
+	validateEmailInput(): Boolean {
+		const value = this.contactInput.value.trim();
+		if (this.contactEmailExp.test(value)) {
+			this.contactInput.style.borderColor = this.successColor;
+			return true;
+		}
+		else {
+			this.contactInput.style.borderColor = this.errorColor;
+			return false;
+		}
+	}
+
+	VallidateEmptyInput(inputField: HTMLInputElement): Boolean {
+		if (inputField.value.trim() == '') {
+			inputField.style.borderColor = this.errorColor;
+			return false;
+		}
+		else {
+			inputField.style.borderColor = this.successColor;
+			return true;
+		}
+	}
+
 	public checkInputs(): Boolean {
 
 		let hasValidData = true;
-		const url = this.ftpUrlInput.value.trim();
-		const port = this.ftpPortInput.value.trim();
-		const protocol = this.typeElement.selectedIndex;
 		const fileTemplate = this.filenameInput.value.trim();
 		const folderTemplate = this.pathInput.value.trim();
-		const contact = this.contactInput.value.trim();
-		const username = this.usernameInput.value.trim();
-		const password = this.passwordInput.value.trim();
 
 		// validate url
-		if (!this.ftpUrlRexExp.test(url)) {
-			this.setErrorfor(this.ftpUrlInput);
+		if (!this.validateFTPInput()) {
 			hasValidData = false;
-		}
-		else {
-			this.setSucessFor(this.ftpUrlInput)
 		}
 		// validate port
-		if (!this.ftpPortRexExp.test(port) || (port == '')) {
-			this.setErrorfor(this.ftpPortInput);
+		if (!this.validateFTPPortInput()) {
 			hasValidData = false;
-		}
-		else {
-			this.setSucessFor(this.ftpPortInput);
 		}
 		// validate type
-		if (protocol === 0) {
-			this.typeElement.style.borderColor = this.errorColor;
+		if (!this.validateSelectElement(this.typeElement)) {
 			hasValidData = false;
 		}
-		else {
-			this.typeElement.style.borderColor = this.successColor;
-		}
-
 		// validate filename
 		if (fileTemplate.length == 0) {
 			this.setErrorfor(this.filenameInput);
@@ -369,30 +362,18 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		}
 
 		// validate contact Name
-		if (!this.contactEmailExp.test(contact)) {
-			this.setErrorfor(this.contactInput);
+		if (!this.validateEmailInput()) {
 			hasValidData = false;
-		}
-		else {
-			this.setSucessFor(this.contactInput);
 		}
 
 		// validate username
-		if (username == '') {
-			this.setErrorfor(this.usernameInput);
+		if (!this.VallidateEmptyInput(this.usernameInput)) {
 			hasValidData = false;
-		}
-		else {
-			this.setSucessFor(this.usernameInput);
 		}
 
 		// validate password
-		if (password == '') {
-			this.setErrorfor(this.passwordInput);
+		if (!this.VallidateEmptyInput(this.passwordInput)) {
 			hasValidData = false;
-		}
-		else {
-			this.setSucessFor(this.passwordInput);
 		}
 
 		return hasValidData;
@@ -438,30 +419,5 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		this.contactInput.value = '';
 		this.usernameInput.value = '';
 		this.passwordInput.value = '';
-	}
-
-	private attributeChangedCallback(name: string, oldVal: string, newVal: string) {
-		this.attributeChanged(name, oldVal, newVal);
-	}
-
-	private attributeChanged(name: string, oldVal: string, newVal: string) {
-		switch (name) {
-			case 'required':
-				if (!this.nativeInput) {
-					break;
-				}
-				if (newVal === 'true') {
-					this.nativeInput.required = true;
-					break;
-				}
-				this.nativeInput.required = false;
-				break;
-			case 'name':
-				if (!this.nativeInput) {
-					break;
-				}
-				this.nativeInput.name = newVal;
-				break;
-		}
 	}
 }

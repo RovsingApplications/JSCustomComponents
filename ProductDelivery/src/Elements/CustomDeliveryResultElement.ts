@@ -1,6 +1,5 @@
-import Colors from "../../../Framework/Constants/Colors";
-import CustomElement from "../../../Framework/custom-element.decorator";
-import DeliveryResult from "../../models/DeliveryResult";
+import CustomElement from "../Framework/custom-element.decorator";
+import DeliveryResult from "../models/DeliveryResult";
 import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 
 @CustomElement({
@@ -48,22 +47,23 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 	}
 
 	.loader {
-    border: 10px solid white;
-    border-top: 10px solid #003E64;
-	border-right: 10px solid #003E64;
-	border-bottom: 10px solid #003E64;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    animation: spin 3s linear infinite;
+		border: 10px solid white;
+		border-top: 10px solid #003E64;
+		border-right: 10px solid #003E64;
+		border-bottom: 10px solid #003E64;
+		border-radius: 50%;
+		width: 60px;
+		height: 60px;
+		animation: spin 3s linear infinite;
 	}
 
 	@keyframes spin {
-	0% { transform: rotate(0deg); }
-	100% { transform: rotate(360deg); }}
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
+	}
 
 	.hide-loader{
-	display:none;
+		display:none;
 	}
 
 	.center {
@@ -99,23 +99,19 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 	}
 
 	.resultcontent {
-	position: absolute;
-	font-family: Mulish;
-	font-style: normal;
-	font-weight: bold;
-	font-size: 11px;
-	line-height: 13px;
-	color: #003E64;
+		position: absolute;
+		font-family: Mulish;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 11px;
+		line-height: 13px;
+		color: #003E64;
 	}
-	.
 	`,
 	useShadow: false,
 })
 export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
-
-
-	private mainDivElement: HTMLParagraphElement;
-	private change = new Event('change');
+	private mainDivElement: HTMLDivElement;
 
 	constructor() {
 		super();
@@ -124,11 +120,6 @@ export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 	componentDidMount() {
 		this.mainDivElement = this.getChildElement('.result-box');
 		this.initialResultText();
-		this.getAttributeNames().forEach(attributeName => {
-			let attributeValue = this.getAttribute(attributeName);
-			this.attributeChanged(attributeName, null, attributeValue);
-		});
-
 	}
 
 	addWaitingSpinner() {
@@ -254,17 +245,4 @@ export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 		return null;
 	}
 
-	private static get observedAttributes() {
-		return ['name', 'required'];
-	}
-
-	private attributeChangedCallback(name: string, oldVal: string, newVal: string) {
-		this.attributeChanged(name, oldVal, newVal);
-	}
-
-	private attributeChanged(name: string, oldVal: string, newVal: string) {
-		switch (name) {
-
-		}
-	}
 }

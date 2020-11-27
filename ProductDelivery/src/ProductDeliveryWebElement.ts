@@ -1,4 +1,4 @@
-import CustomElement from "../../Framework/custom-element.decorator";
+import CustomElement from "./Framework/custom-element.decorator";
 import Constants from "./Framework/Constants/Constants";
 import CustomHTMLBaseElement from "./CustomHTMLBaseElement";
 import CustomDeliveryEventTableElement from "./Elements/CustomDeliveryEventTableElement";
@@ -6,30 +6,25 @@ import CustomDeliveryProfileFormElement from "./Elements/CustomDeliveryProfileFo
 import CustomDeliveryResultElement from "./Elements/CustomDeliveryResultElement";
 import Globals from './Globals/Globals'
 import MakeRequest from "../../Branding/src/Framework/Utilities/MakeRequest";
-import DeliveryResult from "../models/DeliveryResult";
-import IDeliveryProfile from "../models/IDeliveryProfile";
+import DeliveryResult from "./models/DeliveryResult";
+import IDeliveryProfile from "./models/IDeliveryProfile";
+import Colors from "./Framework/Constants/Colors"
 
 @CustomElement({
 	selector: 'product-delivery',
 	template: `
 <div class="wrapper">
 	<h2>Product Delivery Setup</h2>
-	<div style="float: right; display: flex;" >
-		<label style="padding-right: 20px;">Product Delivery - Active</label>
+	<div class="topconner">
+		<label>Product Delivery - Active</label>
 		<label class="switch">
-			<input type="checkbox" id="togBtn" />
+			<input type="checkbox"/>
 			<div class="slider"></div>
 		</label>
 	</div>
 	<div class="top">
 		<div class="container container--left">
 			<delivery-profile-form>
-				<script type="application/json">
-				/* DeliveryProfileJson */
-				{
-					
-				}
-				</script>
 			</delivery-profile-form>
 		</div>
 		<div class="container container--right">
@@ -43,7 +38,7 @@ import IDeliveryProfile from "../models/IDeliveryProfile";
 	</div>
 	<div class="bottom">
 		<delivery-event-table> </delivery-event-table>
-		<button id="runallfail" class="button" style="float: right;">Run all failed</button>
+		<button id="runallfail" class="button">Run all failed</button>
 	</div>
 </div>
 `,
@@ -62,7 +57,7 @@ import IDeliveryProfile from "../models/IDeliveryProfile";
 	}
 	* {
 		font-family: "Mulish", sans-serif;
-		color: #000;
+		color: ${Colors.font};
 	}
 
 	/* text */
@@ -85,10 +80,10 @@ import IDeliveryProfile from "../models/IDeliveryProfile";
 	
 	/* button */
 	.button {
-		background: #003E64;
-		border: 2px solid #003E64;
+		background: ${Colors.primary};
+		border: 2px solid ${Colors.primary};
 		border-radius: 4px;
-		color: #fff;
+		color: ${Colors.buttonFont};
 		text-align: center;
 		float: right;
 		display: inline-block;
@@ -100,8 +95,8 @@ import IDeliveryProfile from "../models/IDeliveryProfile";
 		margin: 10px 0 11px 10px;
 	}
 	.button--inverted {
-		background: #fff;
-		color: #003E64;
+		background: ${Colors.buttonFont};
+		color: ${Colors.primary};
 	}
 	
 	/* inputs boxes */
@@ -114,8 +109,8 @@ import IDeliveryProfile from "../models/IDeliveryProfile";
 		height: 34px;
 		border-radius: 4px;
 		box-sizing: border-box;
-		border: 1px solid #DFDFDF;
-		background: #fff;
+		border: 1px solid ${Colors.grey};
+		background: ${Colors.buttonFont};
 		margin-bottom: 15px;
 	}
 	input:read-only {
@@ -138,6 +133,9 @@ import IDeliveryProfile from "../models/IDeliveryProfile";
 		float: left;
 		width: 100%;
 	}
+	.bottom > button {
+		float: right;
+	}
 	.container {
 		width: calc(50% - 51px);
 		position: relative;
@@ -145,7 +143,7 @@ import IDeliveryProfile from "../models/IDeliveryProfile";
 	}
 	.container--left {
 		padding-right: 50px;
-		border-right: 1px solid #DFDFDF;
+		border-right: 1px solid ${Colors.grey};
 	}
 	.container--right {
 		padding-left: 50px;
@@ -174,52 +172,60 @@ import IDeliveryProfile from "../models/IDeliveryProfile";
 		transition: .4s;
 		border-radius: 34px;
 		height: 24px;
-		border: 2px solid #E5E5E5;
+		border: 2px solid ${Colors.lightGrey};
 	}
 	.slider:before {
-	position: absolute;
-	content: "";
-	height: 20px;
-	width: 20px;
-	left:1px;
-	top: 2px;
-	background-color:#DFDFDF;
-	-webkit-transition: .4s;
-	transition: .4s;
-	border-radius: 50%;
+		position: absolute;
+		content: "";
+		height: 20px;
+		width: 20px;
+		left:1px;
+		top: 2px;
+		background-color:${Colors.grey};
+		-webkit-transition: .4s;
+		transition: .4s;
+		border-radius: 50%;
 	}
 	input:checked + .slider {
-		border-color: #28BECE;
+		border-color: ${Colors.border};
 	}
 	input:focus + .slider {
-	box-shadow: 0 0 1px #DFDFDF;
+		box-shadow: 0 0 1px ${Colors.grey};
 	}
 	input:checked + .slider:before {
-	-webkit-transform: translateX(26px);
-	-ms-transform: translateX(26px);
+		-webkit-transform: translateX(26px);
+		-ms-transform: translateX(26px);
 	transform: translateX(32px);
-		background-color: #28BECE;
+		background-color: ${Colors.border};
 	}
 	.actions i {
 		margin-left: 5px;
 	}
 	.slider:after
 	{
-	color: white;
-	display: block;
-	position: absolute;
-	transform: translate(-50%,-50%);
-	top: 50%;
-	left: 50%;
-	font-size: 10px;
-	font-family: Verdana, sans-serif;
+		color: white;
+		display: block;
+		position: absolute;
+		transform: translate(-50%,-50%);
+		top: 50%;
+		left: 50%;
+		font-size: 10px;
+		font-family: Verdana, sans-serif;
+	}
+	.topconner
+	{
+		float: right; 
+		display: flex;	
+	}
+	.topconner:first-child {
+		padding-right: 40px;
 	}
 /*--------
 	/*table*/
 	table {
 		border-collapse: collapse;
 		width: 100%;
-		border: 1px solid #DFDFDF;
+		border: 1px solid ${Colors.grey};
 		-moz-border-radius: 4px;
 		-webkit-border-radius: 4px;
 		border-radius: 4px;
@@ -234,10 +240,10 @@ import IDeliveryProfile from "../models/IDeliveryProfile";
 		transform: rotate(45deg);
 	}
 	table tr:nth-child(even) {
-		background-color: #f2f2f2;
+		background-color: ${Colors.tableBackground};
 	}
 	table tr:hover {
-		background-color: #ddd;
+		background-color: ${Colors.tableHover};
 	}
 	.buttons-wrapper {
 		width: 100%;
@@ -290,18 +296,15 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 	}
 
 	updateDeliveryResultRow(evt: CustomEvent): void {
-		evt.preventDefault();
 		var deliveryResult = evt.detail as DeliveryResult;
 		this.customDeliveryEventTableElement.updateDeliveryResultRowStatus(deliveryResult);
 	}
 
 	showResultSpinner(evt: CustomEvent) {
-		evt.preventDefault();
 		this.customDeliveryResultElement.addWaitingSpinner();
 	}
 
 	showResult(evt: CustomEvent): void {
-		evt.preventDefault();
 		this.customDeliveryResultElement.clearContent();
 		this.customDeliveryResultElement.AddDeliveryResult(evt.detail);
 	}
@@ -369,8 +372,8 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 		});
 	}
 
-	private changeLanguage(language: string) {
-		// implement language change
+	static get observedAttributes() {
+		return ['api-key', 'api-url', 'customer-id'];
 	}
 
 	attributeChangedCallback(name: string, oldVal: string, newVal: string) {
@@ -379,9 +382,6 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 
 	private attributeChanged(name: string, oldVal: string, newVal: string) {
 		switch (name) {
-			case 'language':
-				this.changeLanguage(newVal)
-				break;
 			case 'api-key':
 				Globals.apiKey = newVal;
 				break;
@@ -391,8 +391,8 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 					Globals.apiUrl = `${Globals.apiUrl}/`;
 				}
 				break;
-			case 'creator-id':
-				Globals.creatorId = newVal
+			case 'customer-id':
+				Globals.customerId = newVal;
 				break;
 		}
 	}

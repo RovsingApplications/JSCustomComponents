@@ -1,4 +1,4 @@
-import CustomElement from "../../../Framework/custom-element.decorator";
+import CustomElement from "../Framework/custom-element.decorator";
 import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 
 @CustomElement({

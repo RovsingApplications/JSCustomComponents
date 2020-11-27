@@ -18,7 +18,7 @@ export default class Interpolation {
 		"Document.CustomDocumentType",
 		"Document.CustomDocumentCategory",
 		"Document.TemplateKey"
-	);;
+	);
 	constructor() {
 
 	}

@@ -1,7 +1,5 @@
-import Colors from "../../../Framework/Constants/Colors";
-import CustomElement from "../../../Framework/custom-element.decorator";
-import DeliveryResult from "../../models/DeliveryResult";
-import IDeliveryProfile from "../../models/IDeliveryProfile";
+import CustomElement from "../Framework/custom-element.decorator";
+import DeliveryResult from "../models/DeliveryResult";
 import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 import Constants from "../Framework/Constants/Constants";
 import MakeRequest from "../../../Branding/src/Framework/Utilities/MakeRequest";
@@ -30,14 +28,14 @@ import CustomDeliveryResultElement from '../Elements/CustomDeliveryResultElement
 		padding-left: 23px;
 		color: #000;
 	}
-	.action
+	.action-run-button
 	{
-	background-color: Transparent;
-	background-repeat:no-repeat;
-	border: none;
-	cursor:pointer;
-	overflow: hidden;
-	outline:none;
+		background-color: Transparent;
+		background-repeat:no-repeat;
+		border: none;
+		cursor:pointer;
+		overflow: hidden;
+		outline:none;
 	}
 	.color-fail
 	{
@@ -59,7 +57,6 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 	private deliveryTable: HTMLTableElement;
 	private nativeInput: HTMLInputElement;
 	public customDeliveryResult: CustomDeliveryResultElement;
-	private change = new Event('change');
 
 	constructor() {
 		super();
@@ -82,12 +79,6 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 	componentDidMount() {
 		this.nativeInput = this.getChildElement('.custom-input');
 		this.deliveryTable = this.getChildElement('table') as HTMLTableElement;
-
-		this.getAttributeNames().forEach(attributeName => {
-			let attributeValue = this.getAttribute(attributeName);
-			this.attributeChanged(attributeName, null, attributeValue);
-		});
-
 	}
 
 	//load all deliveryResults into table.
@@ -96,7 +87,7 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 		//`https://localhost:5001/Results/get?customerId=6657`
 		//`ceeab147-adea-4352-9282-0f75b4254942`
 		const request = new MakeRequest(
-			`${Globals.apiUrl}Results/get?customerId=6657`,
+			`${Globals.apiUrl}Results/get?customerId=${Globals.customerId}`,
 			'get',
 			{
 				[headerName]: Globals.apiKey,
@@ -146,7 +137,7 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 		actionButton.innerHTML = `<i class="fas fa-play"></i>`;
 		actionButton.addEventListener('click', this.runAction.bind(deliveryResult));
 		actionButton.classList.add("result-cell");
-		actionButton.classList.add("action");
+		actionButton.classList.add("action-run-button");
 		actionCell.appendChild(actionButton);
 		tableRow.appendChild(actionCell);
 
@@ -187,7 +178,7 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 				document.dispatchEvent(updateSingleRowEvent);
 			})
 			.catch(exception => {
-				console.log(exception)
+				console.log(exception);
 			});
 	}
 
@@ -226,26 +217,5 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 		deliveryResults.forEach((item) => {
 			this.updateDeliveryResultRowStatus(item);
 		});
-	}
-
-	private attributeChanged(name: string, oldVal: string, newVal: string) {
-		switch (name) {
-			case 'required':
-				if (!this.nativeInput) {
-					break;
-				}
-				if (newVal === 'true') {
-					this.nativeInput.required = true;
-					break;
-				}
-				this.nativeInput.required = false;
-				break;
-			case 'name':
-				if (!this.nativeInput) {
-					break;
-				}
-				this.nativeInput.name = newVal;
-				break;
-		}
 	}
 }
