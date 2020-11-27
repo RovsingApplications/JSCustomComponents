@@ -45,7 +45,7 @@ import Colors from "../../src/Framework/Constants/Colors"
 
 	* {
 		font-family: "Mulish", sans-serif;
-		color: #000;
+		color: ${Colors.font};
 	}
 	.pad-10 {
 		padding: 10px;
@@ -79,8 +79,8 @@ import Colors from "../../src/Framework/Constants/Colors"
 		height: 34px;
 		border-radius: 4px;
 		box-sizing: border-box;
-		border: 1px solid #DFDFDF;
-		background: #fff;
+		border: 1px solid ${Colors.grey};
+		background: ${Colors.white};
 		margin-bottom: 15px;
 		display:inline-block;
 	}
@@ -96,8 +96,8 @@ import Colors from "../../src/Framework/Constants/Colors"
 		height: 34px;
 		border-radius: 4px;
 		box-sizing: border-box;
-		border: 1px solid #DFDFDF;
-		background: #fff;
+		border: 1px solid ${Colors.grey};
+		background: ${Colors.white};
 		margin-bottom: 15px;
 	}
 	`,

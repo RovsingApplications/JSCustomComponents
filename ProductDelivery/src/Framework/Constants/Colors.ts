@@ -6,6 +6,6 @@ export default class Colors {
 	public static readonly tableHover = '#ddd';
 	public static readonly tableBackground = '#f2f2f2';
 	public static readonly font = '#000';
-	public static readonly buttonFont = '#fff';
+	public static readonly white = '#fff';
 	public static readonly error = '#CE2828';
 }

@@ -1,6 +1,7 @@
 import CustomElement from "../Framework/custom-element.decorator";
 import DeliveryResult from "../models/DeliveryResult";
 import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
+import Colors from "../Framework/Constants/Colors"
 
 @CustomElement({
 	selector: 'delivery-result',
@@ -16,8 +17,8 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 	.result-box {
 		position: relative;
 		width: 100%;
-		background: #FFFFFF;
-		border: 1px solid #DFDFDF;
+		background: ${Colors.white};
+		border: 1px solid ${Colors.grey};
 		box-sizing: border-box;
 		border-radius: 4px;
 		height: 457px;
@@ -26,31 +27,21 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 	}
 	* {
 		font-family: "Mulish", sans-serif;
-		color: #000;
+		color: ${Colors.font};
 	}
 	.pad-10 {
 		padding: 10px;
 	}
 	
-	.color-primary
-	{
-		color: #003E64;
-	}
-	
-	.color-secondary
-	{
-		color: #28BECE;
-	}
-
 	.label {
 		font-size: 14px;
 	}
 
 	.loader {
 		border: 10px solid white;
-		border-top: 10px solid #003E64;
-		border-right: 10px solid #003E64;
-		border-bottom: 10px solid #003E64;
+		border-top: 10px solid ${Colors.primary};
+		border-right: 10px solid ${Colors.primary};
+		border-bottom: 10px solid ${Colors.primary};
 		border-radius: 50%;
 		width: 60px;
 		height: 60px;
@@ -70,7 +61,7 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 		position: relative;
 		width: 400px;
   		height: 50px;
-  		background-color: white;
+  		background-color: ${Colors.white};
   		/* Center vertically and horizontally */
   
   		top: 40%;
@@ -85,12 +76,12 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 		font-size: 20px;
 		line-height: 25px;
 		text-align: center;
-		color: #000000;
+		color: ${Colors.font};
 		margin-left: -150px;
 	}
 
 	.secondtext {
-		background: #FFFFFF;
+		background: ${Colors.white};
 		box-sizing: border-box;
 		border-radius: 4px;
 		height: 34.53px;
@@ -105,7 +96,7 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 		font-weight: bold;
 		font-size: 11px;
 		line-height: 13px;
-		color: #003E64;
+		color: ${Colors.primary};
 	}
 	`,
 	useShadow: false,

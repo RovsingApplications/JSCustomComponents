@@ -83,7 +83,7 @@ import Colors from "./Framework/Constants/Colors"
 		background: ${Colors.primary};
 		border: 2px solid ${Colors.primary};
 		border-radius: 4px;
-		color: ${Colors.buttonFont};
+		color: ${Colors.white};
 		text-align: center;
 		float: right;
 		display: inline-block;
@@ -95,7 +95,7 @@ import Colors from "./Framework/Constants/Colors"
 		margin: 10px 0 11px 10px;
 	}
 	.button--inverted {
-		background: ${Colors.buttonFont};
+		background: ${Colors.white};
 		color: ${Colors.primary};
 	}
 	
@@ -110,7 +110,7 @@ import Colors from "./Framework/Constants/Colors"
 		border-radius: 4px;
 		box-sizing: border-box;
 		border: 1px solid ${Colors.grey};
-		background: ${Colors.buttonFont};
+		background: ${Colors.white};
 		margin-bottom: 15px;
 	}
 	input:read-only {
