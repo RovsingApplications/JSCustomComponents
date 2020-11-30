@@ -8,7 +8,7 @@ import CvrValidator from '../../framework/Validation/Validators/CVR';
 	selector: 'cvr-element',
 	template: `
 			<div class="wrapper">
-				<input type="text" id='cvr-field' placeholder='DDMMYY-SSSS'/>
+				<input type="text" id='cvr-field' placeholder='SSSSSSSS'/>
 			</div>`,
 	style: `
     :host{
