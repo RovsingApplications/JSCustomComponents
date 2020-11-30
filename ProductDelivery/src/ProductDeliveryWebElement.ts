@@ -291,9 +291,9 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 		this.saveButton.addEventListener("click", this.submitDeliveryForm.bind(this));
 		this.tryButton.addEventListener("click", this.tryDelivery.bind(this));
 		this.runAllFailButton.addEventListener("click", this.runAllFail.bind(this));
-		document.addEventListener('show-result', (evt) => this.showResult(evt as CustomEvent));
-		document.addEventListener('update-single-row', (evt) => this.updateDeliveryResultRow(evt as CustomEvent));
-		document.addEventListener('show-spinner', (evt) => this.showResultSpinner(evt as CustomEvent));
+		this.customDeliveryEventTableElement.addEventListener('show-result', (evt) => this.showResult(evt as CustomEvent));
+		this.customDeliveryEventTableElement.addEventListener('update-single-row', (evt) => this.updateDeliveryResultRow(evt as CustomEvent));
+		this.customDeliveryEventTableElement.addEventListener('show-spinner', (evt) => this.showResultSpinner(evt as CustomEvent));
 	}
 
 	updateDeliveryResultRow(evt: CustomEvent): void {

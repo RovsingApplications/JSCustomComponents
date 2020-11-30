@@ -135,7 +135,9 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 		var actionCell = tableRow.insertCell(3);
 		var actionButton = document.createElement('button');
 		actionButton.innerHTML = `<i class="fas fa-play"></i>`;
-		actionButton.addEventListener('click', this.runAction.bind(deliveryResult));
+		actionButton.addEventListener('click', () => {
+			this.runAction(deliveryResult.id);
+		});
 		actionButton.classList.add("result-cell");
 		actionButton.classList.add("action-run-button");
 		actionCell.appendChild(actionButton);
@@ -145,16 +147,15 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 	}
 
 	// bind runAction on play button
-	private runAction(event: Event): void {
-		event.preventDefault();
+	private runAction(deliveryResultId: string): void {
 		let showSpinner = new CustomEvent('show-spinner', {
 			bubbles: true,
 			composed: true
 		});
-		document.dispatchEvent(showSpinner);
+		this.dispatchEvent(showSpinner);
 		const headerName = Constants.apiKeyHeaderName;
 		const request = new MakeRequest(
-			`${Globals.apiUrl}Delivery/run?resultId=${this.id}`,
+			`${Globals.apiUrl}Delivery/run?resultId=${deliveryResultId}`,
 			'post',
 			{
 				[headerName]: Globals.apiKey,
@@ -174,8 +175,8 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 					composed: true,
 					detail: deliveryResult
 				});
-				document.dispatchEvent(showDataEvent);
-				document.dispatchEvent(updateSingleRowEvent);
+				this.dispatchEvent(showDataEvent);
+				this.dispatchEvent(updateSingleRowEvent);
 			})
 			.catch(exception => {
 				console.log(exception);
