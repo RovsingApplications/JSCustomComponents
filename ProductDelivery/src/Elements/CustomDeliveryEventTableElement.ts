@@ -2,7 +2,7 @@ import CustomElement from "../Framework/custom-element.decorator";
 import DeliveryResult from "../models/DeliveryResult";
 import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 import Constants from "../Framework/Constants/Constants";
-import MakeRequest from "../../../Branding/src/Framework/Utilities/MakeRequest";
+import MakeRequest from "../Framework/Utilities/MakeRequest";
 import Globals from '../Globals/Globals';
 import CustomDeliveryResultElement from '../Elements/CustomDeliveryResultElement';
 

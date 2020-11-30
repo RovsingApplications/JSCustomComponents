@@ -60,16 +60,10 @@ import Colors from "../../src/Framework/Constants/Colors"
 	}
 	.color-success
 	{
-		color: ${Colors.border};
+		color: ${Colors.success};
 	}
 	.label {
 		font-size: 14px;
-	}
-	.form-control.success  {
-		border-color: ${Colors.border};
-	}
-	.form-control.error  {
-		border-color: ${Colors.border};
 	}
 	.divplaceholder-wrapper{
 		margin-top:13px;
@@ -79,8 +73,8 @@ import Colors from "../../src/Framework/Constants/Colors"
 		height: 34px;
 		border-radius: 4px;
 		box-sizing: border-box;
-		border: 1px solid ${Colors.grey};
-		background: ${Colors.white};
+		border: 1px solid ${Colors.tertiary};
+		background: ${Colors.senary};
 		margin-bottom: 15px;
 		display:inline-block;
 	}
@@ -96,8 +90,8 @@ import Colors from "../../src/Framework/Constants/Colors"
 		height: 34px;
 		border-radius: 4px;
 		box-sizing: border-box;
-		border: 1px solid ${Colors.grey};
-		background: ${Colors.white};
+		border: 1px solid ${Colors.tertiary};
+		background: ${Colors.senary};
 		margin-bottom: 15px;
 	}
 	`,
@@ -121,7 +115,7 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	private filePlaceholderType: string = 'file';
 	private pathPlaceholderType: string = 'path';
 	private errorColor: string = Colors.error;
-	private successColor: string = Colors.border;
+	private successColor: string = Colors.success;
 	private nativeInput: HTMLInputElement;
 	ftpUrlRexExp: RegExp = /^(ftp:\/\/|ftps:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i;
 	ftpPortRexExp: RegExp = /^[0-9\s]*$/;

@@ -5,7 +5,7 @@ import CustomDeliveryEventTableElement from "./Elements/CustomDeliveryEventTable
 import CustomDeliveryProfileFormElement from "./Elements/CustomDeliveryProfileFormElement";
 import CustomDeliveryResultElement from "./Elements/CustomDeliveryResultElement";
 import Globals from './Globals/Globals'
-import MakeRequest from "../../Branding/src/Framework/Utilities/MakeRequest";
+import MakeRequest from "./Framework/Utilities/MakeRequest";
 import DeliveryResult from "./models/DeliveryResult";
 import IDeliveryProfile from "./models/IDeliveryProfile";
 import Colors from "./Framework/Constants/Colors"
@@ -84,7 +84,7 @@ import Colors from "./Framework/Constants/Colors"
 		background: ${Colors.primary};
 		border: 2px solid ${Colors.primary};
 		border-radius: 4px;
-		color: ${Colors.white};
+		color: ${Colors.senary};
 		text-align: center;
 		float: right;
 		display: inline-block;
@@ -96,7 +96,7 @@ import Colors from "./Framework/Constants/Colors"
 		margin: 10px 0 11px 10px;
 	}
 	.button--inverted {
-		background: ${Colors.white};
+		background: ${Colors.senary};
 		color: ${Colors.primary};
 	}
 	
@@ -110,8 +110,8 @@ import Colors from "./Framework/Constants/Colors"
 		height: 34px;
 		border-radius: 4px;
 		box-sizing: border-box;
-		border: 1px solid ${Colors.grey};
-		background: ${Colors.white};
+		border: 1px solid ${Colors.tertiary};
+		background: ${Colors.senary};
 		margin-bottom: 15px;
 	}
 	input:read-only {
@@ -144,7 +144,7 @@ import Colors from "./Framework/Constants/Colors"
 	}
 	.container--left {
 		padding-right: 50px;
-		border-right: 1px solid ${Colors.grey};
+		border-right: 1px solid ${Colors.tertiary};
 	}
 	.container--right {
 		padding-left: 50px;
@@ -173,7 +173,7 @@ import Colors from "./Framework/Constants/Colors"
 		transition: .4s;
 		border-radius: 34px;
 		height: 24px;
-		border: 2px solid ${Colors.lightGrey};
+		border: 2px solid ${Colors.quaternary};
 	}
 	.slider:before {
 		position: absolute;
@@ -182,22 +182,22 @@ import Colors from "./Framework/Constants/Colors"
 		width: 20px;
 		left:1px;
 		top: 2px;
-		background-color:${Colors.grey};
+		background-color:${Colors.tertiary};
 		-webkit-transition: .4s;
 		transition: .4s;
 		border-radius: 50%;
 	}
 	input:checked + .slider {
-		border-color: ${Colors.border};
+		border-color: ${Colors.success};
 	}
 	input:focus + .slider {
-		box-shadow: 0 0 1px ${Colors.grey};
+		box-shadow: 0 0 1px ${Colors.tertiary};
 	}
 	input:checked + .slider:before {
 		-webkit-transform: translateX(26px);
 		-ms-transform: translateX(26px);
 	transform: translateX(32px);
-		background-color: ${Colors.border};
+		background-color: ${Colors.success};
 	}
 	.actions i {
 		margin-left: 5px;
@@ -226,7 +226,7 @@ import Colors from "./Framework/Constants/Colors"
 	table {
 		border-collapse: collapse;
 		width: 100%;
-		border: 1px solid ${Colors.grey};
+		border: 1px solid ${Colors.tertiary};
 		-moz-border-radius: 4px;
 		-webkit-border-radius: 4px;
 		border-radius: 4px;
@@ -241,10 +241,10 @@ import Colors from "./Framework/Constants/Colors"
 		transform: rotate(45deg);
 	}
 	table tr:nth-child(even) {
-		background-color: ${Colors.tableBackground};
+		background-color: ${Colors.quinary};
 	}
 	table tr:hover {
-		background-color: ${Colors.tableHover};
+		background-color: ${Colors.secondary};
 	}
 	.buttons-wrapper {
 		width: 100%;

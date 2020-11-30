@@ -17,8 +17,8 @@ import Colors from "../Framework/Constants/Colors"
 	.result-box {
 		position: relative;
 		width: 100%;
-		background: ${Colors.white};
-		border: 1px solid ${Colors.grey};
+		background: ${Colors.senary};
+		border: 1px solid ${Colors.tertiary};
 		box-sizing: border-box;
 		border-radius: 4px;
 		height: 457px;
@@ -61,7 +61,7 @@ import Colors from "../Framework/Constants/Colors"
 		position: relative;
 		width: 400px;
   		height: 50px;
-  		background-color: ${Colors.white};
+  		background-color: ${Colors.senary};
   		/* Center vertically and horizontally */
   
   		top: 40%;
@@ -81,7 +81,7 @@ import Colors from "../Framework/Constants/Colors"
 	}
 
 	.secondtext {
-		background: ${Colors.white};
+		background: ${Colors.senary};
 		box-sizing: border-box;
 		border-radius: 4px;
 		height: 34.53px;
