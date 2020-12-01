@@ -174,19 +174,21 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 			this.placeholderSelect.style.borderColor = this.errorColor;
 			return;
 		}
-		var selectedValue = this.placeholderSelect.selectedOptions[0].value;
-		let existingValue = '';
 		if (this.placeholderType === this.filePlaceholderType) {
-			existingValue = this.filenameInput.value;
-			existingValue += selectedValue + ' ';
-			this.filenameInput.value = existingValue;
+			this.addPlaceHolderValueIntoInput(this.filenameInput);
 		}
 		else if (this.placeholderType === this.pathPlaceholderType) {
-			existingValue = this.pathInput.value;
-			existingValue += selectedValue + ' ';
-			this.pathInput.value = existingValue;
+			this.addPlaceHolderValueIntoInput(this.pathInput);
 		}
 		this.placeholderType = null;
+	}
+
+	private addPlaceHolderValueIntoInput(input: HTMLInputElement): void {
+		var selectedValue = this.placeholderSelect.selectedOptions[0].value;
+		let existingValue = input.value;
+		existingValue += selectedValue + ' ';
+		input.value = existingValue;
+		input.style.borderColor = this.successColor;
 	}
 
 	validateSelectField(event: Event): void {
@@ -203,6 +205,12 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		}
 		else {
 			this.placeholderType = this.pathPlaceholderType;
+		}
+		if (element.value === '') {
+			element.style.borderColor = this.errorColor;
+		}
+		else {
+			element.style.borderColor = this.successColor;
 		}
 	}
 
@@ -320,8 +328,6 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	public checkInputs(): Boolean {
 
 		let hasValidData = true;
-		const fileTemplate = this.filenameInput.value.trim();
-		const folderTemplate = this.pathInput.value.trim();
 
 		// validate url
 		if (!this.validateFTPInput()) {
@@ -336,21 +342,13 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 			hasValidData = false;
 		}
 		// validate filename
-		if (fileTemplate.length == 0) {
-			this.setErrorfor(this.filenameInput);
+		if (!this.VallidateEmptyInput(this.filenameInput)) {
 			hasValidData = false;
-		}
-		else {
-			this.setSucessFor(this.filenameInput);
 		}
 
 		// validate path
-		if (folderTemplate.length == 0) {
-			this.setErrorfor(this.pathInput);
+		if (!this.VallidateEmptyInput(this.pathInput)) {
 			hasValidData = false;
-		}
-		else {
-			this.setSucessFor(this.pathInput);
 		}
 
 		// validate contact Name
