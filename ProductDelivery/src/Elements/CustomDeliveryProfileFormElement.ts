@@ -3,8 +3,7 @@ import { FTPType } from "../models/FTPType";
 import IDeliveryProfile from "../models/IDeliveryProfile";
 import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 import Interpolation from "../models/Interpolation";
-import Colors from "../../src/Framework/Constants/Colors"
-
+import Colors from "../../src/Framework/Constants/Colors";
 @CustomElement({
 	selector: 'delivery-profile-form',
 	template: `<form class="from" id="from">
@@ -39,6 +38,8 @@ import Colors from "../../src/Framework/Constants/Colors"
 			</div>
 			<label id="lbl-filetemplate">Contact Person</label>
 			<input id="email" placeholder="Enter Email" autocomplete="off"></input>
+			<custom-dropdown-element> 
+			</custom-dropdown-element>
 			</form>
 	`,
 	style: `

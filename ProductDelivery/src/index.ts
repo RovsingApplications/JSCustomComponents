@@ -13,5 +13,6 @@ export {
 	CustomDeliveryEventTableElement,
 	CustomDeliveryProfileFormElement,
 	CustomDeliveryResultElement,
+	CustomDropDownElement,
 	ProductDeliveryWebElement
 }
