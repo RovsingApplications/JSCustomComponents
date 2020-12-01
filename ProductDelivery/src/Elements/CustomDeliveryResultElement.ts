@@ -98,6 +98,12 @@ import Colors from "../Framework/Constants/Colors"
 		line-height: 13px;
 		color: ${Colors.primary};
 	}
+
+	ul {
+		list-style-type: none;
+		padding: 0;
+	}
+	
 	`,
 	useShadow: false,
 })
