@@ -1,5 +1,6 @@
 import CustomElement from "../Framework/custom-element.decorator";
 import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
+import SVGs from "../Framework/Constants/SVGs";
 
 @CustomElement({
 	selector: 'custom-dropdown-element',
@@ -142,6 +143,19 @@ import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 	 	margin-bottom:5px;
 	}
 
+	.div-buttons{
+		float:right; 
+	}
+
+	button, input[type="submit"], input[type="reset"] {
+		background: none;
+		color: inherit;
+		border: none;
+		padding: 20;
+		font: inherit;
+		cursor: pointer;
+		outline: inherit;
+	}
 	`,
 	useShadow: false,
 })
@@ -179,17 +193,18 @@ export default class CustomDropDownElement extends CustomHTMLBaseElement {
 
 	addListeners() {
 		this.divDropDownParent.addEventListener('mousedown', this.handleVisibility.bind(this));
-		this.readonlyInput.addEventListener('click', this.handleVisibility.bind(this));
-		this.addEventListener("divItemClick", this.clickedItem.bind(this));
+		//this.readonlyInput.addEventListener('click', this.handleVisibility.bind(this));
+		//this.addEventListener("divItemClick", this.clickedItem.bind(this));
 	}
 
 	handleVisibility() {
-		if (this.isVisible) {
+		/*if (this.isVisible) {
 			this.hideData();
 		}
 		else {
 			this.showData();
-		}
+		}*/
+		this.showData();
 	}
 
 	showData() {
@@ -205,20 +220,54 @@ export default class CustomDropDownElement extends CustomHTMLBaseElement {
 	}
 
 
-	addElement(item): any {
+	addElement(item): void {
+		var divButtons = document.createElement('div');
+		var editButton = document.createElement('button');
+		editButton.innerHTML = `${SVGs.editPenSVG}`;
+		editButton.classList.add("edit-button");
+		editButton.addEventListener('click', this.editAction.bind(item));
+
+		var deleteButton = document.createElement('button');
+		deleteButton.innerHTML = `${SVGs.trashSVG}`;
+		deleteButton.classList.add("delete-button");
+		deleteButton.addEventListener('click', this.deleteAction.bind(item))
+
+		divButtons.classList.add("div-buttons");
+		divButtons.appendChild(editButton);
+		divButtons.appendChild(deleteButton);
+
+		var textContent = document.createElement("input") as HTMLInputElement;
+		textContent.readOnly = true;
+		textContent.innerText = `${item}`
+		textContent.addEventListener('click', this.selectItem.bind(item));
+
 		var divDropDownItem = document.createElement('div');
-		divDropDownItem.innerHTML = `<div>${item}</div>`;
+		divDropDownItem.appendChild(textContent);
+		divDropDownItem.appendChild(divButtons);
+
 		divDropDownItem.classList.add("dropdown_item");
-		divDropDownItem.addEventListener('click', e => {
+		/*divDropDownItem.addEventListener('click', e => {
+
 			const customDivClick = new CustomEvent('divItemClick', { bubbles: true, composed: true, detail: { item: item } });
 			this.dispatchEvent(customDivClick);
-		});
-		return divDropDownItem;
+		});*/
+		this.divDropDownItems.appendChild(divDropDownItem);
 	}
 
-	clickedItem(event: Event): void {
+
+	deleteAction(event: Event): void {
 		event.preventDefault();
-		console.log('wasclicked');
+		console.log("perfrom Delete operation");
+	}
+
+	editAction(event: Event): void {
+		event.preventDefault();
+		console.log("perfrom Update operation");
+	}
+
+	selectItem(event: Event): void {
+		event.preventDefault();
+		console.log("perfrom select operation");
 	}
 
 	getValue(): string {
@@ -226,7 +275,7 @@ export default class CustomDropDownElement extends CustomHTMLBaseElement {
 		return value;
 	}
 
-	initializePathPlaceholders() {
+	/*initializePathPlaceholders() {
 		let placeholderList: string[] = ['System/Library/Core', 'User/Projects/Product/Delivery', 'D:/Projects/User/PD/CustomFields', 'D:/Projects/User/PD/CustomFields'];
 		placeholderList.forEach(item => this.divDropDownItems.appendChild(this.addElement(item)));
 	}
@@ -234,7 +283,7 @@ export default class CustomDropDownElement extends CustomHTMLBaseElement {
 	initializeFileNamePlaceholders() {
 		let placeholderList: string[] = ['{Placeholder 1}', '{Placeholder 2}', '{Placeholder 3}', '{Placeholder 4}', '{Placeholder 5}', '{Placeholder 6}', '{Placeholder 7}', '{Placeholder 8}'];
 		placeholderList.forEach(item => this.divDropDownItems.appendChild(this.addElement(item)));
-	}
+	}*/
 	/*clicked(event: Event): void {
 			event.stopPropagation();
 			//this.hideData();

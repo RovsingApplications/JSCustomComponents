@@ -4,6 +4,8 @@ import IDeliveryProfile from "../models/IDeliveryProfile";
 import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 import Interpolation from "../models/Interpolation";
 import Colors from "../../src/Framework/Constants/Colors";
+import CustomDropDownElement from "../Elements/CustomDropDownElement";
+
 @CustomElement({
 	selector: 'delivery-profile-form',
 	template: `<form class="from" id="from">
@@ -38,7 +40,7 @@ import Colors from "../../src/Framework/Constants/Colors";
 			</div>
 			<label id="lbl-filetemplate">Contact Person</label>
 			<input id="email" placeholder="Enter Email" autocomplete="off"></input>
-			<custom-dropdown-element> 
+			<custom-dropdown-element placeholder="Enter File Name"> 
 			</custom-dropdown-element>
 			</form>
 	`,
@@ -108,6 +110,7 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	private contactInput: HTMLInputElement;
 	private passwordInput: HTMLInputElement;
 	private usernameInput: HTMLInputElement;
+	private customDropDown: CustomDropDownElement;
 
 	// placeholder fields
 	private placeholderSelect: HTMLSelectElement;
@@ -129,7 +132,7 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	}
 
 	componentDidMount() {
-
+		this.customDropDown = this.getChildElement('custom-dropdown-element') as CustomDropDownElement;
 		this.nativeInput = this.getChildElement('.custom-input');
 		this.ftpUrlInput = (this.getChildElement('#url') as HTMLInputElement);
 		this.ftpPortInput = (this.getChildElement('#port') as HTMLInputElement);
@@ -152,6 +155,10 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 			option.textContent = item;
 			option.value = `{${item}}`;
 			this.placeholderSelect.appendChild(option);
+		})
+
+		Interpolation.InperpolationList.forEach(item => {
+			this.customDropDown.addElement(`{${item}}`);
 		})
 	}
 
