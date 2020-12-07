@@ -1,12 +1,9 @@
-
 export default class MakeRequest {
-
-	private xmlHttpRequest: XMLHttpRequest;
 	method: string;
 	url: string;
 	headers: any;
 
-	constructor(url: string, method: string = "get", headers: any = {}) {
+	constructor(url: string, method: string = 'get', headers: any = {}) {
 		this.method = method;
 		this.url = url;
 		this.headers = headers;
@@ -20,36 +17,31 @@ export default class MakeRequest {
 
 	send(data: any = null) {
 		return new Promise((resolve, reject) => {
-			this.xmlHttpRequest = new XMLHttpRequest();
-			this.xmlHttpRequest.open(this.method, this.url);
-			this.setHeaders(this.xmlHttpRequest);
-			this.xmlHttpRequest.onload = () => {
-				if (this.xmlHttpRequest.status >= 200 && this.xmlHttpRequest.status < 300) {
-					resolve(this.xmlHttpRequest.response);
+			const xmlHttpRequest = new XMLHttpRequest();
+			xmlHttpRequest.open(this.method, this.url);
+			this.setHeaders(xmlHttpRequest);
+			xmlHttpRequest.onload = () => {
+				if (
+					xmlHttpRequest.status >= 200 &&
+					xmlHttpRequest.status < 300
+				) {
+					resolve(xmlHttpRequest.response);
 				} else {
 					reject({
-						status: this.xmlHttpRequest.status,
-						statusText: this.xmlHttpRequest.statusText,
-						body: this.xmlHttpRequest.response,
+						status: xmlHttpRequest.status,
+						statusText: xmlHttpRequest.statusText,
+						body: xmlHttpRequest.response,
 					});
 				}
 			};
-			this.xmlHttpRequest.onerror = () => {
+			xmlHttpRequest.onerror = () => {
 				reject({
-					status: this.xmlHttpRequest.status,
-					statusText: this.xmlHttpRequest.statusText,
-					body: this.xmlHttpRequest.response,
+					status: xmlHttpRequest.status,
+					statusText: xmlHttpRequest.statusText,
+					body: xmlHttpRequest.response,
 				});
 			};
-			this.xmlHttpRequest.send(data);
+			xmlHttpRequest.send(data);
 		});
-	}
-
-	getResponseHeader(headerName: string) {
-		if (!this.xmlHttpRequest) {
-			return null;
-		}
-		const headerValue = this.xmlHttpRequest.getResponseHeader(headerName);
-		return headerValue;
 	}
 }

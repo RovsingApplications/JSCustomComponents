@@ -1,13 +1,11 @@
 export default class Colors {
-	// e.g.
 	public static readonly primary = '#003E64';
-	// public static readonly secondary = '#B8B8B8';
-	// public static readonly tertiary = '#343F4B';
-	// public static readonly quaternary = '#E5F0FF';
-	// public static readonly quinary = '#E8E8E8';
-	// public static readonly senary = '#1D1D1D';
-	// public static readonly septenary = '#2B3744';
-	// public static readonly octonary = '#28BECE';
-	// public static readonly nonary = '#CA0B00';
-
+	public static readonly secondary = '#ddd';
+	public static readonly tertiary = '#DFDFDF';
+	public static readonly quaternary = '#E5E5E5';
+	public static readonly quinary = '#f2f2f2';
+	public static readonly senary = '#fff';
+	public static readonly error = '#CE2828';
+	public static readonly font = '#000';
+	public static readonly success = '#28BECE';
 }

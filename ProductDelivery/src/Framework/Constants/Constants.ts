@@ -1,3 +1,3 @@
 export default class Constants {
-	public static readonly language = 'da';
+	public static readonly apiKeyHeaderName = 'X-Esignatur-ApiKey';
 }
