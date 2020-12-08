@@ -1,7 +1,7 @@
 {
-	"name": "my-custom-web-element",
+	"name": "@luftborn/esignatur-product-delivery",
 	"version": "1.0.0",
-	"description": "template for custom web elements",
+	"description": "custom component for product delivery",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"author": "Esignatur",
