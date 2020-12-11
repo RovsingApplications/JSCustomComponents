@@ -23,7 +23,7 @@ import Colors from "../Framework/Constants/Colors"
 		border-radius: 4px;
 		height: 457px;
 		margin-top: 10px;
-		overflow: auto;
+		overflow: hidden;
 	}
 	* {
 		font-family: "Mulish", sans-serif;
@@ -77,7 +77,7 @@ import Colors from "../Framework/Constants/Colors"
 		line-height: 25px;
 		text-align: center;
 		color: ${Colors.font};
-		margin-left: -150px;
+		margin-left: -165px;
 	}
 
 	.secondtext {

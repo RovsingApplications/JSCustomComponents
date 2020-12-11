@@ -22,7 +22,7 @@ import Colors from "../../src/Framework/Constants/Colors"
 			<label id="lbl-username">Username</label>
 			<input id="username" placeholder="Enter Username" autocomplete="off""></input>
 			<label id="lbl-password">Password</label>
-			<input id="password" type="password" placeholder="Enter password" autocomplete="off"></input>
+			<input id="password" type="password" placeholder="Enter Password" autocomplete="off"></input>
 			<div class="divplaceholder-wrapper">
 				<div class="divplaceholder-wrapper__divselectplaceholder">
 					<select id="placeholder" class="divplaceholder-wrapper-select">
@@ -32,7 +32,7 @@ import Colors from "../../src/Framework/Constants/Colors"
 				</div>	
 				<div>
 					<label id="lbl-filename">File Name (template)</label>
-					<input id="file-template" placeholder="Add file name" autocomplete="off">
+					<input id="file-template" placeholder="Add Filename" autocomplete="off">
 					<label id="lbl-path">Path</label>
 					<input id="path" placeholder="Add Path" autocomplete="off" ></input>
 				</div>
@@ -69,7 +69,7 @@ import Colors from "../../src/Framework/Constants/Colors"
 		margin-top:13px;
 	}
 	.divplaceholder-wrapper-select {
-		width: 78%;
+		width: 60%;
 		height: 34px;
 		border-radius: 4px;
 		box-sizing: border-box;
