@@ -86,7 +86,7 @@ import Colors from "../Framework/Constants/Colors"
 		border-radius: 4px;
 		height: 34.53px;
 		text-align: center;
-		margin-left: -150px;
+		margin-left: -165px;
 	}
 
 	.resultcontent {
