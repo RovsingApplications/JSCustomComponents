@@ -14,7 +14,7 @@ import Colors from "./Framework/Constants/Colors"
 	selector: 'product-delivery',
 	template: `
 <div class="wrapper">
-	<h2>Product Delivery Setup</h2>
+	<br />
 	<div class="topconner">
 		<label>Product Delivery - Active</label>
 		<label class="switch">
@@ -122,6 +122,7 @@ import Colors from "./Framework/Constants/Colors"
 	/*wrapper*/
 	.wrapper {
 		width: 100%;
+		margin-top: 30px;
 	}
 	.top {
 		position: relative;
