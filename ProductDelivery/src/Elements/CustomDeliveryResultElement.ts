@@ -21,9 +21,9 @@ import Colors from "../Framework/Constants/Colors"
 		border: 1px solid ${Colors.tertiary};
 		box-sizing: border-box;
 		border-radius: 4px;
-		height: 457px;
+		height: 470px;
 		margin-top: 10px;
-		overflow: hidden;
+		overflow: auto;
 	}
 	* {
 		font-family: "Mulish", sans-serif;
@@ -59,14 +59,9 @@ import Colors from "../Framework/Constants/Colors"
 
 	.center {
 		position: relative;
-		width: 400px;
   		height: 50px;
   		background-color: ${Colors.senary};
-  		/* Center vertically and horizontally */
-  
   		top: 40%;
-  		left: 50%;
-  		margin: -25px 0 0 -25px
 	}
 
 	.firsttext {
@@ -77,7 +72,6 @@ import Colors from "../Framework/Constants/Colors"
 		line-height: 25px;
 		text-align: center;
 		color: ${Colors.font};
-		margin-left: -165px;
 	}
 
 	.secondtext {
@@ -86,7 +80,6 @@ import Colors from "../Framework/Constants/Colors"
 		border-radius: 4px;
 		height: 34.53px;
 		text-align: center;
-		margin-left: -150px;
 	}
 
 	.resultcontent {

@@ -11,18 +11,24 @@ import Colors from "../../src/Framework/Constants/Colors"
 			<!-- move this to a independent web component -->
 			<label id="lbl-url">Ftp Url</label>
 			<input id="url" placeholder="Enter Url" autocomplete="off""></input>
-			<label id="lbl-port">Port</label>
-			<input id="port" type="number" placeholder="Enter Port" autocomplete="off"></input>
-			<label id="lbl-type">Type</label>
-			<select id="type" class="select-element">
-				<option value="" disabled selected>Select Type</option>
-				<option>FTP</option>
-				<option>FTPS</option>
-			</select>
-			<label id="lbl-username">Username</label>
-			<input id="username" placeholder="Enter Username" autocomplete="off""></input>
-			<label id="lbl-password">Password</label>
-			<input id="password" type="password" placeholder="Enter Password" autocomplete="off"></input>
+			<div class="row">
+				<div class="column" >
+					<label id="lbl-port">Port</label>
+					<input id="port" type="number" placeholder="Enter Port" autocomplete="off"></input>
+					<label id="lbl-username">Username</label>
+					<input id="username" placeholder="Enter Username" autocomplete="off""></input>
+				</div>
+				<div class="column">
+					<label id="lbl-type">Type</label>
+					<select id="type" class="select-element">
+					<option value="" disabled selected>Select Type</option>
+					<option>FTP</option>
+					<option>FTPS</option>
+					</select>
+					<label id="lbl-password">Password</label>
+					<input id="password" type="password" placeholder="Enter Password" autocomplete="off"></input>
+				</div>
+			</div>
 			<div class="divplaceholder-wrapper">
 				<div class="divplaceholder-wrapper__divselectplaceholder">
 					<select id="placeholder" class="divplaceholder-wrapper-select">
@@ -42,7 +48,6 @@ import Colors from "../../src/Framework/Constants/Colors"
 			</form>
 	`,
 	style: `
-
 	* {
 		font-family: "Mulish", sans-serif;
 		color: ${Colors.font};
@@ -93,6 +98,21 @@ import Colors from "../../src/Framework/Constants/Colors"
 		border: 1px solid ${Colors.tertiary};
 		background: ${Colors.senary};
 		margin-bottom: 15px;
+	}
+	/* Create two equal columns that floats next to each other */
+	.column {
+		float: left;
+		width: 50%;
+		box-sizing: border-box;
+	}
+	/* Clear floats after the columns */
+	.row:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+	.column input {
+		width : 90%;
 	}
 	`,
 	useShadow: false,

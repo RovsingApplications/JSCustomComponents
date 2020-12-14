@@ -14,7 +14,6 @@ import Colors from "./Framework/Constants/Colors"
 	selector: 'product-delivery',
 	template: `
 <div class="wrapper">
-	<br />
 	<div class="topconner">
 		<label>Product Delivery - Active</label>
 		<label class="switch">
@@ -218,9 +217,6 @@ import Colors from "./Framework/Constants/Colors"
 	{
 		float: right; 
 		display: flex;	
-	}
-	.topconner:first-child {
-		padding-right: 40px;
 	}
 /*--------
 	/*table*/
