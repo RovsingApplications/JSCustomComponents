@@ -75,7 +75,7 @@ import Colors from "../../src/Framework/Constants/Colors"
 	.divplaceholder-wrapper-select {
 		width: calc(100% - 79px);
 		height: 34px;
-		border-radius: 4px;
+		border-radius: 4px 0 0 4px;
 		box-sizing: border-box;
 		border: 1px solid ${Colors.tertiary};
 		background: ${Colors.senary};
@@ -87,7 +87,7 @@ import Colors from "../../src/Framework/Constants/Colors"
 		height: 34px;
 		margin: 0px;
 		width: 79px;
-		border-radius: 0;
+		border-radius: 0 4px 4px 0;
 	}
 	.select-element {
 		width: 100%;
