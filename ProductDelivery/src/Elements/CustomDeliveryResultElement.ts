@@ -26,7 +26,6 @@ import Colors from "../Framework/Constants/Colors"
 		overflow: auto;
 	}
 	* {
-		font-family: "Mulish", sans-serif;
 		color: ${Colors.font};
 	}
 	.pad-10 {
@@ -65,7 +64,6 @@ import Colors from "../Framework/Constants/Colors"
 	}
 
 	.firsttext {
-		font-family: Mulish;
 		font-style: normal;
 		font-weight: normal;
 		font-size: 20px;
@@ -84,7 +82,6 @@ import Colors from "../Framework/Constants/Colors"
 
 	.resultcontent {
 		position: absolute;
-		font-family: Mulish;
 		font-style: normal;
 		font-weight: bold;
 		font-size: 11px;

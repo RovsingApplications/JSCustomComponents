@@ -12,13 +12,13 @@ import Colors from "../../src/Framework/Constants/Colors"
 			<label id="lbl-url">Ftp Url</label>
 			<input id="url" placeholder="Enter Url" autocomplete="off""></input>
 			<div class="row">
-				<div class="column" >
+				<div class="column column-50" >
 					<label id="lbl-port">Port</label>
 					<input id="port" type="number" placeholder="Enter Port" autocomplete="off"></input>
 					<label id="lbl-username">Username</label>
 					<input id="username" placeholder="Enter Username" autocomplete="off""></input>
 				</div>
-				<div class="column">
+				<div class="column column-50">
 					<label id="lbl-type">Type</label>
 					<select id="type" class="select-element">
 					<option value="" disabled selected>Select Type</option>
@@ -49,7 +49,6 @@ import Colors from "../../src/Framework/Constants/Colors"
 	`,
 	style: `
 	* {
-		font-family: "Mulish", sans-serif;
 		color: ${Colors.font};
 	}
 	.pad-10 {
@@ -74,7 +73,7 @@ import Colors from "../../src/Framework/Constants/Colors"
 		margin-top:13px;
 	}
 	.divplaceholder-wrapper-select {
-		width: 60%;
+		width: calc(100% - 79px);
 		height: 34px;
 		border-radius: 4px;
 		box-sizing: border-box;
@@ -85,10 +84,10 @@ import Colors from "../../src/Framework/Constants/Colors"
 	}
 	.divplaceholder-wrapper-button {
 		display:inline-block;
-		height: 33px;
-		margin-top:-0px;
-		margin-bottom: -10px;
-		
+		height: 34px;
+		margin: 0px;
+		width: 79px;
+		border-radius: 0;
 	}
 	.select-element {
 		width: 100%;
@@ -111,8 +110,11 @@ import Colors from "../../src/Framework/Constants/Colors"
 		display: table;
 		clear: both;
 	}
-	.column input {
-		width : 90%;
+	.column-50 {
+    	width: 50%;
+	}
+	.column:not(:first-of-type) {
+    	padding-left: 10px
 	}
 	`,
 	useShadow: false,
