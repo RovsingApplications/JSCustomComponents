@@ -74,7 +74,7 @@ import Colors from "../../src/Framework/Constants/Colors"
 		margin-top:13px;
 	}
 	.divplaceholder-wrapper-select {
-		width: 50%;
+		width: 60%;
 		height: 34px;
 		border-radius: 4px;
 		box-sizing: border-box;

@@ -72,7 +72,6 @@ import Colors from "../Framework/Constants/Colors"
 		line-height: 25px;
 		text-align: center;
 		color: ${Colors.font};
-		margin-left: -165px;
 	}
 
 	.secondtext {
@@ -81,7 +80,6 @@ import Colors from "../Framework/Constants/Colors"
 		border-radius: 4px;
 		height: 34.53px;
 		text-align: center;
-		margin-left: -165px;
 	}
 
 	.resultcontent {
