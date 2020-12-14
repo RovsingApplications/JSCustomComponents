@@ -16,10 +16,6 @@ import CustomDeliveryResultElement from '../Elements/CustomDeliveryResultElement
 		<table>
 		</table>`,
 	style: `
-	* {
-		font-family: "Mulish", sans-serif;
-		color: #000;
-	}
 	.pad-10 {
 		padding: 10px;
 	}
