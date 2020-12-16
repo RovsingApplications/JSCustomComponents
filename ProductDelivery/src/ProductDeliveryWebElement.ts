@@ -277,10 +277,19 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 	}
 
 	private addFontToDocumentHead() {
-		const link = document.createElement('link');
-		link.rel = 'stylesheet';
-		link.href = 'https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700&display=swap';
-		document.head.appendChild(link);
+
+		const fontLink = document.createElement('link');
+		fontLink.rel = 'stylesheet';
+		fontLink.href = 'https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700&display=swap';
+
+		const fontAwsomeLink = document.createElement('link');
+		fontAwsomeLink.rel = 'stylesheet';
+		fontAwsomeLink.href = 'https://use.fontawesome.com/releases/v5.7.1/css/all.css';
+		fontAwsomeLink.integrity = 'sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr';
+		fontAwsomeLink.crossOrigin = 'anonymous';
+
+		document.head.appendChild(fontLink);
+		document.head.appendChild(fontAwsomeLink);
 	}
 
 	private addListeners() {
