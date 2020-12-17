@@ -31,10 +31,10 @@ import Colors from "../../src/Framework/Constants/Colors"
 			</div>
 			<div class="divplaceholder-wrapper">
 				<div class="divplaceholder-wrapper__divselectplaceholder">
-					<select id="placeholder" class="divplaceholder-wrapper-select rounded-left">
+					<select id="placeholder" class="divplaceholder-wrapper-select">
 						<option value="" disabled selected>Select Placeholder</option>
 					</select>
-					<button id="btn-add" class="divplaceholder-wrapper-button button rounded-right">Add</button>
+					<button id="btn-add" class="divplaceholder-wrapper-button button">Add</button>
 				</div>	
 				<div>
 					<label id="lbl-filename">File Name (template)</label>
