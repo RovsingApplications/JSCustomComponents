@@ -111,17 +111,11 @@ import Colors from "../../src/Framework/Constants/Colors"
 		clear: both;
 	}
 	.column-50 {
-    	width: 50%;
+		width: 50%;
 	}
 	.column:not(:first-of-type) {
-    	padding-left: 10px
+		padding-left: 10px
 	}
-	.rounded-right {
-		border-radius: 0 4px 4px 0;
-		}
-		.rounded-left {
-		border-radius: 4px 0 0 4px;
-		}
 	`,
 	useShadow: false,
 })
