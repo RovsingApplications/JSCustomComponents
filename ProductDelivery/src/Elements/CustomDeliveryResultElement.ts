@@ -45,6 +45,7 @@ import Colors from "../Framework/Constants/Colors"
 		width: 60px;
 		height: 60px;
 		animation: spin 3s linear infinite;
+		margin-left: calc(100% - 250px);
 	}
 
 	@keyframes spin {
