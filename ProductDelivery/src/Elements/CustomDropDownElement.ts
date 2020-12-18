@@ -236,9 +236,10 @@ export default class CustomDropDownElement extends CustomHTMLBaseElement {
 		divButtons.appendChild(editButton);
 		divButtons.appendChild(deleteButton);
 
-		var textContent = document.createElement("input") as HTMLInputElement;
+		/*var textContent = document.createElement("input") as HTMLInputElement;
 		textContent.readOnly = true;
-		textContent.innerText = `${item}`
+		textContent.innerText = `${item}`*/
+		var textContent = document.createTextNode(`${item}`);
 		textContent.addEventListener('click', this.selectItem.bind(item));
 
 		var divDropDownItem = document.createElement('div');
