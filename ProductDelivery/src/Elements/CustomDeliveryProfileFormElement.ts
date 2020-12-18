@@ -12,28 +12,34 @@ import CustomDropDownElement from "../Elements/CustomDropDownElement";
 			<!-- move this to a independent web component -->
 			<label id="lbl-url">Ftp Url</label>
 			<input id="url" placeholder="Enter Url" autocomplete="off""></input>
-			<label id="lbl-port">Port</label>
-			<input id="port" type="number" placeholder="Enter Port" autocomplete="off"></input>
-			<label id="lbl-type">Type</label>
-			<select id="type" class="select-element">
-				<option value="" disabled selected>Select Type</option>
-				<option>FTP</option>
-				<option>FTPS</option>
-			</select>
-			<label id="lbl-username">Username</label>
-			<input id="username" placeholder="Enter Username" autocomplete="off""></input>
-			<label id="lbl-password">Password</label>
-			<input id="password" type="password" placeholder="Enter password" autocomplete="off"></input>
+			<div class="row">
+				<div class="column column-50" >
+					<label id="lbl-port">Port</label>
+					<input id="port" type="number" placeholder="Enter Port" autocomplete="off"></input>
+					<label id="lbl-username">Username</label>
+					<input id="username" placeholder="Enter Username" autocomplete="off""></input>
+				</div>
+				<div class="column column-50">
+					<label id="lbl-type">Type</label>
+					<select id="type" class="select-element">
+					<option value="" disabled selected>Select Type</option>
+					<option>FTP</option>
+					<option>FTPS</option>
+					</select>
+					<label id="lbl-password">Password</label>
+					<input id="password" type="password" placeholder="Enter Password" autocomplete="off"></input>
+				</div>
+			</div>
 			<div class="divplaceholder-wrapper">
 				<div class="divplaceholder-wrapper__divselectplaceholder">
-					<select id="placeholder" class="divplaceholder-wrapper-select">
+					<select id="placeholder" class="divplaceholder-wrapper-select rounded-left">
 						<option value="" disabled selected>Select Placeholder</option>
 					</select>
-					<button id="btn-add" class="divplaceholder-wrapper-button button">Add</button>
+					<button id="btn-add" class="divplaceholder-wrapper-button button rounded-right">Add</button>
 				</div>	
 				<div>
 					<label id="lbl-filename">File Name (template)</label>
-					<input id="file-template" placeholder="Add file name" autocomplete="off">
+					<input id="file-template" placeholder="Add Filename" autocomplete="off">
 					<label id="lbl-path">Path</label>
 					<input id="path" placeholder="Add Path" autocomplete="off" ></input>
 				</div>
@@ -45,9 +51,7 @@ import CustomDropDownElement from "../Elements/CustomDropDownElement";
 			</form>
 	`,
 	style: `
-
 	* {
-		font-family: "Mulish", sans-serif;
 		color: ${Colors.font};
 	}
 	.pad-10 {
@@ -72,7 +76,7 @@ import CustomDropDownElement from "../Elements/CustomDropDownElement";
 		margin-top:13px;
 	}
 	.divplaceholder-wrapper-select {
-		width: 78%;
+		width: calc(100% - 79px);
 		height: 34px;
 		border-radius: 4px;
 		box-sizing: border-box;
@@ -83,10 +87,10 @@ import CustomDropDownElement from "../Elements/CustomDropDownElement";
 	}
 	.divplaceholder-wrapper-button {
 		display:inline-block;
-		height: 33px;
-		margin-top:-0px;
-		margin-bottom: -10px;
-		
+		height: 34px;
+		margin: 0px;
+		width: 79px;
+		border-radius: 0;
 	}
 	.select-element {
 		width: 100%;
@@ -97,6 +101,30 @@ import CustomDropDownElement from "../Elements/CustomDropDownElement";
 		background: ${Colors.senary};
 		margin-bottom: 15px;
 	}
+	/* Create two equal columns that floats next to each other */
+	.column {
+		float: left;
+		width: 50%;
+		box-sizing: border-box;
+	}
+	/* Clear floats after the columns */
+	.row:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+	.column-50 {
+    	width: 50%;
+	}
+	.column:not(:first-of-type) {
+    	padding-left: 10px
+	}
+	.rounded-right {
+		border-radius: 0 4px 4px 0;
+		}
+		.rounded-left {
+		border-radius: 4px 0 0 4px;
+		}
 	`,
 	useShadow: false,
 })
@@ -182,19 +210,21 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 			this.placeholderSelect.style.borderColor = this.errorColor;
 			return;
 		}
-		var selectedValue = this.placeholderSelect.selectedOptions[0].value;
-		let existingValue = '';
 		if (this.placeholderType === this.filePlaceholderType) {
-			existingValue = this.filenameInput.value;
-			existingValue += selectedValue + ' ';
-			this.filenameInput.value = existingValue;
+			this.addPlaceHolderValueIntoInput(this.filenameInput);
 		}
 		else if (this.placeholderType === this.pathPlaceholderType) {
-			existingValue = this.pathInput.value;
-			existingValue += selectedValue + ' ';
-			this.pathInput.value = existingValue;
+			this.addPlaceHolderValueIntoInput(this.pathInput);
 		}
 		this.placeholderType = null;
+	}
+
+	private addPlaceHolderValueIntoInput(input: HTMLInputElement): void {
+		var selectedValue = this.placeholderSelect.selectedOptions[0].value;
+		let existingValue = input.value;
+		existingValue += selectedValue + ' ';
+		input.value = existingValue;
+		input.style.borderColor = this.successColor;
 	}
 
 	validateSelectField(event: Event): void {
@@ -211,6 +241,12 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		}
 		else {
 			this.placeholderType = this.pathPlaceholderType;
+		}
+		if (element.value === '') {
+			element.style.borderColor = this.errorColor;
+		}
+		else {
+			element.style.borderColor = this.successColor;
 		}
 	}
 
@@ -328,8 +364,6 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	public checkInputs(): Boolean {
 
 		let hasValidData = true;
-		const fileTemplate = this.filenameInput.value.trim();
-		const folderTemplate = this.pathInput.value.trim();
 
 		// validate url
 		if (!this.validateFTPInput()) {
@@ -344,21 +378,13 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 			hasValidData = false;
 		}
 		// validate filename
-		if (fileTemplate.length == 0) {
-			this.setErrorfor(this.filenameInput);
+		if (!this.VallidateEmptyInput(this.filenameInput)) {
 			hasValidData = false;
-		}
-		else {
-			this.setSucessFor(this.filenameInput);
 		}
 
 		// validate path
-		if (folderTemplate.length == 0) {
-			this.setErrorfor(this.pathInput);
+		if (!this.VallidateEmptyInput(this.pathInput)) {
 			hasValidData = false;
-		}
-		else {
-			this.setSucessFor(this.pathInput);
 		}
 
 		// validate contact Name

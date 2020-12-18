@@ -5,12 +5,12 @@ import CprValidator from '../../framework/Validation/Validators/CPR';
 import CvrValidator from '../../framework/Validation/Validators/CVR';
 
 @CustomElement({
-    selector: 'cvr-element',
-    template: `
+	selector: 'cvr-element',
+	template: `
 			<div class="wrapper">
-				<input type="text" id='cvr-field' placeholder='DDMMYY-SSSS'/>
+				<input type="text" id='cvr-field' placeholder='SSSSSSSS'/>
 			</div>`,
-    style: `
+	style: `
     :host{
             width:100%;
     }
@@ -26,50 +26,50 @@ import CvrValidator from '../../framework/Validation/Validators/CVR';
             resize: none;
     }
            `,
-    useShadow: true,
+	useShadow: true,
 })
 export class CVRElement extends CustomInputElement {
-    text: HTMLInputElement;
-    validator: CvrValidator = new CvrValidator();
+	text: HTMLInputElement;
+	validator: CvrValidator = new CvrValidator();
 
-    constructor() {
-        super();
-    }
+	constructor() {
+		super();
+	}
 
-    get value(): string {
-        return `${this.text.value}`;
-    }
+	get value(): string {
+		return `${this.text.value}`;
+	}
 
-    set value(value: string) {
-        this.text.value = value;
-    }
+	set value(value: string) {
+		this.text.value = value;
+	}
 
-    get valid(): boolean {
-        return this.validator.isSatisfiedBy(this.value, !this.required);
-    }
+	get valid(): boolean {
+		return this.validator.isSatisfiedBy(this.value, !this.required);
+	}
 
-    connectedCallback(): void {
-        super.connectedCallback();
-    }
+	connectedCallback(): void {
+		super.connectedCallback();
+	}
 
-    initChildInputs() {
-        this.text = super.getChildInput('#cvr-field');
-        this.text.addEventListener('change', this.change.bind(this));
-        if (this.required) {
-            this.text.setAttribute('required', '');
-        }
-    }
+	initChildInputs() {
+		this.text = super.getChildInput('#cvr-field');
+		this.text.addEventListener('change', this.change.bind(this));
+		if (this.required) {
+			this.text.setAttribute('required', '');
+		}
+	}
 
-    // events
-    public change($event): void {
-        this.touched = true;
-        this.onChange.emit(new CustomElementEventArgs(this.value, 'change'));
-    }
+	// events
+	public change($event): void {
+		this.touched = true;
+		this.onChange.emit(new CustomElementEventArgs(this.value, 'change'));
+	}
 
-    public validate(): void {
-        this.valid;
-        this.onValidate.emit(
-            new CustomElementEventArgs(this.value, 'validate'),
-        );
-    }
+	public validate(): void {
+		this.valid;
+		this.onValidate.emit(
+			new CustomElementEventArgs(this.value, 'validate'),
+		);
+	}
 }

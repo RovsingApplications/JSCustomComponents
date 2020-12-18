@@ -82,6 +82,12 @@ export class AddressElement extends CustomInputElement {
 		this.address.addEventListener('change', this.change.bind(this));
 		this.city.addEventListener('change', this.change.bind(this));
 		this.zip.addEventListener('change', this.change.bind(this));
+
+		if (this.required) {
+			this.address.setAttribute('required', '');
+			this.city.setAttribute('required', '');
+			this.zip.setAttribute('required', '');
+		}
 	}
 
 	// events

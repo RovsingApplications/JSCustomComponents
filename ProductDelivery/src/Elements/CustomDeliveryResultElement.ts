@@ -21,12 +21,11 @@ import Colors from "../Framework/Constants/Colors"
 		border: 1px solid ${Colors.tertiary};
 		box-sizing: border-box;
 		border-radius: 4px;
-		height: 457px;
+		height: 470px;
 		margin-top: 10px;
 		overflow: auto;
 	}
 	* {
-		font-family: "Mulish", sans-serif;
 		color: ${Colors.font};
 	}
 	.pad-10 {
@@ -59,25 +58,18 @@ import Colors from "../Framework/Constants/Colors"
 
 	.center {
 		position: relative;
-		width: 400px;
   		height: 50px;
   		background-color: ${Colors.senary};
-  		/* Center vertically and horizontally */
-  
   		top: 40%;
-  		left: 50%;
-  		margin: -25px 0 0 -25px
 	}
 
 	.firsttext {
-		font-family: Mulish;
 		font-style: normal;
 		font-weight: normal;
 		font-size: 20px;
 		line-height: 25px;
 		text-align: center;
 		color: ${Colors.font};
-		margin-left: -150px;
 	}
 
 	.secondtext {
@@ -86,12 +78,10 @@ import Colors from "../Framework/Constants/Colors"
 		border-radius: 4px;
 		height: 34.53px;
 		text-align: center;
-		margin-left: -150px;
 	}
 
 	.resultcontent {
 		position: absolute;
-		font-family: Mulish;
 		font-style: normal;
 		font-weight: bold;
 		font-size: 11px;

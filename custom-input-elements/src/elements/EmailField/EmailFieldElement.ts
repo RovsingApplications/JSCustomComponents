@@ -3,12 +3,12 @@ import { CustomInputElement } from '../../framework/CustomInputElement';
 import { CustomElementEventArgs } from '../../framework/CustomEvents';
 
 @CustomElement({
-    selector: 'email-element',
-    template: `
+	selector: 'email-element',
+	template: `
 			<div class="wrapper">
 				<input type="text" id='email-field'/>
 			</div>`,
-    style: `
+	style: `
     :host{
             width:100%;
     }
@@ -24,55 +24,55 @@ import { CustomElementEventArgs } from '../../framework/CustomEvents';
             resize: none;
     }
            `,
-    useShadow: true,
+	useShadow: true,
 })
 export class EmailFieldElement extends CustomInputElement {
-    mailRegex: RegExp = new RegExp(
-        /^([a-zA-Z0-9ÆØÅæøå_.+-])+\@(([a-zA-Z0-9ÆØÅæøå-])+\.)+([a-zA-Z0-9ÆØÅæøå]{2,4})+$/,
-    );
+	mailRegex: RegExp = new RegExp(
+		/^([a-zA-Z0-9ÆØÅæøå_.+-])+\@(([a-zA-Z0-9ÆØÅæøå-])+\.)+([a-zA-Z0-9ÆØÅæøå]{2,4})+$/,
+	);
 
-    email: HTMLInputElement;
+	email: HTMLInputElement;
 
-    constructor() {
-        super();
-    }
+	constructor() {
+		super();
+	}
 
-    get value(): string {
-        return `${this.email.value}`;
-    }
+	get value(): string {
+		return `${this.email.value}`;
+	}
 
-    set value(value: string) {
-        this.email.value = value;
-    }
+	set value(value: string) {
+		this.email.value = value;
+	}
 
-    get valid(): boolean {
-        const patternValid = !this.value || this.mailRegex.test(this.value);
-        return this.email.validity.valid && patternValid;
-    }
+	get valid(): boolean {
+		const patternValid = !this.value || this.mailRegex.test(this.value);
+		return this.email.validity.valid && patternValid;
+	}
 
-    connectedCallback(): void {
-        this.initChildInputs();
-        super.connectedCallback();
-    }
+	connectedCallback(): void {
+		this.initChildInputs();
+		super.connectedCallback();
+	}
 
-    initChildInputs() {
-        this.email = super.getChildInput('#email-field');
-        this.email.addEventListener('change', this.change.bind(this));
-        if (this.required) {
-            this.email.setAttribute('required', '');
-        }
-    }
+	initChildInputs() {
+		this.email = super.getChildInput('#email-field');
+		this.email.addEventListener('change', this.change.bind(this));
+		if (this.required) {
+			this.email.setAttribute('required', '');
+		}
+	}
 
-    // events
-    public change($event): void {
-        this.touched = true;
-        this.onChange.emit(new CustomElementEventArgs(this.value, 'change'));
-    }
+	// events
+	public change($event): void {
+		this.touched = true;
+		this.onChange.emit(new CustomElementEventArgs(this.value, 'change'));
+	}
 
-    public validate(): void {
-        this.valid;
-        this.onValidate.emit(
-            new CustomElementEventArgs(this.value, 'validate'),
-        );
-    }
+	public validate(): void {
+		this.valid;
+		this.onValidate.emit(
+			new CustomElementEventArgs(this.value, 'validate'),
+		);
+	}
 }
