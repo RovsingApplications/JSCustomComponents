@@ -156,6 +156,10 @@ import SVGs from "../Framework/Constants/SVGs";
 		cursor: pointer;
 		outline: inherit;
 	}
+
+	.textContent {
+		display: inline;
+	}
 	`,
 	useShadow: false,
 })
@@ -239,15 +243,19 @@ export default class CustomDropDownElement extends CustomHTMLBaseElement {
 		/*var textContent = document.createElement("input") as HTMLInputElement;
 		textContent.readOnly = true;
 		textContent.innerText = `${item}`*/
-		var textContent = document.createTextNode(`${item}`);
-		textContent.addEventListener('click', this.selectItem.bind(item));
+		//var textContent = document.createTextNode(`${item}`);
+		var textContent = document.createElement("label") as HTMLLabelElement;
+		textContent.classList.add('textContent');
+		textContent.innerText = `${item}`
+		textContent.addEventListener('click', this.selectItem.bind(this));
 
 		var divDropDownItem = document.createElement('div');
 		divDropDownItem.appendChild(textContent);
 		divDropDownItem.appendChild(divButtons);
 
 		divDropDownItem.classList.add("dropdown_item");
-		/*divDropDownItem.addEventListener('click', e => {
+		divDropDownItem.addEventListener('click', this.selectItem.bind(this));
+		/* divDropDownItem.addEventListener('click', e => {
 
 			const customDivClick = new CustomEvent('divItemClick', { bubbles: true, composed: true, detail: { item: item } });
 			this.dispatchEvent(customDivClick);
@@ -268,7 +276,14 @@ export default class CustomDropDownElement extends CustomHTMLBaseElement {
 
 	selectItem(event: Event): void {
 		event.preventDefault();
-		console.log("perfrom select operation");
+		var targetElement = (event.target as HTMLLabelElement);
+		var selectedValue = targetElement.innerText;
+		if (typeof selectedValue !== 'undefined') {
+			let existingValue = this.readonlyInput.value;
+			existingValue += selectedValue + ' ';
+			this.readonlyInput.value = existingValue;
+			this.hideData();
+		}
 	}
 
 	getValue(): string {
