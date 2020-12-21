@@ -4,3 +4,7 @@
 /**/demo/*.js
 /**/demo/*.js.map
 /**/package-lock.js
+/.vs/slnx.sqlite-journal
+/.vs/slnx.sqlite
+/ProductDelivery/yarn.lock
+/.vs/JsCustomComponents/v16/.suo

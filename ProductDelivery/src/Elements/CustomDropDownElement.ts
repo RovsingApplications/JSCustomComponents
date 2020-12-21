@@ -15,12 +15,57 @@ import SVGs from "../Framework/Constants/SVGs";
 		</div>
 		<input class="readOnlyOption" readonly>
 	</div>	
+	<div class="overlay">
+		<div class="add-or-edit-box">
+			<input class="add-or-edit-box__input" type="text">
+			</input>
+			<button class="button" id="add-or-edit-overlay-button__delete">
+				Confirm delete
+			</button>
+			<button class="button" id="add-or-edit-overlay-button__add">
+				Add
+			</button>
+			<button class="button" id="add-or-edit-overlay-button__edit">
+				Confirm edit
+			</button>
+			<button class="button button--inverted" id="add-or-edit-overlay-button__cancel">
+				Cancel
+			</button>
+		<div>
+	</div>
 	`,
 	style: `
 	.divWrapper {
 		width: 100%;
 		height: 48px;
 	}
+	.overlay {
+		position: fixed;
+		left: -100px;
+		top: -100px;
+		width: 150vw;
+		height: 150vh;
+		background-color: rgb(105,105,105,0.5);
+		z-index: 20000;
+		margin-top: 0;
+		display:none;
+	}
+	.add-or-edit-box {
+		width: 500px;
+		padding: 50px;
+		padding-bottom: 45px;
+		position: fixed;
+		left: calc(100vw / 2 - 500px / 2);
+		top: calc(100vh / 2 - 200px / 2);
+		background-color: white;
+		border-radius: 15px;
+		border: 1px solid black;
+	}
+
+	.add-or-edit-box__input {
+		width: 500px;
+	}
+
 	.dropdown {
 		text-align:left;
 		font-family: "Mulish", sans-serif;
@@ -87,6 +132,7 @@ import SVGs from "../Framework/Constants/SVGs";
 		top: 26px;
 		overflow: hidden;
 		pointer-events: none;
+		margin-top:6px;
 	}
 
 	.dropdown_items {
@@ -169,8 +215,14 @@ export default class CustomDropDownElement extends CustomHTMLBaseElement {
 	private readonlyInput: HTMLInputElement;
 	private addPlaceholderButton: HTMLButtonElement;
 	private isVisible: boolean;
-
-
+	private overlay: HTMLDivElement;
+	private deleteButton: HTMLDivElement;
+	private cancelButton: HTMLDivElement;
+	private addButton: HTMLDivElement;
+	private editButton: HTMLDivElement;
+	private addOrEditInput: HTMLInputElement;
+	private currentlyEditingDropdownItem: HTMLDivElement;
+	private currentTarget: EventTarget;
 
 	constructor() {
 		super();
@@ -182,7 +234,15 @@ export default class CustomDropDownElement extends CustomHTMLBaseElement {
 		this.divArrow = this.getChildElement('.dropdown_arrow');
 		this.divValue = this.getChildElement('.dropdown_value');
 		this.readonlyInput = this.getChildElement('.readOnlyOption');
-
+		this.overlay = this.getChildElement('.overlay');
+		this.deleteButton = this.getChildElement('#add-or-edit-overlay-button__delete');
+		this.deleteButton.addEventListener('click', this.deletePlaceholder.bind(this));
+		this.addButton = this.getChildElement('#add-or-edit-overlay-button__add');
+		this.editButton = this.getChildElement('#add-or-edit-overlay-button__edit');
+		this.editButton.addEventListener('click', this.editPlaceholder.bind(this));
+		this.cancelButton = this.getChildElement('#add-or-edit-overlay-button__cancel');
+		this.cancelButton.addEventListener('click', this.cancelEditAddOrDelete.bind(this));
+		this.addOrEditInput = this.getChildElement('.add-or-edit-box__input');
 
 		this.getAttributeNames().forEach(attributeName => {
 			let attributeValue = this.getAttribute(attributeName);
@@ -225,12 +285,15 @@ export default class CustomDropDownElement extends CustomHTMLBaseElement {
 		var editButton = document.createElement('button');
 		editButton.innerHTML = `${SVGs.editPenSVG}`;
 		editButton.classList.add("edit-button");
-		editButton.addEventListener('click', this.editAction.bind(item));
+		editButton.addEventListener('click', this.editAction.bind(this));
+		(editButton as any).item = item;
 
 		var deleteButton = document.createElement('button');
 		deleteButton.innerHTML = `${SVGs.trashSVG}`;
 		deleteButton.classList.add("delete-button");
-		deleteButton.addEventListener('click', this.deleteAction.bind(item))
+		deleteButton.addEventListener('click', this.deleteAction.bind(this));
+		(deleteButton as any).item = item;
+		(editButton as any).deleteButton = deleteButton;
 
 		divButtons.classList.add("div-buttons");
 		divButtons.appendChild(editButton);
@@ -239,13 +302,15 @@ export default class CustomDropDownElement extends CustomHTMLBaseElement {
 		/*var textContent = document.createElement("input") as HTMLInputElement;
 		textContent.readOnly = true;
 		textContent.innerText = `${item}`*/
+		var textSpan = document.createElement('span');
 		var textContent = document.createTextNode(`${item}`);
 		textContent.addEventListener('click', this.selectItem.bind(item));
-
+		textSpan.appendChild(textContent);
 		var divDropDownItem = document.createElement('div');
-		divDropDownItem.appendChild(textContent);
+		divDropDownItem.appendChild(textSpan);
 		divDropDownItem.appendChild(divButtons);
-
+		(editButton as any).spanElement = textSpan;
+		(deleteButton as any).dropDownItem = divDropDownItem;
 		divDropDownItem.classList.add("dropdown_item");
 		/*divDropDownItem.addEventListener('click', e => {
 
@@ -258,12 +323,29 @@ export default class CustomDropDownElement extends CustomHTMLBaseElement {
 
 	deleteAction(event: Event): void {
 		event.preventDefault();
-		console.log("perfrom Delete operation");
+		let item = (event.currentTarget as any).item;
+		this.currentTarget = event.currentTarget;
+		this.deleteButton.style.display = '';
+		this.addButton.style.display = 'none';
+		this.editButton.style.display = 'none';
+		this.cancelButton.style.display = '';
+		this.overlay.style.display = 'initial';
+		this.addOrEditInput.value = item;
+		this.addOrEditInput.disabled = true;
 	}
 
-	editAction(event: Event): void {
+	editAction(event: Event) {
 		event.preventDefault();
-		console.log("perfrom Update operation");
+		let item = (event.currentTarget as any).item;
+		this.currentTarget = event.currentTarget;
+		this.deleteButton.style.display = 'none';
+		this.addButton.style.display = 'none';
+		this.editButton.style.display = '';
+		this.cancelButton.style.display = '';
+		this.overlay.style.display = 'initial';
+		this.addOrEditInput.value = item;
+		this.addOrEditInput.disabled = false;
+		this.currentlyEditingDropdownItem = (event.currentTarget as any).spanElement;
 	}
 
 	selectItem(event: Event): void {
@@ -274,6 +356,28 @@ export default class CustomDropDownElement extends CustomHTMLBaseElement {
 	getValue(): string {
 		var value = this.readonlyInput.innerText;
 		return value;
+	}
+
+	editPlaceholder(event: Event): void {
+		event.preventDefault();
+		console.log(this.currentlyEditingDropdownItem);
+		console.log(this.addOrEditInput.value);
+		this.currentlyEditingDropdownItem.textContent = this.addOrEditInput.value;
+		(this.currentTarget as any).item = this.addOrEditInput.value;
+		(this.currentTarget as any).deleteButton.item = this.addOrEditInput.value;
+		this.overlay.style.display = 'none';
+	}
+
+	cancelEditAddOrDelete(event: Event): void {
+		event.preventDefault();
+		this.overlay.style.display = 'none';
+	}
+
+	deletePlaceholder(event: Event): void {
+		event.preventDefault();
+		var dropDownItem = (this.currentTarget as any).dropDownItem;
+		this.divDropDownItems.removeChild(dropDownItem);
+		this.overlay.style.display = 'none';
 	}
 
 	/*initializePathPlaceholders() {
