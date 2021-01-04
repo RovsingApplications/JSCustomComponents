@@ -276,10 +276,10 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 		this.statusElement = this.getChildElement('#status');
 		this.customDeliveryEventTableElement.GetAllDeliveryResults();
 		this.addListeners();
-		this.UpdateProductDeliveryServiceStatus();
+		this.updateProductDeliveryServiceStatus();
 	}
 
-	private UpdateProductDeliveryServiceStatus() {
+	private updateProductDeliveryServiceStatus() {
 		const headerName = Constants.apiKeyHeaderName;
 		const request = new MakeRequest(
 			`${Globals.apiUrl}Profile/profilestatus`,
@@ -318,13 +318,13 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 		this.saveButton.addEventListener("click", this.submitDeliveryForm.bind(this));
 		this.tryButton.addEventListener("click", this.tryDelivery.bind(this));
 		this.runAllFailButton.addEventListener("click", this.runAllFail.bind(this));
-		this.statusElement.addEventListener("click", this.StatusChanged.bind(this));
+		this.statusElement.addEventListener("click", this.statusChanged.bind(this));
 		this.customDeliveryEventTableElement.addEventListener('show-result', (evt) => this.showResult(evt as CustomEvent));
 		this.customDeliveryEventTableElement.addEventListener('update-single-row', (evt) => this.updateDeliveryResultRow(evt as CustomEvent));
 		this.customDeliveryEventTableElement.addEventListener('show-spinner', (evt) => this.showResultSpinner(evt as CustomEvent));
 	}
 
-	private StatusChanged() {
+	private statusChanged() {
 		const headerName = Constants.apiKeyHeaderName;
 		let status = this.statusElement.checked;
 		const req = new MakeRequest(
