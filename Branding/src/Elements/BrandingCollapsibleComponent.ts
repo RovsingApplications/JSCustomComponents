@@ -56,20 +56,18 @@ import Colors from '../Framework/Constants/Colors';
 			font-size: 30px;
 			display: inline-block;
 			user-select: none;
-			margin-right: 10px;
 			position: static;
 			right: 0;
+			margin-right: 0;
 			transform: rotate(90deg);
-			transition-property: transform, margin-right, position, right;
+			transition-property: transform, margin-right;
 			transition-duration: .3s;
 			transition-timing-function: ease-in-out;
 		}
 		
 		.collapsible.active .collapsible-icon {
 			transform: rotate(-90deg);
-			margin-right: 0;
-			position: relative;
-			right: -10px;
+			margin-right: 4.5px;
 			color: ${Colors.primary};
 		}
 	`,
