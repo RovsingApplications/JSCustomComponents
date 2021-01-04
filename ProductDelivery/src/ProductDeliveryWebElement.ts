@@ -17,7 +17,7 @@ import Colors from "./Framework/Constants/Colors"
 	<div class="topconner">
 		<label>Product Delivery - Active</label>
 		<label class="switch">
-			<input type="checkbox"/>
+			<input id="status" type="checkbox"/>
 			<div class="slider"></div>
 		</label>
 	</div>
@@ -255,6 +255,7 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 	private customDeliveryProfileFormElement: CustomDeliveryProfileFormElement;
 	private customDeliveryResultElement: CustomDeliveryResultElement;
 	private deliveryResult: DeliveryResult;
+	private statusElement: HTMLInputElement;
 
 	constructor() {
 		super();
@@ -272,8 +273,29 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 		this.customDeliveryEventTableElement = this.getChildElement('delivery-event-table');
 		this.customDeliveryProfileFormElement = this.getChildElement('delivery-profile-form');
 		this.customDeliveryResultElement = this.getChildElement('delivery-result');
+		this.statusElement = this.getChildElement('#status');
 		this.customDeliveryEventTableElement.GetAllDeliveryResults();
 		this.addListeners();
+		this.updateProductDeliveryServiceStatus();
+	}
+
+	private updateProductDeliveryServiceStatus() {
+		const headerName = Constants.apiKeyHeaderName;
+		const request = new MakeRequest(
+			`${Globals.apiUrl}Profile/profilestatus`,
+			'get',
+			{
+				[headerName]: Globals.apiKey,
+				'Content-Type': 'application/json'
+			})
+			.send()
+			.then(response => {
+				var statusResult = (JSON.parse(response as string)) as boolean;
+				this.statusElement.checked = statusResult;
+			})
+			.catch(exception => {
+				console.log(exception);
+			});
 	}
 
 	private addFontToDocumentHead() {
@@ -296,9 +318,27 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 		this.saveButton.addEventListener("click", this.submitDeliveryForm.bind(this));
 		this.tryButton.addEventListener("click", this.tryDelivery.bind(this));
 		this.runAllFailButton.addEventListener("click", this.runAllFail.bind(this));
+		this.statusElement.addEventListener("click", this.statusChanged.bind(this));
 		this.customDeliveryEventTableElement.addEventListener('show-result', (evt) => this.showResult(evt as CustomEvent));
 		this.customDeliveryEventTableElement.addEventListener('update-single-row', (evt) => this.updateDeliveryResultRow(evt as CustomEvent));
 		this.customDeliveryEventTableElement.addEventListener('show-spinner', (evt) => this.showResultSpinner(evt as CustomEvent));
+	}
+
+	private statusChanged() {
+		const headerName = Constants.apiKeyHeaderName;
+		let status = this.statusElement.checked;
+		const req = new MakeRequest(
+			`${Globals.apiUrl}Profile/setprofilestatus?status=${status}`,
+			'post', {
+			[headerName]: Globals.apiKey,
+			'Content-Type': 'application/json'
+		}
+		).send(JSON.stringify(status)).then(response => {
+			var statusResult = (JSON.parse(response as string)) as boolean;
+			this.statusElement.checked = statusResult;
+		}).catch(exception => {
+			console.log(exception);
+		});
 	}
 
 	updateDeliveryResultRow(evt: CustomEvent): void {
