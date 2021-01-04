@@ -31,10 +31,10 @@ import Colors from "../../src/Framework/Constants/Colors"
 			</div>
 			<div class="divplaceholder-wrapper">
 				<div class="divplaceholder-wrapper__divselectplaceholder">
-					<select id="placeholder" class="divplaceholder-wrapper-select rounded-left">
+					<select id="placeholder" class="divplaceholder-wrapper-select">
 						<option value="" disabled selected>Select Placeholder</option>
 					</select>
-					<button id="btn-add" class="divplaceholder-wrapper-button button rounded-right">Add</button>
+					<button id="btn-add" class="divplaceholder-wrapper-button button">Add</button>
 				</div>	
 				<div>
 					<label id="lbl-filename">File Name (template)</label>
@@ -75,7 +75,7 @@ import Colors from "../../src/Framework/Constants/Colors"
 	.divplaceholder-wrapper-select {
 		width: calc(100% - 79px);
 		height: 34px;
-		border-radius: 4px;
+		border-radius: 4px 0 0 4px;
 		box-sizing: border-box;
 		border: 1px solid ${Colors.tertiary};
 		background: ${Colors.senary};
@@ -87,7 +87,7 @@ import Colors from "../../src/Framework/Constants/Colors"
 		height: 34px;
 		margin: 0px;
 		width: 79px;
-		border-radius: 0;
+		border-radius: 0 4px 4px 0;
 	}
 	.select-element {
 		width: 100%;
@@ -111,17 +111,11 @@ import Colors from "../../src/Framework/Constants/Colors"
 		clear: both;
 	}
 	.column-50 {
-    	width: 50%;
+		width: 50%;
 	}
 	.column:not(:first-of-type) {
-    	padding-left: 10px
+		padding-left: 10px
 	}
-	.rounded-right {
-		border-radius: 0 4px 4px 0;
-		}
-		.rounded-left {
-		border-radius: 4px 0 0 4px;
-		}
 	`,
 	useShadow: false,
 })
