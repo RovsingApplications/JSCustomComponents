@@ -1,6 +1,6 @@
 {
 	"name": "@luftborn/esignatur-product-delivery",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"description": "custom component for product delivery",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",

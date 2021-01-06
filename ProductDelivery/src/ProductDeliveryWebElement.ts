@@ -369,8 +369,8 @@ export default class ProductDeliveryWebElement extends CustomHTMLBaseElement {
 			).send(JSON.stringify(deliveryProfile)).then(response => {
 				var deliveryProfile = (JSON.parse(response as string)) as IDeliveryProfile;
 				this.customDeliveryResultElement.createDeliveryProfile(this.deliveryResult);
-				this.customDeliveryProfileFormElement.resetFields();
 			}).catch(exception => {
+				// to do: Add better exception handling
 				console.log(exception);
 			});
 		}

@@ -6,7 +6,7 @@ export default interface IDeliveryProfile {
 	connectionMode: string;
 	protocol: FTPType;
 	userName: string;
-	Password: string;
+	password: string;
 	folderTemplate: string;
 	fileTemplate: string;
 	email: string;

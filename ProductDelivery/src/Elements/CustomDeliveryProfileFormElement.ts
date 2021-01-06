@@ -4,29 +4,33 @@ import IDeliveryProfile from "../models/IDeliveryProfile";
 import CustomHTMLBaseElement from "../CustomHTMLBaseElement";
 import Interpolation from "../models/Interpolation";
 import Colors from "../../src/Framework/Constants/Colors"
+import MakeRequest from "../Framework/Utilities/MakeRequest";
+import Globals from "../Globals/Globals";
+import Constants from "../Framework/Constants/Constants";
 
 @CustomElement({
 	selector: 'delivery-profile-form',
-	template: `<form class="from" id="from">
+	template: `
+		<form class="from" id="from">
 			<!-- move this to a independent web component -->
 			<label id="lbl-url">Ftp Url</label>
-			<input id="url" placeholder="Enter Url" autocomplete="off""></input>
+			<input id="url" placeholder="Enter Url" autocomplete="off"">
 			<div class="row">
 				<div class="column column-50" >
 					<label id="lbl-port">Port</label>
-					<input id="port" type="number" placeholder="Enter Port" autocomplete="off"></input>
+					<input id="port" type="number" placeholder="Enter Port" autocomplete="off">
 					<label id="lbl-username">Username</label>
-					<input id="username" placeholder="Enter Username" autocomplete="off""></input>
+					<input id="username" placeholder="Enter Username" autocomplete="off"">
 				</div>
 				<div class="column column-50">
 					<label id="lbl-type">Type</label>
 					<select id="type" class="select-element">
-					<option value="" disabled selected>Select Type</option>
-					<option>FTP</option>
-					<option>FTPS</option>
+						<option value="" disabled selected>Select Type</option>
+						<option value="${FTPType.FTP}">FTP</option>
+						<option value="${FTPType.FTPS}">FTPS</option>
 					</select>
 					<label id="lbl-password">Password</label>
-					<input id="password" type="password" placeholder="Enter Password" autocomplete="off"></input>
+					<input id="password" type="password" placeholder="Enter Password" autocomplete="off">
 				</div>
 			</div>
 			<div class="divplaceholder-wrapper">
@@ -40,12 +44,12 @@ import Colors from "../../src/Framework/Constants/Colors"
 					<label id="lbl-filename">File Name (template)</label>
 					<input id="file-template" placeholder="Add Filename" autocomplete="off">
 					<label id="lbl-path">Path</label>
-					<input id="path" placeholder="Add Path" autocomplete="off" ></input>
+					<input id="path" placeholder="Add Path" autocomplete="off" >
 				</div>
 			</div>
 			<label id="lbl-filetemplate">Contact Person</label>
-			<input id="email" placeholder="Enter Email" autocomplete="off"></input>
-			</form>
+			<input id="email" placeholder="Enter Email" autocomplete="off">
+		</form>
 	`,
 	style: `
 	* {
@@ -164,6 +168,7 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		this.placeholderAddbtn = (this.getChildElement('#btn-add') as HTMLButtonElement);
 
 		this.initializeInterpolation();
+		this.fillWithCurrentCustomerData();
 		this.addListeners();
 	}
 
@@ -271,21 +276,50 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		this.nativeInput.value = val;
 	}
 
-	public getProfile(): IDeliveryProfile {
+	fillWithCurrentCustomerData() {
+		const apiKeyHeaderName = Constants.apiKeyHeaderName;
+		new MakeRequest(
+			`${Globals.apiUrl}profile/get`,
+			'get', {
+				[apiKeyHeaderName]: Globals.apiKey,
+				'Content-Type': 'application/json'
+		}
+		).send().then(response => {
+			var deliveryProfile = (JSON.parse(response as string)) as IDeliveryProfile;
+			this.setProfile(deliveryProfile);
+		}).catch(exception => {
+			console.log(exception);
+		});
+	}
+
+	getProfile(): IDeliveryProfile {
 		var profile =
 			{
 				url: this.ftpUrlInput.value.trim(),
 				//url: "ftp://waws-prod-am2-331.ftp.azurewebsites.windows.net/",
 				port: Number(this.ftpPortInput.value.trim()),
 				connectionMode: "Implicit",
-				protocol: this.GetSelectedFTPType(this.typeElement),
+				protocol: this.getSelectedFTPType(),
 				fileTemplate: this.filenameInput.value.trim(),
 				folderTemplate: this.pathInput.value.trim(),
 				userName: this.usernameInput.value.trim(),
-				Password: this.passwordInput.value.trim(),
+				password: this.passwordInput.value.trim(),
 				email: this.contactInput.value.trim()
 			} as IDeliveryProfile;
 		return profile;
+	}
+
+	setProfile(deliveryProfile: IDeliveryProfile, ignorePassword = true): void {
+			this.ftpUrlInput.value = deliveryProfile.url;
+			this.ftpPortInput.value = deliveryProfile.port.toString();
+			this.setSelectedFTPType(deliveryProfile.protocol);
+			this.filenameInput.value = deliveryProfile.fileTemplate;
+			this.pathInput.value = deliveryProfile.folderTemplate;
+			this.usernameInput.value = deliveryProfile.userName;
+			this.contactInput.value = deliveryProfile.email;
+			if (!ignorePassword) {
+				this.passwordInput.value = deliveryProfile.password;
+			}
 	}
 
 
@@ -416,9 +450,15 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		return profile;
 	}*/
 
-	private GetSelectedFTPType(select): FTPType {
-		var selectedValue = select.options[select.selectedIndex].value
+	private getSelectedFTPType(): FTPType {
+		var selectedValue = this.typeElement.options[this.typeElement.selectedIndex].value
 		return (<any>FTPType)[selectedValue];
+	}
+
+	private setSelectedFTPType(ftpType: FTPType) {
+		const options = Array.prototype.slice.call(this.typeElement.options);
+		const optionIndex = options.findIndex(option => option.innerHTML === ftpType.toString());
+		this.typeElement.selectedIndex = optionIndex;
 	}
 
 	resetFields() {
