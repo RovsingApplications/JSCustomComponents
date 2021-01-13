@@ -6,6 +6,8 @@ import Branding from '../../Framework/Models/Branding';
 import Conversions from '../../Framework/Utilities/Conversions';
 import Globals from '../../Framework/Globals/Globals';
 import { AlignmentPositionEnum } from '../../Framework/Models/AlignmentPositionEnum';
+import ColorsUtility from '../../Framework/Utilities/ColorsUtility';
+import Colors from '../../Framework/Constants/Colors';
 
 @CustomElement({
 	selector: 'esignatur-branding-sign-preview',
@@ -174,7 +176,7 @@ import { AlignmentPositionEnum } from '../../Framework/Models/AlignmentPositionE
 			background: #325d77;
 		}
 		.stepindicator li .stepnumber {
-			color: #333333;
+			color: ${Colors.denary};
 			font-family: Verdana;
 			font-size: 16px;
 			text-align: center;
@@ -182,7 +184,7 @@ import { AlignmentPositionEnum } from '../../Framework/Models/AlignmentPositionE
 			font-size: 16px;
 		}
 		.stepindicator li.box.active .stepnumber {
-			color: #FFFFFF !important;
+			color: #FFFFFF;
 		}
 		.stepindicator li .steptxt {
 			display: none;
@@ -198,7 +200,7 @@ import { AlignmentPositionEnum } from '../../Framework/Models/AlignmentPositionE
 			box-sizing: border-box;
 			font-size: 14px;
 			line-height: 1.42857;
-			color: #333333;
+			color: ${Colors.denary};
 		}
 		.sign-preview-content-header h3 {
 			color: #325d77;
@@ -226,7 +228,7 @@ import { AlignmentPositionEnum } from '../../Framework/Models/AlignmentPositionE
 			font-weight: 600px;
 			font-size: 14px;
 			line-height: 1.42857;
-			color: #333333;
+			color: ${Colors.denary};
 		}
 		.language-select img {
 			margin-right: 10px;
@@ -305,6 +307,35 @@ export default class BrandingSignPreview extends CustomHTMLBaseElement {
 		contentPreviewH3.style.color = Conversions.nullColorToTransparent(branding.primaryColor);
 		languageSelectLi.style.color = Conversions.nullColorToTransparent(branding.textColor);
 		languageArrow.style.fill = Conversions.nullColorToTransparent(branding.primaryColor);
+
+		this.setStepsTextColor(branding);
+	}
+
+	private setStepsTextColor(branding: Branding) {
+		const activeStep = this.getChildElement('.box.active .stepnumber');
+		const nonActiveSteps = this.getChildElements<HTMLElement>('.box:not(.active) .stepnumber');
+
+		const primaryColorToWhiteContrastRatio = ColorsUtility.getContrastRatio(branding.primaryColor, '#FFFFFF');
+		const primaryColorToBlackContrastRatio = ColorsUtility.getContrastRatio(branding.primaryColor, '#000000');
+
+		const secondaryColorToWhiteContrastRatio = ColorsUtility.getContrastRatio(branding.secondaryColor, '#FFFFFF');
+		const secondaryColorToBlackContrastRatio = ColorsUtility.getContrastRatio(branding.secondaryColor, '#000000');
+		
+		if (primaryColorToBlackContrastRatio > primaryColorToWhiteContrastRatio) {
+			activeStep.style.color = Colors.denary;
+		} else {
+			activeStep.style.color = '#FFFFFF';
+		}
+
+		if (secondaryColorToBlackContrastRatio > secondaryColorToWhiteContrastRatio) {
+			nonActiveSteps.forEach(step => {
+				step.style.color = Colors.denary;
+			});
+		} else {
+			nonActiveSteps.forEach(step => {
+				step.style.color = '#FFFFFF';
+			});
+		}
 	}
 
 	magnifyPreview() {
