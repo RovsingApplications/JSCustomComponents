@@ -7,7 +7,7 @@ import Colors from "../Framework/Constants/Colors"
 	selector: 'delivery-result',
 	template: `
 <!-- move this to a independent web component -->
-<label>Delivery result</label>
+<label>Leverings resultat</label>
 <div class="result-box pad-10">
 </div>
 	`,
@@ -45,7 +45,7 @@ import Colors from "../Framework/Constants/Colors"
 		width: 60px;
 		height: 60px;
 		animation: spin 3s linear infinite;
-		margin-left: calc(100% - 250px);
+		margin: auto;
 	}
 
 	@keyframes spin {

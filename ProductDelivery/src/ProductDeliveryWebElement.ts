@@ -15,7 +15,7 @@ import Colors from "./Framework/Constants/Colors"
 	template: `
 <div class="wrapper">
 	<div class="topconner">
-		<label>Product Delivery - Active</label>
+		<label>Automatisk arkivering - aktiv</label>
 		<label class="switch">
 			<input id="status" type="checkbox"/>
 			<div class="slider"></div>

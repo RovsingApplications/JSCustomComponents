@@ -12,7 +12,7 @@ import CustomDeliveryResultElement from '../Elements/CustomDeliveryResultElement
 		<head>
 			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 		</head>
-		<label>Deliveries</label>
+		<label>Leveringer</label>
 		<table>
 		</table>`,
 	style: `
