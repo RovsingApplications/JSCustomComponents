@@ -10,7 +10,7 @@ import Colors from '../../Framework/Constants/Colors';
 	<div class="esignatur-branding-preview-container">
 		<div class="preview-nav">
 			<button class="preview-nav-button active" data-target="sign-preview-item">Sign</button>
-			<button class="preview-nav-button" data-target="email-preview-item">E-mail</button>
+			<button class="preview-nav-button" data-target="email-preview-item" hidden>E-mail</button>
 		</div>
 		<div>
 			<div id="sign-preview-item" class="preview-item active">

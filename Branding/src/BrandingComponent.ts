@@ -21,7 +21,7 @@ import SVGs from "./Framework/Constants/SVGs";
 				<div id="side-bar-top">
 					<div id="logo-container">
 						<img src="${WhiteEDataUrl}">
-						<span>esignatur <b>Branding</b></span>
+						<span>signatur <b>Branding</b></span>
 					</div>
 					<div id="branding-form">
 						<esignatur-branding-form></esignatur-branding-form>
