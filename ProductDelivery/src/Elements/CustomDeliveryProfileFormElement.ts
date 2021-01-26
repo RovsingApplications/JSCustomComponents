@@ -39,13 +39,13 @@ import Constants from "../Framework/Constants/Constants";
 					<select id="placeholder" class="divplaceholder-wrapper-select">
 						<option value="" disabled selected>Vælg placeholder</option>
 					</select>
-					<button id="btn-add" class="divplaceholder-wrapper-button button">Tilføje</button>
+					<button id="btn-add" class="divplaceholder-wrapper-button button">Tilføj</button>
 				</div>	
 				<div>
 					<label id="lbl-filename">Dokumentnavn (skabelon)</label>
-					<input id="file-template" placeholder="Tilføje Filnavn" autocomplete="off">
+					<input id="file-template" placeholder="Tilføj Filnavn" autocomplete="off">
 					<label id="lbl-path">Filsti på serveren</label>
-					<input id="path" placeholder="Tilføje Filsti på serveren" autocomplete="off" >
+					<input id="path" placeholder="Tilføj Filsti på serveren" autocomplete="off" >
 				</div>
 			</div>
 			<div>
