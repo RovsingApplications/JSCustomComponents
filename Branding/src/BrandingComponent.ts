@@ -97,7 +97,7 @@ import SVGs from "./Framework/Constants/SVGs";
 			user-select: none;
 		}
 		#logo-container img {
-			margin-right: 10px;
+			margin-right: 4px;
 		}
 		#submit-button {
 			width: 100%;

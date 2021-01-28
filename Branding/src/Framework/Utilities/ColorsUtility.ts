@@ -26,6 +26,10 @@ export default class ColorsUtility {
 
 	// https://ux.stackexchange.com/questions/82056/how-to-measure-the-contrast-between-any-given-color-and-white/82068#82068
 	static getRelativeLuminance (hexColor: string) : number {
+		if (hexColor && hexColor.toLowerCase() === 'transparent') {
+			return 1;
+		}
+
 		const rgb = ColorsUtility.hexToRGB(hexColor);
 
 		if (rgb == null) {

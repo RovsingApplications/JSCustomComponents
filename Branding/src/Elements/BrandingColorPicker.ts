@@ -353,7 +353,7 @@ export default class BrandingColorPicker extends CustomHTMLBaseElement {
 			if (!this.isSolidTransparent) {
 				return this.nativeSolidInput.value;
 			} else {
-				return null;
+				return 'transparent';
 			}
 		}
 
@@ -368,17 +368,19 @@ export default class BrandingColorPicker extends CustomHTMLBaseElement {
 		if (!this.isSolidTransparent) {
 			return new Color(this.nativeSolidInput.value);
 		}
-		return null;
+		return new Color({
+			isGradient: false,
+			solidColor: 'transparent'
+		});
 	}
 
 	set value(color: Color | string) {
-		if (color === null || color === undefined) {
+		if (color === null || color === undefined || (typeof color === 'string' && color.toLowerCase() === 'transparent')) {
 			this.isSolidTransparent = true;
 			this.isGradient = false;
 			this.dispatchEvent(this.change);
 			return;
 		}
-
 		if (typeof color === 'string') {
 			this.isSolidTransparent = false;
 			this.nativeSolidInput.value = color;
@@ -393,7 +395,7 @@ export default class BrandingColorPicker extends CustomHTMLBaseElement {
 				return;
 			}
 			if (color.solidColor) {
-				this.isSolidTransparent = false;
+				this.isSolidTransparent = color.solidColor.toLowerCase() === 'transparent';
 				this.nativeSolidInput.value = color.solidColor;
 			} else {
 				this.isSolidTransparent = true;
@@ -482,7 +484,7 @@ export default class BrandingColorPicker extends CustomHTMLBaseElement {
 		solidStandardColorElements.forEach(colorElement => {
 			colorElement.addEventListener('click', () => {
 				const elementColor = colorElement.dataset['color'];
-				if (!elementColor || elementColor.trim() === '' || elementColor === 'transparent') {
+				if (!elementColor || elementColor.trim() === '' || elementColor.toLowerCase() === 'transparent') {
 					this.isSolidTransparent = true;
 					this.unsetSolidPreview()
 				} else {
