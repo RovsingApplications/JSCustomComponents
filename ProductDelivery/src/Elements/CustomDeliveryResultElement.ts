@@ -117,10 +117,10 @@ export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 		var innerDivElement = document.createElement("div");
 		innerDivElement.classList.add("loader");
 		var firstText = document.createElement('p');
-		firstText.innerText = 'Connecting';
+		firstText.innerText = 'Forbinder';
 		firstText.classList.add('firsttext');
 		var secondText = document.createElement('p');
-		secondText.innerHTML = 'Connecting to product delivery <br> is in progress...';
+		secondText.innerHTML = 'Automatisk arkivering forbinder til din server...';
 		secondText.classList.add('secondtext');
 		outerDivElement.appendChild(innerDivElement);
 		outerDivElement.appendChild(firstText);
