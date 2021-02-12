@@ -44,6 +44,8 @@ import DomUtility from '../../framework/Utilities/DomUtility';
 			top: 100%;
 			left: 0;
 			right: 0;
+			max-height: 200px;
+			overflow-y: auto;
 		}
 		.options-list-item {
 			padding: 10px;
