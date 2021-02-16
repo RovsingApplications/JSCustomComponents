@@ -105,7 +105,7 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 		var iconCell = tableRow.insertCell(0);
 		var faIcon = deliveryResult.resultStatus == "Success" ? SVGs.link : SVGs.linkOff;
 		var faColor = deliveryResult.resultStatus == "Success" ? 'success' : 'fail';
-		iconCell.innerHTML = `${faIcon}`;
+		iconCell.innerHTML = faIcon;
 		iconCell.classList.add("result-cell");
 		iconCell.classList.add("result-cell--status-icon");
 		tableRow.appendChild(iconCell);
@@ -125,7 +125,7 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 
 		var actionCell = tableRow.insertCell(3);
 		var actionButton = document.createElement('button');
-		actionButton.innerHTML = `${SVGs.playArrow}`;
+		actionButton.innerHTML = SVGs.playArrow;
 		actionButton.addEventListener('click', () => {
 			this.runAction(deliveryResult.id);
 		});
@@ -188,7 +188,7 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 			resultCell = (row as HTMLTableRowElement).cells[1] as HTMLTableDataCellElement;
 			if (resultCell.innerText === deliveryResult.id) {
 
-				(row as HTMLTableRowElement).cells[0].innerHTML = `${faIcon}`;
+				(row as HTMLTableRowElement).cells[0].innerHTML = faIcon;
 
 				(row as HTMLTableRowElement).cells[statuscolumn].innerText = deliveryResult.resultStatus;
 
