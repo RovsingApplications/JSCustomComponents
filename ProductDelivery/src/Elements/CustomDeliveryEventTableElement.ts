@@ -5,13 +5,11 @@ import Constants from "../Framework/Constants/Constants";
 import MakeRequest from "../Framework/Utilities/MakeRequest";
 import Globals from '../Globals/Globals';
 import CustomDeliveryResultElement from '../Elements/CustomDeliveryResultElement';
+import SVGs from '../Framework/Constants/SVGs';
 
 @CustomElement({
 	selector: 'delivery-event-table',
 	template: `
-		<head>
-			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-		</head>
 		<label>Deliveries</label>
 		<table>
 		</table>`,
@@ -105,12 +103,9 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 		var tableRow = this.deliveryTable.insertRow(0);
 		// icon cell
 		var iconCell = tableRow.insertCell(0);
-		var faIcon = deliveryResult.resultStatus == "Success" ? 'link' : "unlink";
+		var faIcon = deliveryResult.resultStatus == "Success" ? SVGs.link : SVGs.linkOff;
 		var faColor = deliveryResult.resultStatus == "Success" ? 'success' : 'fail';
-		// <i class="fas fa-unlink rotate-45 color-error"></i>
-		// <i class="fas fa-link rotate-45 color-secondary"></i>
-		//iconCell.appendChild(document.createElement(`<i class="fa fa-${faIcon} rotate-45 ${deliveryResult.resultStatus}" aria-hidden="true"></i>`));
-		iconCell.innerHTML = `<i class="fas fa-${faIcon} rotate-45 color-${faColor}"></i>`;
+		iconCell.innerHTML = `${faIcon}`;
 		iconCell.classList.add("result-cell");
 		iconCell.classList.add("result-cell--status-icon");
 		tableRow.appendChild(iconCell);
@@ -130,7 +125,7 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 
 		var actionCell = tableRow.insertCell(3);
 		var actionButton = document.createElement('button');
-		actionButton.innerHTML = `<i class="fas fa-play"></i>`;
+		actionButton.innerHTML = `${SVGs.playArrow}`;
 		actionButton.addEventListener('click', () => {
 			this.runAction(deliveryResult.id);
 		});
@@ -186,14 +181,14 @@ export default class CustomDeliveryEventTableElement extends CustomHTMLBaseEleme
 		// otherwise update only spceific row as follows.
 		let statuscolumn = 2;
 		let resultCell = null;
-		var faIcon = deliveryResult.resultStatus == "Success" ? 'link' : "unlink";
+		var faIcon = deliveryResult.resultStatus == "Success" ? SVGs.link : SVGs.linkOff;
 		var faColor = deliveryResult.resultStatus == "Success" ? 'success' : 'fail';
 		for (var i = 0, row; row = this.deliveryTable.rows[i]; i++) {
 			// retrive result id row cell
 			resultCell = (row as HTMLTableRowElement).cells[1] as HTMLTableDataCellElement;
 			if (resultCell.innerText === deliveryResult.id) {
 
-				(row as HTMLTableRowElement).cells[0].innerHTML = `<i class="fas fa-${faIcon} rotate-45 color-${faColor}"></i>`;
+				(row as HTMLTableRowElement).cells[0].innerHTML = `${faIcon}`;
 
 				(row as HTMLTableRowElement).cells[statuscolumn].innerText = deliveryResult.resultStatus;
 
