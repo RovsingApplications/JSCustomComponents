@@ -1,7 +1,7 @@
 {
-	"name": "@luftborn/esignatur-product-delivery",
-	"version": "1.0.10",
-	"description": "custom component for product delivery",
+	"name": "@luftborn/esignatur-tooltip",
+	"version": "1.0.0",
+	"description": "custom tooltip",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"author": "Esignatur",

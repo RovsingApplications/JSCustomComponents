@@ -9,5 +9,6 @@ export default interface IDeliveryProfile {
 	password: string;
 	folderTemplate: string;
 	fileTemplate: string;
-	email: string;
+	contactEmail: string;
+	contactName: string;
 }

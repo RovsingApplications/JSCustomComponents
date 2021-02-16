@@ -8,7 +8,6 @@ export default class Colors {
 	public static readonly septenary = '#2B3744';
 	public static readonly octonary = '#28BECE';
 	public static readonly nonary = '#CA0B00';
-
-	// public static readonly denary = '#2B3744';
+	public static readonly denary = '#333333';
 
 }

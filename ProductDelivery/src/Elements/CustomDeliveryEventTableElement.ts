@@ -10,7 +10,7 @@ import SVGs from '../Framework/Constants/SVGs';
 @CustomElement({
 	selector: 'delivery-event-table',
 	template: `
-		<label>Deliveries</label>
+		<label>Leveringer</label>
 		<table>
 		</table>`,
 	style: `

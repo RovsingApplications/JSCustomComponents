@@ -13,42 +13,49 @@ import Constants from "../Framework/Constants/Constants";
 	template: `
 		<form class="from" id="from">
 			<!-- move this to a independent web component -->
-			<label id="lbl-url">Ftp Url</label>
-			<input id="url" placeholder="Enter Url" autocomplete="off"">
+			<label id="lbl-url">FTP url</label>
+			<input id="url" placeholder="Url" autocomplete="off"">
 			<div class="row">
 				<div class="column column-50" >
 					<label id="lbl-port">Port</label>
-					<input id="port" type="number" placeholder="Enter Port" autocomplete="off">
-					<label id="lbl-username">Username</label>
-					<input id="username" placeholder="Enter Username" autocomplete="off"">
+					<input id="port" type="number" placeholder="Port" autocomplete="off">
+					<label id="lbl-username">Brugernavn</label>
+					<input id="username" placeholder="Brugernavn" autocomplete="off"">
 				</div>
 				<div class="column column-50">
 					<label id="lbl-type">Type</label>
 					<select id="type" class="select-element">
-						<option value="" disabled selected>Select Type</option>
+						<option value="" disabled selected>Vælg Type</option>
 						<option value="${FTPType.FTP}">FTP</option>
 						<option value="${FTPType.FTPS}">FTPS</option>
 					</select>
-					<label id="lbl-password">Password</label>
-					<input id="password" type="password" placeholder="Enter Password" autocomplete="off">
+					<label id="lbl-password">Kodeord</label>
+					<input id="password" type="password" placeholder="Kodeord" autocomplete="off">
 				</div>
 			</div>
 			<div class="divplaceholder-wrapper">
 				<div class="divplaceholder-wrapper__divselectplaceholder">
+					<label>Vælg placeholder</label>
 					<select id="placeholder" class="divplaceholder-wrapper-select">
-						<option value="" disabled selected>Select Placeholder</option>
+						<option value="" disabled selected>Vælg placeholder</option>
 					</select>
-					<button id="btn-add" class="divplaceholder-wrapper-button button">Add</button>
+					<button id="btn-add" class="divplaceholder-wrapper-button button">Tilføj</button>
 				</div>	
 				<div>
-					<label id="lbl-filename">File Name (template)</label>
-					<input id="file-template" placeholder="Add Filename" autocomplete="off">
-					<label id="lbl-path">Path</label>
-					<input id="path" placeholder="Add Path" autocomplete="off" >
+					<label id="lbl-filename">Dokumentnavn (skabelon)</label>
+					<input id="file-template" placeholder="Tilføj Filnavn" autocomplete="off">
+					<label id="lbl-path">Filsti på serveren</label>
+					<input id="path" placeholder="Tilføj Filsti på serveren" autocomplete="off" >
 				</div>
 			</div>
-			<label id="lbl-filetemplate">Contact Person</label>
-			<input id="email" placeholder="Enter Email" autocomplete="off">
+			<div>
+				<label id="lbl-filetemplate">Kontakt navn</label>
+				<input id="contact-name" placeholder="Kontakt navn" autocomplete="off">
+			</div>
+			
+
+			<label id="lbl-filetemplate">Kontakt e-mail</label>
+			<input id="contact-email" placeholder="Kontakt e-mail" autocomplete="off">
 		</form>
 	`,
 	style: `
@@ -130,7 +137,8 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	private typeElement: HTMLSelectElement;
 	private filenameInput: HTMLInputElement;
 	private pathInput: HTMLInputElement;
-	private contactInput: HTMLInputElement;
+	private contactEmail: HTMLInputElement;
+	private contactName: HTMLInputElement;
 	private passwordInput: HTMLInputElement;
 	private usernameInput: HTMLInputElement;
 
@@ -161,7 +169,8 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		this.typeElement = (this.getChildElement('#type') as HTMLSelectElement);
 		this.filenameInput = (this.getChildElement('#file-template') as HTMLInputElement);
 		this.pathInput = (this.getChildElement('#path') as HTMLInputElement);
-		this.contactInput = (this.getChildElement('#email') as HTMLInputElement);
+		this.contactEmail = (this.getChildElement('#contact-email') as HTMLInputElement);
+		this.contactName = (this.getChildElement('#contact-name') as HTMLInputElement);
 		this.usernameInput = (this.getChildElement('#username') as HTMLInputElement);
 		this.passwordInput = (this.getChildElement('#password') as HTMLInputElement);
 		this.placeholderSelect = (this.getChildElement('#placeholder') as HTMLSelectElement);
@@ -186,7 +195,7 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		this.ftpPortInput.addEventListener("blur", this.validateFtpPort.bind(this));
 		this.filenameInput.addEventListener("blur", this.lostFocusEvent.bind(this));
 		this.pathInput.addEventListener("blur", this.lostFocusEvent.bind(this));
-		this.contactInput.addEventListener("blur", this.validateEmailField.bind(this));
+		this.contactEmail.addEventListener("blur", this.validateEmailField.bind(this));
 		this.usernameInput.addEventListener("blur", this.validateEmptyField.bind(this));
 		this.passwordInput.addEventListener("blur", this.validateEmptyField.bind(this));
 		this.typeElement.addEventListener("change", this.validateSelectField.bind(this));
@@ -304,22 +313,22 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 				folderTemplate: this.pathInput.value.trim(),
 				userName: this.usernameInput.value.trim(),
 				password: this.passwordInput.value.trim(),
-				email: this.contactInput.value.trim()
+				contactEmail: this.contactEmail.value.trim(),
+				contactName: this.contactName.value.trim()
 			} as IDeliveryProfile;
 		return profile;
 	}
 
-	setProfile(deliveryProfile: IDeliveryProfile, ignorePassword = true): void {
+	setProfile(deliveryProfile: IDeliveryProfile): void {
 			this.ftpUrlInput.value = deliveryProfile.url;
 			this.ftpPortInput.value = deliveryProfile.port.toString();
 			this.setSelectedFTPType(deliveryProfile.protocol);
 			this.filenameInput.value = deliveryProfile.fileTemplate;
 			this.pathInput.value = deliveryProfile.folderTemplate;
 			this.usernameInput.value = deliveryProfile.userName;
-			this.contactInput.value = deliveryProfile.email;
-			if (!ignorePassword) {
-				this.passwordInput.value = deliveryProfile.password;
-			}
+			this.contactEmail.value = deliveryProfile.contactEmail;
+			this.contactName.value = deliveryProfile.contactName;
+			this.passwordInput.value = deliveryProfile.password;
 	}
 
 
@@ -359,13 +368,13 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 	}
 
 	validateEmailInput(): Boolean {
-		const value = this.contactInput.value.trim();
+		const value = this.contactEmail.value.trim();
 		if (this.contactEmailExp.test(value)) {
-			this.contactInput.style.borderColor = this.successColor;
+			this.contactEmail.style.borderColor = this.successColor;
 			return true;
 		}
 		else {
-			this.contactInput.style.borderColor = this.errorColor;
+			this.contactEmail.style.borderColor = this.errorColor;
 			return false;
 		}
 	}
@@ -468,7 +477,7 @@ export default class CustomDeliveryProfileFormElement extends CustomHTMLBaseElem
 		this.placeholderSelect.selectedIndex = 0;
 		this.filenameInput.value = '';
 		this.pathInput.value = '';
-		this.contactInput.value = '';
+		this.contactEmail.value = '';
 		this.usernameInput.value = '';
 		this.passwordInput.value = '';
 	}

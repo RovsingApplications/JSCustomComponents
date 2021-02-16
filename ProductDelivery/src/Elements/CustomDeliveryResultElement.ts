@@ -7,7 +7,7 @@ import Colors from "../Framework/Constants/Colors"
 	selector: 'delivery-result',
 	template: `
 <!-- move this to a independent web component -->
-<label>Delivery result</label>
+<label>Leverings resultat</label>
 <div class="result-box pad-10">
 </div>
 	`,
@@ -45,7 +45,7 @@ import Colors from "../Framework/Constants/Colors"
 		width: 60px;
 		height: 60px;
 		animation: spin 3s linear infinite;
-		margin-left: calc(100% - 250px);
+		margin: auto;
 	}
 
 	@keyframes spin {
@@ -117,10 +117,10 @@ export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 		var innerDivElement = document.createElement("div");
 		innerDivElement.classList.add("loader");
 		var firstText = document.createElement('p');
-		firstText.innerText = 'Connecting';
+		firstText.innerText = 'Forbinder';
 		firstText.classList.add('firsttext');
 		var secondText = document.createElement('p');
-		secondText.innerHTML = 'Connecting to product delivery <br> is in progress...';
+		secondText.innerHTML = 'Automatisk arkivering forbinder til din server...';
 		secondText.classList.add('secondtext');
 		outerDivElement.appendChild(innerDivElement);
 		outerDivElement.appendChild(firstText);

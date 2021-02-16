@@ -15,7 +15,7 @@ import Colors from "./Framework/Constants/Colors"
 	template: `
 <div class="wrapper">
 	<div class="topconner">
-		<label>Product Delivery - Active</label>
+		<label>Automatisk arkivering - aktiv</label>
 		<label class="switch">
 			<input id="status" type="checkbox"/>
 			<div class="slider"></div>
@@ -31,13 +31,13 @@ import Colors from "./Framework/Constants/Colors"
 		</div>
 
 		<div class="buttons-wrapper">
-			<button id="save" class="button">Save</button>
-			<button id="try" class="button button--inverted">Try</button>
+			<button id="save" class="button">Gem</button>
+			<button id="try" class="button button--inverted">Prøv</button>
 		</div>
 	</div>
 	<div class="bottom">
 		<delivery-event-table> </delivery-event-table>
-		<button id="runallfail" class="button">Run all failed</button>
+		<button id="runallfail" class="button">Genkør alle fejlede</button>
 	</div>
 </div>
 `,

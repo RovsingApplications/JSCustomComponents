@@ -262,16 +262,19 @@ export default class CollaboratorOnboardingFormComponent extends HTMLElement {
 			});
 	}
 
-	extractData(): ChildOnboardingRequest {
+	private extractData(): ChildOnboardingRequest {
 		this.id = this.idElement.value;
 		this.name = this.nameElement.value;
 		this.customerNumber = this.customerNumberElement.value;
 		this.cvr = this.cvrElement.value;
 		this.email = this.emailElement.value;
 		this.department = this.departmentElement.value;
-		this.branding = new Branding({
-			id: this.brandingElement.value
-		});
+		this.branding = null;
+		if (this.brandingElement.value && this.brandingElement.value != null && this.brandingElement.value != 'null') {
+			this.branding = new Branding({
+				id: this.brandingElement.value
+			});
+		}
 		return new ChildOnboardingRequest({
 			id: this.id,
 			name: this.name,

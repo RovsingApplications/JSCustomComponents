@@ -9,7 +9,7 @@ import Color from '../../Framework/Models/Color';
 	selector: 'esignatur-branding-form-colors-bar',
 	template: `
 		<esignatur-branding-collapsible>
-			<span class="collapsible-title">Colors</span>
+			<span class="collapsible-title">Farver</span>
 			<span class="collapsible-content">
 			<div class="form-item">
 				<label class="form-label">Primærfarver</label>
