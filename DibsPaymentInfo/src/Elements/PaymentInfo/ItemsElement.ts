@@ -17,7 +17,7 @@ import DomUtility from "../../Framework/Utilities/DomUtility";
 							<td>Item</td>
 							<td>Qty</td>
 							<td>Unit price</td>
-							<td>Tax rate</td>
+							<td id="item-tax-column">Tax rate</td>
 							<td>Amount</td>
 						</tr>
 					</thead>
@@ -25,11 +25,11 @@ import DomUtility from "../../Framework/Utilities/DomUtility";
 					</tbody>
 				<table>
 				<table class="total">
-					<tr>
+					<tr id="subtotal-row">
 						<td>Subtotal</td>
 						<td id="subtotal-value"></td>
 					</tr>
-					<tr>
+					<tr id="total-tax-row">
 						<td>Tax</td>
 						<td id="tax-amount-value"></td>
 					</tr>
@@ -89,6 +89,9 @@ export default class ItemsElement extends CustomHTMLBaseElement {
 	private subtotalValueElement: HTMLElement
 	private taxAmountValueElement: HTMLElement
 	private totalValueElement: HTMLElement
+	private taxColumnElement: HTMLElement;
+	private subtotalRowElement: HTMLElement;
+	private totalTaxRowElement: HTMLElement;
 
 	constructor() {
 		super();
@@ -99,6 +102,9 @@ export default class ItemsElement extends CustomHTMLBaseElement {
 		this.subtotalValueElement = this.getChildElement('#subtotal-value');
 		this.taxAmountValueElement = this.getChildElement('#tax-amount-value');
 		this.totalValueElement = this.getChildElement('#total-value');
+		this.taxColumnElement = this.getChildElement('#item-tax-column');
+		this.subtotalRowElement = this.getChildElement('#subtotal-row');
+		this.totalTaxRowElement = this.getChildElement('#total-tax-row');
 	}
 
 	initComponent(items: Item[], currency: string) {
@@ -118,6 +124,7 @@ export default class ItemsElement extends CustomHTMLBaseElement {
 			const quantityCol = document.createElement('td');
 			const unitPriceCol = document.createElement('td');
 			const taxRateCol = document.createElement('td');
+			taxRateCol.classList.add('tax-item-column-value');
 			const amountCol = document.createElement('td');
 			itemNameCol.innerHTML = item.name;
 			quantityCol.innerHTML = item.quantity.toString();;
@@ -135,6 +142,19 @@ export default class ItemsElement extends CustomHTMLBaseElement {
 		this.subtotalValueElement.innerHTML = `${ArithmeticUtility.formatDecimal(subTotal)} ${currency}`;
 		this.taxAmountValueElement.innerHTML = `${ArithmeticUtility.formatDecimal(taxAmmount)} ${currency}`;
 		this.totalValueElement.innerHTML = `${ArithmeticUtility.formatDecimal(totalAmmount)} ${currency}`;
+		
+		if (taxAmmount === 0) {
+			this.hideTaxElements();
+		}
+	}
+
+	hideTaxElements() {
+		this.taxColumnElement.style.display = 'none';
+		this.subtotalRowElement.style.display = 'none';
+		this.totalTaxRowElement.style.display = 'none';
+
+		const taxColumnValues = this.getChildElements<HTMLElement>('.tax-item-column-value');
+		taxColumnValues.forEach(elem => elem.style.display = 'none');
 	}
 
 }
