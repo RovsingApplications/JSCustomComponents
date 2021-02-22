@@ -136,10 +136,10 @@ export default class CustomDeliveryResultElement extends CustomHTMLBaseElement {
 		var outerDivElement = document.createElement("div");
 		outerDivElement.classList.add("center");
 		var firstText = document.createElement('p');
-		firstText.innerText = 'Awaiting test';
+		firstText.innerText = 'Afventer test';
 		firstText.classList.add('firsttext');
 		var secondText = document.createElement('p');
-		secondText.innerHTML = 'Please enter your credentials and test your <br> connection to product delivery';
+		secondText.innerHTML = 'Venligst indtast dine oplysninger og test <br> forbindelsen til automatisk arkivering';
 		secondText.classList.add('secondtext');
 		outerDivElement.appendChild(firstText);
 		outerDivElement.appendChild(secondText);
