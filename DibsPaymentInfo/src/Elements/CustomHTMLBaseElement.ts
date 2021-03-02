@@ -1,6 +1,18 @@
+import Globals from "../Framework/Globals/Globals";
+import Translator from "../Framework/Language/Translator";
+
 export default abstract class CustomHTMLBaseElement extends HTMLElement {
 	constructor() {
 		super();
+	}
+
+	componentDidMount() {
+		const translationElements = this.getChildElements<HTMLElement>('[data-translate]');
+		translationElements.forEach(element => {
+			const translationKey = element.dataset['translate'];
+			const translationText = Translator.translate(translationKey, Globals.language);
+			element.innerHTML = translationText;
+		});
 	}
 
 	applyCustomStyle(customStyle: HTMLStyleElement) {

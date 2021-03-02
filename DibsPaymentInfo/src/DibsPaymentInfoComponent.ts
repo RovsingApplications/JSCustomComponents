@@ -103,8 +103,12 @@ export default class DibsPaymentInfoComponent extends CustomHTMLBaseElement {
 		DomUtility.fillContent(this.paymentInfoWrapper, errorBlock);
 	}
 
+	private changeLanguage(language: string) {
+		Globals.language = language;
+	}
+
 	private static get observedAttributes() {
-		return ['nets-id', 'api-key', 'base-url', 'payment-id', 'signing-order-id', 'signer-reference'];
+		return ['nets-id', 'api-key', 'base-url', 'payment-id', 'signing-order-id', 'signer-reference', 'language'];
 	}
 
 	protected attributeChangedCallback(name: string, oldVal: string, newVal: string) {
@@ -133,6 +137,9 @@ export default class DibsPaymentInfoComponent extends CustomHTMLBaseElement {
 				break;
 			case 'signer-reference':
 				Globals.signerReference = newVal;
+				break;
+			case 'language':
+				this.changeLanguage(newVal)
 				break;
 		}
 	}

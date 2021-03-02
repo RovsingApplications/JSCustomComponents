@@ -5,4 +5,5 @@ export default class Globals {
 	public static paymentId: string;
 	public static signingOrderId: string;
 	public static signerReference: string;
+	public static language: string;
 }

@@ -5,11 +5,9 @@ import Colors from "../../Framework/Constants/Colors";
 import ItemsElement from "./ItemsElement";
 import DateTimeUtility from "../../Framework/Utilities/DateTimeUtility";
 import SVGs from "../../Framework/Constants/SVGs";
-import Globals from "../../Framework/Globals/Globals";
 import PaymentService from "../../Framework/Services/PaymentService";
 import ConversionUtility from "../../Framework/Utilities/ConversionUtility";
 import DownloadUtility from "../../Framework/Utilities/DownloadUtility";
-
 
 @CustomElement({
 	selector: 'esignatur-dibs-payment-info-payment',
@@ -18,17 +16,19 @@ import DownloadUtility from "../../Framework/Utilities/DownloadUtility";
 			<div class="dibs-payment-info-payment-header">
 				<div>
 					<div class="dibs-payment-info-payment-line">
-						Charged At:
+						<span data-translate="PaymentElement.ChargedAt"></span>:
 						<span id="charged-at">-</span>
 					</div>
 					<div class="dibs-payment-info-payment-line">
-						Payment Order Reference:
+						<span data-translate="PaymentElement.PaymentOrderReference"></span>:
 						<span id="payment-order-reference"></span>
 					</div>
 				</div>
 				<div class="download-icon-wrapper">
 					${SVGs.downloadSVG}
-					<span class="tooltip">Download Receipt</span>
+					<span class="tooltip">
+						<span data-translate="PaymentElement.DownloadReceipt"></span>
+					</span>
 				</div>
 			</div>
 			<div class="payment-info-items-element-wrapper">
@@ -96,6 +96,8 @@ export default class PaymentElement extends CustomHTMLBaseElement {
 	}
 
 	componentDidMount() {
+		super.componentDidMount();
+
 		this.chargedAtElement = this.getChildElement('#charged-at');
 		this.paymentOrderReferenceElement = this.getChildElement('#payment-order-reference');
 		this.itemsElement = this.getChildElement('esignatur-dibs-payment-info-items');

@@ -5,7 +5,6 @@ import Colors from "../../Framework/Constants/Colors";
 import ArithmeticUtility from "../../Framework/Utilities/ArithmeticUtility";
 import DomUtility from "../../Framework/Utilities/DomUtility";
 
-
 @CustomElement({
 	selector: 'esignatur-dibs-payment-info-items',
 	template: `
@@ -14,11 +13,11 @@ import DomUtility from "../../Framework/Utilities/DomUtility";
 				<table>
 					<thead>
 						<tr>
-							<td>Item</td>
-							<td>Qty</td>
-							<td>Unit price</td>
-							<td id="item-tax-column">Tax rate</td>
-							<td>Amount</td>
+							<td><span data-translate="ItemsElement.Item"></span></td>
+							<td><span data-translate="ItemsElement.Qty"></span></td>
+							<td><span data-translate="ItemsElement.UnitPrice"></span></td>
+							<td id="item-tax-column"><span data-translate="ItemsElement.TaxRate"></span></td>
+							<td><span data-translate="ItemsElement.Amount"></span></td>
 						</tr>
 					</thead>
 					<tbody id="items-body">
@@ -26,15 +25,15 @@ import DomUtility from "../../Framework/Utilities/DomUtility";
 				<table>
 				<table class="total">
 					<tr id="subtotal-row">
-						<td>Subtotal</td>
+						<td><span data-translate="ItemsElement.Subtotal"></span></td>
 						<td id="subtotal-value"></td>
 					</tr>
 					<tr id="total-tax-row">
-						<td>Tax</td>
+						<td><span data-translate="ItemsElement.Tax"></span></td>
 						<td id="tax-amount-value"></td>
 					</tr>
 					<tr class="total-row">
-						<td>Total</td>
+						<td><span data-translate="ItemsElement.Total"></span></td>
 						<td id="total-value"></td>
 				</table>
 			</div>
@@ -98,6 +97,8 @@ export default class ItemsElement extends CustomHTMLBaseElement {
 	}
 
 	componentDidMount() {
+		super.componentDidMount();
+
 		this.itemsBodyElement = this.getChildElement('#items-body');
 		this.subtotalValueElement = this.getChildElement('#subtotal-value');
 		this.taxAmountValueElement = this.getChildElement('#tax-amount-value');
