@@ -26,7 +26,7 @@ import { infoSVG15px } from "../framework/Constants/svgs";
 					<floating-label-input error="Du skal indtaste et gyldigt cvr nummer" number-input="true" id="cvr-field" label="CVR*" validator="cvr" required="true"></floating-label-input>
 				</div>
 				<div class="col col-spacing">
-					<floating-label-input error="Du skal indtaste et gyldigt email" id="email-field" label="Email*" validator="email" required="true"></floating-label-input>
+					<floating-label-input error="Du skal indtaste et gyldigt email" id="email-field" label="E-mail*" validator="email" required="true"></floating-label-input>
 				</div>
 				<div class="col col-spacing">
 					<floating-label-input error="Du skal indtaste et gyldigt Afdeling" id="department-field" label="Afdeling">

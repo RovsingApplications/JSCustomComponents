@@ -159,9 +159,9 @@ export default class ChildCompaniesTable extends HTMLElement {
 
 				var tableHeaders: Array<string | HTMLElement>;
 				if (brandingsExists) {
-					tableHeaders = ['Kundenavn', 'Virk Nr.', 'CVR', 'Email', 'Afdeling', 'Branding', 'Oprettet kl', headerCheckboxWrapper];
+					tableHeaders = ['Kundenavn', 'Kundenr.', 'CVR', 'E-mail', 'Afdeling', 'Branding', 'Oprettet', headerCheckboxWrapper];
 				} else {
-					tableHeaders = ['Kundenavn', 'Virk Nr.', 'CVR', 'Email', 'Afdeling', 'Oprettet kl', headerCheckboxWrapper];
+					tableHeaders = ['Kundenavn', 'Kundenr.', 'CVR', 'E-mail', 'Afdeling', 'Oprettet', headerCheckboxWrapper];
 				}
 				this.customTable = new CustomTable();
 				this.customTableWrapper.fillContent(this.customTable);
@@ -247,7 +247,7 @@ export default class ChildCompaniesTable extends HTMLElement {
 		this.childCompaniesTableWrapper.parentElement.append(modal);
 		detailsTable.addRow(['ApiKey', childCompany.apiKey]);
 		detailsTable.addRow(['CreatorId', childCompany.creatorId]);
-		detailsTable.addRow(['Email', childCompany.email]);
+		detailsTable.addRow(['E-mail', childCompany.email]);
 	}
 
 	public animateFirstRow() {
@@ -269,7 +269,7 @@ export default class ChildCompaniesTable extends HTMLElement {
 	private renderActionBar() {
 		const downloadCredentialsButton = document.createElement('button');
 		downloadCredentialsButton.classList.add('download-button');
-		downloadCredentialsButton.innerHTML = 'Download legitimationsoplysninger';
+		downloadCredentialsButton.innerHTML = 'Download bruger oplysninger';
 		this.actionBarWrapper.fillContent(downloadCredentialsButton);
 		downloadCredentialsButton.onclick = () => {
 			downloadCredentialsButton.disabled = true;
