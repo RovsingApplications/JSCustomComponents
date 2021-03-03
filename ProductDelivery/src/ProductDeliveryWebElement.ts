@@ -32,7 +32,7 @@ import Colors from "./Framework/Constants/Colors"
 
 		<div class="buttons-wrapper">
 			<button id="save" class="button">Gem</button>
-			<button id="try" class="button button--inverted">Prøv</button>
+			<button id="try" class="button button--inverted">Test forbindelsen</button>
 		</div>
 	</div>
 	<div class="bottom">
