@@ -1,13 +1,14 @@
 export default class DateTimeUtility {
 	static format(input: string | Date): string {
-		const options = {
-			hour: 'numeric', minute: 'numeric', second: 'numeric',
-			year: 'numeric', month: '2-digit', day: '2-digit',
-			timeZoneName: 'short'
-		};
-		var date = new Date(input);
-		var result = new Intl.DateTimeFormat('en-AU', options).format(date);
-		return result;
+		const dateTime = new Date(input);
+		const day = ('0' + dateTime.getDate()).slice(-2);
+		const month = ('0' + (dateTime.getMonth() + 1)).slice(-2);
+		const year = ('' + dateTime.getFullYear()).slice(-2);
+		const hours = ('0' + dateTime.getHours()).slice(-2);
+		const minutes = ('0' + dateTime.getMinutes()).slice(-2);
+		const seconds = ('0' + dateTime.getSeconds()).slice(-2);
+		const dateTimeFormatted = `${day}-${month}-${year} - ${hours}:${minutes}:${seconds}`;
+		return dateTimeFormatted;
 	}
 }
 
