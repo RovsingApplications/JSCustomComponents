@@ -4,14 +4,14 @@ export default class DanishDictionary extends BaseDictionary {
 
 	dictionary: any = {
 		PaymentElement: {
-			ChargedAt: "Opladet kl",
-			PaymentOrderReference: "Reference til betalingsordre",
-			DownloadReceipt: "Download Receipt"
+			ChargedAt: "Betalt",
+			PaymentOrderReference: "Betalingsreference",
+			DownloadReceipt: "Download Kvittering"
 		},
 		ItemsElement: {
-			Item: "Vare",
+			Item: "Produkt/Ydelse",
 			Qty: "Antal",
-			UnitPrice: "Pris per stk",
+			UnitPrice: "Pris per styk",
 			TaxRate: "Skatteprocent",
 			Amount: "Beløb",
 			Subtotal: "Subtotal",
