@@ -144,13 +144,22 @@ export class AddressElement extends CustomInputElement {
 		if (!place.address_components) {
 			return;
 		}
-		let cityComponents = place.address_components.filter(component => {
+		
+		this.address.value = place.name;
+
+		const cityComponents = place.address_components.filter(component => {
 			const citySynonyms = ['administrative_area_level_1', 'locality'];
 			const isCityComponent = citySynonyms.some(citySynonym => component.types.indexOf(citySynonym) != -1);
 			return isCityComponent;
 		});
 		if (cityComponents && cityComponents[0]) {
 			this.city.value = cityComponents[cityComponents.length - 1].long_name;
+		}
+		const countryComponents = place.address_components.filter(component => component.types.indexOf('country') != -1);
+		if (countryComponents && countryComponents[0]) {
+			const country = countryComponents[countryComponents.length - 1].long_name;
+			const cityFieldEmpty = this.city.value === '' || this.city.value.trim() === '';
+			cityFieldEmpty ? this.city.value = country : this.city.value += `, ${country}`;
 		}
 		const zipComponents = place.address_components.filter(component => component.types.indexOf('postal_code') != -1);
 		if (zipComponents && zipComponents[0]) {
