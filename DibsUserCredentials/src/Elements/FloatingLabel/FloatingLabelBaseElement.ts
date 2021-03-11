@@ -111,6 +111,14 @@ export default abstract class FloatingLabelElement extends CustomHTMLBaseElement
 				}
 				this.labelElement.innerHTML = newVal;
 				break;
+			default:
+				if (name === 'id' || name === 'class') {
+					break;
+				}
+				if (this.innerElement) {
+					this.innerElement.setAttribute(name, newVal);
+				}
+				break;
 		}
 	}
 

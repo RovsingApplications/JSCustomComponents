@@ -5,6 +5,7 @@ export default class CustomerPaymentAccount {
 	merchantId: string = '';
 	secretKey: string = '';
 	checkoutKey: string = '';
+	termsUrl: string = '';
 
 	constructor(customerPaymentAccounts: Partial<CustomerPaymentAccount>) {
 		Object.assign(this, customerPaymentAccounts);

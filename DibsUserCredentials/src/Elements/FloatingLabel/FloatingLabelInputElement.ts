@@ -39,7 +39,7 @@ export default class FloatingLabelInputElement extends FloatingLabelBaseElement 
 		if (!allowEmpty) {
 			return this.value && this.value.trim().length > 0;
 		}
-		return true;
+		return this.inputElement.validity.valid;
 	}
 	get disabled() {
 		return this._disabled;

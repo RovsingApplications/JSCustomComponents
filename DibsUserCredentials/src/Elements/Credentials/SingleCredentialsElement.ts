@@ -50,6 +50,16 @@ import Globals from "../../Framework/Globals/Globals";
 					>
 					</esignatur-dibs-user-credentials-floating-label-input>
 				</div>
+				<div class="single-credentials-item-wrapper">
+					<esignatur-dibs-user-credentials-floating-label-input
+						id="terms-url-field"
+						required="false"
+						label="Handelsbetingelser" 
+						pattern="[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?"
+						error="Du skal indtaste et gyldigt Handelsbetingelser url med (https)"
+					>
+					</esignatur-dibs-user-credentials-floating-label-input>
+				</div>
 			</div>
 			<div class="single-credentials-actions-wrapper">
 				<button class="edit-button">${SVGs.editPenCrossedSVG}</button>
@@ -110,6 +120,7 @@ export default class SingleCredentialsElement extends CustomHTMLBaseElement {
 	private merchantIdElement: FloatingLabelInputElement;
 	private secretKeyElement: FloatingLabelInputElement;
 	private checkoutKeyElement: FloatingLabelInputElement;
+	private termsUrlElement: FloatingLabelInputElement;
 	private editButton: HTMLElement;
 	private deleteButton: HTMLElement;
 	private _disabled: boolean;
@@ -176,13 +187,26 @@ export default class SingleCredentialsElement extends CustomHTMLBaseElement {
 		}
 		this.secretKeyElement.value = val;
 	}
+	private set termsUrl(val: string) {
+		if (!this.termsUrlElement) {
+			return
+		}
+		this.termsUrlElement.value = val;
+	}
+	private get termsUrl() {
+		if (!this.termsUrlElement) {
+			return
+		}
+		return this.termsUrlElement.value.trim();
+	}
 	get customerPaymentAccount() {
 		return new CustomerPaymentAccount({
 			id: this.paymentAccountId,
 			name: this.name,
 			merchantId: this.merchantId,
 			checkoutKey: this.checkoutKey,
-			secretKey: this.secretKey
+			secretKey: this.secretKey,
+			termsUrl: this.termsUrl
 		});
 	}
 	set customerPaymentAccount(val: CustomerPaymentAccount) {
@@ -191,13 +215,15 @@ export default class SingleCredentialsElement extends CustomHTMLBaseElement {
 		this.merchantId = val.merchantId;
 		this.checkoutKey = val.checkoutKey;
 		this.secretKey = val.secretKey;
+		this.termsUrl = val.termsUrl ? val.termsUrl : '';
 	}
 
 	get valid() {
 		return this.nameElement.valid &&
 			this.merchantIdElement.valid &&
 			this.secretKeyElement.valid &&
-			this.checkoutKeyElement.valid;
+			this.checkoutKeyElement.valid &&
+			this.termsUrlElement.valid;
 	}
 
 	constructor() {
@@ -210,6 +236,7 @@ export default class SingleCredentialsElement extends CustomHTMLBaseElement {
 		this.merchantIdElement = this.getChildElement('#merchant-id-field');
 		this.secretKeyElement = this.getChildElement('#secret-key-field');
 		this.checkoutKeyElement = this.getChildElement('#checkout-key-field');
+		this.termsUrlElement = this.getChildElement('#terms-url-field');
 		this.editButton = this.getChildElement('.edit-button');
 		this.deleteButton = this.getChildElement('.delete-button');
 		this.singleCredentialsActionsWrapper = this.getChildElement('.single-credentials-actions-wrapper');
@@ -253,6 +280,9 @@ export default class SingleCredentialsElement extends CustomHTMLBaseElement {
 		this.checkoutKeyElement.onblur = () => {
 			this.checkoutKeyElement.validate();
 		};
+		this.termsUrlElement.onblur = () => {
+			this.termsUrlElement.validate();
+		};
 	}
 
 
@@ -261,6 +291,7 @@ export default class SingleCredentialsElement extends CustomHTMLBaseElement {
 		this.merchantIdElement.validate();
 		this.secretKeyElement.validate();
 		this.checkoutKeyElement.validate();
+		this.termsUrlElement.validate();
 	}
 
 	private disableInputFields() {
@@ -268,6 +299,7 @@ export default class SingleCredentialsElement extends CustomHTMLBaseElement {
 		this.merchantIdElement.disabled = true;
 		this.secretKeyElement.disabled = true;
 		this.checkoutKeyElement.disabled = true;
+		this.termsUrlElement.disabled = true;
 		this.editButton.innerHTML = SVGs.editPenSVG;
 	}
 	private enableInputFields() {
@@ -275,6 +307,7 @@ export default class SingleCredentialsElement extends CustomHTMLBaseElement {
 		this.merchantIdElement.disabled = false;
 		this.secretKeyElement.disabled = false;
 		this.checkoutKeyElement.disabled = false;
+		this.termsUrlElement.disabled = false;
 		this.editButton.innerHTML = SVGs.editPenCrossedSVG;
 	}
 
