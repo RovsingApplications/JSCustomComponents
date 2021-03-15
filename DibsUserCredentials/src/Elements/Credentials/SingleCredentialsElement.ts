@@ -53,8 +53,8 @@ import Globals from "../../Framework/Globals/Globals";
 				<div class="single-credentials-item-wrapper">
 					<esignatur-dibs-user-credentials-floating-label-input
 						id="terms-url-field"
-						required="false"
-						label="Handelsbetingelser" 
+						label="Handelsbetingelser"
+						required="true"
 						pattern="[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?"
 						error="Du skal indtaste et gyldigt Handelsbetingelser url med (https)"
 					>
