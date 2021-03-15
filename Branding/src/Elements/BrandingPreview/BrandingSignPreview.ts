@@ -304,7 +304,7 @@ export default class BrandingSignPreview extends CustomHTMLBaseElement {
 			stepIndicatorStepNumber.style.color = Conversions.nullColorToTransparent(branding.textColor);
 		});
 		contentPreview.style.color = Conversions.nullColorToTransparent(branding.textColor);
-		contentPreviewH3.style.color = Conversions.nullColorToTransparent(branding.primaryColor);
+		contentPreviewH3.style.color = Conversions.nullColorToTransparent(branding.textColor);
 		languageSelectLi.style.color = Conversions.nullColorToTransparent(branding.textColor);
 		languageArrow.style.fill = Conversions.nullColorToTransparent(branding.primaryColor);
 
