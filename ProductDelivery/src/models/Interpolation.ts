@@ -1,6 +1,8 @@
 export default class Interpolation {
 
 	public static InperpolationList: string[] = new Array(
+		"SenderEmail",
+		"SenderName",
 		"Signer.Name",
 		"Signer.Identification",
 		"Signer.CustomerInvoiceNumber",
