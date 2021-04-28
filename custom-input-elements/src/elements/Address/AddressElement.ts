@@ -155,12 +155,12 @@ export class AddressElement extends CustomInputElement {
 		if (cityComponents && cityComponents[0]) {
 			this.city.value = cityComponents[cityComponents.length - 1].long_name;
 		}
-		const countryComponents = place.address_components.filter(component => component.types.indexOf('country') != -1);
-		if (countryComponents && countryComponents[0]) {
-			const country = countryComponents[countryComponents.length - 1].long_name;
-			const cityFieldEmpty = this.city.value === '' || this.city.value.trim() === '';
-			cityFieldEmpty ? this.city.value = country : this.city.value += `, ${country}`;
-		}
+		// const countryComponents = place.address_components.filter(component => component.types.indexOf('country') != -1);
+		// if (countryComponents && countryComponents[0]) {
+		// 	const country = countryComponents[countryComponents.length - 1].long_name;
+		// 	const cityFieldEmpty = this.city.value === '' || this.city.value.trim() === '';
+		// 	cityFieldEmpty ? this.city.value = country : this.city.value += `, ${country}`;
+		// }
 		const zipComponents = place.address_components.filter(component => component.types.indexOf('postal_code') != -1);
 		if (zipComponents && zipComponents[0]) {
 			this.zip.value = zipComponents[0].long_name;
