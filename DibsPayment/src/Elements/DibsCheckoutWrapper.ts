@@ -59,7 +59,7 @@ export default class DibsCheckoutWrapper extends CustomHTMLBaseElement {
 	}
 
 	private static get observedAttributes() {
-		return ['payment-id', 'checkout-key', 'language', 'test'];
+		return ['payment-id', 'checkout-key', 'language'];
 	}
 
 	protected attributeChangedCallback(name: string, oldVal: string, newVal: string) {
@@ -73,12 +73,10 @@ export default class DibsCheckoutWrapper extends CustomHTMLBaseElement {
 				break;
 			case 'checkout-key':
 				this.checkoutKey = newVal;
+				this.test = this.checkoutKey.indexOf("test") !== -1;
 				break;
 			case 'language':
 				this.language = newVal;
-				break;
-			case 'test':
-				this.test = true;
 				break;
 		}
 	}
