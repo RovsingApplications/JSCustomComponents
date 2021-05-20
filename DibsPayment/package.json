@@ -1,6 +1,6 @@
 {
 	"name": "@luftborn/esignatur-dibs-payment",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "custom component for dibs-payment",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
