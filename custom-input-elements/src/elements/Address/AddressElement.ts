@@ -3,7 +3,7 @@ import { CustomInputElement } from '../../framework/CustomInputElement';
 import { CustomElementEventArgs } from '../../framework/CustomEvents';
 import Translator from '../../framework/Language/Translator';
 import getAttributeNamesPolyfill from '../../framework/Polyfills/getAttributeNamesPolyfill';
-import debouncer from "../../Framework/Utilities/debouncer";
+import debouncer from "../../framework/Utilities/debouncer";
 
 @CustomElement({
 	selector: 'address-element',
