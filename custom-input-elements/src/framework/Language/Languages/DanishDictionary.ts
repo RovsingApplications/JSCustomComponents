@@ -6,6 +6,7 @@ export default class DanishDictionary extends BaseDictionary {
 		AddressElement: {
 			Address: "adresse",
 			City: "by",
+			Country: "land",
 			Zip: "postnummer"
 		},
 		BankElement: {

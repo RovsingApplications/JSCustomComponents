@@ -3,6 +3,7 @@ import { CustomInputElement } from '../../framework/CustomInputElement';
 import { CustomElementEventArgs } from '../../framework/CustomEvents';
 import Translator from '../../framework/Language/Translator';
 import getAttributeNamesPolyfill from '../../framework/Polyfills/getAttributeNamesPolyfill';
+import debouncer from "../../Framework/Utilities/debouncer";
 
 @CustomElement({
 	selector: 'address-element',
@@ -10,7 +11,8 @@ import getAttributeNamesPolyfill from '../../framework/Polyfills/getAttributeNam
 			<div class="address-wrapper">
 				<input class='address-part' id='address' type="text" placeholder='Address'/>
 				<input class='address-part' id='city' type="text" placeholder='City'/>
-				<input class='address-part' id='zip' type="number" placeholder='Zip'/>
+				<input class='address-part' id='country' type="text" placeholder='Country'/>
+				<input class='address-part' id='zip' type="text" placeholder='Zip'/>
 			</div>`,
 	style: `.address-wrapper{
                 display: flex;
@@ -34,6 +36,7 @@ export class AddressElement extends CustomInputElement {
 
 	address: HTMLInputElement;
 	city: HTMLInputElement;
+	country: HTMLInputElement;
 	zip: HTMLInputElement;
 
 	constructor() {
@@ -44,21 +47,24 @@ export class AddressElement extends CustomInputElement {
 	get value(): string {
 		let address = this.address.value || '';
 		let city = this.city.value ? `,${this.city.value}` : '';
+		let country = this.country.value ? `,${this.country.value}` : '';
 		let zip = this.zip.value ? `,${this.zip.value}` : '';
-		return `${address}${city}${zip}`;
+		return `${address}${city}${country}${zip}`;
 	}
 
 	set value(value: string) {
 		const values = value.split(',');
 		this.address.value = values[0];
 		this.city.value = values[1];
-		this.zip.value = values[2];
+		this.country.value = values[2];
+		this.zip.value = values[3];
 	}
 
 	get valid(): boolean {
 		return (
 			this.address.validity.valid &&
 			this.city.validity.valid &&
+			this.country.validity.valid &&
 			this.zip.validity.valid
 		);
 	}
@@ -78,14 +84,20 @@ export class AddressElement extends CustomInputElement {
 	initChildInputs() {
 		this.address = super.getChildInput('#address');
 		this.city = super.getChildInput('#city');
+		this.country = super.getChildInput('#country');
 		this.zip = super.getChildInput('#zip');
-		this.address.addEventListener('change', this.change.bind(this));
+		const addressChaneDebounce = debouncer(this.change.bind(this), 400, false);
+		this.address.addEventListener('change', () => {
+			addressChaneDebounce();
+		});
 		this.city.addEventListener('change', this.change.bind(this));
+		this.country.addEventListener('change', this.change.bind(this));
 		this.zip.addEventListener('change', this.change.bind(this));
 
 		if (this.required) {
 			this.address.setAttribute('required', '');
 			this.city.setAttribute('required', '');
+			this.country.setAttribute('required', '');
 			this.zip.setAttribute('required', '');
 		}
 	}
@@ -104,11 +116,12 @@ export class AddressElement extends CustomInputElement {
 	}
 
 	changeLanguage(language: string) {
-		if (!this.address || !this.city || !this.zip) {
+		if (!this.address || !this.city || !this.country || !this.zip) {
 			return;
 		}
 		this.address.placeholder = Translator.Translate('AddressElement.Address', language);
 		this.city.placeholder = Translator.Translate('AddressElement.City', language);
+		this.country.placeholder = Translator.Translate('AddressElement.Country', language);
 		this.zip.placeholder = Translator.Translate('AddressElement.Zip', language);
 	}
 
@@ -137,6 +150,7 @@ export class AddressElement extends CustomInputElement {
 
 	onAddressChangedHandler() {
 		this.city.value = '';
+		this.country.value = '';
 		this.zip.value = '';
 
 		const place = this.addressAutoComplete.getPlace();
@@ -155,16 +169,17 @@ export class AddressElement extends CustomInputElement {
 		if (cityComponents && cityComponents[0]) {
 			this.city.value = cityComponents[cityComponents.length - 1].long_name;
 		}
-		// const countryComponents = place.address_components.filter(component => component.types.indexOf('country') != -1);
-		// if (countryComponents && countryComponents[0]) {
-		// 	const country = countryComponents[countryComponents.length - 1].long_name;
-		// 	const cityFieldEmpty = this.city.value === '' || this.city.value.trim() === '';
-		// 	cityFieldEmpty ? this.city.value = country : this.city.value += `, ${country}`;
-		// }
+
+		const countryComponents = place.address_components.filter(component => component.types.indexOf('country') != -1);
+		if (countryComponents && countryComponents[0]) {
+			this.country.value = countryComponents[countryComponents.length - 1].long_name;
+		}
+
 		const zipComponents = place.address_components.filter(component => component.types.indexOf('postal_code') != -1);
 		if (zipComponents && zipComponents[0]) {
 			this.zip.value = zipComponents[0].long_name;
 		}
+		this.change(null);
 	}
 
 	static get observedAttributes() {

@@ -6,6 +6,7 @@ export default class EnglishDictionary extends BaseDictionary {
 		AddressElement: {
 			Address: "address",
 			City: "city",
+			Country: "country",
 			Zip: "zip"
 		},
 		BankElement: {
