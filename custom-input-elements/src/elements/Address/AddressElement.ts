@@ -11,8 +11,8 @@ import debouncer from "../../framework/Utilities/debouncer";
 			<div class="address-wrapper">
 				<input class='address-part' id='address' type="text" placeholder='Address'/>
 				<input class='address-part' id='city' type="text" placeholder='City'/>
-				<input class='address-part' id='country' type="text" placeholder='Country'/>
 				<input class='address-part' id='zip' type="text" placeholder='Zip'/>
+				<input class='address-part' id='country' type="text" placeholder='Country'/>
 			</div>`,
 	style: `.address-wrapper{
                 display: flex;
@@ -47,9 +47,9 @@ export class AddressElement extends CustomInputElement {
 	get value(): string {
 		let address = this.address.value || '';
 		let city = this.city.value ? `,${this.city.value}` : '';
-		let country = this.country.value ? `,${this.country.value}` : '';
 		let zip = this.zip.value ? `,${this.zip.value}` : '';
-		return `${address}${city}${country}${zip}`;
+		let country = this.country.value ? `,${this.country.value}` : '';
+		return `${address}${city}${zip}${country}`;
 	}
 
 	set value(value: string) {
